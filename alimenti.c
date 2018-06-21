@@ -20,6 +20,7 @@ void alimenti(){
     int variabile2;  //TODO RIMUOVI
     int variabile3;
     int variabile4;
+    int variabile5;
     int menu_select=0;
     int i;
     int alimenti_temp; 							//variabile di appoggio per la scelta dell'unità di misura dell'alimento
@@ -51,6 +52,7 @@ void alimenti(){
 
             system("cls");
             printf("Quanti alimenti vuoi aggiungere?Inserire un valore numerico\n\n");
+            printf("\n Prova prova prova.");
             fflush(stdin);
 
             gets(selezione);
