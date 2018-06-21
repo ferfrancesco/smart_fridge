@@ -16,12 +16,15 @@ typedef int bool;
 void alimenti(){
 
     int num_linee=file_load_alimenti();
+    int variabile;   //TODO Rimuovi
+    int variabile2;  //TODO RIMUOVI
+    int variabile3;
     int menu_select=0;
     int i;
-    int alimenti_temp; //variabile di appoggio
-    char selezione[10]; //alimento selezionato
-    int selezione_int; //selezione in forma di intero
-   // int alimenti_selez;
+    int alimenti_temp; 							//variabile di appoggio per la scelta dell'unit‡ di misura dell'alimento
+    char selezione[10]; 						//stringa per memorizzare il numero di alimenti che si vogliono inserire
+    int selezione_int; 							//variabile in cui Ë memorizzato il numero di alimenti che si vogliono inserire (case1), il numero dell'alimento che si vuole modificare( case3)
+
 
     fflush(stdin);
     system("cls");
@@ -39,7 +42,7 @@ void alimenti(){
             system("pause");
             fflush(stdin);
 
-            alimenti();
+            alimenti();										//torno al menu principale degli alimenti
 
             break;
 
@@ -70,14 +73,14 @@ void alimenti(){
                 printf("Inserire il nome dell'alimento:");
                 gets(archivio_alimenti[num_linee].nome);
 
-                printf("\nInserire la scadenza dell'alimento nel formato (dd/mm/yyyy):");
+                printf("\nInserire la scadenza dell'alimento nel formato (dd/mm/yyyy):");  //TODO inserire controllo data
                 gets(archivio_alimenti[num_linee].data);
 
-                printf("\nInserire la quantita' dell'alimento inserito:");
+                printf("\nInserire la quantita' dell'alimento inserito:");				  //TODO inserire controllo sull'input numerico
                 gets(archivio_alimenti[num_linee].numero);
 
                 printf("\nInserire la tipologia di misura dell'alimento:\n\n1)Solido [GRAMMI]\n2)Liquido [MILLILITRI]\n\n");
-                gets(archivio_alimenti[num_linee].tipo);
+                gets(archivio_alimenti[num_linee].tipo);								 //TODO inserire controllo sulla scelta numerica
 
                 alimenti_temp = atoi(archivio_alimenti[num_linee].tipo);
 
@@ -85,24 +88,24 @@ void alimenti(){
 
                     case 1:
 
-                        printf("\nQual'e' la quantita' in g del singolo elemento?[GRAMMI]:");
+                        printf("\nQual e' la quantita' in g del singolo elemento?[GRAMMI]:"); //TODO inserire controllo su input numerico
                         gets(archivio_alimenti[num_linee].quantita);
 
                         break;
 
                     case 2:
 
-                        printf("\nQual'e' la quantita' in ml del singolo elemento?[MILLILITRI]:");
+                        printf("\nQual e' la quantita' in ml del singolo elemento?[MILLILITRI]:"); //TODO inserire controllo su input numerico
                         gets(archivio_alimenti[num_linee].quantita);
 
                         break;
 
                 }
 
-                printf("\nInserire le KCAL dell'alimento:");
+                printf("\nInserire le KCAL dell'alimento:");							//TODO inserire controllo sull'input numerico
                 gets(archivio_alimenti[num_linee].kcal);
 
-                num_linee++;  //incremento il numero di linee del file,in modo da non sovrascrivere alimenti precedenti
+                num_linee++; 								 //incremento del numero di linee del file,in modo da non sovrascrivere alimenti precedentemente inseriti
 
                 file_save_alimenti(num_linee);
 
@@ -136,13 +139,13 @@ void alimenti(){
                 selezione_int=atoi(selezione);
             }
 
-            selezione_int=selezione_int-1; //diminuisco il valore di 1 per allinearmi con l'array,in quanto l'utente vede e seleziona valori shiftati di 1,per evitare che vi sia un alimento indicato col valore 0
+            selezione_int=selezione_int-1; 											//diminuzione del valore della variabile di 1 per allinearsi con l'array,in quanto l'utente vede e seleziona valori shiftati di 1,per evitare che vi sia un alimento indicato col valore 0
 
             printf("\nInserire la nuova quantita':");
 
             gets(archivio_alimenti[selezione_int].quantita);
 
-            if(strcmp(archivio_alimenti[selezione_int].quantita,"0")==0 ){             //nel caso venga inserito un valore pari a zero nel campo quantita',l'alimento verr√† automaticamente rimosso
+            if(strcmp(archivio_alimenti[selezione_int].quantita,"0")==0 ){          //nel caso venga inserito un valore pari a 0 nel campo quantit‡,l'alimento verr‡†automaticamente rimosso
 
                 FILE *fp;
                 fp = fopen ("lista_spesa.txt","a");
@@ -155,9 +158,9 @@ void alimenti(){
 
                 fclose(fp);
 
-                for (i=selezione_int;i<num_linee;i++){
+                for (i=selezione_int;i<num_linee;i++){ 								//ciclo per copiare i valori nella posizione precedente,in modo da rimuovere l'alimento e non lasciare spazi vuoti nell'elenco
 
-                    strcpy(archivio_alimenti[i].nome,archivio_alimenti[i+1].nome);           //copio i valori nella posizione precedente,in modo da rimuovere l'alimento e non lasciare buchi nell'elenco
+                    strcpy(archivio_alimenti[i].nome,archivio_alimenti[i+1].nome);
                     strcpy(archivio_alimenti[i].data,archivio_alimenti[i+1].data);
                     strcpy(archivio_alimenti[i].quantita,archivio_alimenti[i+1].quantita);
                     strcpy(archivio_alimenti[i].kcal,archivio_alimenti[i+1].kcal);
@@ -165,9 +168,9 @@ void alimenti(){
 
                 }
 
-                num_linee--;
+                num_linee--;														//decremento del numero di linee del file, dopo l'eliminazione di un alimento
 
-                file_save_alimenti(num_linee); //aggiorno il contenuto del file
+                file_save_alimenti(num_linee);										//aggiornamento del contenuto del file dopo le modifiche
 
                 printf("\n\n");
                 system("pause");
@@ -196,11 +199,11 @@ void stampa_alimenti(int num_linee){
     fflush(stdin);
     system("cls");
     int i;
-    char temp_quantita[10]; //variabile temporanea per la visualizzazione della quantita' in g o ml
+    char temp_quantita[10]; 												//stringa in cui Ë memorizzata l'unit‡ di misura dell'alimento( "g" o "ml")
 
     if (num_linee==0){
 
-        printf("Il frigo e' vuoto!\n\n");
+        printf("Il frigo e' vuoto!\n\n");									//TODO controllare perchË non esegue questa printf(non si sa perchË , non risultano mai 0 linee, ma parte sempre da 1)
         system("pause");
         // alimenti();
 

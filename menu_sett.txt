@@ -1,7 +1,7 @@
-Pasta
-carne
-pesce
-pane
-uova
-lasagne
-tagliatelle
+pasta
+re
+w
+e
+r
+t
+y

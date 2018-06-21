@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "structs.h"
+#define GIORNI_SETTIMANA 7
 
 //inclusione valori bool
 typedef int bool;
@@ -16,7 +17,7 @@ int conta_linee(char nome_file[40]){
     FILE *fp;
     fp = fopen (nome_file,"r");
 
-    if (fp==NULL){			//controllo presenza file
+    if (fp==NULL){													//controllo presenza file
         printf("\n Errore nel caricamento del file");
         exit(1);
     }
@@ -24,7 +25,7 @@ int conta_linee(char nome_file[40]){
     while(!feof(fp)){
 
         if(fgetc(fp) == '\n')
-            num_linee++;   //conta il numero di linee,cercando un eventuale /n
+            num_linee++;  											 //TODO da eliminare
 
     }
 
@@ -33,7 +34,7 @@ int conta_linee(char nome_file[40]){
     return num_linee;
 }
 
-void to_und_conversion(char stringa[]){
+void to_und_conversion(char stringa[]){								//TODO da eliminare
 
     int i;
 
@@ -45,7 +46,7 @@ void to_und_conversion(char stringa[]){
     }
 }
 
-void to_space_conversion(char stringa[]){
+void to_space_conversion(char stringa[]){							//TODO da eliminare
 
     int i;
 
@@ -59,6 +60,7 @@ void to_space_conversion(char stringa[]){
 
 
 //OPERAZIONI DI CARICAMENTO DEI FILE
+
 int file_load_alimenti(){
 
     int i=0;
@@ -67,14 +69,14 @@ int file_load_alimenti(){
     FILE *fp;
     fp = fopen ("alimenti.txt","r");
 
-    if (fp==NULL){			//controllo presenza file
+    if (fp==NULL){										//controllo presenza file, se non esiste esce dal programma
         system("cls");
         printf("Errore nel caricamento del file\n");
         system("pause");
         exit(1);
     }
 
-    while(!feof(fp)){
+    while(!feof(fp)){								//TODO nella funzione stampa, se il num linee ==1, visualizza : 'il frigo è vuoto'
 
         fscanf(fp,"%50[^,],%12[^,],%15[^,],%5[^,],%10[^,],%15[^,],\n",archivio_alimenti[i].nome,archivio_alimenti[i].data,archivio_alimenti[i].numero,archivio_alimenti[i].tipo,archivio_alimenti[i].quantita,archivio_alimenti[i].kcal);	//utilizzo [^,] in quanto utilizzare %s leggeva l'intera stringa,virgole incluse,
 
@@ -95,13 +97,13 @@ int file_load_ricette(){
 
     int i=0;
     int j=0;
-    int temp_int=0; //per la conversione da char a int per l'uso nel ciclo di acquisizione
+    int temp_int=0; 								//variabile per la conversione del numero di step da stringa a intero
     int num_linee=0;
 
     FILE *fp;
     fp = fopen ("ricette.txt","r");
 
-    if (fp==NULL){			//controllo presenza file
+    if (fp==NULL){									//controllo presenza file
         system("cls");
         printf("Errore nel caricamento del file\n");
         system("pause");
@@ -112,11 +114,11 @@ int file_load_ricette(){
 
         fscanf(fp,"%50[^,],%5[^,],%5[^,],",archivio_ricette[i].nome,archivio_ricette[i].difficolta,archivio_ricette[i].num_ingredienti); //utilizzo [^,] in quanto utilizzare %s leggeva l'intera stringa,virgole incluse
 
-        temp_int = atoi(archivio_ricette[i].num_ingredienti);  //converto il numero di step in intero per l'uso nel ciclo
+        temp_int = atoi(archivio_ricette[i].num_ingredienti);
 
-        for(j=0;j<temp_int;j++){
+        for(j=0;j<temp_int;j++){					//acquisizione degli ingredienti per ogni ricetta, un incremento della j indica un ingrediente
 
-            fscanf(fp,"%100[^,],",archivio_ricette[i].ingredienti[j]);  //acquisizione degli ingredienti
+            fscanf(fp,"%100[^,],",archivio_ricette[i].ingredienti[j]);
 
         }
 
@@ -130,7 +132,7 @@ int file_load_ricette(){
 
         }
 
-       i++;
+       i++;											//incremento della i per il ciclo while
        num_linee++;
 
     }
@@ -149,18 +151,17 @@ int file_load_menu_sett(){
     FILE *fp;
     fp = fopen ("menu_sett.txt","r");
 
-    if (fp==NULL){			//controllo presenza file
+    if (fp==NULL){									//controllo presenza file
         printf("\n Errore nel caricamento del file");
         exit(1);
     }
 
     while(!feof(fp)){
 
-        for	(i=0;i<7;i++){
+        for	(i=0;i<GIORNI_SETTIMANA;i++){
 
-            fscanf(fp,"%s\n",giorno[i].pietanza);	//utilizzo [^,] in quanto utilizzare %s leggeva l'intera stringa,virgole incluse,
-
-            to_space_conversion(giorno[i].pietanza);
+            fscanf(fp,"%s\n",giorno[i].pietanza);
+            to_space_conversion(giorno[i].pietanza); //TODO togli to_space_conversion
 
         }
 
@@ -179,16 +180,16 @@ int file_load_lista(int num_linee){
     FILE *fp;
     fp = fopen ("lista_spesa.txt","r");
 
-    if (fp==NULL){			//controllo presenza file
+    if (fp==NULL){								//controllo presenza file
         printf("\n Errore nel caricamento del file");
         exit(1);
     }
 
-    //while(!feof(fp)){
+    //while(!feof(fp)){							//TODO controlla
 
     for	(i=0;i<num_linee;i++){
 
-        fscanf(fp,"%[^,]\n",lista_spesa[i]);	//utilizzo [^,] in quanto utilizzare %s leggeva l'intera stringa,virgole incluse,
+        fscanf(fp,"%[^,]\n",lista_spesa[i]);	//utilizzo [^,] in quanto utilizzare %s leggeva l'intera stringa,virgole incluse
 
         to_space_conversion(lista_spesa[i]);
 
@@ -204,20 +205,22 @@ int file_load_lista(int num_linee){
 
 
 //OPERAZIONI DI SALVATAGGIO DEI FILE
+
+
 void file_save_alimenti(int num_linee){
 
     FILE *fp;
     int i;
 
-    fp = fopen ("alimenti.txt","w");  //apro il file per aggiungere elementi
+    fp = fopen ("alimenti.txt","w"); 					//apro il file per aggiungere elementi
 
     for(i=0;i<num_linee;i++){
 
-        to_und_conversion(archivio_alimenti[i].nome);   //converto il nome con gli underscore per prepararlo al salvataggio su file
+        to_und_conversion(archivio_alimenti[i].nome);   //TODO elimina to_und_conversion
 
         fprintf(fp,"%s,%s,%s,%s,%s,%s,\n",archivio_alimenti[i].nome,archivio_alimenti[i].data,archivio_alimenti[i].numero,archivio_alimenti[i].tipo,archivio_alimenti[i].quantita,archivio_alimenti[i].kcal);
 
-        to_space_conversion(archivio_alimenti[i].nome);  //riporto il nome da underscore a spazi
+        to_space_conversion(archivio_alimenti[i].nome); //TODO elimina to_space_conversion
 
     }
 
@@ -229,9 +232,9 @@ void file_save_ricette (int num_linee){
     FILE *fp;
     int i=0;
     int j=0;
-    int temp_int=0;
+    int temp_int=0;										//variabile che contiene il numero di step di una ricetta
 
-    fp = fopen ("ricette.txt","w");  //apro il file per aggiungere elementi
+    fp = fopen ("ricette.txt","w");  					//apro il file per aggiungere elementi
 
     for(i=0;i<num_linee;i++){
 
