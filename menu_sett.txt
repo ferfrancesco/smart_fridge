@@ -1,0 +1,7 @@
+Pasta
+carne
+pesce
+pane
+uova
+lasagne
+tagliatelle
