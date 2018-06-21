@@ -19,6 +19,7 @@ void alimenti(){
     int variabile;   //TODO Rimuovi
     int variabile2;  //TODO RIMUOVI
     int variabile3;
+    int variabile4;
     int menu_select=0;
     int i;
     int alimenti_temp; 							//variabile di appoggio per la scelta dell'unità di misura dell'alimento
