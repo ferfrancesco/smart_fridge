@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
 
     dayname_fill(); 								//inizializzazione giorni della settimana per il menù settimanale
 
-    printf("test");
+    printf("test");   //test test
 
     stampa_menu();									//stampa del menù di scelta principale del programma
 
