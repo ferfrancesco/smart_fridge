@@ -12,25 +12,26 @@ typedef int bool;
 #define true 1
 #define false 0
 
+int num_linee;
+
+
 /**
 La procedura rappresenta il menu degli alimenti. In base alla scelta che viene inserita, si hanno possibilità diverse:
 
 
 1) Attiva la procedura stampa_alimenti;
 
-2) Permette di inserire nuovi alimenti;
-   E' possibile effettuare una scelta interna:
+2) Attiva la procedura aggiunta_alimenti;
 
-		1- Se l'alimento è solido, e le sue quantità si misurano in grammi.
-		2- Se l'alimento è liquido e si misura in millilitri.
-
-3) Permette di modificare delle quantità di un alimento;
+3) Attiva la procedura modifica_alimenti;
 
 4) Torna al menu principale;
+
+
  *
  */
 
-int num_linee;
+
 
 void alimenti(){
 
@@ -91,11 +92,11 @@ void alimenti(){
 
 /**
  * la procedura stampa gli alimenti presenti nel frigo e, in caso di assenza di alimenti, stampa
- * "il frigo è vuoto"
+ * "il frigo e' vuoto"
  *
  * @param num_linee Contiene il numero di linee del file "alimenti.txt" che viene caricato nel programma
  *
- * @pre num_linee Il file è già esistente al momento dell'accesso alla sezione "alimenti"
+ * @pre num_linee Il file e' gia' esistente al momento dell'accesso alla sezione "alimenti"
  *
  *
  */
@@ -106,11 +107,11 @@ void stampa_alimenti(int num_linee){
     fflush(stdin);
     system("cls");
     int i;
-    char temp_quantita[10]; 												//stringa in cui è memorizzata l'unità di misura dell'alimento( "g" o "ml")
+    char temp_quantita[10]; 	//stringa in cui è memorizzata l'unità di misura dell'alimento( "g" o "ml")
 
     if (num_linee==0){
 
-        printf("Il frigo e' vuoto!\n\n");									//TODO controllare perchè non esegue questa printf(non si sa perchè , non risultano mai 0 linee, ma parte sempre da 1)
+        printf("Il frigo e' vuoto!\n\n");	//TODO controllare perchè non esegue questa printf(non si sa perchè , non risultano mai 0 linee, ma parte sempre da 1)
         system("pause");
         // alimenti();
 
@@ -149,15 +150,25 @@ void stampa_alimenti(int num_linee){
 
 }
 
+/**
+ * La procedura permette di inserire nuovi alimenti.
+   E' possibile effettuare una scelta interna:
+
+		1- Se l'alimento è solido, e le sue quantità si misurano in grammi.
+		2- Se l'alimento è liquido e si misura in millilitri.
+
+ * @param num_linee riceve in input il numero di linee di cui e' composto il file
+ */
+
 void aggiunta_alimenti(int num_linee){
 
 	int i;
-    int mese_int;								//variabile temporanea per la conversione in int della stringa mese
-    int giorno_int;								//variabile temporanea per la conversione in int della stringa giorno
-    int tipo_int; 								//variabile di appoggio per la scelta dell'unità di misura dell'alimento
+    int mese_int;		//variabile temporanea per la conversione in int della stringa mese
+    int giorno_int;		//variabile temporanea per la conversione in int della stringa giorno
+    int tipo_int; 		//variabile di appoggio per la scelta dell'unità di misura dell'alimento
 
-    char selezione[10]; 						//stringa per memorizzare il numero di alimenti che si vogliono inserire
-    int selezione_int; 							//variabile in cui è memorizzato il numero di alimenti che si vogliono inserire (case1), il numero dell'alimento che si vuole modificare( case3)
+    char selezione[10];	//stringa per memorizzare il numero di alimenti che si vogliono inserire
+    int selezione_int; 	//variabile in cui è memorizzato il numero di alimenti che si vogliono inserire (case1), il numero dell'alimento che si vuole modificare( case3)
 
     system("cls");
     printf("Quanti alimenti vuoi aggiungere?Inserire un valore numerico\n\n");
@@ -358,7 +369,7 @@ void aggiunta_alimenti(int num_linee){
 			alimenti();
 		}
 
-        num_linee++; 								 //incremento del numero di linee del file,in modo da non sovrascrivere alimenti precedentemente inseriti
+        num_linee++;  //incremento del numero di linee del file,in modo da non sovrascrivere alimenti precedentemente inseriti
 
         file_save_alimenti(num_linee);
 
@@ -370,10 +381,15 @@ void aggiunta_alimenti(int num_linee){
 
 }
 
+/**
+ * La procedura permette di modificare le quantita degli alimenti presenti nel frigo.
+ *
+ * @param num_linee riceve in input il numero di linee del file "alimenti.txt"
+ */
 void modifica_alimenti(int num_linee){
 
-    char selezione[10]; 						//stringa per memorizzare il numero di alimenti che si vogliono inserire
-    int selezione_int; 							//variabile in cui è memorizzato il numero di alimenti che si vogliono inserire (case1), il numero dell'alimento che si vuole modificare( case3)
+    char selezione[10]; //stringa per memorizzare il numero di alimenti che si vogliono inserire
+    int selezione_int; 	//variabile in cui è memorizzato il numero di alimenti che si vogliono inserire (case1), il numero dell'alimento che si vuole modificare( case3)
 	int i;
 
     printf("Di quale alimento si intende modificare le quantita' presenti?\n\nSe vuoi rimuovere un elemento dal frigo,digita una quantita' '0'\n\nDigitane il numero ad esso associato:");
@@ -394,13 +410,13 @@ void modifica_alimenti(int num_linee){
         selezione_int=atoi(selezione);
     }
 
-    selezione_int=selezione_int-1; 											//diminuzione del valore della variabile di 1 per allinearsi con l'array,in quanto l'utente vede e seleziona valori shiftati di 1,per evitare che vi sia un alimento indicato col valore 0
+    selezione_int=selezione_int-1; 	//diminuzione del valore della variabile di 1 per allinearsi con l'array,in quanto l'utente vede e seleziona valori shiftati di 1,per evitare che vi sia un alimento indicato col valore 0
 
     printf("\nInserire la nuova quantita':");
 
     gets(archivio_alimenti[selezione_int].quantita);
 
-    if(strcmp(archivio_alimenti[selezione_int].quantita,"0")==0 ){          //nel caso venga inserito un valore pari a 0 nel campo quantità,l'alimento verrà automaticamente rimosso
+    if(strcmp(archivio_alimenti[selezione_int].quantita,"0")==0 ){    //nel caso venga inserito un valore pari a 0 nel campo quantità,l'alimento verrà automaticamente rimosso
 
         FILE *fp;
         fp = fopen ("lista_spesa.txt","a");
@@ -413,7 +429,7 @@ void modifica_alimenti(int num_linee){
 
         fclose(fp);
 
-        for (i=selezione_int;i<num_linee;i++){ 								//ciclo per copiare i valori nella posizione precedente,in modo da rimuovere l'alimento e non lasciare spazi vuoti nell'elenco
+        for (i=selezione_int;i<num_linee;i++){ 		//ciclo per copiare i valori nella posizione precedente,in modo da rimuovere l'alimento e non lasciare spazi vuoti nell'elenco
 
             strcpy(archivio_alimenti[i].nome,archivio_alimenti[i+1].nome);
             strcpy(archivio_alimenti[i].giorno,archivio_alimenti[i+1].giorno);
@@ -425,9 +441,9 @@ void modifica_alimenti(int num_linee){
 
         }
 
-        num_linee--;														//decremento del numero di linee del file, dopo l'eliminazione di un alimento
+        num_linee--;	//decremento del numero di linee del file, dopo l'eliminazione di un alimento
 
-        file_save_alimenti(num_linee);										//aggiornamento del contenuto del file dopo le modifiche
+        file_save_alimenti(num_linee);	//aggiornamento del contenuto del file dopo le modifiche
 
         printf("\n\n");
         system("pause");
