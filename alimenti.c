@@ -163,9 +163,11 @@ void stampa_alimenti(int num_linee){
 void aggiunta_alimenti(int num_linee){
 
 	int i;
-    int mese_int;		//variabile temporanea per la conversione in int della stringa mese
+    int anno_int;		//variabile temporanea per la conversione in int della stringa anno
+	int mese_int;		//variabile temporanea per la conversione in int della stringa mese
     int giorno_int;		//variabile temporanea per la conversione in int della stringa giorno
     int tipo_int; 		//variabile di appoggio per la scelta dell'unità di misura dell'alimento
+    int anno_attuale;   //variabile in cui salvare l'anno attuale (a cui poi dover aggiungere 1900)
 
     char selezione[10];	//stringa per memorizzare il numero di alimenti che si vogliono inserire
     int selezione_int; 	//variabile in cui è memorizzato il numero di alimenti che si vogliono inserire (case1), il numero dell'alimento che si vuole modificare( case3)
@@ -203,6 +205,8 @@ void aggiunta_alimenti(int num_linee){
 
     		printf("Inserisci il giorno di scadenza:");
     		gets(archivio_alimenti[num_linee].giorno);
+
+    		printf("\n");
 
     		if(isOnlyNumbers(archivio_alimenti[num_linee].giorno)==true){
 
@@ -274,7 +278,7 @@ void aggiunta_alimenti(int num_linee){
 
     			if (mese_int==2) {
 
-    				printf("\n\nHai scelto un mese non valido,riprovare\n");
+    				printf("\nHai scelto un mese non valido,riprovare\n");
     				system("pause");
 
     			}
@@ -286,8 +290,6 @@ void aggiunta_alimenti(int num_linee){
     	else
 
     		do {
-
-    			system("cls");
 
        			printf("Inserisci mese di scadenza scegliendo fra i seguenti\n\n");
 
@@ -308,12 +310,14 @@ void aggiunta_alimenti(int num_linee){
 
     			printf("Il mese inserito non esiste,riprovare\n");
     			system("pause");
+    			system("cls");
+
     		}
 
     	} while (mese_int < 1 || mese_int > 12);
 
 
-    	printf("Inserire l' anno di scadenza\n");
+    	printf("\nInserire l' anno di scadenza:");
     	gets(archivio_alimenti[num_linee].anno);
 
 		if(isOnlyNumbers(archivio_alimenti[num_linee].anno)==true){
@@ -321,6 +325,62 @@ void aggiunta_alimenti(int num_linee){
 			messaggio_errore();
 			alimenti();
 		}
+
+		anno_int=atoi(archivio_alimenti[num_linee].anno);
+
+		//--------------------------------------------------------------------------
+		//CONTROLLO SCADENZA
+
+		//Acquisisco l'orario e lo memorizzo nella struct tm
+	    time_t rawtime;
+	    struct tm *info;
+
+	    time(&rawtime);
+	    info = gmtime(&rawtime );
+
+	    anno_attuale=info->tm_year;
+
+	    anno_attuale=anno_attuale + 1900; //aggiungo 1900 perchè la libreria esterna inizia a contare da 0,ignorando ben 1900 anni.Senza l'addizione,risulterebbe come anno attuale il 118,e non 2018 (2018=1900+118)
+
+	    if(anno_int<anno_attuale){
+
+	    	printf("\n----------------------------------------------------------------------");
+	    	printf("\nATTENZIONE!");
+	    	printf("\n----------------------------------------------------------------------");
+
+	    	printf("\nHai inserito un alimento gia' scaduto.L'inserimento e' stato annullato.\nE' consigliato cestinare questo alimento\n\n");
+	    	system("pause");
+	    	alimenti();
+
+	    }
+
+	    if(anno_int==anno_attuale && mese_int-1<info->tm_mon){  //shift di -1 per il mese,in quanto tm_mon è un array da 0 a 11
+
+	    	printf("\n----------------------------------------------------------------------");
+	    	printf("\nATTENZIONE!");
+	    	printf("\n----------------------------------------------------------------------");
+
+	    	printf("\nHai inserito un alimento gia' scaduto.L'inserimento e' stato annullato.\nE' consigliato cestinare questo alimento\n\n");
+	    	system("pause");
+	    	alimenti();
+
+	    }
+
+	    if(anno_int==anno_attuale && mese_int-1==info->tm_mon && giorno_int<info->tm_mday){  //shift di -1 per il mese,in quanto tm_mon è un array da 0 a 11
+
+	    	printf("\n----------------------------------------------------------------------");
+	    	printf("\nATTENZIONE!");
+	    	printf("\n----------------------------------------------------------------------");
+
+	    	printf("\nHai inserito un alimento gia' scaduto.L'inserimento e' stato annullato.\nE' consigliato cestinare questo alimento\n\n");
+	    	system("pause");
+	    	alimenti();
+
+	    }
+
+		//-------------------------------------------------------------------------
+
+	    system("cls");
 
         printf("\nInserire la quantita' dell'alimento inserito:");
         gets(archivio_alimenti[num_linee].numero);
@@ -386,6 +446,7 @@ void aggiunta_alimenti(int num_linee){
  *
  * @param num_linee riceve in input il numero di linee del file "alimenti.txt"
  */
+
 void modifica_alimenti(int num_linee){
 
     char selezione[10]; //stringa per memorizzare il numero di alimenti che si vogliono inserire
