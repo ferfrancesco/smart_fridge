@@ -53,3 +53,4 @@ struct ricetta{
 }archivio_ricette[MAX_RICETTE];
 
 char lista_spesa[50][50];
+

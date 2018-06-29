@@ -22,6 +22,7 @@ int main(int argc, char *argv[]) {
 
     stampa_menu();									//stampa del menù di scelta principale del programma
 
+    //printf("%d",tm.tm_year);
 
     return 0;
 }
