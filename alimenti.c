@@ -5,8 +5,8 @@
 #include <time.h>
 #include "structs.h"
 #include "operazioni_file.h"
-#include "operazioni_varie.h"
 #include "alimenti.h"
+#include "altre_procedure.h"
 
 typedef int bool;
 #define true 1

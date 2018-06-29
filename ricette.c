@@ -5,9 +5,9 @@
 #include <time.h>
 #include "structs.h"
 #include "operazioni_file.h"
-#include "operazioni_varie.h"
 #include "alimenti.h"
 #include "ricette.h"
+#include "altre_procedure.h"
 
 //inclusione valori bool
 typedef int bool;
