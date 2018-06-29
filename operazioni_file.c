@@ -5,12 +5,7 @@
 #define GIORNI_SETTIMANA 7
 
 
-/**
- * Definizione di un tipo booleano nello standard C (che non lo prevede)
- * tramite la definizione di due costanti:
- * 1- Vero
- * 2- Falso
- */
+
 typedef int bool;
 #define true 1
 #define false 0
@@ -76,6 +71,8 @@ void to_space_conversion(char stringa[]){							//TODO da eliminare
  *altrimenti riporta un messaggio d'errore nell'apertura del file.
  *Apre automaticamente il file "alimenti.txt" senza aver bisogno di un nome in input
  *
+ *@pre Il file "alimenti.txt" deve gia' esistere
+ *
  * @return num_linee Se il controllo va a buon fine, la funzione restituirà il numero di linee del file analizzato
  */
 
@@ -114,6 +111,7 @@ int file_load_alimenti(){
  *Questa funzione conta le linee del file ricette, se il file esiste,
  *altrimenti riporta un messaggio d'errore nell'apertura del file.
  *Apre automaticamente il file "ricette.txt" senza aver bisogno di un nome in input
+ *@pre Il file "ricette.txt" deve gia' esistere
  *
  * @return num_linee Se il controllo va a buon fine, la funzione restituirà il numero di linee del file analizzato
  */
@@ -174,6 +172,8 @@ int file_load_ricette(){
  *altrimenti riporta un messaggio d'errore nell'apertura del file.
  *Apre automaticamente il file "menu_sett.txt" senza aver bisogno di un nome in input
  *
+ *@pre Il file "menu_sett.txt" deve gia' esistere
+ *
  * @return num_linee Se il controllo va a buon fine, la funzione restituirà il numero di linee del file analizzato
  */
 
@@ -214,10 +214,12 @@ int file_load_menu_sett(){
  *altrimenti riporta un messaggio d'errore nell'apertura del file.
  *Apre automaticamente il file "lista_spesa.txt" senza aver bisogno di un nome in input
  *
+ *@pre Il file "lista_spesa.txt" deve gia' esistere
+ *
  * @return num_linee Se il controllo va a buon fine, la funzione restituirà il numero di linee del file analizzato
  */
 
-int file_load_lista(int num_linee){
+int file_load_lista(int num_linee){ //TODO CONTROLLA
 
     int i;
 
@@ -321,7 +323,8 @@ void file_save_ricette (int num_linee){
 
 
 /**
- * Questa procedura riceve in input il numero di linee del file "menu_sett.txt" e lo stesso viene aperto in scrittura.
+ * Questa procedura salva il menu settimanale.
+ *
  * Non effettua alcun controllo sulla previa esistenza del file, semplicemente sovrascrive l'intero menu settimanale qualora venisse chiesto di salvarlo
  *
  *
@@ -334,7 +337,7 @@ void file_save_menu_sett(){
 
     fp = fopen ("menu_sett.txt","w");
 
-    for(i=0;i<7;i++){
+    for(i=0;i<GIORNI_SETTIMANA;i++){
 
         to_und_conversion(giorno[i].pietanza); //TODO elimina  //converto il nome con gli underscore per prepararlo al salvataggio su file
 

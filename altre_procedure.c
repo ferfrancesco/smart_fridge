@@ -12,6 +12,12 @@ typedef int bool;
 #define true 1
 #define false 0
 
+/**
+ * Questa funzione verifica che una data stringa contenga solo numeri.
+ *
+ * @pre deve essere inserita una stringa che indica la data di scadenza di un dato prodotto
+ * @post viene restituito un valore booleano, o vero o falso (che corrispondono rispettivamente ad un 1 o ad uno 0)
+ */
 int isOnlyNumbers(char* stringa){
 
     int i;
@@ -35,6 +41,11 @@ int isOnlyNumbers(char* stringa){
 
 }
 
+/**
+ * Questa procedura stampa un messaggio di errore, utile in diverse funzioni
+ *
+ */
+
 void messaggio_errore(){
 
     system("cls");
@@ -43,6 +54,10 @@ void messaggio_errore(){
     fflush(stdin);
 
 }
+
+/**
+ * Questa procedura copia i nomi dei giorni della settimana nella struct "giorno"
+ */
 
 void dayname_fill(){
 
@@ -55,6 +70,11 @@ void dayname_fill(){
     strcpy(giorno[6].dayname,"Domenica");
 
 }
+
+/**
+ * Questa procedura stampa il menu principale dello Smart Fridge.
+ *
+ */
 
 void stampa_menu(){
 
@@ -106,6 +126,7 @@ void stampa_menu(){
     }
 
 }
+
 
 void controllo_scadenza(){
 

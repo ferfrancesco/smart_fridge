@@ -14,6 +14,11 @@
 struct archivio_alimenti[ALIM_MAX];
 struct archivio_ricette[MAX_RICETTE];*/
 
+/**
+ * Struct che definisce ogni singola pietanza del menu settimanale,
+ * contrassegnata da nome del piatto stesso e dal giorno della settimana in cui
+ * si e' consumato o si intende consumarlo
+ */
 struct menu_settimana{
 
     char dayname[12];
@@ -22,6 +27,10 @@ struct menu_settimana{
 }giorno[6];
 
 //struct dati cibo
+
+/**
+ * Struct che definisce ogni singolo alimento presente nello Smart Fridge
+ */
 
 struct alimento{
 
@@ -39,6 +48,9 @@ struct alimento{
 
 //struct dati ricette
 
+/**
+ * Struct che definisce ogni singola ricetta presente nella lista inserita nello Smart Fridge
+ */
 struct ricetta{
 
     char nome[LUNGH_MAX_NOME];

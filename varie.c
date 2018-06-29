@@ -17,6 +17,13 @@ typedef int bool;
 
 int menu_inserito=false; //flag controllo inserimento menù della settimana
 
+/**
+ * Questa procedura stampa il menu per la categoria "varie".
+ * E' possibile effettuare diverse scelte al suo interno.
+ *
+ * @pre E' necessario che nel menu principale dello Smart Fridge sia selezionata la categoria "varie"
+ *
+ */
 void varie(){
 
     int menu_select=0;
@@ -51,10 +58,19 @@ void varie(){
 
 }
 
+/**
+ * Procedura che stampa eventuali promemoria inseriti nello Smart Fridge
+ *
+ */
 void memos(){
 
     printf("\n\n---------------------------------------------\n\nSEZIONE MEMOS");
 }
+
+/**
+ * Procedura che stampa le diverse opzioni disponibili riguardo il menu settimanale
+ * @pre per selezionare la prima scelta del menu, c'e' bisogno che il menu sia gia' stato inserito in precedenza
+ */
 
 void menu_sett(){
 

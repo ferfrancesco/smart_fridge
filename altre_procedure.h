@@ -8,7 +8,24 @@
 #include <stdlib.h>
 #include <string.h>
 
-int controllo_numerico(char* stringa);  //prende in input una stringa,usare quindi gets(),non scanf("%c",..). Controlla che sia ocmposta unicamente da numeri,poi la riconverte in un valore intero che restituisce
+/**
+ * Questa funzione verifica che la stringa data in input sia composta da soli numeri.
+ * @param stringa, ovvero quella che dovrebbe essere la data di scadenza
+ * @return un valore booleano tra true o false(codificati in 1: true, 2:false)
+ */
+int isOnlyNumbers(char* stringa);
+
+/**
+ * Procedura che stampa un messaggio d'errore
+ */
 void messaggio_errore();
+
+/**
+ * Questa procedura copia i nomi dei giorni della settimana nella struct "giorno"
+ */
 void dayname_fill();
+
+/**
+ * Questa procedura stampa il menu principale dello Smart Fridge.
+ */
 void stampa_menu();
