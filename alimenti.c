@@ -44,7 +44,8 @@ void alimenti(){
     int alimenti_temp; 							//variabile di appoggio per la scelta dell'unità di misura dell'alimento
     char selezione[10]; 						//stringa per memorizzare il numero di alimenti che si vogliono inserire
     int selezione_int; 							//variabile in cui è memorizzato il numero di alimenti che si vogliono inserire (case1), il numero dell'alimento che si vuole modificare( case3)
-    int mese_int; 								//variabile temporanea per la conversione in int della stringa mese
+    int mese_int;								//variabile temporanea per la conversione in int della stringa mese
+    int giorno_int;								//variabile temporanea per la conversione in int della stringa giorno
 
     fflush(stdin);
     system("cls");
@@ -75,13 +76,14 @@ void alimenti(){
 
             gets(selezione);
 
-            if(controllo_numerico(selezione)==false) {
+            if(isOnlyLetters(selezione)==true) {
 
+            	messaggio_errore();
                 alimenti();
 
             }
 
-            else if (controllo_numerico(selezione)==true){
+            else if (isOnlyLetters(selezione)==false){
 
                 selezione_int=atoi(selezione);
             }
@@ -101,19 +103,19 @@ void alimenti(){
             		printf("Inserisci il giorno di scadenza:");
             		gets(archivio_alimenti[num_linee].giorno);
 
-            		if(isOnlyLetters(archivio_alimenti[num_linee].giorno)==false){
+            		if(isOnlyLetters(archivio_alimenti[num_linee].giorno)==true){
 
             			messaggio_errore();
             			alimenti();
             		}
 
-            		int giorno_int;
-
             		giorno_int=atoi(archivio_alimenti[num_linee].giorno);
 
             		if (giorno_int <1 || giorno_int >31) {
 
-            			printf("Giorno inesistente! Reinserire il giorno:\n");
+            			printf("Giorno inesistente! Reinserire il giorno\n");
+            			system("pause");
+            			printf("\n\n");
             		}
 
             	} while(giorno_int <1 || giorno_int >31);
@@ -125,13 +127,13 @@ void alimenti(){
 
             			system("cls");
 
-            			printf("\n\nInserisci mese di scadenza scegliendo fra i seguenti\n");
+            			printf("Inserisci mese di scadenza scegliendo fra i seguenti\n\n");
 
             			printf("1-Gennaio\n3-Marzo\n5-Maggio\n7-Luglio\n8-Agosto\n10-Ottobre\n12-Dicembre\n\n");
 
             			gets(archivio_alimenti[num_linee].mese);
 
-                		if(isOnlyLetters(archivio_alimenti[num_linee].mese)==false){
+                		if(isOnlyLetters(archivio_alimenti[num_linee].mese)==true){
 
                 			messaggio_errore();
                 			alimenti();
@@ -141,27 +143,27 @@ void alimenti(){
 
                 		if(mese_int==2 || mese_int==4 || mese_int==6|| mese_int==9||mese_int==11) {
 
-                			system("cls");
                 			printf("\n\nHai scelto un mese non valido,riprovare\n");
+                			system("pause");
                 		}
 
             		} while (mese_int==2 || mese_int==4 || mese_int==6|| mese_int==9||mese_int==11);
 
             	}
 
-            	else if (vett[i].giorno==30|| vett[i].giorno==29) {
+            	else if (giorno_int==30|| giorno_int==29) {
 
             		do {
 
             			system("cls");
 
-            			printf("\n\nInserisci mese di scadenza scegliendo fra i seguenti\n");
+            			printf("Inserisci mese di scadenza scegliendo fra i seguenti\n\n");
 
             			printf("1-Gennaio\n3-Marzo\n4-Aprile\n5-Maggio\n6-Giugno\n7-Luglio\n8-Agosto\n9-Settembre\n10-Ottobre\n11-Novembre\n12-Dicembre\n\n");
 
             			gets(archivio_alimenti[num_linee].mese);
 
-                		if(isOnlyLetters(archivio_alimenti[num_linee].mese)==false){
+                		if(isOnlyLetters(archivio_alimenti[num_linee].mese)==true){
 
                 			messaggio_errore();
                 			alimenti();
@@ -172,6 +174,7 @@ void alimenti(){
             			if (mese_int==2) {
 
             				printf("\n\nHai scelto un mese non valido,riprovare\n");
+            				system("pause");
 
             			}
 
@@ -185,13 +188,13 @@ void alimenti(){
 
             			system("cls");
 
-               			printf("\n\nInserisci mese di scadenza scegliendo fra i seguenti\n");
+               			printf("Inserisci mese di scadenza scegliendo fra i seguenti\n\n");
 
                 		printf("1-Gennaio\n2-Febbraio\n3-Marzo\n4-Aprile\n5-Maggio\n6-Giugno\n7-Luglio\n8-Agosto\n9-Settembre\n10-Ottobre\n11-Novembre\n12-Dicembre\n\n");
 
                 		gets(archivio_alimenti[num_linee].mese);
 
-                    	if(isOnlyLetters(archivio_alimenti[num_linee].mese)==false){
+                    	if(isOnlyLetters(archivio_alimenti[num_linee].mese)==true){
 
                     		messaggio_errore();
                     		alimenti();
@@ -201,16 +204,18 @@ void alimenti(){
                     mese_int=atoi(archivio_alimenti[num_linee].mese);
 
             		if  (mese_int < 1 || mese_int > 12) {
+
             			printf("Il mese inserito non esiste,riprovare\n");
+            			system("pause");
             		}
 
-            	} while (vett[i].mese < 1 || vett[i].mese > 12);
+            	} while (mese_int < 1 || mese_int > 12);
 
 
             	printf("Inserire l' anno di scadenza\n");
             	gets(archivio_alimenti[num_linee].anno);
 
-        		if(isOnlyLetters(archivio_alimenti[num_linee].anno)==false){
+        		if(isOnlyLetters(archivio_alimenti[num_linee].anno)==true){
 
         			messaggio_errore();
         			alimenti();
@@ -219,7 +224,7 @@ void alimenti(){
                 printf("\nInserire la quantita' dell'alimento inserito:");
                 gets(archivio_alimenti[num_linee].numero);
 
-        		if(isOnlyLetters(archivio_alimenti[num_linee].mese)==false){
+        		if(isOnlyLetters(archivio_alimenti[num_linee].numero)==true){
 
         			messaggio_errore();
         			alimenti();
@@ -228,7 +233,7 @@ void alimenti(){
                 printf("\nInserire la tipologia di misura dell'alimento:\n\n1)Solido [GRAMMI]\n2)Liquido [MILLILITRI]\n\n");
                 gets(archivio_alimenti[num_linee].tipo);
 
-        		if(isOnlyLetters(archivio_alimenti[num_linee].mese)==false){
+        		if(isOnlyLetters(archivio_alimenti[num_linee].tipo)==true){
 
         			messaggio_errore();
         			alimenti();
@@ -254,10 +259,10 @@ void alimenti(){
 
                 }
 
-                printf("\nInserire le KCAL dell'alimento:");							//TODO inserire controllo sull'input numerico
+                printf("\nInserire le KCAL dell'alimento:");
                 gets(archivio_alimenti[num_linee].kcal);
 
-        		if(isOnlyLetters(archivio_alimenti[num_linee].mese)==false){
+        		if(isOnlyLetters(archivio_alimenti[num_linee].kcal)==true){
 
         			messaggio_errore();
         			alimenti();
@@ -286,13 +291,14 @@ void alimenti(){
 
             gets(selezione);
 
-            if(controllo_numerico(selezione)==false) {
+            if(isOnlyLetters(selezione)==true) {
 
+            	messaggio_errore();
                 alimenti();
 
             }
 
-            else if (controllo_numerico(selezione)==true){
+            else if (isOnlyLetters(selezione)==false){
 
                 selezione_int=atoi(selezione);
             }
@@ -319,7 +325,9 @@ void alimenti(){
                 for (i=selezione_int;i<num_linee;i++){ 								//ciclo per copiare i valori nella posizione precedente,in modo da rimuovere l'alimento e non lasciare spazi vuoti nell'elenco
 
                     strcpy(archivio_alimenti[i].nome,archivio_alimenti[i+1].nome);
-                    strcpy(archivio_alimenti[i].data,archivio_alimenti[i+1].data);
+                    strcpy(archivio_alimenti[i].giorno,archivio_alimenti[i+1].giorno);
+                    strcpy(archivio_alimenti[i].mese,archivio_alimenti[i+1].mese);
+                    strcpy(archivio_alimenti[i].anno,archivio_alimenti[i+1].anno);
                     strcpy(archivio_alimenti[i].quantita,archivio_alimenti[i+1].quantita);
                     strcpy(archivio_alimenti[i].kcal,archivio_alimenti[i+1].kcal);
 
@@ -380,7 +388,7 @@ void stampa_alimenti(int num_linee){
 
     else{
 
-        printf("Elenco degli alimenti presenti in frigo\n\n|%-50s|%-11s|%-10s|%-10s|%-7s|","Alimento","Scadenza","Numero","Quantita'","KCAL");  //il valore negativo serve per l'allineamento a sinistra
+        printf("Elenco degli alimenti presenti in frigo\n\n|%-50s|%-10s|%-10s|%-10s|%-7s|","Alimento","Scadenza","Numero","Quantita'","KCAL");  //il valore negativo serve per l'allineamento a sinistra
         printf("\n----------------------------------------------------------------------------------------------");
 
         for(i=0;i<num_linee;i++){
@@ -390,7 +398,7 @@ void stampa_alimenti(int num_linee){
                 strcpy(temp_quantita,archivio_alimenti[i].quantita);
                 strcat(temp_quantita," ml");
 
-                printf("\n|%-50s|%-11s|%-10s|%-10s|%-7s|%d)",archivio_alimenti[i].nome,archivio_alimenti[i].data,archivio_alimenti[i].numero,temp_quantita,archivio_alimenti[i].kcal,i+1);
+                printf("\n|%-50s|%-2s/%-2s/%-6s|%-10s|%-10s|%-7s|%d)",archivio_alimenti[i].nome,archivio_alimenti[i].giorno,archivio_alimenti[i].mese,archivio_alimenti[i].anno,archivio_alimenti[i].numero,temp_quantita,archivio_alimenti[i].kcal,i+1);
 
             }
 
@@ -399,7 +407,7 @@ void stampa_alimenti(int num_linee){
                 strcpy(temp_quantita,archivio_alimenti[i].quantita);
                 strcat(temp_quantita," g");
 
-                printf("\n|%-50s|%-11s|%-10s|%-10s|%-7s|%d)",archivio_alimenti[i].nome,archivio_alimenti[i].data,archivio_alimenti[i].numero,temp_quantita,archivio_alimenti[i].kcal,i+1);
+                printf("\n|%-50s|%-s/%-s/%-s|%-10s|%-10s|%-7s|%d)",archivio_alimenti[i].nome,archivio_alimenti[i].giorno,archivio_alimenti[i].mese,archivio_alimenti[i].anno,archivio_alimenti[i].numero,temp_quantita,archivio_alimenti[i].kcal,i+1);
 
             }
 
