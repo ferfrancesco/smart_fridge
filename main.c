@@ -21,9 +21,6 @@ int main(int argc, char *argv[]) {
 
     stampa_menu();									//stampa del menù di scelta principale del programma
 
-    //super prova
-    //provA SUPER ecceziUnale
-    //prova super super supersayan
 
     return 0;
 }
