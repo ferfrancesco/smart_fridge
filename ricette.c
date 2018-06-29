@@ -45,14 +45,14 @@ void ricette(){
             fflush(stdin);
             gets(selezione);
 
-            if(isOnlyLetters(selezione)==true) {
+            if(isOnlyNumbers(selezione)==true) {
 
             	messaggio_errore();
                 ricette();
 
             }
 
-            else if (isOnlyLetters(selezione)==false){
+            else if (isOnlyNumbers(selezione)==false){
 
                 selezione_int=atoi(selezione);
             }
@@ -87,14 +87,14 @@ void ricette(){
             printf("\nDa 1 a 5 Quanto è difficile questa ricetta?(Inserire valori numerici):");
             gets(selezione);
 
-            if(isOnlyLetters(selezione)==true) {
+            if(isOnlyNumbers(selezione)==true) {
 
             	messaggio_errore();
                 ricette();
 
             }
 
-            else if (isOnlyLetters(selezione)==false){
+            else if (isOnlyNumbers(selezione)==false){
 
                 strcpy(archivio_ricette[num_linee].difficolta,selezione);
             }
@@ -104,14 +104,14 @@ void ricette(){
             printf("\nQuanti ingredienti ha questa ricetta?(Inserire valori numerici):");
             gets(selezione);
 
-            if(isOnlyLetters(selezione)==true) {
+            if(isOnlyNumbers(selezione)==true) {
 
             	messaggio_errore();
                 ricette();
 
             }
 
-            else if (isOnlyLetters(selezione)==false){
+            else if (isOnlyNumbers(selezione)==false){
 
                 strcpy(archivio_ricette[num_linee].num_ingredienti,selezione);
             }
@@ -130,14 +130,14 @@ void ricette(){
             printf("\nQuanti step ha questa ricetta?(Inserire valori numerici):");
             gets(selezione);
 
-            if(isOnlyLetters(selezione)==true) {
+            if(isOnlyNumbers(selezione)==true) {
 
             	messaggio_errore();
                 ricette();
 
             }
 
-            else if (isOnlyLetters(selezione)==false){
+            else if (isOnlyNumbers(selezione)==false){
 
                 strcpy(archivio_ricette[num_linee].num_step,selezione);
             }

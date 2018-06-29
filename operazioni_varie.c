@@ -12,7 +12,7 @@ typedef int bool;
 #define true 1
 #define false 0
 
-int isOnlyLetters(char* stringa){
+int isOnlyNumbers(char* stringa){
 
     int i;
     int numero;
