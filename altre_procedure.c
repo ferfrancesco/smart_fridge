@@ -12,23 +12,22 @@ typedef int bool;
 #define true 1
 #define false 0
 
-int controllo_numerico(char* stringa){  //TODO trasformare in isNumero() e portare il messaggio_errore al di fuori
+int isOnlyNumbers(char* stringa){
 
     int i;
     int numero;
 
     for(i=0;i<strlen(stringa);i++){
 
-        if(isdigit(stringa[i])==false){		//controllo input.In caso di input errato,torna al menu.
+        if(isdigit(stringa[i])==false){
 
-            messaggio_errore();
-            return false;
+            return true;
 
         }
 
         else if(isdigit(stringa[i])==true){
 
-            return true;
+            return false;
 
         }
 
@@ -107,3 +106,20 @@ void stampa_menu(){
     }
 
 }
+
+void controllo_scadenza(){
+
+	int anno_curr;
+	int mese_curr;
+	int giorno_curr;
+
+	int anno_scad;
+	int mese_scad;
+	int giorno_scad;
+
+
+
+
+
+}
+

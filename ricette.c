@@ -5,9 +5,9 @@
 #include <time.h>
 #include "structs.h"
 #include "operazioni_file.h"
-#include "operazioni_varie.h"
 #include "alimenti.h"
 #include "ricette.h"
+#include "altre_procedure.h"
 
 //inclusione valori bool
 typedef int bool;
@@ -45,13 +45,14 @@ void ricette(){
             fflush(stdin);
             gets(selezione);
 
-            if(controllo_numerico(selezione)==false) {
+            if(isOnlyNumbers(selezione)==true) {
 
+            	messaggio_errore();
                 ricette();
 
             }
 
-            else if (controllo_numerico(selezione)==true){
+            else if (isOnlyNumbers(selezione)==false){
 
                 selezione_int=atoi(selezione);
             }
@@ -86,13 +87,14 @@ void ricette(){
             printf("\nDa 1 a 5 Quanto è difficile questa ricetta?(Inserire valori numerici):");
             gets(selezione);
 
-            if(controllo_numerico(selezione)==false) {
+            if(isOnlyNumbers(selezione)==true) {
 
+            	messaggio_errore();
                 ricette();
 
             }
 
-            else if (controllo_numerico(selezione)==true){
+            else if (isOnlyNumbers(selezione)==false){
 
                 strcpy(archivio_ricette[num_linee].difficolta,selezione);
             }
@@ -102,13 +104,14 @@ void ricette(){
             printf("\nQuanti ingredienti ha questa ricetta?(Inserire valori numerici):");
             gets(selezione);
 
-            if(controllo_numerico(selezione)==false) {
+            if(isOnlyNumbers(selezione)==true) {
 
+            	messaggio_errore();
                 ricette();
 
             }
 
-            else if (controllo_numerico(selezione)==true){
+            else if (isOnlyNumbers(selezione)==false){
 
                 strcpy(archivio_ricette[num_linee].num_ingredienti,selezione);
             }
@@ -127,13 +130,14 @@ void ricette(){
             printf("\nQuanti step ha questa ricetta?(Inserire valori numerici):");
             gets(selezione);
 
-            if(controllo_numerico(selezione)==false) {
+            if(isOnlyNumbers(selezione)==true) {
 
+            	messaggio_errore();
                 ricette();
 
             }
 
-            else if (controllo_numerico(selezione)==true){
+            else if (isOnlyNumbers(selezione)==false){
 
                 strcpy(archivio_ricette[num_linee].num_step,selezione);
             }

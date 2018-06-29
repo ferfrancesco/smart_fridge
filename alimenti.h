@@ -10,6 +10,8 @@
 
 void alimenti();
 void stampa_alimenti(int num_linee);
+void aggiunta_alimenti(int num_linee);
+void modifica_alimenti(int num_linee);
 
 
 

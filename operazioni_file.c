@@ -96,7 +96,7 @@ int file_load_alimenti(){
 
     while(!feof(fp)){								//TODO nella funzione stampa, se il num linee ==1, visualizza : 'il frigo è vuoto'
 
-        fscanf(fp,"%50[^,],%12[^,],%15[^,],%5[^,],%10[^,],%15[^,],\n",archivio_alimenti[i].nome,archivio_alimenti[i].data,archivio_alimenti[i].numero,archivio_alimenti[i].tipo,archivio_alimenti[i].quantita,archivio_alimenti[i].kcal);	//utilizzo [^,] in quanto utilizzare %s leggeva l'intera stringa,virgole incluse,
+        fscanf(fp,"%50[^,],%4[^,],%4[^,],%6[^,],%15[^,],%5[^,],%10[^,],%15[^,],\n",archivio_alimenti[i].nome,archivio_alimenti[i].giorno,archivio_alimenti[i].mese,archivio_alimenti[i].anno,archivio_alimenti[i].numero,archivio_alimenti[i].tipo,archivio_alimenti[i].quantita,archivio_alimenti[i].kcal);	//utilizzo [^,] in quanto utilizzare %s leggeva l'intera stringa,virgole incluse,
 
         i++;
         num_linee++;
@@ -267,11 +267,7 @@ void file_save_alimenti(int num_linee){
 
     for(i=0;i<num_linee;i++){
 
-        to_und_conversion(archivio_alimenti[i].nome);   //TODO elimina to_und_conversion
-
-        fprintf(fp,"%s,%s,%s,%s,%s,%s,\n",archivio_alimenti[i].nome,archivio_alimenti[i].data,archivio_alimenti[i].numero,archivio_alimenti[i].tipo,archivio_alimenti[i].quantita,archivio_alimenti[i].kcal);
-
-        to_space_conversion(archivio_alimenti[i].nome); //TODO elimina to_space_conversion
+        fprintf(fp,"%s,%s,%s,%s,%s,%s,%s,%s,\n",archivio_alimenti[i].nome,archivio_alimenti[i].giorno,archivio_alimenti[i].mese,archivio_alimenti[i].anno,archivio_alimenti[i].numero,archivio_alimenti[i].tipo,archivio_alimenti[i].quantita,archivio_alimenti[i].kcal);
 
     }
 

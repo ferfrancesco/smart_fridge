@@ -26,8 +26,8 @@ struct menu_settimana{
 struct alimento{
 
     char nome[LUNGH_MAX_NOME];
-    char giorno[5];
-    char mese[20];
+    char giorno[4];
+    char mese[4];
     char anno[6];
     char numero[10];
     char kcal[7];
