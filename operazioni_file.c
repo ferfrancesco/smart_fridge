@@ -4,13 +4,21 @@
 #include "structs.h"
 #define GIORNI_SETTIMANA 7
 
-//inclusione valori bool
+
+/**
+ * Definizione di un tipo booleano nello standard C (che non lo prevede)
+ * tramite la definizione di due costanti:
+ * 1- Vero
+ * 2- Falso
+ */
 typedef int bool;
 #define true 1
 #define false 0
 
 //OPERAZIONI VARIE
-int conta_linee(char nome_file[40]){
+
+
+int conta_linee(char nome_file[40]){ //TODO togli funzione perchè inutile
 
     int num_linee=0;
 
@@ -33,6 +41,8 @@ int conta_linee(char nome_file[40]){
 
     return num_linee;
 }
+
+
 
 void to_und_conversion(char stringa[]){								//TODO da eliminare
 
@@ -61,6 +71,14 @@ void to_space_conversion(char stringa[]){							//TODO da eliminare
 
 //OPERAZIONI DI CARICAMENTO DEI FILE
 
+/**
+ *Questa funzione conta le linee del file alimenti, se il file esiste,
+ *altrimenti riporta un messaggio d'errore nell'apertura del file.
+ *Apre automaticamente il file "alimenti.txt" senza aver bisogno di un nome in input
+ *
+ * @return num_linee Se il controllo va a buon fine, la funzione restituirà il numero di linee del file analizzato
+ */
+
 int file_load_alimenti(){
 
     int i=0;
@@ -83,7 +101,7 @@ int file_load_alimenti(){
         i++;
         num_linee++;
 
-        to_space_conversion(archivio_alimenti[i].nome);
+        to_space_conversion(archivio_alimenti[i].nome);  //TODO elimina riferimento a funzione inutile
 
     }
 
@@ -92,6 +110,14 @@ int file_load_alimenti(){
     return num_linee;
 
 }
+/**
+ *Questa funzione conta le linee del file ricette, se il file esiste,
+ *altrimenti riporta un messaggio d'errore nell'apertura del file.
+ *Apre automaticamente il file "ricette.txt" senza aver bisogno di un nome in input
+ *
+ * @return num_linee Se il controllo va a buon fine, la funzione restituirà il numero di linee del file analizzato
+ */
+
 
 int file_load_ricette(){
 
@@ -143,6 +169,16 @@ int file_load_ricette(){
 
 }
 
+/**
+ *Questa funzione conta le linee del file menu settimanale, se il file esiste,
+ *altrimenti riporta un messaggio d'errore nell'apertura del file.
+ *Apre automaticamente il file "menu_sett.txt" senza aver bisogno di un nome in input
+ *
+ * @return num_linee Se il controllo va a buon fine, la funzione restituirà il numero di linee del file analizzato
+ */
+
+
+
 int file_load_menu_sett(){
 
     int i;
@@ -172,6 +208,14 @@ int file_load_menu_sett(){
     return num_linee;
 
 }
+
+/**
+ *Questa funzione conta le linee del file lista della spesa, se il file esiste,
+ *altrimenti riporta un messaggio d'errore nell'apertura del file.
+ *Apre automaticamente il file "lista_spesa.txt" senza aver bisogno di un nome in input
+ *
+ * @return num_linee Se il controllo va a buon fine, la funzione restituirà il numero di linee del file analizzato
+ */
 
 int file_load_lista(int num_linee){
 
@@ -206,6 +250,13 @@ int file_load_lista(int num_linee){
 
 //OPERAZIONI DI SALVATAGGIO DEI FILE
 
+/**
+ * Questa procedura riceve in input il numero di linee del file "alimenti.txt" e lo stesso viene aperto in scrittura.
+ * Salva sul file eventuali modifiche apportate.
+ *
+ * @param num_linee La procedura riceve in input il numero di linee del file, derivanti dalla precedente lettura dello stesso.
+ */
+
 
 void file_save_alimenti(int num_linee){
 
@@ -226,6 +277,13 @@ void file_save_alimenti(int num_linee){
 
     fclose(fp);
 }
+
+/**
+ * Questa procedura riceve in input il numero di linee del file "ricette.txt" e lo stesso viene aperto in scrittura.
+ * Salva sul file eventuali modifiche apportate.
+ *
+ * @param num_linee La procedura riceve in input il numero di linee del file, derivanti dalla precedente lettura dello stesso.
+ */
 
 void file_save_ricette (int num_linee){
 
@@ -265,6 +323,14 @@ void file_save_ricette (int num_linee){
 
 }
 
+
+/**
+ * Questa procedura riceve in input il numero di linee del file "menu_sett.txt" e lo stesso viene aperto in scrittura.
+ * Non effettua alcun controllo sulla previa esistenza del file, semplicemente sovrascrive l'intero menu settimanale qualora venisse chiesto di salvarlo
+ *
+ *
+ */
+
 void file_save_menu_sett(){
 
     FILE *fp;
@@ -274,11 +340,11 @@ void file_save_menu_sett(){
 
     for(i=0;i<7;i++){
 
-        to_und_conversion(giorno[i].pietanza);   //converto il nome con gli underscore per prepararlo al salvataggio su file
+        to_und_conversion(giorno[i].pietanza); //TODO elimina  //converto il nome con gli underscore per prepararlo al salvataggio su file
 
         fprintf(fp,"%s\n",giorno[i].pietanza);
 
-        to_space_conversion(giorno[i].pietanza);  //riporto il nome da underscore a spazi
+        to_space_conversion(giorno[i].pietanza); //TODO ELIMINA //riporto il nome da underscore a spazi
 
     }
 
