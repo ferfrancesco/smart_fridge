@@ -59,15 +59,6 @@ void varie(){
 }
 
 /**
- * Procedura che stampa eventuali promemoria inseriti nello Smart Fridge
- *
- */
-void memos(){
-
-    printf("\n\n---------------------------------------------\n\nSEZIONE MEMOS");
-}
-
-/**
  * Procedura che stampa le diverse opzioni disponibili riguardo il menu settimanale
  * @pre per selezionare la prima scelta del menu, c'e' bisogno che il menu sia gia' stato inserito in precedenza
  */

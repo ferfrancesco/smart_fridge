@@ -127,20 +127,74 @@ void stampa_menu(){
 
 }
 
+/**
+ * Procedura che stampa eventuali promemoria inseriti nello Smart Fridge
+ *
+ */
+void memos(){
 
-void controllo_scadenza(){
+    printf("\n\n---------------------------------------------\n\nSEZIONE MEMOS");
+}
 
-	int anno_curr;
-	int mese_curr;
-	int giorno_curr;
+void scadenze(int num_linee){
 
-	int anno_scad;
-	int mese_scad;
-	int giorno_scad;
+	int anno_int;          //conversione in int dell'anno di scadenza dell'alimento
+	int mese_int;		   //conversione in int del mese di scadenza dell'alimento
+	int giorno_int;		   //conversione in int del giorno di scadenza dell'alimento
+
+	int anno_attuale;   //variabile in cui salvare l'anno attuale (a cui poi dover aggiungere 1900)
+	int i;
+
+	//Acquisisco l'orario e lo memorizzo nella struct tm
+    time_t rawtime;
+    struct tm *info;
+
+    time(&rawtime);
+    info = gmtime(&rawtime );
+
+    anno_attuale=info->tm_year;
+
+    anno_attuale=anno_attuale + 1900; //aggiungo 1900 perchè la libreria esterna inizia a contare da 0,ignorando ben 1900 anni.Senza l'addizione,risulterebbe come anno attuale il 118,e non 2018 (2018=1900+118)
 
 
+    for(i=0;i<num_linee;i++){
+
+    	anno_int=atoi(archivio_alimenti[num_linee].anno);
+    	mese_int=atoi(archivio_alimenti[num_linee].mese);
+    	giorno_int=atoi(archivio_alimenti[num_linee].giorno);
 
 
+        if(anno_int<anno_attuale){
+
+
+        }
+
+        if(anno_int==anno_attuale && mese_int-1<info->tm_mon){  //shift di -1 per il mese,in quanto tm_mon è un array da 0 a 11
+
+        	printf("\n----------------------------------------------------------------------");
+        	printf("\nATTENZIONE!");
+        	printf("\n----------------------------------------------------------------------");
+
+        	printf("\nHai inserito un alimento gia' scaduto.L'inserimento e' stato annullato.\nE' consigliato cestinare questo alimento\n\n");
+        	system("pause");
+        	alimenti();
+
+        }
+
+        if(anno_int==anno_attuale && mese_int-1==info->tm_mon && giorno_int<info->tm_mday){  //shift di -1 per il mese,in quanto tm_mon è un array da 0 a 11
+
+        	printf("\n----------------------------------------------------------------------");
+        	printf("\nATTENZIONE!");
+        	printf("\n----------------------------------------------------------------------");
+
+        	printf("\nHai inserito un alimento gia' scaduto.L'inserimento e' stato annullato.\nE' consigliato cestinare questo alimento\n\n");
+        	system("pause");
+        	alimenti();
+
+        }
+
+
+    }
 
 }
 

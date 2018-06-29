@@ -201,7 +201,10 @@ void aggiunta_alimenti(int num_linee){
 
         system("cls");
 
-    	do {
+    	//--------------------------------------------------------------------------
+        //CONTROLLO INSERIMENTO DATE (SCADENZA)
+
+        do {
 
     		printf("Inserisci il giorno di scadenza:");
     		gets(archivio_alimenti[num_linee].giorno);

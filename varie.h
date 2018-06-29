@@ -5,6 +5,5 @@
 #include <time.h>
 
 void varie();
-void memos();
 void menu_sett();
 void lista();

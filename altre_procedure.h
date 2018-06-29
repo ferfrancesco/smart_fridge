@@ -29,3 +29,7 @@ void dayname_fill();
  * Questa procedura stampa il menu principale dello Smart Fridge.
  */
 void stampa_menu();
+
+void memos();
+
+void scadenze();
