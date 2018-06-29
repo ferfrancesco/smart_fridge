@@ -8,10 +8,33 @@
 #include "operazioni_varie.h"
 #include "alimenti.h"
 
-//inclusione valori bool
+/**
+ * Definizione di un tipo booleano nello standard C (che non lo prevede)
+ * tramite la definizione di due costanti:
+ * 1- Vero
+ * 2- Falso
+ */
 typedef int bool;
 #define true 1
 #define false 0
+
+/**
+La procedura rappresenta il menu degli alimenti. In base alla scelta che viene inserita, si hanno possibilità diverse:
+
+
+1) Attiva la procedura stampa_alimenti;
+
+2) Permette di inserire nuovi alimenti;
+   E' possibile effettuare una scelta interna:
+
+		1- Se l'alimento è solido, e le sue quantità si misurano in grammi.
+		2- Se l'alimento è liquido e si misura in millilitri.
+
+3) Permette di modificare delle quantità di un alimento;
+
+4) Torna al menu principale;
+ *
+ */
 
 void alimenti(){
 
@@ -47,7 +70,7 @@ void alimenti(){
 
             system("cls");
             printf("Quanti alimenti vuoi aggiungere?Inserire un valore numerico\n\n");
-            printf("\n Prova prova prova.");
+
             fflush(stdin);
 
             gets(selezione);
@@ -148,11 +171,11 @@ void alimenti(){
                 FILE *fp;
                 fp = fopen ("lista_spesa.txt","a");
 
-                to_und_conversion(archivio_alimenti[selezione_int].nome);
+                to_und_conversion(archivio_alimenti[selezione_int].nome); //TODO togliere
 
                 fprintf(fp,"%s,\n",archivio_alimenti[selezione_int].nome);
 
-                to_space_conversion(archivio_alimenti[selezione_int].nome);
+                to_space_conversion(archivio_alimenti[selezione_int].nome);	//TODO togliere
 
                 fclose(fp);
 
@@ -190,6 +213,17 @@ void alimenti(){
     }
 
 }
+
+/**
+ * la procedura stampa gli alimenti presenti nel frigo e, in caso di assenza di alimenti, stampa
+ * "il frigo è vuoto"
+ *
+ * @param num_linee Contiene il numero di linee del file "alimenti.txt" che viene caricato nel programma
+ *
+ * @pre num_linee Il file è già esistente al momento dell'accesso alla sezione "alimenti"
+ *
+ *
+ */
 
 void stampa_alimenti(int num_linee){
 

@@ -10,6 +10,7 @@
 #include "ricette.h"
 #include "varie.h"
 
+
 #define ALIM_MAX 50  								//quantità massima alimenti presenti in frigo
 #define STEP_MAX 50  								//numero massimo di step per ricetta
 #define INGR_MAX 50  								//numero massimo di ingredienti per ricetta
