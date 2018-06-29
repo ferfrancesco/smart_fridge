@@ -152,7 +152,8 @@ void stampa_alimenti(int num_linee){
 void aggiunta_alimenti(int num_linee){
 
 	int i;
-    int mese_int;								//variabile temporanea per la conversione in int della stringa mese
+    int anno_int;								//variabile temporanea per la conversione in int della stringa anno
+	int mese_int;								//variabile temporanea per la conversione in int della stringa mese
     int giorno_int;								//variabile temporanea per la conversione in int della stringa giorno
     int tipo_int; 								//variabile di appoggio per la scelta dell'unità di misura dell'alimento
 
@@ -310,6 +311,28 @@ void aggiunta_alimenti(int num_linee){
 			messaggio_errore();
 			alimenti();
 		}
+
+		anno_int=atoi(archivio_alimenti[num_linee].anno);
+
+		//-------------------------------------------------------------
+		//CONTROLLO SCADENZA
+
+		if(anno_int<tm.tm_year){
+
+			printf("ANNO ERRATO");
+			system("pause");
+
+			alimenti();
+		}
+
+
+
+
+
+
+
+		//-------------------------------------------------------------
+
 
         printf("\nInserire la quantita' dell'alimento inserito:");
         gets(archivio_alimenti[num_linee].numero);
