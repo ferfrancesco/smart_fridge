@@ -1,3 +1,12 @@
+/**
+ * @file alimenti.h
+ *
+ * Questa libreria contiene procedure relative al sottomenu' della categoria "alimenti".
+ *
+ * @authors Francesco Ferrara & Alessia Laforgia
+ *
+ */
+
 #ifndef ALIMENTI_H_
 #define ALIMENTI_H_
 #endif /* ALIMENTI_H_ */

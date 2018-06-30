@@ -1,3 +1,17 @@
+/**
+ * @file altre_procedure.h
+ *
+ * Questa libreria contiene controlli e procedure utilizzati in altre librerie e/o altre procedure
+ * appartenenti a differenti sottomenu'.
+ *
+ * @authors Francesco Ferrara & Alessia Laforgia
+ *
+ */
+
+
+
+
+
 #ifndef OPERAZIONI_VARIE_H_
 #define OPERAZIONI_VARIE_H_
 #endif /* OPERAZIONI_VARIE_H_ */

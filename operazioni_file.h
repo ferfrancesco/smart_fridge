@@ -1,9 +1,24 @@
+ /**
+ * @file operazioni_file.h
+ *
+ * Questa libreria contiene procedure relative al caricamento, al salvataggio e alla modifica
+ * dei vari file CSV utili all'interno del programma.
+ *
+ * @authors Francesco Ferrara & Alessia Laforgia
+ *
+ */
+
+
+
+
+
+
+
 #ifndef OPERAZIONI_FILE_H_
 #define OPERAZIONI_FILE_H_
 #endif /* OPERAZIONI_FILE_H_ */
 
-/* Libreria contenente funzioni per operazioni su file,quali apertura,salvataggio,modifica,
-e conversione di spazi in tratti bassi per il salvataggio come CSV file e viceversa*/
+
 
 #include <stdio.h>
 #include <stdlib.h>

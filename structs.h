@@ -21,8 +21,8 @@ struct archivio_ricette[MAX_RICETTE];*/
  */
 struct menu_settimana{
 
-    char dayname[12];
-    char pietanza[50];
+    char dayname[12];  /// nome del giorno della settimana
+    char pietanza[50]; /// nome del piatto
 
 }giorno[6];
 
@@ -33,14 +33,27 @@ struct menu_settimana{
  */
 
 struct alimento{
-
+	///nome dell'alimento
     char nome[LUNGH_MAX_NOME];
+
+    ///giorno di scadenza dell'alimento
     char giorno[4];
+
+    ///mese di scadenza dell'alimento
     char mese[4];
+
+    ///anno di scadenza dell'alimento
     char anno[6];
-    char numero[10];
+
+    char numero[10];			//TODO togli, e' ridondante, facciamo scegliere prima il tipo poi la quantita
+
+    ///calorie di un dato alimento
     char kcal[7];
+
+    ///tipo di un alimento (ovvero liquido o solido)
     char tipo [5];
+
+    ///quantita' di un dato alimento
     char quantita[10];
 
 
@@ -52,15 +65,24 @@ struct alimento{
  * Struct che definisce ogni singola ricetta presente nella lista inserita nello Smart Fridge
  */
 struct ricetta{
-
+	///nome ricetta
     char nome[LUNGH_MAX_NOME];
+
+    ///difficolta' (da 1 a 5)
     char difficolta[5];
 
-    char num_ingredienti[5];   //variabile per determinare il numero di ingredienti
-    char ingredienti[INGR_MAX][100]; //[RIGHE] [COLONNE]
+    ///numero di ingredienti
+    char num_ingredienti[5];
 
-    char num_step[5];   //variabile per determinare il numero di step che la ricetta richiede
+    ///[numero max ingredienti] [nome ciascun ingrediente]
+    char ingredienti[INGR_MAX][100];
+
+    ///numero di step che la ricetta richiede
+    char num_step[5];
+
+    ///[numero step] [descrizione ciascuno step]
     char procedura[STEP_MAX][4000];
+
 
 }archivio_ricette[MAX_RICETTE];
 

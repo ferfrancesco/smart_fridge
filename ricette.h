@@ -1,3 +1,16 @@
+/**
+ * @file ricette.h
+ *
+ * Questa libreria contiene procedure e funzioni utili all'interno del sottomenu' "ricette".
+ *
+ *
+ * @authors Francesco Ferrara & Alessia Laforgia
+ *
+ */
+
+
+
+
 #ifndef RICETTE_H_
 #define RICETTE_H_
 #endif /* RICETTE_H_ */
