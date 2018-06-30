@@ -8,25 +8,15 @@
  *
  */
 
-
-
-
-
-
-
 #ifndef OPERAZIONI_FILE_H_
 #define OPERAZIONI_FILE_H_
 #endif /* OPERAZIONI_FILE_H_ */
-
-
 
 #include <stdio.h>
 #include <stdlib.h>
 
 // TODO elimina le seguenti tre funzioni
 int conta_linee(char nome_file[40]);  //conta quante linee sono presenti in un determinato file
-void to_und_conversion(char stringa[]); //funzione di conversione da spazio a _ ,utile per il salvataggio su file
-void to_space_conversion(char stringa[]); //Viceversa di quanto scritto sopra ^
 
 //PROCEDURE DI CARICAMENTO DA FILE
 /**

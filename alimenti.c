@@ -14,10 +14,8 @@ typedef int bool;
 
 int num_linee;
 
-
 /**
 La procedura rappresenta il menu degli alimenti. In base alla scelta che viene inserita, si hanno possibilità diverse:
-
 
 1) Attiva la procedura stampa_alimenti;
 
@@ -27,11 +25,8 @@ La procedura rappresenta il menu degli alimenti. In base alla scelta che viene i
 
 4) Torna al menu principale;
 
-
  *
  */
-
-
 
 void alimenti(){
 
@@ -43,6 +38,10 @@ void alimenti(){
     system("cls");
 
     printf("Menu' Alimenti\nSeleziona un opzione\n\n1)Visualizza alimenti presenti in frigo\n2)Aggiungi un alimento\n3)Modifica le quantita' presenti\n4)Torna al menu'\n\n");
+
+    //fflush(stdout);
+
+    scadenze(num_linee);
 
     scanf("%d",&menu_select);
 
@@ -129,7 +128,7 @@ void stampa_alimenti(int num_linee){
                 strcpy(temp_quantita,archivio_alimenti[i].quantita);
                 strcat(temp_quantita," ml");
 
-                printf("\n|%-50s|%-2s/%-2s/%-6s|%-10s|%-10s|%-7s|%d)",archivio_alimenti[i].nome,archivio_alimenti[i].giorno,archivio_alimenti[i].mese,archivio_alimenti[i].anno,archivio_alimenti[i].numero,temp_quantita,archivio_alimenti[i].kcal,i+1);
+                printf("\n|%-50s|%-s/%-s/%-6s|%-10s|%-10s|%-7s|%d)",archivio_alimenti[i].nome,archivio_alimenti[i].giorno,archivio_alimenti[i].mese,archivio_alimenti[i].anno,archivio_alimenti[i].numero,temp_quantita,archivio_alimenti[i].kcal,i+1);
 
             }
 
@@ -138,7 +137,7 @@ void stampa_alimenti(int num_linee){
                 strcpy(temp_quantita,archivio_alimenti[i].quantita);
                 strcat(temp_quantita," g");
 
-                printf("\n|%-50s|%-s/%-s/%-s|%-10s|%-10s|%-7s|%d)",archivio_alimenti[i].nome,archivio_alimenti[i].giorno,archivio_alimenti[i].mese,archivio_alimenti[i].anno,archivio_alimenti[i].numero,temp_quantita,archivio_alimenti[i].kcal,i+1);
+                printf("\n|%-50s|%-s/%-s/%-6s|%-10s|%-10s|%-7s|%d)",archivio_alimenti[i].nome,archivio_alimenti[i].giorno,archivio_alimenti[i].mese,archivio_alimenti[i].anno,archivio_alimenti[i].numero,temp_quantita,archivio_alimenti[i].kcal,i+1);
 
             }
 
@@ -199,7 +198,54 @@ void aggiunta_alimenti(int num_linee){
         printf("Inserire il nome dell'alimento:");
         gets(archivio_alimenti[num_linee].nome);
 
-        system("cls");
+        printf("\nInserire il numero di confezioni o elementi dell'alimento inserito:");
+        gets(archivio_alimenti[num_linee].numero);
+
+		if(isOnlyNumbers(archivio_alimenti[num_linee].numero)==true){
+
+			messaggio_errore();
+			alimenti();
+		}
+
+        printf("\nInserire la tipologia di misura dell'alimento:\n\n1)Solido [GRAMMI]\n2)Liquido [MILLILITRI]\n\n");
+        gets(archivio_alimenti[num_linee].tipo);
+
+		if(isOnlyNumbers(archivio_alimenti[num_linee].tipo)==true){
+
+			messaggio_errore();
+			alimenti();
+		}
+
+        tipo_int = atoi(archivio_alimenti[num_linee].tipo);
+
+        switch(tipo_int){
+
+            case 1:
+
+                printf("\nQual e' la quantita' in g del singolo elemento?[GRAMMI]:"); //TODO inserire controllo su input numerico
+                gets(archivio_alimenti[num_linee].quantita);
+
+                break;
+
+            case 2:
+
+                printf("\nQual e' la quantita' in ml del singolo elemento?[MILLILITRI]:"); //TODO inserire controllo su input numerico
+                gets(archivio_alimenti[num_linee].quantita);
+
+                break;
+
+        }
+
+        printf("\nInserire le KCAL dell'alimento:");
+        gets(archivio_alimenti[num_linee].kcal);
+
+		if(isOnlyNumbers(archivio_alimenti[num_linee].kcal)==true){
+
+			messaggio_errore();
+			alimenti();
+		}
+
+		system("cls");
 
     	//--------------------------------------------------------------------------
         //CONTROLLO INSERIMENTO DATE (SCADENZA)
@@ -357,7 +403,7 @@ void aggiunta_alimenti(int num_linee){
 
 	    }
 
-	    if(anno_int==anno_attuale && mese_int-1<info->tm_mon){  //shift di -1 per il mese,in quanto tm_mon è un array da 0 a 11
+	    if((anno_int==anno_attuale) && (mese_int-1<info->tm_mon)){  //shift di -1 per il mese,in quanto tm_mon è un array da 0 a 11
 
 	    	printf("\n----------------------------------------------------------------------");
 	    	printf("\nATTENZIONE!");
@@ -369,7 +415,7 @@ void aggiunta_alimenti(int num_linee){
 
 	    }
 
-	    if(anno_int==anno_attuale && mese_int-1==info->tm_mon && giorno_int<info->tm_mday){  //shift di -1 per il mese,in quanto tm_mon è un array da 0 a 11
+	    if((anno_int==anno_attuale) && (mese_int-1==info->tm_mon) && (giorno_int<info->tm_mday)){  //shift di -1 per il mese,in quanto tm_mon è un array da 0 a 11
 
 	    	printf("\n----------------------------------------------------------------------");
 	    	printf("\nATTENZIONE!");
@@ -382,55 +428,6 @@ void aggiunta_alimenti(int num_linee){
 	    }
 
 		//-------------------------------------------------------------------------
-
-	    system("cls");
-
-        printf("\nInserire la quantita' dell'alimento inserito:");
-        gets(archivio_alimenti[num_linee].numero);
-
-		if(isOnlyNumbers(archivio_alimenti[num_linee].numero)==true){
-
-			messaggio_errore();
-			alimenti();
-		}
-
-        printf("\nInserire la tipologia di misura dell'alimento:\n\n1)Solido [GRAMMI]\n2)Liquido [MILLILITRI]\n\n");
-        gets(archivio_alimenti[num_linee].tipo);
-
-		if(isOnlyNumbers(archivio_alimenti[num_linee].tipo)==true){
-
-			messaggio_errore();
-			alimenti();
-		}
-
-        tipo_int = atoi(archivio_alimenti[num_linee].tipo);
-
-        switch(tipo_int){
-
-            case 1:
-
-                printf("\nQual e' la quantita' in g del singolo elemento?[GRAMMI]:"); //TODO inserire controllo su input numerico
-                gets(archivio_alimenti[num_linee].quantita);
-
-                break;
-
-            case 2:
-
-                printf("\nQual e' la quantita' in ml del singolo elemento?[MILLILITRI]:"); //TODO inserire controllo su input numerico
-                gets(archivio_alimenti[num_linee].quantita);
-
-                break;
-
-        }
-
-        printf("\nInserire le KCAL dell'alimento:");
-        gets(archivio_alimenti[num_linee].kcal);
-
-		if(isOnlyNumbers(archivio_alimenti[num_linee].kcal)==true){
-
-			messaggio_errore();
-			alimenti();
-		}
 
         num_linee++;  //incremento del numero di linee del file,in modo da non sovrascrivere alimenti precedentemente inseriti
 
@@ -485,11 +482,7 @@ void modifica_alimenti(int num_linee){
         FILE *fp;
         fp = fopen ("lista_spesa.txt","a");
 
-        to_und_conversion(archivio_alimenti[selezione_int].nome); //TODO togliere
-
         fprintf(fp,"%s,\n",archivio_alimenti[selezione_int].nome);
-
-        to_space_conversion(archivio_alimenti[selezione_int].nome);	//TODO togliere
 
         fclose(fp);
 

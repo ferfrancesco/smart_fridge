@@ -8,10 +8,6 @@
  *
  */
 
-
-
-
-
 #ifndef OPERAZIONI_VARIE_H_
 #define OPERAZIONI_VARIE_H_
 #endif /* OPERAZIONI_VARIE_H_ */
@@ -46,4 +42,4 @@ void stampa_menu();
 
 void memos();
 
-void scadenze();
+void scadenze(int num_linee);

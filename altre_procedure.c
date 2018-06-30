@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
+#include <time.h>
 #include "structs.h"
 #include "alimenti.h"
 #include "ricette.h"
@@ -11,6 +12,8 @@
 typedef int bool;
 #define true 1
 #define false 0
+
+#define SOGLIA_SCADENZA 3
 
 /**
  * Questa funzione verifica che una data stringa contenga solo numeri.
@@ -97,6 +100,7 @@ void stampa_menu(){
 
     printf("\n\nSeleziona una categoria\n\n1)Alimenti\n2)Ricette\n3)Varie\n4)Spegni il sistema\n\n");
 
+    //fflush(stdout);
     //memos();
 
     scanf("%d",&menu_select);
@@ -145,6 +149,8 @@ void scadenze(int num_linee){
 	int anno_attuale;   //variabile in cui salvare l'anno attuale (a cui poi dover aggiungere 1900)
 	int i;
 
+	int tot_giorni_anno=0; //variabile per salvare il numero del giorno in cui scade l'alimento,da 0 a 365
+
 	//Acquisisco l'orario e lo memorizzo nella struct tm
     time_t rawtime;
     struct tm *info;
@@ -156,43 +162,105 @@ void scadenze(int num_linee){
 
     anno_attuale=anno_attuale + 1900; //aggiungo 1900 perchè la libreria esterna inizia a contare da 0,ignorando ben 1900 anni.Senza l'addizione,risulterebbe come anno attuale il 118,e non 2018 (2018=1900+118)
 
-
     for(i=0;i<num_linee;i++){
 
-    	anno_int=atoi(archivio_alimenti[num_linee].anno);
-    	mese_int=atoi(archivio_alimenti[num_linee].mese);
-    	giorno_int=atoi(archivio_alimenti[num_linee].giorno);
+    	anno_int=atoi(archivio_alimenti[i].anno);
+    	mese_int=atoi(archivio_alimenti[i].mese);
+    	giorno_int=atoi(archivio_alimenti[i].giorno);
+
+    	tot_giorni_anno=0;
+
+    	//in base al mese di scadenza dell'alimento,sommo il numero di giorni dei mesi precedenti
+    	//Es. Marzo(case 3) equivale alla somma  dei giorni di Gennaio (31) e Febbraio (28) = 59 , + i giorni del mese stesso
+    	//Quindi,se avremo un alimento che scade il 10 Marzo,avremo che il contatore totale dei giorni dell'anno ammonterà a 69.
+    	//Questo numero sarà poi utilizzato per il controllo di scadenza,dove confronterò i giorni di scadenza del cibo,con i giorni attualmente passati dall'inizio dell'anno
 
 
-        if(anno_int<anno_attuale){
+    	switch(mese_int){
 
+    		case 1:
 
-        }
+    			tot_giorni_anno=giorno_int;
 
-        if(anno_int==anno_attuale && mese_int-1<info->tm_mon){  //shift di -1 per il mese,in quanto tm_mon è un array da 0 a 11
+    		break;
 
-        	printf("\n----------------------------------------------------------------------");
-        	printf("\nATTENZIONE!");
-        	printf("\n----------------------------------------------------------------------");
+    		case 2:
 
-        	printf("\nHai inserito un alimento gia' scaduto.L'inserimento e' stato annullato.\nE' consigliato cestinare questo alimento\n\n");
-        	system("pause");
-        	alimenti();
+    			tot_giorni_anno=31+giorno_int;
 
-        }
+    		break;
 
-        if(anno_int==anno_attuale && mese_int-1==info->tm_mon && giorno_int<info->tm_mday){  //shift di -1 per il mese,in quanto tm_mon è un array da 0 a 11
+    		case 3:
 
-        	printf("\n----------------------------------------------------------------------");
-        	printf("\nATTENZIONE!");
-        	printf("\n----------------------------------------------------------------------");
+    			tot_giorni_anno=59+giorno_int;
 
-        	printf("\nHai inserito un alimento gia' scaduto.L'inserimento e' stato annullato.\nE' consigliato cestinare questo alimento\n\n");
-        	system("pause");
-        	alimenti();
+    		break;
 
-        }
+    		case 4:
 
+    			tot_giorni_anno=90+giorno_int;
+
+    		break;
+
+    		case 5:
+
+    			tot_giorni_anno=120+giorno_int;
+
+    		break;
+
+    		case 6:
+
+    			tot_giorni_anno=151+giorno_int;
+
+    		break;
+
+    		case 7:
+
+    			tot_giorni_anno=181+giorno_int;
+
+    		break;
+
+    		case 8:
+
+    			tot_giorni_anno=212+giorno_int;
+
+    		break;
+
+    		case 9:
+
+    			tot_giorni_anno=243+giorno_int;
+
+    		break;
+
+    		case 10:
+
+    			tot_giorni_anno=273+giorno_int;
+
+    		break;
+
+    		case 11:
+
+    			tot_giorni_anno=304+giorno_int;
+
+    		break;
+
+    		case 12:
+
+    			tot_giorni_anno=334+giorno_int;
+
+    		break;
+
+    	}
+
+    	if(tot_giorni_anno-SOGLIA_SCADENZA<=info->tm_yday){
+
+            printf("\n----------------------------------------------------");
+            printf("\nALIMENTI IN SCADENZA");
+            printf("\n----------------------------------------------------");
+
+            printf("\n%s",archivio_alimenti[i].nome);
+
+    	}
 
     }
 

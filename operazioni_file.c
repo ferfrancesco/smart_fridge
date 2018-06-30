@@ -4,14 +4,9 @@
 #include "structs.h"
 #define GIORNI_SETTIMANA 7
 
-
-
 typedef int bool;
 #define true 1
 #define false 0
-
-//OPERAZIONI VARIE
-
 
 int conta_linee(char nome_file[40]){ //TODO togli funzione perchè inutile
 
@@ -35,32 +30,6 @@ int conta_linee(char nome_file[40]){ //TODO togli funzione perchè inutile
     fclose(fp);
 
     return num_linee;
-}
-
-
-
-void to_und_conversion(char stringa[]){								//TODO da eliminare
-
-    int i;
-
-    for(i=0;i<strlen(stringa);i++){
-
-        if(stringa[i]==' ')
-            stringa[i]='_';
-
-    }
-}
-
-void to_space_conversion(char stringa[]){							//TODO da eliminare
-
-    int i;
-
-    for(i=0;i<strlen(stringa);i++){
-
-        if(stringa[i]=='_')
-            stringa[i]=' ';
-
-    }
 }
 
 
@@ -98,7 +67,12 @@ int file_load_alimenti(){
         i++;
         num_linee++;
 
-        to_space_conversion(archivio_alimenti[i].nome);  //TODO elimina riferimento a funzione inutile
+        if(archivio_alimenti[i-1].giorno[0] == '\0'){   /*controllo se una stringa qualsiasi della struct è vuota,significa che in realtà
+        												 *non è stato caricato nulla,quindi decremento il numero di linee,e quindi di alimenti caricati. Funzione necessaria per il fix di un bug*/
+        	i--;
+        	num_linee--;
+
+        }
 
     }
 
@@ -197,7 +171,6 @@ int file_load_menu_sett(){
         for	(i=0;i<GIORNI_SETTIMANA;i++){
 
             fscanf(fp,"%s\n",giorno[i].pietanza);
-            to_space_conversion(giorno[i].pietanza); //TODO togli to_space_conversion
 
         }
 
@@ -236,10 +209,6 @@ int file_load_lista(int num_linee){ //TODO CONTROLLA
     for	(i=0;i<num_linee;i++){
 
         fscanf(fp,"%[^,]\n",lista_spesa[i]);	//utilizzo [^,] in quanto utilizzare %s leggeva l'intera stringa,virgole incluse
-
-        to_space_conversion(lista_spesa[i]);
-
-        //	}
 
     }
 
@@ -339,11 +308,7 @@ void file_save_menu_sett(){
 
     for(i=0;i<GIORNI_SETTIMANA;i++){
 
-        to_und_conversion(giorno[i].pietanza); //TODO elimina  //converto il nome con gli underscore per prepararlo al salvataggio su file
-
         fprintf(fp,"%s\n",giorno[i].pietanza);
-
-        to_space_conversion(giorno[i].pietanza); //TODO ELIMINA //riporto il nome da underscore a spazi
 
     }
 
