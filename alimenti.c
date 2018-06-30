@@ -129,7 +129,7 @@ void stampa_alimenti(int num_linee){
                 strcpy(temp_quantita,archivio_alimenti[i].quantita);
                 strcat(temp_quantita," ml");
 
-                printf("\n|%-50s|%-2s/%-2s/%-6s|%-10s|%-10s|%-7s|%d)",archivio_alimenti[i].nome,archivio_alimenti[i].giorno,archivio_alimenti[i].mese,archivio_alimenti[i].anno,archivio_alimenti[i].quantita,temp_quantita,archivio_alimenti[i].kcal,i+1);
+                printf("\n|%-50s|%-2s/%-2s/%-6s|%-10s|%-10s|%-7s|%d)",archivio_alimenti[i].nome,archivio_alimenti[i].giorno,archivio_alimenti[i].mese,archivio_alimenti[i].anno,archivio_alimenti[i].numero,temp_quantita,archivio_alimenti[i].kcal,i+1);
 
             }
 
@@ -138,7 +138,7 @@ void stampa_alimenti(int num_linee){
                 strcpy(temp_quantita,archivio_alimenti[i].quantita);
                 strcat(temp_quantita," g");
 
-                printf("\n|%-50s|%-s/%-s/%-s|%-10s|%-10s|%-7s|%d)",archivio_alimenti[i].nome,archivio_alimenti[i].giorno,archivio_alimenti[i].mese,archivio_alimenti[i].anno,archivio_alimenti[i].quantita,temp_quantita,archivio_alimenti[i].kcal,i+1);
+                printf("\n|%-50s|%-s/%-s/%-s|%-10s|%-10s|%-7s|%d)",archivio_alimenti[i].nome,archivio_alimenti[i].giorno,archivio_alimenti[i].mese,archivio_alimenti[i].anno,archivio_alimenti[i].numero,temp_quantita,archivio_alimenti[i].kcal,i+1);
 
             }
 
@@ -455,9 +455,6 @@ void modifica_alimenti(int num_linee){
     char selezione[10]; //stringa per memorizzare il numero di alimenti che si vogliono inserire
     int selezione_int; 	//variabile in cui è memorizzato il numero di alimenti che si vogliono inserire (case1), il numero dell'alimento che si vuole modificare( case3)
 	int i;
-	char nuova_quantita[20];
-
-
 
     printf("Di quale alimento si intende modificare le quantita' presenti?\n\nSe vuoi rimuovere un elemento dal frigo,digita una quantita' '0'\n\nDigitane il numero ad esso associato:");
 
@@ -481,15 +478,9 @@ void modifica_alimenti(int num_linee){
 
     printf("\nInserire la nuova quantita':");
 
-   gets(nuova_quantita);
+    gets(archivio_alimenti[selezione_int].quantita);
 
-    //gets(archivio_alimenti[selezione_int].numero);
-   strcpy(archivio_alimenti[selezione_int].quantita, nuova_quantita);
-
-
-
-
-   if(strcmp(archivio_alimenti[selezione_int].quantita,"0")==0 ){    //nel caso venga inserito un valore pari a 0 nel campo quantità,l'alimento verrà automaticamente rimosso
+    if(strcmp(archivio_alimenti[selezione_int].quantita,"0")==0 ){    //nel caso venga inserito un valore pari a 0 nel campo quantità,l'alimento verrà automaticamente rimosso
 
         FILE *fp;
         fp = fopen ("lista_spesa.txt","a");
@@ -520,6 +511,6 @@ void modifica_alimenti(int num_linee){
 
         printf("\n\n");
         system("pause");
-    }  file_save_alimenti(num_linee);//else strcpy(archivio_alimenti[i].numero, nuova_quantita);
+    }
 
 }
