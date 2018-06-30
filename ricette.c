@@ -96,7 +96,14 @@ void ricette(){
 
             else if (isOnlyNumbers(selezione)==false){
 
-                strcpy(archivio_ricette[num_linee].difficolta,selezione);
+			if(((selezione)>0)&&((selezione)<6)) {
+            	 strcpy(archivio_ricette[num_linee].difficolta,selezione);
+            } else
+            		printf("Scelta inserita non valida!\n");
+					system("pause");
+            	    ricette();
+
+
             }
 
             /*---------------------------------------------------------------*/
@@ -209,11 +216,12 @@ char* stampa_stelle(int num){
     int i;
     int int_difficolta;
 
-    char stars[5]={0};  //definisco un array locale
+    char stars[5]={0}; //definisco un array locale
 
     int_difficolta = atoi(archivio_ricette[num].difficolta);
 
-    for(i=0;i<int_difficolta;i++){
+
+    	for(i=0;i<int_difficolta;i++){
 
         strcat(stars,"*");  //accodo una stella fino a raggiungere il valore di difficoltà
 
@@ -222,6 +230,10 @@ char* stampa_stelle(int num){
     strcpy(stelle,stars); //copio l'array locale nell'array globale
 
     return stelle;
+
+
+
+
 }
 
 void stampa_ricetta(int num){
