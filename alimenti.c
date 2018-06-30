@@ -39,8 +39,6 @@ void alimenti(){
 
     printf("Menu' Alimenti\nSeleziona un opzione\n\n1)Visualizza alimenti presenti in frigo\n2)Aggiungi un alimento\n3)Modifica le quantita' presenti\n4)Torna al menu'\n\n");
 
-    //fflush(stdout);
-
     scadenze(num_linee);
 
     scanf("%d",&menu_select);
@@ -110,9 +108,7 @@ void stampa_alimenti(int num_linee){
 
     if (num_linee==0){
 
-        printf("Il frigo e' vuoto!\n\n");	//TODO controllare perchè non esegue questa printf(non si sa perchè , non risultano mai 0 linee, ma parte sempre da 1)
-        system("pause");
-        // alimenti();
+        printf("Il frigo e' vuoto!\n\n");
 
     }
 
@@ -137,11 +133,7 @@ void stampa_alimenti(int num_linee){
                 strcpy(temp_quantita,archivio_alimenti[i].quantita);
                 strcat(temp_quantita," g");
 
-<<<<<<< HEAD
-                printf("\n|%-50s|%-s/%-s/%-6s|%-10s|%-10s|%-7s|%d)",archivio_alimenti[i].nome,archivio_alimenti[i].giorno,archivio_alimenti[i].mese,archivio_alimenti[i].anno,archivio_alimenti[i].numero,temp_quantita,archivio_alimenti[i].kcal,i+1);
-=======
                 printf("\n|%-50s|%-2s/%-2s/%-6s|%-10s|%-10s|%-7s|%d)",archivio_alimenti[i].nome,archivio_alimenti[i].giorno,archivio_alimenti[i].mese,archivio_alimenti[i].anno,archivio_alimenti[i].numero,temp_quantita,archivio_alimenti[i].kcal,i+1);
->>>>>>> 7b699e8273ea4d32494f7403e0d521e2c30cec0b
 
             }
 

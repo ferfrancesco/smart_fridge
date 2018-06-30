@@ -18,10 +18,6 @@
 
 int main(int argc, char *argv[]) {
 
-
-	int num_linee=file_load_alimenti();
-	scadenze(num_linee);
-
     dayname_fill(); 								//inizializzazione giorni della settimana per il menù settimanale
     stampa_menu();									//stampa del menù di scelta principale del programma
 
