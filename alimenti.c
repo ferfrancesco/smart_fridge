@@ -118,7 +118,7 @@ void stampa_alimenti(int num_linee){
 
     else{
 
-        printf("Elenco degli alimenti presenti in frigo\n\n|%-50s|%-10s|%-10s|%-10s|%-7s|","Alimento","Scadenza","Numero","Quantita'","KCAL");  //il valore negativo serve per l'allineamento a sinistra
+        printf("Elenco degli alimenti presenti in frigo\n\n|%-50s|%-12s|%-10s|%-10s|%-7s|","Alimento","Scadenza","Numero","Quantita'","KCAL");  //il valore negativo serve per l'allineamento a sinistra
         printf("\n----------------------------------------------------------------------------------------------");
 
         for(i=0;i<num_linee;i++){
@@ -137,7 +137,11 @@ void stampa_alimenti(int num_linee){
                 strcpy(temp_quantita,archivio_alimenti[i].quantita);
                 strcat(temp_quantita," g");
 
+<<<<<<< HEAD
                 printf("\n|%-50s|%-s/%-s/%-6s|%-10s|%-10s|%-7s|%d)",archivio_alimenti[i].nome,archivio_alimenti[i].giorno,archivio_alimenti[i].mese,archivio_alimenti[i].anno,archivio_alimenti[i].numero,temp_quantita,archivio_alimenti[i].kcal,i+1);
+=======
+                printf("\n|%-50s|%-2s/%-2s/%-6s|%-10s|%-10s|%-7s|%d)",archivio_alimenti[i].nome,archivio_alimenti[i].giorno,archivio_alimenti[i].mese,archivio_alimenti[i].anno,archivio_alimenti[i].numero,temp_quantita,archivio_alimenti[i].kcal,i+1);
+>>>>>>> 7b699e8273ea4d32494f7403e0d521e2c30cec0b
 
             }
 

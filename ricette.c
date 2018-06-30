@@ -14,7 +14,22 @@ typedef int bool;
 #define true 1
 #define false 0
 
+/**
+ * Questo array serve a conservare il numero di stelle indicanti la difficoltà di una ricetta.
+ */
+
 char stelle[5]={0};
+
+/**
+ * 		Questa procedura permette di stampare il sottomenu per la categoria "ricette".
+ * 		E' possibile :
+ * 	1) 	Visualizzare le ricette salvate nel sistema
+ * 	2)	Ricercare corrispondenza ricette per ingrediente o per un gruppo di ingredienti
+ * 	3)	Aggiungere una ricetta
+ * 	4)  Rimuovere una ricetta
+ * 	5)	Modificare una ricetta
+ * 	6)	Tornare al menu
+ */
 
 void ricette(){
 
@@ -96,7 +111,14 @@ void ricette(){
 
             else if (isOnlyNumbers(selezione)==false){
 
-                strcpy(archivio_ricette[num_linee].difficolta,selezione);
+			if(((selezione)>0)&&((selezione)<6)) {
+            	 strcpy(archivio_ricette[num_linee].difficolta,selezione);
+            } else
+            		printf("Scelta inserita non valida!\n");
+					system("pause");
+            	    ricette();
+
+
             }
 
             /*---------------------------------------------------------------*/
@@ -182,10 +204,21 @@ void ricette(){
             messaggio_errore();
             ricette();
             break;
+
+
+            //TODO INSERISCI POSSIBILITA DI MODIFICARE RICETTE ALL'INTERNO DEL MENU RICETTE
     }
 
 }
 
+
+/**
+ * Questa procedura permette di visualizzare l'elenco delle ricette inserite nel sistema.
+ *
+ * @pre E' necessario che il file delle ricette sia gia' esistente nel sistema
+ *
+ * @param num_linee, ovvero il numero di linee di cui il file "ricette.txt" e' costituito
+ */
 void stampa_elenco_ricette(int num_linee){
 
     int i;
@@ -204,16 +237,27 @@ void stampa_elenco_ricette(int num_linee){
 
 }
 
+/**
+ * Questa funzione permette di calcolare il numero di stelline da visualizzare relativamente alla difficolta di una ricetta
+ *
+ * @pre Deve essere inserito un numero intero nel campo difficolta' di una ricetta
+ *
+ * @param num, ovvero il numero intero che indica la difficolta' di una ricetta
+ *
+ * @return il numero di stelle che saranno visualizzate in output, in base al numero intero inserito
+ */
+
 char* stampa_stelle(int num){
 
     int i;
     int int_difficolta;
 
-    char stars[5]={0};  //definisco un array locale
+    char stars[5]={0}; //definisco un array locale
 
     int_difficolta = atoi(archivio_ricette[num].difficolta);
 
-    for(i=0;i<int_difficolta;i++){
+
+    	for(i=0;i<int_difficolta;i++){
 
         strcat(stars,"*");  //accodo una stella fino a raggiungere il valore di difficoltà
 
@@ -222,6 +266,10 @@ char* stampa_stelle(int num){
     strcpy(stelle,stars); //copio l'array locale nell'array globale
 
     return stelle;
+
+
+
+
 }
 
 void stampa_ricetta(int num){
