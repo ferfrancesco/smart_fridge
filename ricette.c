@@ -91,7 +91,7 @@ void ricette(){
 
         case 3:
 
-            system("cls");
+            system("cls");//todo CREARE SOTTOFUNZIONE PER AGGIUNTA RICETTE (da chiamare aggiungi_ricette)
             fflush(stdin);
 
             printf("Inserire il nome della ricetta:");
@@ -111,7 +111,10 @@ void ricette(){
 
             else if (isOnlyNumbers(selezione)==false){
 
-			if(((selezione)>0)&&((selezione)<6)) {
+			selezione_int=atoi(selezione);
+
+			if(((selezione_int)>0)&&((selezione_int)<6)) {
+
             	 strcpy(archivio_ricette[num_linee].difficolta,selezione);
             } else
             		printf("Scelta inserita non valida!\n");
@@ -219,7 +222,7 @@ void ricette(){
  *
  * @param num_linee, ovvero il numero di linee di cui il file "ricette.txt" e' costituito
  */
-void stampa_elenco_ricette(int num_linee){
+void stampa_elenco_ricette(int num_linee){ // TODO Stampare "Non ci sono ricette" quando effettivamente non ce ne sono
 
     int i;
 
@@ -272,7 +275,7 @@ char* stampa_stelle(int num){
 
 }
 
-void stampa_ricetta(int num){
+void stampa_ricetta(int num){ //TODO Far stampare "Non ci sono ricette!" quando il frigo è vuoto
 
     int i;
     int temp_int; //variabile intera temporanea per i cicli di stampa di ingredienti e procedure
@@ -303,4 +306,6 @@ void stampa_ricetta(int num){
     }
 
 }
+
+//TODO MANCA LA MODIFICA DELLE RICETTE!!! ovvero modifica dei passi delle ricette e cose del genere
 

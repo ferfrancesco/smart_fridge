@@ -445,7 +445,7 @@ void aggiunta_alimenti(int num_linee){
  * @param num_linee riceve in input il numero di linee del file "alimenti.txt"
  */
 
-void modifica_alimenti(int num_linee){
+void modifica_alimenti(int num_linee){ //TODO bug quando il frigo è vuoto
 
     char selezione[10]; //stringa per memorizzare il numero di alimenti che si vogliono inserire
     int selezione_int; 	//variabile in cui è memorizzato il numero di alimenti che si vogliono inserire (case1), il numero dell'alimento che si vuole modificare( case3)
@@ -505,6 +505,8 @@ void modifica_alimenti(int num_linee){
     }
 
 }
+
+//TODO commenta
 
 void scadenze(int num_linee){
 
