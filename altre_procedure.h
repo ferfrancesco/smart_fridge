@@ -42,4 +42,4 @@ void stampa_menu();
 
 void memos();
 
-void scadenze(int num_linee);
+

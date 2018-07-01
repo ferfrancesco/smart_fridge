@@ -12,6 +12,8 @@ typedef int bool;
 #define true 1
 #define false 0
 
+#define SOGLIA_SCADENZA 3
+
 int num_linee;
 
 /**
@@ -503,3 +505,302 @@ void modifica_alimenti(int num_linee){
     }
 
 }
+
+void scadenze(int num_linee){
+
+	int anno_int;          //conversione in int dell'anno di scadenza dell'alimento
+	int mese_int;		   //conversione in int del mese di scadenza dell'alimento
+	int giorno_int;		   //conversione in int del giorno di scadenza dell'alimento
+
+	int anno_attuale;   	//variabile in cui salvare l'anno attuale (a cui poi dover aggiungere 1900)
+	int flag_scadenza=0;	//valore flag per indicare se ci sono alimenti in scadenza
+	int flag_scaduto=0;		//valore flag per indicare se un alimento è scaduto,serve per non ripetere la stampa degli alimenti ANCORA IN SCADENZA
+	int i;
+
+	int tot_giorni_anno=0; //variabile per salvare il numero del giorno in cui scade l'alimento,da 0 a 365
+	int giorni1;		   //variabile di appoggio per il controllo della scadenza nel caso di alimenti che scadono l'anno dopo (solo nel caso di (Dicembre 20XX) -> (Gennaio 20XX+1)
+	int giorni2;		   //variabile di appoggio per il controllo della scadenza nel caso di alimenti che scadono l'anno dopo (solo nel caso di (Dicembre 20XX) -> (Gennaio 20XX+1)
+
+
+	//Acquisisco l'orario e lo memorizzo nella struct tm
+    time_t rawtime;
+    struct tm *info;
+
+    time(&rawtime);
+    info = gmtime(&rawtime );
+
+    anno_attuale=info->tm_year;
+
+    anno_attuale=anno_attuale + 1900; //aggiungo 1900 perchè la libreria esterna inizia a contare da 0,ignorando ben 1900 anni.Senza l'addizione,risulterebbe come anno attuale il 118,e non 2018 (2018=1900+118)
+
+    printf("\n-----------------------------------------------------------");
+    printf("\nALIMENTI IN SCADENZA");
+    printf("\n-----------------------------------------------------------");
+
+    for(i=0;i<num_linee;i++){
+
+    	anno_int=atoi(archivio_alimenti[i].anno);
+    	mese_int=atoi(archivio_alimenti[i].mese);
+    	giorno_int=atoi(archivio_alimenti[i].giorno);
+
+    	tot_giorni_anno=0;
+    	flag_scaduto=0;
+
+    	//in base al mese di scadenza dell'alimento,sommo il numero di giorni dei mesi precedenti
+    	//Es. Marzo(case 3) equivale alla somma  dei giorni di Gennaio (31) e Febbraio (28) = 59 , + i giorni del mese stesso
+    	//Quindi,se avremo un alimento che scade il 10 Marzo,avremo che il contatore totale dei giorni dell'anno ammonterà a 69.
+    	//Questo numero sarà poi utilizzato per il controllo di scadenza,dove confronterò i giorni di scadenza del cibo,con i giorni attualmente passati dall'inizio dell'anno
+
+
+    	switch(mese_int){
+
+    		case 1:
+
+    			tot_giorni_anno=giorno_int;
+
+    		break;
+
+    		case 2:
+
+    			tot_giorni_anno=31+giorno_int;
+
+    		break;
+
+    		case 3:
+
+    			tot_giorni_anno=59+giorno_int;
+
+    		break;
+
+    		case 4:
+
+    			tot_giorni_anno=90+giorno_int;
+
+    		break;
+
+    		case 5:
+
+    			tot_giorni_anno=120+giorno_int;
+
+    		break;
+
+    		case 6:
+
+    			tot_giorni_anno=151+giorno_int;
+
+    		break;
+
+    		case 7:
+
+    			tot_giorni_anno=181+giorno_int;
+
+    		break;
+
+    		case 8:
+
+    			tot_giorni_anno=212+giorno_int;
+
+    		break;
+
+    		case 9:
+
+    			tot_giorni_anno=243+giorno_int;
+
+    		break;
+
+    		case 10:
+
+    			tot_giorni_anno=273+giorno_int;
+
+    		break;
+
+    		case 11:
+
+    			tot_giorni_anno=304+giorno_int;
+
+    		break;
+
+    		case 12:
+
+    			tot_giorni_anno=334+giorno_int;
+
+    		break;
+
+    	}
+
+    	//------------------------------------------------------------
+    	//CONTROLLO SCADUTI
+
+    	if((anno_attuale==anno_int) && (tot_giorni_anno<info->tm_yday)){
+
+    		flag_scadenza=0; //indica che c'è effettivamente cibo in scadenza
+    		flag_scaduto=1;  //L'alimento è scaduto
+
+    	}
+
+    	if ((anno_attuale>anno_int)){
+
+        		flag_scadenza=0; //indica che c'è effettivamente cibo in scadenza
+        		flag_scaduto=1;  //L'alimento è scaduto
+
+    	}
+
+    	//-------------------------------------------------------------
+    	//CONTROLLO IN SCADENZA
+
+    	if((anno_attuale==anno_int) && (tot_giorni_anno-SOGLIA_SCADENZA<=info->tm_yday)){
+
+    		flag_scadenza=1; //indica che c'è effettivamente cibo in scadenza
+
+    		if(flag_scaduto==0){
+
+    			printf("\n%s",archivio_alimenti[i].nome);
+
+            	//printf("Potresti cucinare:%s",);
+
+    		}
+    	}
+
+    	//controllo della scadenza nel caso di alimenti che scadono l'anno dopo (solo nel caso di (Dicembre 20XX) -> (Gennaio 20XX+1)
+
+    	//ALGORITMO
+    	//[(N.Giorni_Anno - Giorno_attuale) + Giorno_di_scadenza] < Soglia_di_scadenza
+
+    	//Se il risultato dell'operazione fra le parentesi è minore della soglia di scadenza,l'alimento è in scadenza
+
+    	if ((anno_attuale<anno_int)  && (mese_int==1) && (((364-info->tm_yday)+tot_giorni_anno)<=SOGLIA_SCADENZA)){
+
+        		flag_scadenza=1; //indica che c'è effettivamente cibo in scadenza
+
+        		if(flag_scaduto==0){
+
+        			printf("\n%s",archivio_alimenti[i].nome);
+
+                	//printf("Potresti cucinare:%s",);
+
+        		}
+
+    	}
+
+    }
+
+    if(flag_scadenza==0){
+
+    	printf("\nNessun alimento in scadenza\n\n");
+    }
+
+    printf("\n\n\n");
+
+    printf("\n***********************************************************");
+    printf("\nALIMENTI SCADUTI\nE' consigliato rimuovere questi alimenti dal frigo)");
+    printf("\n***********************************************************");
+
+    for(i=0;i<num_linee;i++){
+
+    	anno_int=atoi(archivio_alimenti[i].anno);
+    	mese_int=atoi(archivio_alimenti[i].mese);
+    	giorno_int=atoi(archivio_alimenti[i].giorno);
+
+    	tot_giorni_anno=0;
+    	flag_scaduto=0;
+
+    	//in base al mese di scadenza dell'alimento,sommo il numero di giorni dei mesi precedenti
+    	//Es. Marzo(case 3) equivale alla somma  dei giorni di Gennaio (31) e Febbraio (28) = 59 , + i giorni del mese stesso
+    	//Quindi,se avremo un alimento che scade il 10 Marzo,avremo che il contatore totale dei giorni dell'anno ammonterà a 69.
+    	//Questo numero sarà poi utilizzato per il controllo di scadenza,dove confronterò i giorni di scadenza del cibo,con i giorni attualmente passati dall'inizio dell'anno
+
+
+    	switch(mese_int){
+
+    		case 1:
+
+    			tot_giorni_anno=giorno_int;
+
+    		break;
+
+    		case 2:
+
+    			tot_giorni_anno=31+giorno_int;
+
+    		break;
+
+    		case 3:
+
+    			tot_giorni_anno=59+giorno_int;
+
+    		break;
+
+    		case 4:
+
+    			tot_giorni_anno=90+giorno_int;
+
+    		break;
+
+    		case 5:
+
+    			tot_giorni_anno=120+giorno_int;
+
+    		break;
+
+    		case 6:
+
+    			tot_giorni_anno=151+giorno_int;
+
+    		break;
+
+    		case 7:
+
+    			tot_giorni_anno=181+giorno_int;
+
+    		break;
+
+    		case 8:
+
+    			tot_giorni_anno=212+giorno_int;
+
+    		break;
+
+    		case 9:
+
+    			tot_giorni_anno=243+giorno_int;
+
+    		break;
+
+    		case 10:
+
+    			tot_giorni_anno=273+giorno_int;
+
+    		break;
+
+    		case 11:
+
+    			tot_giorni_anno=304+giorno_int;
+
+    		break;
+
+    		case 12:
+
+    			tot_giorni_anno=334+giorno_int;
+
+    		break;
+
+    	}
+
+    	//------------------------------------------------------------
+    	//CONTROLLO SCADUTI
+
+    	if((anno_attuale==anno_int) && (tot_giorni_anno<info->tm_yday)){
+
+            printf("\n%s",archivio_alimenti[i].nome);
+
+    	}
+
+    	if ((anno_attuale>anno_int)){
+
+                printf("\n%s",archivio_alimenti[i].nome);
+
+    	}
+    }
+
+}
+

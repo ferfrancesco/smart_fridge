@@ -56,5 +56,7 @@ void aggiunta_alimenti(int num_linee);
 
 void modifica_alimenti(int num_linee);
 
+void scadenze(int num_linee);
+
 
 
