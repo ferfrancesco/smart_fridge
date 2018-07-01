@@ -260,7 +260,7 @@ void scadenze(int num_linee){
 
     	}
 
-    	if(tot_giorni_anno-SOGLIA_SCADENZA<=info->tm_yday){
+    	if((anno_attuale==anno_int) && (tot_giorni_anno-SOGLIA_SCADENZA<=info->tm_yday)){
 
     		flag_scadenza=1; //indica che c'è effettivamente cibo in scadenza
 
@@ -273,17 +273,11 @@ void scadenze(int num_linee){
     	//controllo della scadenza nel caso di alimenti che scadono l'anno dopo (solo nel caso di (Dicembre 20XX) -> (Gennaio 20XX+1)
 
     	//ALGORITMO
-    	//{[(N.Giorni Dicembre+N.Giorni Gennaio) - Giorno attuale] - (N.Giorni Gennaio - Giorno di Scadenza)} < Soglia di scadenza
+    	//[(N.Giorni_Anno - Giorno_attuale) + Giorno_di_scadenza] < Soglia_di_scadenza
 
     	//Se il risultato dell'operazione fra le parentesi è minore della soglia di scadenza,l'alimento è in scadenza
 
-    	else if (anno_attuale<anno_int  &&  mese_int<info->tm_mon){
-
-    		giorni1=info->tm_mday;
-
-    		giorni2=(62-giorni1)-(31-giorno_int);
-
-    		if(giorni2<SOGLIA_SCADENZA){
+    	if ((anno_attuale<anno_int)  && (mese_int==1) && (((364-info->tm_yday)+tot_giorni_anno)<=SOGLIA_SCADENZA)){
 
         		flag_scadenza=1; //indica che c'è effettivamente cibo in scadenza
 
@@ -295,7 +289,6 @@ void scadenze(int num_linee){
 
     	}
 
-    }
 
     if(flag_scadenza==0){
 

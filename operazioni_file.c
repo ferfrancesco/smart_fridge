@@ -23,7 +23,7 @@ int conta_linee(char nome_file[40]){ //TODO togli funzione perchè inutileee
     while(!feof(fp)){
 
         if(fgetc(fp) == '\n')
-            num_linee++;  											 //TODO da eliminare
+            num_linee++;  											 //TODO NON ELIMINARE
 
     }
 
@@ -67,7 +67,7 @@ int file_load_alimenti(){
         i++;
         num_linee++;
 
-        if(archivio_alimenti[i-1].giorno[0] == '\0'){   /*controllo se una stringa qualsiasi della struct è vuota,significa che in realtà
+        if(archivio_alimenti[i-1].giorno[0] == '\0'){   /*controllo se la prima posizione di un array di caratteri (stringa[0]) qualsiasi della struct contiene il carattere speciale \0. Se il carattere è trovato,significa che in realtà
         												 *non è stato caricato nulla,quindi decremento il numero di linee,e quindi di alimenti caricati. Funzione necessaria per il fix di un bug*/
         	i--;
         	num_linee--;
