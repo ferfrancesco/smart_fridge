@@ -14,6 +14,10 @@ typedef int bool;
 #define true 1
 #define false 0
 
+#define MAX_RICETTE 50  //quantità max di ricette
+
+int num_linee;
+
 /**
  * Questo array serve a conservare il numero di stelle indicanti la difficoltà di una ricetta.
  */
@@ -35,7 +39,7 @@ void ricette(){
 
     int i;
 
-    int num_linee=file_load_ricette();
+    num_linee=file_load_ricette();
     int menu_select=0;
 
     char selezione[10];
@@ -109,17 +113,19 @@ void ricette(){
 
             }
 
-            else if (isOnlyNumbers(selezione)==false){
+            selezione_int=atoi(selezione);
 
-			if(((selezione)>0)&&((selezione)<6)) {
-            	 strcpy(archivio_ricette[num_linee].difficolta,selezione);
-            } else
-            		printf("Scelta inserita non valida!\n");
-					system("pause");
-            	    ricette();
+			if((selezione_int>0) && (selezione_int<6)) {
 
+				strcpy(archivio_ricette[num_linee].difficolta,selezione);
 
             }
+
+				else{
+						printf("Scelta inserita non valida!\n");
+						system("pause");
+						ricette();
+				}
 
             /*---------------------------------------------------------------*/
 
@@ -181,14 +187,6 @@ void ricette(){
             printf("\nRicetta inserita correttamente.Verrai ora riportato al menu delle ricette\n\n");
             system("pause");
             ricette();
-
-
-
-
-
-
-
-
 
             break;
 
@@ -301,6 +299,42 @@ void stampa_ricetta(int num){
         getchar();
 
     }
+
+}
+
+int* ricerca_ricetta(char alimento[]){
+
+	int num_linee;
+	static int ricette_con_alimento[MAX_RICETTE];  //static necessario per il return dell'array
+	int i;
+	int j;
+	int k=0;
+	int num_ingredienti_int;
+
+	char *ricerca;
+
+	num_linee=file_load_ricette();
+
+	for(i=0;i<num_linee;i++){
+
+		num_ingredienti_int=atoi(archivio_ricette[i].num_ingredienti);
+
+		for(j=0;j<num_ingredienti_int;j++){
+
+			ricerca=strstr(archivio_ricette[i].ingredienti[j],alimento); //scansiono,cercando anche in sottostringhe,l'elenco degli ingredienti di ogni ricetta.
+
+			if(ricerca != NULL){								//se viene trovata una corrispondenza,trascrivo il valore dell'indice i in un array,salvando quindi effettivamente,la ricetta contenente l'ingrediente
+
+				ricette_con_alimento[k]=i;
+
+				k++;
+			}
+		}
+
+
+	}
+
+	return ricette_con_alimento;
 
 }
 

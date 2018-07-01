@@ -6,6 +6,7 @@
 #include "structs.h"
 #include "operazioni_file.h"
 #include "alimenti.h"
+#include "ricette.h"
 #include "altre_procedure.h"
 
 typedef int bool;
@@ -13,6 +14,8 @@ typedef int bool;
 #define false 0
 
 #define SOGLIA_SCADENZA 3
+#define INGR_MAX 50  //quantità max di ingredienti in una ricetta
+
 
 int num_linee;
 
@@ -516,11 +519,11 @@ void scadenze(int num_linee){
 	int flag_scadenza=0;	//valore flag per indicare se ci sono alimenti in scadenza
 	int flag_scaduto=0;		//valore flag per indicare se un alimento è scaduto,serve per non ripetere la stampa degli alimenti ANCORA IN SCADENZA
 	int i;
+	int j;
+	int k;
+	int *ricette_trovate;
 
 	int tot_giorni_anno=0; //variabile per salvare il numero del giorno in cui scade l'alimento,da 0 a 365
-	int giorni1;		   //variabile di appoggio per il controllo della scadenza nel caso di alimenti che scadono l'anno dopo (solo nel caso di (Dicembre 20XX) -> (Gennaio 20XX+1)
-	int giorni2;		   //variabile di appoggio per il controllo della scadenza nel caso di alimenti che scadono l'anno dopo (solo nel caso di (Dicembre 20XX) -> (Gennaio 20XX+1)
-
 
 	//Acquisisco l'orario e lo memorizzo nella struct tm
     time_t rawtime;
@@ -656,7 +659,20 @@ void scadenze(int num_linee){
 
     			printf("\n%s",archivio_alimenti[i].nome);
 
-            	//printf("Potresti cucinare:%s",);
+    		/*	ricette_trovate=ricerca_ricetta(archivio_alimenti[i].nome);
+
+    			for(j=0;j<k;j++){
+
+    				if(ricette_trovate[j] == NULL){
+
+        				printf("Potresti cucinare:%s",archivio_ricette[j].nome);
+
+    				}
+
+
+    			}*/
+
+
 
     		}
     	}
