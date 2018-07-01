@@ -8,7 +8,7 @@ typedef int bool;
 #define true 1
 #define false 0
 
-int conta_linee(char nome_file[40]){ //TODO togli funzione perchè inutile
+int conta_linee(char nome_file[40]){ //TODO togli funzione perchè inutileee
 
     int num_linee=0;
 
