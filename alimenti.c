@@ -659,18 +659,20 @@ void scadenze(int num_linee){
 
     			printf("\n%s",archivio_alimenti[i].nome);
 
-    		/*	ricette_trovate=ricerca_ricetta(archivio_alimenti[i].nome);
+    			ricette_trovate=ricerca_ricetta(archivio_alimenti[i].nome);
+
+    			k=ricette_trovate[0];
 
     			for(j=0;j<k;j++){
 
     				if(ricette_trovate[j] == NULL){
 
-        				printf("Potresti cucinare:%s",archivio_ricette[j].nome);
+        				printf("\nPotresti cucinare:%s",archivio_ricette[j-1].nome);
 
     				}
 
 
-    			}*/
+    			}
 
 
 
