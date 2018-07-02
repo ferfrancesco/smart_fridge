@@ -15,6 +15,7 @@ typedef int bool;
 #define false 0
 
 #define MAX_RICETTE 50  //quantità max di ricette
+#define LUNGH_MAX_NOME 50 //Luneghezza massima per il nome di un alimento
 
 int num_linee;
 
@@ -90,7 +91,10 @@ void ricette(){
             break;
 
         case 2:
-            //	ricette();
+
+        	ricerca_ricette();
+        	ricette();
+
             break;
 
         case 3:
@@ -313,6 +317,7 @@ void stampa_ricetta(int num){
     }
 
 }
+
 //todo commenta (ricordati di usare l'algoritmo di scrematura--->
 //fedelucio vuole un ingrediente o un gruppo di ingredienti.
 
@@ -322,7 +327,7 @@ void stampa_ricetta(int num){
  * @return
  */
 
-int* ricerca_ricetta(char alimento[]){
+int* ricerca(char alimento[]){
 
 	int num_linee;
 	static int ricette_con_alimento[MAX_RICETTE];  //static necessario per il return dell'array
@@ -343,8 +348,8 @@ int* ricerca_ricetta(char alimento[]){
 
 			ricerca=strstr(archivio_ricette[i].ingredienti[j],alimento); //scansiono,cercando anche in sottostringhe,l'elenco degli ingredienti di ogni ricetta.
 
-			if(ricerca != NULL){								//se viene trovata una corrispondenza,trascrivo il valore dell'indice i in un array,salvando quindi effettivamente,la ricetta contenente l'ingrediente
-
+			if(ricerca != NULL){								//se viene trovata una corrispondenza,trascrivo il valore dell'indice i in un array,salvando quindi effettivamente,
+																//la posizione nell'array di struct della ricetta contenente l'ingrediente
 				ricette_con_alimento[k]=i;
 
 				k++;
@@ -360,3 +365,34 @@ int* ricerca_ricetta(char alimento[]){
 
 }
 
+void ricerca_ricette(){  //TODO Fix Case sensitive
+
+	char nome_alimento[LUNGH_MAX_NOME];
+
+	int *ricette_trovate;
+	int i;
+	int j;
+
+	system("cls");
+	printf("Ricerca ricette in base ai suoi ingredienti\n\n");
+	printf("Inserire il nome dell'ingrediente:");
+
+	fflush(stdin);
+
+	gets(nome_alimento);
+
+	ricette_trovate=ricerca(nome_alimento);
+
+	j=ricette_trovate[0];   //la prima posizione dell'array ricette_trovate contiene il numero di ricette trovate,utile quindi al corretto numero di stampe
+
+	for(i=0;i<j;i++){
+
+		printf("%s\n",archivio_ricette[ricette_trovate[i+1]].nome);  //il resto delle posizioni dell'array,quindi da ricette_trovate[1] in poi,contiene
+																   //la posizione nell'array di struct della ricetta contenente l'alimento in scadenza
+
+	}
+
+	printf("\n\n");
+	system("pause");
+
+}

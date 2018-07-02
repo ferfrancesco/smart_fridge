@@ -659,7 +659,7 @@ void scadenze(int num_linee){
 
     			printf("\n%s",archivio_alimenti[i].nome);
 
-    			ricette_trovate=ricerca_ricetta(archivio_alimenti[i].nome);
+    			ricette_trovate=ricerca(archivio_alimenti[i].nome);
 
     			k=ricette_trovate[0];   //la prima posizione dell'array ricette_trovate contiene il numero di ricette trovate,utile quindi al corretto numero di stampe
 

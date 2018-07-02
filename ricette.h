@@ -46,4 +46,6 @@ char* stampa_stelle(int num); //stampa le stellette di difficolta',int num indic
  */
 void stampa_ricetta(int num);
 
-int* ricerca_ricetta(char alimento[]);
+int* ricerca(char alimento[]);  //int* perchè ha come ritorno un array di int
+
+void ricerca_ricette();
