@@ -142,7 +142,7 @@ void memos(){
 
 //converte una stringa in caratteri minuscoli,utile per le funzioni di ricerca
 
-const char* low_conversion(char stringa[]){
+char* low_conversion(char stringa[]){
 
 	int i;
 

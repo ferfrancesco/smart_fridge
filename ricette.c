@@ -102,6 +102,9 @@ void ricette(){
             system("cls");
             fflush(stdin);
 
+            char nome_alimento [LUNGH_MAX_NOME];
+            char* nome_alimento_low;
+
             printf("Inserire il nome della ricetta:");
             gets(archivio_ricette[num_linee].nome);
 
@@ -153,7 +156,11 @@ void ricette(){
             for(i=0;i<selezione_int;i++){
 
                 printf("\nInserire l'ingrediente N%d:",i+1);
-                gets(archivio_ricette[num_linee].ingredienti[i]);
+                gets(nome_alimento);
+
+               nome_alimento_low=low_conversion(nome_alimento);
+
+               strcpy(archivio_ricette[num_linee].ingredienti[i],nome_alimento_low);
 
             }
 
@@ -365,11 +372,11 @@ int* ricerca(char alimento[]){
 
 }
 
-void ricerca_ricette(){  //TODO Fix Case sensitive
+void ricerca_ricette(){
 
 	char nome_alimento[LUNGH_MAX_NOME];
 
-	char *nome_alimento_low;
+	char* nome_alimento_low;
 
 	int *ricette_trovate;
 	int i;
