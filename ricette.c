@@ -308,7 +308,7 @@ int* ricerca_ricetta(char alimento[]){
 	static int ricette_con_alimento[MAX_RICETTE];  //static necessario per il return dell'array
 	int i;
 	int j;
-	int k=0;
+	int k=1;
 	int num_ingredienti_int;
 
 	char *ricerca;
@@ -333,6 +333,8 @@ int* ricerca_ricetta(char alimento[]){
 
 
 	}
+
+	ricette_con_alimento[0]=k;
 
 	return ricette_con_alimento;
 
