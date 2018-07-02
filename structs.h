@@ -86,5 +86,10 @@ struct ricetta{
 
 }archivio_ricette[MAX_RICETTE];
 
+/**
+ * Rappresenta la lista della spesa, con [ numero di ingrediente ]
+ * e [nome dell'alimento]
+ *
+ */
 char lista_spesa[50][50];
 

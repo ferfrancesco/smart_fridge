@@ -37,6 +37,13 @@ void stampa_elenco_ricette(int num_linee);
  */
 char* stampa_stelle(int num); //stampa le stellette di difficolta',int num indica il numero della ricetta
 
+/**
+ * Questa procedura permette di stampare le caratteristiche relative ad una ricetta, prendendo in input il
+ * numero corrispondente alla ricetta di cui si vogliono visualizzare le caratteristiche.
+ * Il numero della ricetta da visualizzare si ricava dall'elenco globale delle ricette.
+ *
+ * @param num, ovvero il numero della ricetta di cui visionare le caratteristiche.
+ */
 void stampa_ricetta(int num);
 
 int* ricerca_ricetta(char alimento[]);

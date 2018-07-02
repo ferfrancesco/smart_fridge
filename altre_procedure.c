@@ -19,7 +19,7 @@ typedef int bool;
  * @pre deve essere inserita una stringa che indica la data di scadenza di un dato prodotto
  * @post viene restituito un valore booleano, o vero o falso (che corrispondono rispettivamente ad un 1 o ad uno 0)
  */
-int isOnlyNumbers(char* stringa){
+int isOnlyNumbers(char* stringa){ // todo c'è un warning legato alla correttezza dei tipi
 
     int i;
     int numero;

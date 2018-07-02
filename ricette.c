@@ -219,6 +219,7 @@ void ricette(){
  */
 void stampa_elenco_ricette(int num_linee){
 
+	//todo inserire messaggio d'errore quando nel sistema non sono presenti ricette "Non ci sono ricette!"
     int i;
 
     printf("Elenco delle ricette\n\n");
@@ -270,7 +271,18 @@ char* stampa_stelle(int num){
 
 }
 
+/**
+ * Questa procedura permette di stampare le informazioni e le caratteristiche relative ad una
+ * particolare ricetta inserita nel sistema.
+ *
+ * @pre devono esserci ricette inserite nel sistema.
+ *
+ * @param num, prende in input il numero della ricetta di cui visualizzarne le caratteristiche.
+ */
+
 void stampa_ricetta(int num){
+
+	//todo inserire messaggio d'errore quando nel sistema non sono presenti ricette "Non ci sono ricette!"
 
     int i;
     int temp_int; //variabile intera temporanea per i cicli di stampa di ingredienti e procedure
@@ -301,6 +313,14 @@ void stampa_ricetta(int num){
     }
 
 }
+//todo commenta (ricordati di usare l'algoritmo di scrematura--->
+//fedelucio vuole un ingrediente o un gruppo di ingredienti.
+
+/**
+ *
+ * @param alimento
+ * @return
+ */
 
 int* ricerca_ricetta(char alimento[]){
 
@@ -308,7 +328,7 @@ int* ricerca_ricetta(char alimento[]){
 	static int ricette_con_alimento[MAX_RICETTE];  //static necessario per il return dell'array
 	int i;
 	int j;
-	int k=1;
+	int k=0;
 	int num_ingredienti_int;
 
 	char *ricerca;
@@ -333,8 +353,6 @@ int* ricerca_ricetta(char alimento[]){
 
 
 	}
-
-	ricette_con_alimento[0]=k-1;
 
 	return ricette_con_alimento;
 
