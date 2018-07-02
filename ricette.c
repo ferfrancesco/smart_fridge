@@ -334,7 +334,7 @@ int* ricerca_ricetta(char alimento[]){
 
 	}
 
-	ricette_con_alimento[0]=k;
+	ricette_con_alimento[0]=k-1;
 
 	return ricette_con_alimento;
 

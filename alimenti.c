@@ -665,11 +665,12 @@ void scadenze(int num_linee){
 
     			for(j=0;j<k;j++){
 
-    				if(ricette_trovate[j] == NULL){
 
-        				printf("\nPotresti cucinare:%s",archivio_ricette[j-1].nome);
 
-    				}
+        				printf("\nPotresti cucinare:");  //%s",archivio_ricette[j-1].nome
+
+        				printf("%s",archivio_ricette[ricette_trovate[j+1]].nome);
+
 
 
     			}
