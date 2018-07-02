@@ -369,6 +369,8 @@ void ricerca_ricette(){  //TODO Fix Case sensitive
 
 	char nome_alimento[LUNGH_MAX_NOME];
 
+	char *nome_alimento_low;
+
 	int *ricette_trovate;
 	int i;
 	int j;
@@ -381,7 +383,9 @@ void ricerca_ricette(){  //TODO Fix Case sensitive
 
 	gets(nome_alimento);
 
-	ricette_trovate=ricerca(nome_alimento);
+	nome_alimento_low=low_conversion(nome_alimento);
+
+	ricette_trovate=ricerca(nome_alimento_low);
 
 	j=ricette_trovate[0];   //la prima posizione dell'array ricette_trovate contiene il numero di ricette trovate,utile quindi al corretto numero di stampe
 

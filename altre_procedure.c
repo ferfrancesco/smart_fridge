@@ -13,6 +13,8 @@ typedef int bool;
 #define true 1
 #define false 0
 
+#define LUNGH_MAX_NOME 50 //Luneghezza massima per il nome di un alimento
+
 /**
  * Questa funzione verifica che una data stringa contenga solo numeri.
  *
@@ -136,4 +138,19 @@ void stampa_menu(){
 void memos(){
 
     printf("\n\n---------------------------------------------\n\nSEZIONE MEMOS");
+}
+
+//converte una stringa in caratteri minuscoli,utile per le funzioni di ricerca
+
+const char* low_conversion(char stringa[]){
+
+	int i;
+
+	for(i=0;i<strlen(stringa);i++){
+
+		stringa[i]=tolower(stringa[i]);
+
+	}
+
+	return stringa;
 }
