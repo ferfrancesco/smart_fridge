@@ -14,6 +14,10 @@ typedef int bool;
 #define true 1
 #define false 0
 
+#define MAX_RICETTE 50  //quantità max di ricette
+
+int num_linee;
+
 /**
  * Questo array serve a conservare il numero di stelle indicanti la difficoltà di una ricetta.
  */
@@ -35,7 +39,7 @@ void ricette(){
 
     int i;
 
-    int num_linee=file_load_ricette();
+    num_linee=file_load_ricette();
     int menu_select=0;
 
     char selezione[10];
@@ -91,7 +95,7 @@ void ricette(){
 
         case 3:
 
-            system("cls");//todo CREARE SOTTOFUNZIONE PER AGGIUNTA RICETTE (da chiamare aggiungi_ricette)
+            system("cls");
             fflush(stdin);
 
             printf("Inserire il nome della ricetta:");
@@ -109,20 +113,19 @@ void ricette(){
 
             }
 
-            else if (isOnlyNumbers(selezione)==false){
+            selezione_int=atoi(selezione);
 
-			selezione_int=atoi(selezione);
+			if((selezione_int>0) && (selezione_int<6)) {
 
-			if(((selezione_int)>0)&&((selezione_int)<6)) {
-
-            	 strcpy(archivio_ricette[num_linee].difficolta,selezione);
-            } else
-            		printf("Scelta inserita non valida!\n");
-					system("pause");
-            	    ricette();
-
+				strcpy(archivio_ricette[num_linee].difficolta,selezione);
 
             }
+
+				else{
+						printf("Scelta inserita non valida!\n");
+						system("pause");
+						ricette();
+				}
 
             /*---------------------------------------------------------------*/
 
@@ -185,14 +188,6 @@ void ricette(){
             system("pause");
             ricette();
 
-
-
-
-
-
-
-
-
             break;
 
         case 4:
@@ -222,7 +217,7 @@ void ricette(){
  *
  * @param num_linee, ovvero il numero di linee di cui il file "ricette.txt" e' costituito
  */
-void stampa_elenco_ricette(int num_linee){ // TODO Stampare "Non ci sono ricette" quando effettivamente non ce ne sono
+void stampa_elenco_ricette(int num_linee){
 
     int i;
 
@@ -275,7 +270,7 @@ char* stampa_stelle(int num){
 
 }
 
-void stampa_ricetta(int num){ //TODO Far stampare "Non ci sono ricette!" quando il frigo è vuoto
+void stampa_ricetta(int num){
 
     int i;
     int temp_int; //variabile intera temporanea per i cicli di stampa di ingredienti e procedure
@@ -307,5 +302,39 @@ void stampa_ricetta(int num){ //TODO Far stampare "Non ci sono ricette!" quando 
 
 }
 
-//TODO MANCA LA MODIFICA DELLE RICETTE!!! ovvero modifica dei passi delle ricette e cose del genere
+int* ricerca_ricetta(char alimento[]){
+
+	int num_linee;
+	static int ricette_con_alimento[MAX_RICETTE];  //static necessario per il return dell'array
+	int i;
+	int j;
+	int k=0;
+	int num_ingredienti_int;
+
+	char *ricerca;
+
+	num_linee=file_load_ricette();
+
+	for(i=0;i<num_linee;i++){
+
+		num_ingredienti_int=atoi(archivio_ricette[i].num_ingredienti);
+
+		for(j=0;j<num_ingredienti_int;j++){
+
+			ricerca=strstr(archivio_ricette[i].ingredienti[j],alimento); //scansiono,cercando anche in sottostringhe,l'elenco degli ingredienti di ogni ricetta.
+
+			if(ricerca != NULL){								//se viene trovata una corrispondenza,trascrivo il valore dell'indice i in un array,salvando quindi effettivamente,la ricetta contenente l'ingrediente
+
+				ricette_con_alimento[k]=i;
+
+				k++;
+			}
+		}
+
+
+	}
+
+	return ricette_con_alimento;
+
+}
 

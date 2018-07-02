@@ -107,7 +107,7 @@ void menu_sett(){
 
                         fflush(stdin);
                         system("cls");
-                        //todo fare una sottofunzione per l'inserimento del menu settimanale
+
                         printf("Inserire il piatto del %s:",giorno[0].dayname);			//popolo il primo giorno della settimana
                         gets(giorno[0].pietanza);
 
@@ -193,7 +193,7 @@ void lista(){
     switch(menu_selez){
 
         case 1:
-        	//TODO mettere la visualizzazione del file in una sottofunzione
+
             system("cls");
             printf("Questa e' la lista della spesa generata automaticamente\n\n");
 

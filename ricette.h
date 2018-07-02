@@ -36,4 +36,7 @@ void stampa_elenco_ricette(int num_linee);
  * @return il vettore caricato di stelle in base all'input inserito
  */
 char* stampa_stelle(int num); //stampa le stellette di difficolta',int num indica il numero della ricetta
+
 void stampa_ricetta(int num);
+
+int* ricerca_ricetta(char alimento[]);
