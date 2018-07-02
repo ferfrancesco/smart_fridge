@@ -661,21 +661,16 @@ void scadenze(int num_linee){
 
     			ricette_trovate=ricerca_ricetta(archivio_alimenti[i].nome);
 
-    			k=ricette_trovate[0];
+    			k=ricette_trovate[0];   //la prima posizione dell'array ricette_trovate contiene il numero di ricette trovate,utile quindi al corretto numero di stampe
 
     			for(j=0;j<k;j++){
 
+        			printf("\nPotresti cucinare:");
 
-
-        				printf("\nPotresti cucinare:");  //%s",archivio_ricette[j-1].nome
-
-        				printf("%s",archivio_ricette[ricette_trovate[j+1]].nome);
-
-
+        			printf("%s",archivio_ricette[ricette_trovate[j+1]].nome);  //il resto delle posizioni dell'array,quindi da ricette_trovate[1] in poi,contiene
+        																	   //la posizione nell'array di struct della ricetta contenente l'alimento in scadenza
 
     			}
-
-
 
     		}
     	}
