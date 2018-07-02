@@ -65,7 +65,7 @@ void varie(){
 
 void menu_sett(){
 
-    char temp_nome_file[40];
+  //  char temp_nome_file[40];
     int menu_select=0;
     int i;
     FILE *fp;
@@ -87,7 +87,7 @@ void menu_sett(){
 
                     fp = fopen (temp_nome_file,"r");
 
-                    if (/*(fp!=NULL) && (conta_linee(temp_nome_file)==7)){   //controllo la presenza del file. se il file è presente e vi sono 7 righe,il menu' è stato già inserito
+                    if ((fp!=NULL) && (conta_linee(temp_nome_file)==7)){   //controllo la presenza del file. se il file è presente e vi sono 7 righe,il menu' è stato già inserito
 
                         menu_inserito=true;
 
