@@ -55,7 +55,7 @@ void memos();
 
 /**
  * Questa funzione trasforma una stringa composta di lettere (anche maiuscole) in lettere tutte minuscole
- * @param stringa,ovvero la stringa da convertire tutta in minuscolo
+ * @param stringa, ovvero la stringa da convertire tutta in minuscolo
  * @return stringa, ovvero la stringa convertita
  */
 
