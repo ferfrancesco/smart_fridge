@@ -46,6 +46,19 @@ char* stampa_stelle(int num); //stampa le stellette di difficolta',int num indic
  */
 void stampa_ricetta(int num);
 
+/**
+ * La funzione "ricerca" prende in input una stringa (che rappresenta un alimento) e restituisce
+ * la ricetta (o le ricette) che contengono quell'ingrediente.Dà come valore di ritorno un array
+ * di interi, ovvero "ricette_con_alimento"
+ *
+ * @param alimento,ovvero l'ingrediente con il quale ricercare le corrispondenze
+ * @return ricette_con_alimento,ovvero un array di indici interi che indicano le posizioni delle corrispondenze
+ */
+
 int* ricerca(char alimento[]);  //int* perchè ha come ritorno un array di int
 
+/**
+ * E' la procedura che ci permette di accedere alla funzione "ricerca", per trovare le
+ * corrispondenze tra un alimento e le ricette disponibili all'interno del sistema.
+ */
 void ricerca_ricette();

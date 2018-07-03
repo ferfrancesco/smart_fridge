@@ -509,6 +509,15 @@ void modifica_alimenti(int num_linee){
 
 }
 
+/**
+ * Questa procedura permette di capire quali sono gli alimenti, presenti nello Smart Fridge, che sono scaduti o sono in scadenza.
+ * Viene utilizzata all'interno del sottomenù "alimenti".
+ *
+ * @pre devono esserci alimenti presenti nello Smart Fridge.
+ *
+ * @param num_linee, ovvero il numero di linee del file "alimenti.txt"
+ */
+
 void scadenze(int num_linee){
 
 	int anno_int;          //conversione in int dell'anno di scadenza dell'alimento

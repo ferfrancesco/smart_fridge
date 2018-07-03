@@ -18,7 +18,7 @@ typedef int bool;
 /**
  * Questa funzione verifica che una data stringa contenga solo numeri.
  *
- * @pre deve essere inserita una stringa che indica la data di scadenza di un dato prodotto
+ * @pre deve essere inserita una stringa che indica la stringa la cui composizione deve essere verificata
  * @post viene restituito un valore booleano, o vero o falso (che corrispondono rispettivamente ad un 1 o ad uno 0)
  */
 int isOnlyNumbers(char* stringa){ // todo c'è un warning legato alla correttezza dei tipi
@@ -142,6 +142,14 @@ void memos(){
 
 //converte una stringa in caratteri minuscoli,utile per le funzioni di ricerca
 
+/**
+ * Questa funzione trasforma una stringa ,eventualmente scritta anche in lettere maiuscole,
+ * in lettere minuscole.
+ *
+ * @pre la stringa deve essere composta di lettere.
+ * @param stringa, ovvero la stringa da convertire
+ * @return stringa, la stringa convertita
+ */
 char* low_conversion(char stringa[]){
 
 	int i;

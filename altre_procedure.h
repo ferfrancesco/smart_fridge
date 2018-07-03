@@ -20,9 +20,16 @@
 
 /**
  * Questa funzione verifica che la stringa data in input sia composta da soli numeri.
- * @param stringa, ovvero quella che dovrebbe essere la data di scadenza
- * @return un valore booleano tra true o false(codificati in 1: true, 2:false)
+ *
+ * @pre stringa deve essere composta da soli numeri
+ * @param stringa, ovvero la stringa che bisogna controllare sia davvero composta da soli numeri.
+ *
+ *@return un valore booleano tra true o false(codificati in 1: true, 2:false)
+ * true: se la funzione non è composta da soli numeri;
+ * false: se la stringa è composta da soli numeri;
+ *
  */
+
 int isOnlyNumbers(char* stringa);
 
 /**
@@ -40,6 +47,10 @@ void dayname_fill();
  */
 void stampa_menu();
 
+/**
+ * Procedura che permette di visualizzare sull'interfaccia del programma eventuali
+ * note e promemoria.
+ */
 void memos();
 
 /**
