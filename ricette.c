@@ -384,9 +384,13 @@ void stampa_ricetta(int num){
 //fedelucio vuole un ingrediente o un gruppo di ingredienti.
 
 /**
+ * La funzione "ricerca" prende in input una stringa (che rappresenta un alimento) e restituisce
+ * la ricetta (o le ricette) che contengono quell'ingrediente.
  *
- * @param alimento
- * @return
+ * @pre Si deve accedere prima alla procedura "ricerca_ricette"
+ *
+ * @param alimento,ovvero l'ingrediente con il quale ricercare le corrispondenze
+ * @return ricette_con_alimento,ovvero un array di indici interi che indicano le posizioni delle corrispondenze
  */
 
 int* ricerca(char alimento[]){
@@ -421,12 +425,16 @@ int* ricerca(char alimento[]){
 
 	}
 
-	ricette_con_alimento[0]=k-1;
+	ricette_con_alimento[0]=k-1;			// salvo nella posizione 0 il numero di ricette (corrispondenze) trovate, ovvero k-1.
 
 	return ricette_con_alimento;
 
 }
 
+/**
+ * E' la procedura che ci permette di accedere alla funzione "ricerca", per trovare le
+ * corrispondenze tra un alimento e le ricette disponibili all'interno del sistema.
+ */
 void ricerca_ricette(){
 
 	char nome_alimento[LUNGH_MAX_NOME];
