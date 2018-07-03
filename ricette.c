@@ -38,13 +38,8 @@ char stelle[5]={0};
 
 void ricette(){
 
-    int i;
-
     num_linee=file_load_ricette();
     int menu_select=0;
-
-    char selezione[10];
-    int selezione_int;
 
     fflush(stdin);
     system("cls");
@@ -57,38 +52,10 @@ void ricette(){
 
         case 1:
 
-            system("cls");
-            stampa_elenco_ricette(num_linee);
-
-            printf("\n\nChe ricetta si desidera visualizzare?Inserire un valore numerico:");
-
-            fflush(stdin);
-            gets(selezione);
-
-            if(isOnlyNumbers(selezione)==true) {
-
-            	messaggio_errore();
-                ricette();
-
-            }
-
-            else if (isOnlyNumbers(selezione)==false){
-
-                selezione_int=atoi(selezione);
-            }
-
-            selezione_int--; //decremento di 1 per allinearmi con l'array
-
-            system("cls");
-
-            stampa_ricetta(selezione_int);
-
-            printf("\n------------------------------------------------------------------");
-            printf("\nFinito!Tornerai ora al menu' delle ricette\n\n");
-            system("pause");
+        	visualizza_ricette();
             ricette();
 
-            break;
+        break;
 
         case 2:
 
@@ -99,104 +66,7 @@ void ricette(){
 
         case 3:
 
-            system("cls");
-            fflush(stdin);
-
-            char nome_alimento [LUNGH_MAX_NOME];
-            char* nome_alimento_low;
-
-            printf("Inserire il nome della ricetta:");
-            gets(archivio_ricette[num_linee].nome);
-
-            /*---------------------------------------------------------------*/
-
-            printf("\nDa 1 a 5 Quanto è difficile questa ricetta?(Inserire valori numerici):");
-            gets(selezione);
-
-            if(isOnlyNumbers(selezione)==true) {
-
-            	messaggio_errore();
-                ricette();
-
-            }
-
-            selezione_int=atoi(selezione);
-
-			if((selezione_int>0) && (selezione_int<6)) {
-
-				strcpy(archivio_ricette[num_linee].difficolta,selezione);
-
-            }
-
-				else{
-						printf("Scelta inserita non valida!\n");
-						system("pause");
-						ricette();
-				}
-
-            /*---------------------------------------------------------------*/
-
-            printf("\nQuanti ingredienti ha questa ricetta?(Inserire valori numerici):");
-            gets(selezione);
-
-            if(isOnlyNumbers(selezione)==true) {
-
-            	messaggio_errore();
-                ricette();
-
-            }
-
-            else if (isOnlyNumbers(selezione)==false){
-
-                strcpy(archivio_ricette[num_linee].num_ingredienti,selezione);
-            }
-
-            selezione_int = atoi(selezione);
-
-            for(i=0;i<selezione_int;i++){
-
-                printf("\nInserire l'ingrediente N%d:",i+1);
-                gets(nome_alimento);
-
-               nome_alimento_low=low_conversion(nome_alimento);
-
-               strcpy(archivio_ricette[num_linee].ingredienti[i],nome_alimento_low);
-
-            }
-
-            /*---------------------------------------------------------------*/
-
-            printf("\nQuanti step ha questa ricetta?(Inserire valori numerici):");
-            gets(selezione);
-
-            if(isOnlyNumbers(selezione)==true) {
-
-            	messaggio_errore();
-                ricette();
-
-            }
-
-            else if (isOnlyNumbers(selezione)==false){
-
-                strcpy(archivio_ricette[num_linee].num_step,selezione);
-            }
-
-            selezione_int = atoi(selezione);
-
-            for(i=0;i<selezione_int;i++){
-
-                printf("\nInserire lo step N%d:",i+1);
-                gets(archivio_ricette[num_linee].procedura[i]);
-
-            }
-
-            num_linee++; //incremento il nmero di linee per non sovrascrivere vecchie ricette
-
-            file_save_ricette(num_linee);
-
-            printf("\n------------------------------------------------------------------");
-            printf("\nRicetta inserita correttamente.Verrai ora riportato al menu delle ricette\n\n");
-            system("pause");
+        	aggiungi_ricette();
             ricette();
 
             break;
@@ -468,5 +338,151 @@ void ricerca_ricette(){
 
 	printf("\n\n");
 	system("pause");
+
+}
+
+void visualizza_ricette(){
+
+    char selezione[10];
+    int selezione_int;
+
+    system("cls");
+    stampa_elenco_ricette(num_linee);
+
+    printf("\n\nChe ricetta si desidera visualizzare?Inserire un valore numerico:");
+
+    fflush(stdin);
+    gets(selezione);
+
+    if(isOnlyNumbers(selezione)==true) {
+
+    	messaggio_errore();
+        ricette();
+
+    }
+
+    else if (isOnlyNumbers(selezione)==false){
+
+        selezione_int=atoi(selezione);
+    }
+
+    selezione_int--; //decremento di 1 per allinearmi con l'array
+
+    system("cls");
+
+    stampa_ricetta(selezione_int);
+
+    printf("\n------------------------------------------------------------------");
+    printf("\nFinito!Tornerai ora al menu' delle ricette\n\n");
+    system("pause");
+
+}
+
+void aggiungi_ricette(){  //TODO aggiungi inserimento numero volte cucinate
+
+    char selezione[10];
+    int selezione_int;
+
+    int i;
+
+    system("cls");
+    fflush(stdin);
+
+    char nome_alimento [LUNGH_MAX_NOME];
+    char* nome_alimento_low;
+
+    printf("Inserire il nome della ricetta:");
+    gets(archivio_ricette[num_linee].nome);
+
+    /*---------------------------------------------------------------*/
+
+    printf("\nDa 1 a 5 Quanto è difficile questa ricetta?(Inserire valori numerici):");
+    gets(selezione);
+
+    if(isOnlyNumbers(selezione)==true) {
+
+    	messaggio_errore();
+        ricette();
+
+    }
+
+    selezione_int=atoi(selezione);
+
+	if((selezione_int>0) && (selezione_int<6)) {
+
+		strcpy(archivio_ricette[num_linee].difficolta,selezione);
+
+    }
+
+		else{
+				printf("Scelta inserita non valida!\n");
+				system("pause");
+				ricette();
+		}
+
+    /*---------------------------------------------------------------*/
+
+    printf("\nQuanti ingredienti ha questa ricetta?(Inserire valori numerici):");
+    gets(selezione);
+
+    if(isOnlyNumbers(selezione)==true) {
+
+    	messaggio_errore();
+        ricette();
+
+    }
+
+    else if (isOnlyNumbers(selezione)==false){
+
+        strcpy(archivio_ricette[num_linee].num_ingredienti,selezione);
+    }
+
+    selezione_int = atoi(selezione);
+
+    for(i=0;i<selezione_int;i++){
+
+        printf("\nInserire l'ingrediente N%d:",i+1);
+        gets(nome_alimento);
+
+       nome_alimento_low=low_conversion(nome_alimento);
+
+       strcpy(archivio_ricette[num_linee].ingredienti[i],nome_alimento_low);
+
+    }
+
+    /*---------------------------------------------------------------*/
+
+    printf("\nQuanti step ha questa ricetta?(Inserire valori numerici):");
+    gets(selezione);
+
+    if(isOnlyNumbers(selezione)==true) {
+
+    	messaggio_errore();
+        ricette();
+
+    }
+
+    else if (isOnlyNumbers(selezione)==false){
+
+        strcpy(archivio_ricette[num_linee].num_step,selezione);
+    }
+
+    selezione_int = atoi(selezione);
+
+    for(i=0;i<selezione_int;i++){
+
+        printf("\nInserire lo step N%d:",i+1);
+        gets(archivio_ricette[num_linee].procedura[i]);
+
+    }
+
+    num_linee++; //incremento il nmero di linee per non sovrascrivere vecchie ricette
+
+    file_save_ricette(num_linee);
+
+    printf("\n------------------------------------------------------------------");
+    printf("\nRicetta inserita correttamente.Verrai ora riportato al menu delle ricette\n\n");
+    system("pause");
+
 
 }
