@@ -83,7 +83,7 @@ struct ricetta{
     ///[numero step] [descrizione ciascuno step]
     char procedura[STEP_MAX][4000];
 
-    //int num
+    char num_preparazioni[5];
 
 
 }archivio_ricette[MAX_RICETTE];

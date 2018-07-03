@@ -233,15 +233,25 @@ void stampa_elenco_ricette(int num_linee){
 	//todo inserire messaggio d'errore quando nel sistema non sono presenti ricette "Non ci sono ricette!"
     int i;
 
-    printf("Elenco delle ricette\n\n");
-    printf("|%-50s|%-12s|","Nome Ricetta","Difficolta'");
-    printf("\n-----------------------------------------------------------------\n");
+    if(num_linee==0){
 
-    for(i=0;i<num_linee;i++){
+    	printf("Nessuna ricetta salvata!\n\n");
+    	system("pause");
+    	ricette();
+    }
 
-        printf("|%-50s|",archivio_ricette[i].nome);
+    else{
 
-        printf("%-12s|%d)\n",stampa_stelle(i),i+1);
+        printf("Elenco delle ricette\n\n");
+        printf("|%-50s|%-12s|","Nome Ricetta","Difficolta'");
+        printf("\n-----------------------------------------------------------------\n");
+
+        for(i=0;i<num_linee;i++){
+
+            printf("|%-50s|",archivio_ricette[i].nome);
+
+            printf("%-12s|%d)\n",stampa_stelle(i),i+1);
+        }
 
     }
 
@@ -297,6 +307,9 @@ void stampa_ricetta(int num){
 
     int i;
     int temp_int; //variabile intera temporanea per i cicli di stampa di ingredienti e procedure
+    int num_preparazioni_int;  //variabile intera temporanea per l'incremento di num_preparazioni
+
+    int menu_select=0;
 
     printf("%s\nDifficolta':%s\n",archivio_ricette[num].nome,stampa_stelle(num));
     printf("------------------------------------------------------------------\n");
@@ -312,9 +325,51 @@ void stampa_ricetta(int num){
 
     printf("\n------------------------------------------------------------------");
 
+    printf("\nIntendi semplicemente visualizzare la ricetta o la vuoi preparare?\n\n1)Visualizzare\n2)Preparare\n\n");
+    scanf("%d",&menu_select);
+
+    switch(menu_select){
+
+			case 1:
+
+				printf("\nOK!Visualizzerai ora la ricetta\n");
+				system("pause");
+
+			break;
+
+			case 2:
+
+				num_preparazioni_int=atoi(archivio_ricette[num].num_preparazioni);
+
+				num_preparazioni_int++;
+
+				sprintf(archivio_ricette[num].num_preparazioni, "%d", num_preparazioni_int);
+
+				printf("\nOK!Verra' memorizzato che hai gia' cucinato questa ricetta %s volte\n",archivio_ricette[num].num_preparazioni);
+
+				file_save_ricette(num_linee); //salvo le ricette su file per salvare il contatore del numero di volte che la ricetta è stata cucinata aggiornato
+
+				system("pause");
+
+
+			break;
+
+			default:
+
+				messaggio_errore();
+				ricette();
+
+			break;
+
+    }
+
+    printf("\n------------------------------------------------------------------");
+
     printf("\nProcedura:\n");
 
     temp_int=atoi(archivio_ricette[num].num_step);
+
+    fflush(stdin);
 
     for(i=0;i<temp_int;i++){
 

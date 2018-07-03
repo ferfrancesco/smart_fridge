@@ -110,7 +110,7 @@ int file_load_ricette(){
 
     while(!feof(fp)){
 
-        fscanf(fp,"%50[^,],%5[^,],%5[^,],",archivio_ricette[i].nome,archivio_ricette[i].difficolta,archivio_ricette[i].num_ingredienti); //utilizzo [^,] in quanto utilizzare %s leggeva l'intera stringa,virgole incluse
+        fscanf(fp,"%50[^,],%5[^,],%5[^,],%5[^,],",archivio_ricette[i].nome,archivio_ricette[i].difficolta,archivio_ricette[i].num_ingredienti,archivio_ricette[i].num_preparazioni); //utilizzo [^,] in quanto utilizzare %s leggeva l'intera stringa,virgole incluse
 
         temp_int = atoi(archivio_ricette[i].num_ingredienti);
 
@@ -133,6 +133,13 @@ int file_load_ricette(){
        i++;											//incremento della i per il ciclo while
        num_linee++;
 
+       if(archivio_ricette[i-1].num_ingredienti[0] == '\0'){   /*controllo se la prima posizione di un array di caratteri (stringa[0]) qualsiasi della struct contiene il carattere speciale \0. Se il carattere è trovato,significa che in realtà
+       												 *non è stato caricato nulla,quindi decremento il numero di linee,e quindi di alimenti caricati. Funzione necessaria per il fix di un bug*/
+       	i--;
+       	num_linee--;
+
+       }
+
     }
 
     fclose(fp);
@@ -150,8 +157,6 @@ int file_load_ricette(){
  *
  * @return num_linee Se il controllo va a buon fine, la funzione restituirà il numero di linee del file analizzato
  */
-
-
 
 int file_load_menu_sett(){
 
@@ -263,7 +268,7 @@ void file_save_ricette (int num_linee){
 
     for(i=0;i<num_linee;i++){
 
-        fprintf(fp,"%s,%s,%s,",archivio_ricette[i].nome,archivio_ricette[i].difficolta,archivio_ricette[i].num_ingredienti);
+        fprintf(fp,"%s,%s,%s,%s,",archivio_ricette[i].nome,archivio_ricette[i].difficolta,archivio_ricette[i].num_ingredienti,archivio_ricette[i].num_preparazioni);
 
         temp_int = atoi(archivio_ricette[i].num_ingredienti);  //converto il numero di step in intero per l'uso nel ciclo
 
