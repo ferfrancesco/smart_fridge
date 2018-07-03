@@ -341,6 +341,10 @@ void ricerca_ricette(){
 
 }
 
+/**
+ * Questa procedura richiama le sottoprocedure "stampa_elenco_ricette" e, a sua volta, stampa_ricette
+ */
+
 void visualizza_ricette(){
 
     char selezione[10];
@@ -377,7 +381,10 @@ void visualizza_ricette(){
     system("pause");
 
 }
-
+/**Questa procedura permette di aggiungere ricette alla lista di ricette presenti all'interno del sistema.
+*
+* E' possibile immettere il nome della ricetta, gli ingredienti, la difficolta' e gli steps.
+* **/
 void aggiungi_ricette(){
 
     char selezione[10];

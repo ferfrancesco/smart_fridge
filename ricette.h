@@ -62,7 +62,15 @@ int* ricerca(char alimento[]);  //int* perchè ha come ritorno un array di int
  * corrispondenze tra un alimento e le ricette disponibili all'interno del sistema.
  */
 void ricerca_ricette();
-
+/**
+ * Questa procedura richiama a sua volta le sottoprocedure "stampa_elenco_ricette" e "stampa_ricetta"
+ */
 void visualizza_ricette();
+
+/**
+ * Questa procedura permette di aggiungere ricette alla lista di ricette presenti all'interno del sistema.
+ * E' possibile immettere il nome della ricetta, gli ingredienti, la difficolta' e gli steps.
+ *
+ */
 
 void aggiungi_ricette();
