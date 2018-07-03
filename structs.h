@@ -45,7 +45,7 @@ struct alimento{
     ///anno di scadenza dell'alimento
     char anno[6];
 
-    char numero[10];			//TODO togli, e' ridondante, facciamo scegliere prima il tipo poi la quantita
+    char numero[10];
 
     ///calorie di un dato alimento
     char kcal[7];
@@ -82,6 +82,8 @@ struct ricetta{
 
     ///[numero step] [descrizione ciascuno step]
     char procedura[STEP_MAX][4000];
+
+    //int num
 
 
 }archivio_ricette[MAX_RICETTE];

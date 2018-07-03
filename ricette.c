@@ -343,7 +343,7 @@ int* ricerca(char alimento[]){
 	int k=1;
 	int num_ingredienti_int;
 
-	char *ricerca;
+	char *risultato;
 
 	num_linee=file_load_ricette();
 
@@ -353,9 +353,9 @@ int* ricerca(char alimento[]){
 
 		for(j=0;j<num_ingredienti_int;j++){
 
-			ricerca=strstr(archivio_ricette[i].ingredienti[j],alimento); //scansiono,cercando anche in sottostringhe,l'elenco degli ingredienti di ogni ricetta.
+			risultato=strstr(archivio_ricette[i].ingredienti[j],alimento); //scansiono,cercando anche in sottostringhe,l'elenco degli ingredienti di ogni ricetta.
 
-			if(ricerca != NULL){								//se viene trovata una corrispondenza,trascrivo il valore dell'indice i in un array,salvando quindi effettivamente,
+			if(risultato != NULL){								//se viene trovata una corrispondenza,trascrivo il valore dell'indice i in un array,salvando quindi effettivamente,
 																//la posizione nell'array di struct della ricetta contenente l'ingrediente
 				ricette_con_alimento[k]=i;
 

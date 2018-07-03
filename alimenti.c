@@ -657,7 +657,7 @@ void scadenze(int num_linee){
 
     		if(flag_scaduto==0){
 
-    			printf("\n%s",archivio_alimenti[i].nome);
+    			printf("\n%s",archivio_alimenti[i].nome);  //TODO Inserire consiglio ricette anche nelle altre condizioni if
 
     			ricette_trovate=ricerca(archivio_alimenti[i].nome);
 
