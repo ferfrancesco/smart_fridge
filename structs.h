@@ -51,6 +51,7 @@ struct alimento{
     ///quantita' di un dato alimento
     char quantita[10];
 
+    char quantita_tot[10];
 
 }archivio_alimenti[ALIM_MAX];
 

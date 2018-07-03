@@ -126,7 +126,7 @@ void stampa_alimenti(int num_linee){
 
             if(strcmp(archivio_alimenti[i].tipo,"1")){
 
-                strcpy(temp_quantita,archivio_alimenti[i].quantita);
+                strcpy(temp_quantita,archivio_alimenti[i].quantita_tot);
                 strcat(temp_quantita," ml");
 
                 printf("\n|%-50s|%-s/%-s/%-6s|%-10s|%-10s|%-7s|%d)",archivio_alimenti[i].nome,archivio_alimenti[i].giorno,archivio_alimenti[i].mese,archivio_alimenti[i].anno,archivio_alimenti[i].numero,temp_quantita,archivio_alimenti[i].kcal,i+1);
@@ -135,7 +135,7 @@ void stampa_alimenti(int num_linee){
 
             else if(strcmp(archivio_alimenti[i].tipo,"2")){
 
-                strcpy(temp_quantita,archivio_alimenti[i].quantita);
+                strcpy(temp_quantita,archivio_alimenti[i].quantita_tot);
                 strcat(temp_quantita," g");
 
                 printf("\n|%-50s|%-2s/%-2s/%-6s|%-10s|%-10s|%-7s|%d)",archivio_alimenti[i].nome,archivio_alimenti[i].giorno,archivio_alimenti[i].mese,archivio_alimenti[i].anno,archivio_alimenti[i].numero,temp_quantita,archivio_alimenti[i].kcal,i+1);
@@ -163,10 +163,15 @@ void stampa_alimenti(int num_linee){
 void aggiunta_alimenti(int num_linee){
 
 	int i;
-    int anno_int;		//variabile temporanea per la conversione in int della stringa anno
+
+    int numero_int;
+	int tipo_int; 		//variabile di appoggio per la scelta dell'unità di misura dell'alimento
+	int quantita_int;
+	int quantita_tot_int;
+
+	int anno_int;		//variabile temporanea per la conversione in int della stringa anno
 	int mese_int;		//variabile temporanea per la conversione in int della stringa mese
     int giorno_int;		//variabile temporanea per la conversione in int della stringa giorno
-    int tipo_int; 		//variabile di appoggio per la scelta dell'unità di misura dell'alimento
     int anno_attuale;   //variabile in cui salvare l'anno attuale (a cui poi dover aggiungere 1900)
 
     char selezione[10];	//stringa per memorizzare il numero di alimenti che si vogliono inserire
@@ -236,6 +241,13 @@ void aggiunta_alimenti(int num_linee){
                 break;
 
         }
+
+        numero_int=atoi(archivio_alimenti[num_linee].numero);
+        quantita_int=atoi(archivio_alimenti[num_linee].quantita);
+
+        quantita_tot_int=numero_int*quantita_int;
+
+        sprintf(archivio_alimenti[num_linee].quantita_tot, "%d" ,quantita_tot_int);
 
         printf("\nInserire le KCAL dell'alimento:");
         gets(archivio_alimenti[num_linee].kcal);
@@ -453,6 +465,8 @@ void modifica_alimenti(int num_linee){
     char selezione[10]; //stringa per memorizzare il numero di alimenti che si vogliono inserire
     int selezione_int; 	//variabile in cui è memorizzato il numero di alimenti che si vogliono inserire (case1), il numero dell'alimento che si vuole modificare( case3)
 
+    int selezione_tipo;
+
     char nuova_quantita[10];
     int nuova_quantita_int;
 
@@ -460,7 +474,7 @@ void modifica_alimenti(int num_linee){
 
     int i;
 
-    printf("Di quale alimento si intende modificare le quantita' presenti?\n\nSe vuoi rimuovere un elemento dal frigo,digita una quantita' '0'\n\nDigitane il numero ad esso associato:");
+    printf("Di quale alimento si intende modificare i numeri di confezioni o le quantita'presenti?\n\nDigitane il numero ad esso associato:");
 
     fflush(stdin);
 
@@ -480,64 +494,82 @@ void modifica_alimenti(int num_linee){
 
     selezione_int=selezione_int-1; 	//diminuzione del valore della variabile di 1 per allinearsi con l'array,in quanto l'utente vede e seleziona valori shiftati di 1,per evitare che vi sia un alimento indicato col valore 0
 
-    vecchia_quantita=atoi(archivio_alimenti[selezione_int].quantita); //copio la vecciha quantità presente in frigo per usarla nel confronto,in quanto è possibile solo diminuire le quantità,non aumentarle
+    printf("\n\nVuoi modificare il numero di elementi in frigo o le quantita'?\n\n1)Numero Elementi\n2)Quantita'\n\n");
 
-    do{
+    scanf("%d",&selezione_tipo);
 
-		printf("\nInserire la nuova quantita':");
+    switch(selezione_tipo){
 
-		gets(nuova_quantita);
+    	case 1:
 
-		if(isOnlyNumbers(nuova_quantita)==true) {
+    	break;
 
-			messaggio_errore();
-			alimenti();
+    	case 2:
 
-		}
+    	    vecchia_quantita=atoi(archivio_alimenti[selezione_int].quantita_tot); //copio la vecciha quantità presente in frigo per usarla nel confronto,in quanto è possibile solo diminuire le quantità,non aumentarle
 
-		else if (isOnlyNumbers(nuova_quantita)==false){
+    	    do{
 
-			nuova_quantita_int=atoi(nuova_quantita);
-		}
+    			printf("\nInserire la nuova quantita',se vuoi rimuovere un elemento dal frigo,digita 0");
 
-		if(nuova_quantita_int>vecchia_quantita){
+    			gets(nuova_quantita);
 
-			printf("\n\n Non puoi aggiungere cibo!Solo rimuoverlo,se vuoi aggiungere cibo al frigo\nusare la funzione 'Aggiungi Alimenti'\n");
-			system("pause");
-		}
+    			if(isOnlyNumbers(nuova_quantita)==true) {
 
-	}while(nuova_quantita_int>vecchia_quantita);
+    				messaggio_errore();
+    				alimenti();
 
-    strcpy(archivio_alimenti[selezione_int].quantita,nuova_quantita);
+    			}
 
-    if(nuova_quantita_int==0){    //nel caso venga inserito un valore pari a 0 nel campo quantità,l'alimento verrà automaticamente rimosso
+    			else if (isOnlyNumbers(nuova_quantita)==false){
 
-        for (i=selezione_int;i<num_linee;i++){ 		//ciclo per copiare i valori nella posizione precedente,in modo da rimuovere l'alimento e non lasciare spazi vuoti nell'elenco
+    				nuova_quantita_int=atoi(nuova_quantita);
+    			}
 
-            strcpy(archivio_alimenti[i].nome,archivio_alimenti[i+1].nome);
-            strcpy(archivio_alimenti[i].giorno,archivio_alimenti[i+1].giorno);
-            strcpy(archivio_alimenti[i].mese,archivio_alimenti[i+1].mese);
-            strcpy(archivio_alimenti[i].anno,archivio_alimenti[i+1].anno);
-            strcpy(archivio_alimenti[i].quantita,archivio_alimenti[i+1].quantita);
-            strcpy(archivio_alimenti[i].kcal,archivio_alimenti[i+1].kcal);
+    			if(nuova_quantita_int>vecchia_quantita){
 
-            //copia del nome nella lista della spesa
+    				printf("\n\nNon puoi aggiungere cibo!\nPuoi solo rimuoverlo,se vuoi aggiungere cibo al frigo\nusare la funzione 'Aggiungi Alimenti'\n");
+    				system("pause");
+    			}
 
-            file_append_lista(archivio_alimenti[i].nome);
+    		}while(nuova_quantita_int>vecchia_quantita);
 
-        }
+    	    strcpy(archivio_alimenti[selezione_int].quantita,nuova_quantita);
 
-        num_linee--;	//decremento del numero di linee del file, dopo l'eliminazione di un alimento
+    	    if(nuova_quantita_int==0){    //nel caso venga inserito un valore pari a 0 nel campo quantità,l'alimento verrà automaticamente rimosso
 
+    	        for (i=selezione_int;i<num_linee;i++){ 		//ciclo per copiare i valori nella posizione precedente,in modo da rimuovere l'alimento e non lasciare spazi vuoti nell'elenco
+
+    	            strcpy(archivio_alimenti[i].nome,archivio_alimenti[i+1].nome);
+    	            strcpy(archivio_alimenti[i].giorno,archivio_alimenti[i+1].giorno);
+    	            strcpy(archivio_alimenti[i].mese,archivio_alimenti[i+1].mese);
+    	            strcpy(archivio_alimenti[i].anno,archivio_alimenti[i+1].anno);
+    	            strcpy(archivio_alimenti[i].quantita,archivio_alimenti[i+1].quantita);
+    	            strcpy(archivio_alimenti[i].kcal,archivio_alimenti[i+1].kcal);
+
+    	            //copia del nome nella lista della spesaa
+
+    	            file_append_lista(archivio_alimenti[i].nome);
+
+    	        }
+
+    	        num_linee--;	//decremento del numero di linee del file, dopo l'eliminazione di un alimento
+
+    	    }
+
+    	    if(nuova_quantita_int<=SOGLIA_LISTA){
+
+    	        //copia del nome nella lista della spesaa
+
+    	    	file_append_lista(archivio_alimenti[selezione_int].nome);
+
+    	    }
+
+    	break;
     }
 
-    if(nuova_quantita_int<=SOGLIA_LISTA){
 
-        //copia del nome nella lista della spesa
 
-        file_append_lista(archivio_alimenti[i].nome);
-
-    }
 
         file_save_alimenti(num_linee);	//aggiornamento del contenuto del file dopo le modifiche
 

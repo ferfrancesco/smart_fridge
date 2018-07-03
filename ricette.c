@@ -173,8 +173,6 @@ char* stampa_stelle(int num){
 
 void stampa_ricetta(int num){
 
-	//todo inserire messaggio d'errore quando nel sistema non sono presenti ricette "Non ci sono ricette!"
-
     int i;
     int temp_int; //variabile intera temporanea per i cicli di stampa di ingredienti e procedure
     int num_preparazioni_int;  //variabile intera temporanea per l'incremento di num_preparazioni
