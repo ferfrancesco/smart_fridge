@@ -13,9 +13,9 @@ typedef int bool;
 #define true 1
 #define false 0
 
-#define SOGLIA_SCADENZA 3
+#define SOGLIA_SCADENZA 3  //Un alimento risultera' in scadenza quando il suo giorno di scadenza di stanzierà di SOGLIA_SCADENZA dal giorno attuale
+#define SOGLIA_LISTA 2     //Soglia sotto al quale un alimento verrà inserito nella lista della spesa
 #define INGR_MAX 50  //quantità max di ingredienti in una ricetta
-
 
 int num_linee;
 
@@ -452,7 +452,13 @@ void modifica_alimenti(int num_linee){
 
     char selezione[10]; //stringa per memorizzare il numero di alimenti che si vogliono inserire
     int selezione_int; 	//variabile in cui è memorizzato il numero di alimenti che si vogliono inserire (case1), il numero dell'alimento che si vuole modificare( case3)
-	int i;
+
+    char nuova_quantita[10];
+    int nuova_quantita_int;
+
+    int vecchia_quantita;
+
+    int i;
 
     printf("Di quale alimento si intende modificare le quantita' presenti?\n\nSe vuoi rimuovere un elemento dal frigo,digita una quantita' '0'\n\nDigitane il numero ad esso associato:");
 
@@ -474,18 +480,37 @@ void modifica_alimenti(int num_linee){
 
     selezione_int=selezione_int-1; 	//diminuzione del valore della variabile di 1 per allinearsi con l'array,in quanto l'utente vede e seleziona valori shiftati di 1,per evitare che vi sia un alimento indicato col valore 0
 
-    printf("\nInserire la nuova quantita':");
+    vecchia_quantita=atoi(archivio_alimenti[selezione_int].quantita); //copio la vecciha quantità presente in frigo per usarla nel confronto,in quanto è possibile solo diminuire le quantità,non aumentarle
 
-    gets(archivio_alimenti[selezione_int].quantita);
+    do{
 
-    if(strcmp(archivio_alimenti[selezione_int].quantita,"0")==0 ){    //nel caso venga inserito un valore pari a 0 nel campo quantità,l'alimento verrà automaticamente rimosso
+		printf("\nInserire la nuova quantita':");
 
-        FILE *fp;
-        fp = fopen ("lista_spesa.txt","a");
+		gets(nuova_quantita);
 
-        fprintf(fp,"%s,\n",archivio_alimenti[selezione_int].nome);
+		if(isOnlyNumbers(nuova_quantita)==true) {
 
-        fclose(fp);
+			messaggio_errore();
+			alimenti();
+
+		}
+
+		else if (isOnlyNumbers(nuova_quantita)==false){
+
+			nuova_quantita_int=atoi(nuova_quantita);
+		}
+
+		if(nuova_quantita_int>vecchia_quantita){
+
+			printf("\n\n Non puoi aggiungere cibo!Solo rimuoverlo,se vuoi aggiungere cibo al frigo\nusare la funzione 'Aggiungi Alimenti'\n");
+			system("pause");
+		}
+
+	}while(nuova_quantita_int>vecchia_quantita);
+
+    strcpy(archivio_alimenti[selezione_int].quantita,nuova_quantita);
+
+    if(nuova_quantita_int==0){    //nel caso venga inserito un valore pari a 0 nel campo quantità,l'alimento verrà automaticamente rimosso
 
         for (i=selezione_int;i<num_linee;i++){ 		//ciclo per copiare i valori nella posizione precedente,in modo da rimuovere l'alimento e non lasciare spazi vuoti nell'elenco
 
@@ -496,16 +521,28 @@ void modifica_alimenti(int num_linee){
             strcpy(archivio_alimenti[i].quantita,archivio_alimenti[i+1].quantita);
             strcpy(archivio_alimenti[i].kcal,archivio_alimenti[i+1].kcal);
 
+            //copia del nome nella lista della spesa
+
+            file_append_lista(archivio_alimenti[i].nome);
 
         }
 
         num_linee--;	//decremento del numero di linee del file, dopo l'eliminazione di un alimento
 
+    }
+
+    if(nuova_quantita_int<=SOGLIA_LISTA){
+
+        //copia del nome nella lista della spesa
+
+        file_append_lista(archivio_alimenti[i].nome);
+
+    }
+
         file_save_alimenti(num_linee);	//aggiornamento del contenuto del file dopo le modifiche
 
         printf("\n\n");
         system("pause");
-    }
 
 }
 

@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// TODO elimina le seguenti tre funzioni
+
 int conta_linee(char nome_file[40]);  //conta quante linee sono presenti in un determinato file
 
 //PROCEDURE DI CARICAMENTO DA FILE
@@ -40,7 +40,6 @@ int file_load_ricette();
  */
 int file_load_menu_sett();
 
-
 int file_load_lista(int num_linee); //TODO commenta dopo che la funzione viene controllata
 
 //PROCEDURE DI SALVATAGGIO SU FILE
@@ -62,3 +61,5 @@ void file_save_alimenti(int num_linee);
  * @param num_linee,ovvero il numero di linee di cui il file e' composto
  */
 void file_save_ricette (int num_linee);
+
+void file_append_lista(char stringa[]);

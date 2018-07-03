@@ -32,7 +32,7 @@ int conta_linee(char nome_file[40]){ //TODO togli funzione perchè inutileee
     return num_linee;
 }
 
-
+//---------------------------------------------------------------------------------------
 //OPERAZIONI DI CARICAMENTO DEI FILE
 
 /**
@@ -81,6 +81,7 @@ int file_load_alimenti(){
     return num_linee;
 
 }
+
 /**
  *Questa funzione conta le linee del file ricette, se il file esiste,
  *altrimenti riporta un messaggio d'errore nell'apertura del file.
@@ -89,7 +90,6 @@ int file_load_alimenti(){
  *
  * @return num_linee Se il controllo va a buon fine, la funzione restituirà il numero di linee del file analizzato
  */
-
 
 int file_load_ricette(){
 
@@ -110,7 +110,7 @@ int file_load_ricette(){
 
     while(!feof(fp)){
 
-        fscanf(fp,"%50[^,],%5[^,],%5[^,],",archivio_ricette[i].nome,archivio_ricette[i].difficolta,archivio_ricette[i].num_ingredienti); //utilizzo [^,] in quanto utilizzare %s leggeva l'intera stringa,virgole incluse
+        fscanf(fp,"%50[^,],%5[^,],%5[^,],%5[^,],",archivio_ricette[i].nome,archivio_ricette[i].difficolta,archivio_ricette[i].num_ingredienti,archivio_ricette[i].num_preparazioni); //utilizzo [^,] in quanto utilizzare %s leggeva l'intera stringa,virgole incluse
 
         temp_int = atoi(archivio_ricette[i].num_ingredienti);
 
@@ -133,6 +133,13 @@ int file_load_ricette(){
        i++;											//incremento della i per il ciclo while
        num_linee++;
 
+       if(archivio_ricette[i-1].num_ingredienti[0] == '\0'){   /*controllo se la prima posizione di un array di caratteri (stringa[0]) qualsiasi della struct contiene il carattere speciale \0. Se il carattere è trovato,significa che in realtà
+       												 *non è stato caricato nulla,quindi decremento il numero di linee,e quindi di alimenti caricati. Funzione necessaria per il fix di un bug*/
+       	i--;
+       	num_linee--;
+
+       }
+
     }
 
     fclose(fp);
@@ -150,8 +157,6 @@ int file_load_ricette(){
  *
  * @return num_linee Se il controllo va a buon fine, la funzione restituirà il numero di linee del file analizzato
  */
-
-
 
 int file_load_menu_sett(){
 
@@ -228,7 +233,6 @@ int file_load_lista(int num_linee){ //TODO CONTROLLA
  * @param num_linee La procedura riceve in input il numero di linee del file, derivanti dalla precedente lettura dello stesso.
  */
 
-
 void file_save_alimenti(int num_linee){
 
     FILE *fp;
@@ -263,7 +267,7 @@ void file_save_ricette (int num_linee){
 
     for(i=0;i<num_linee;i++){
 
-        fprintf(fp,"%s,%s,%s,",archivio_ricette[i].nome,archivio_ricette[i].difficolta,archivio_ricette[i].num_ingredienti);
+        fprintf(fp,"%s,%s,%s,%s,",archivio_ricette[i].nome,archivio_ricette[i].difficolta,archivio_ricette[i].num_ingredienti,archivio_ricette[i].num_preparazioni);
 
         temp_int = atoi(archivio_ricette[i].num_ingredienti);  //converto il numero di step in intero per l'uso nel ciclo
 
@@ -290,7 +294,6 @@ void file_save_ricette (int num_linee){
 
 }
 
-
 /**
  * Questa procedura salva il menu settimanale.
  *
@@ -314,6 +317,16 @@ void file_save_menu_sett(){
 
     fclose(fp);
 
+}
+
+void file_append_lista(char stringa[]){
+
+    FILE *fp;
+    fp = fopen ("lista_spesa.txt","a");
+
+    fprintf(fp,"%s,\n",stringa);
+
+    fclose(fp);
 }
 
 

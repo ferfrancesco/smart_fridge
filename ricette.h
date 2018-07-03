@@ -62,3 +62,7 @@ int* ricerca(char alimento[]);  //int* perchè ha come ritorno un array di int
  * corrispondenze tra un alimento e le ricette disponibili all'interno del sistema.
  */
 void ricerca_ricette();
+
+void visualizza_ricette();
+
+void aggiungi_ricette();
