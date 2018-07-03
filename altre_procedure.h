@@ -42,6 +42,12 @@ void stampa_menu();
 
 void memos();
 
+/**
+ * Questa funzione trasforma una stringa composta di lettere (anche maiuscole) in lettere tutte minuscole
+ * @param stringa,ovvero la stringa da convertire tutta in minuscolo
+ * @return stringa, ovvero la stringa convertita
+ */
+
 const char* low_conversion(char* stringa[]); //converte la stringa di ingresso in caratteri minuscoli
 
 
