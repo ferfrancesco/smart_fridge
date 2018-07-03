@@ -378,7 +378,7 @@ void visualizza_ricette(){
 
 }
 
-void aggiungi_ricette(){  //TODO aggiungi inserimento numero volte cucinate
+void aggiungi_ricette(){
 
     char selezione[10];
     int selezione_int;
@@ -396,7 +396,7 @@ void aggiungi_ricette(){  //TODO aggiungi inserimento numero volte cucinate
 
     /*---------------------------------------------------------------*/
 
-    printf("\nDa 1 a 5 Quanto è difficile questa ricetta?(Inserire valori numerici):");
+    printf("\nDa 1 a 5 Quanto e' difficile questa ricetta?(Inserire valori numerici):");
     gets(selezione);
 
     if(isOnlyNumbers(selezione)==true) {
@@ -475,6 +475,8 @@ void aggiungi_ricette(){  //TODO aggiungi inserimento numero volte cucinate
         gets(archivio_ricette[num_linee].procedura[i]);
 
     }
+
+    strcpy(archivio_ricette[num_linee].num_preparazioni,"0");
 
     num_linee++; //incremento il nmero di linee per non sovrascrivere vecchie ricette
 

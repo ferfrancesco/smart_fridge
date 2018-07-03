@@ -32,7 +32,7 @@ int conta_linee(char nome_file[40]){ //TODO togli funzione perchè inutileee
     return num_linee;
 }
 
-
+//---------------------------------------------------------------------------------------
 //OPERAZIONI DI CARICAMENTO DEI FILE
 
 /**
@@ -81,6 +81,7 @@ int file_load_alimenti(){
     return num_linee;
 
 }
+
 /**
  *Questa funzione conta le linee del file ricette, se il file esiste,
  *altrimenti riporta un messaggio d'errore nell'apertura del file.
@@ -89,7 +90,6 @@ int file_load_alimenti(){
  *
  * @return num_linee Se il controllo va a buon fine, la funzione restituirà il numero di linee del file analizzato
  */
-
 
 int file_load_ricette(){
 
@@ -233,7 +233,6 @@ int file_load_lista(int num_linee){ //TODO CONTROLLA
  * @param num_linee La procedura riceve in input il numero di linee del file, derivanti dalla precedente lettura dello stesso.
  */
 
-
 void file_save_alimenti(int num_linee){
 
     FILE *fp;
@@ -295,7 +294,6 @@ void file_save_ricette (int num_linee){
 
 }
 
-
 /**
  * Questa procedura salva il menu settimanale.
  *
@@ -319,6 +317,16 @@ void file_save_menu_sett(){
 
     fclose(fp);
 
+}
+
+void file_append_lista(char stringa[]){
+
+    FILE *fp;
+    fp = fopen ("lista_spesa.txt","a");
+
+    fprintf(fp,"%s,\n",stringa);
+
+    fclose(fp);
 }
 
 

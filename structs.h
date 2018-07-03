@@ -10,23 +10,18 @@
 #define LUNGH_MAX_NOME 50 //Luneghezza massima per il nome di un alimento
 #define MAX_RICETTE 50 //Num massimo di ricette salvabili
 
-/*struct menu_settimana();
-struct archivio_alimenti[ALIM_MAX];
-struct archivio_ricette[MAX_RICETTE];*/
-
 /**
  * Struct che definisce ogni singola pietanza del menu settimanale,
  * contrassegnata da nome del piatto stesso e dal giorno della settimana in cui
  * si e' consumato o si intende consumarlo
  */
+
 struct menu_settimana{
 
     char dayname[12];  /// nome del giorno della settimana
     char pietanza[50]; /// nome del piatto
 
 }giorno[6];
-
-//struct dati cibo
 
 /**
  * Struct che definisce ogni singolo alimento presente nello Smart Fridge
@@ -59,11 +54,10 @@ struct alimento{
 
 }archivio_alimenti[ALIM_MAX];
 
-//struct dati ricette
-
 /**
  * Struct che definisce ogni singola ricetta presente nella lista inserita nello Smart Fridge
  */
+
 struct ricetta{
 	///nome ricetta
     char nome[LUNGH_MAX_NOME];
@@ -93,5 +87,6 @@ struct ricetta{
  * e [nome dell'alimento]
  *
  */
-char lista_spesa[50][50];
+
+char lista_spesa[50][LUNGH_MAX_NOME];
 
