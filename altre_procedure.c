@@ -142,13 +142,7 @@ void memos(){
 
 //converte una stringa in caratteri minuscoli,utile per le funzioni di ricerca
 
-/**
- * Questa funzione trasforma una stringa ,eventualmente scritta in lettere maiuscole, in lettere minuscole
- * @pre la stringa deve essere composta di lettere.
- * @param stringa,ovvero la stringa da convertire
- * @return stringa, la stringa convertita
- */
-const char* low_conversion(char stringa[]){
+char* low_conversion(char stringa[]){
 
 	int i;
 
