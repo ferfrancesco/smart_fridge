@@ -162,3 +162,4 @@ char* low_conversion(char stringa[]){
 
 	return stringa;
 }
+

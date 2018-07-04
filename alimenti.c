@@ -3,6 +3,7 @@
 #include <ctype.h>
 #include <string.h>
 #include <time.h>
+#include <math.h>
 #include "structs.h"
 #include "operazioni_file.h"
 #include "alimenti.h"
@@ -14,7 +15,8 @@ typedef int bool;
 #define false 0
 
 #define SOGLIA_SCADENZA 3  //Un alimento risultera' in scadenza quando il suo giorno di scadenza di stanzierà di SOGLIA_SCADENZA dal giorno attuale
-#define SOGLIA_LISTA 2     //Soglia sotto al quale un alimento verrà inserito nella lista della spesa
+#define SOGLIA_LISTA_Q 50  //Soglia sotto al quale un alimento verrà inserito nella lista della spesa
+#define SOGLIA_LISTA 2	   //Soglia sotto al quale un alimento verrà inserito nella lista della spesa
 #define INGR_MAX 50  //quantità max di ingredienti in una ricetta
 
 int num_linee;
@@ -467,18 +469,23 @@ void modifica_alimenti(int num_linee){
 
     int selezione_tipo;
 
-    char nuova_quantita[10];
-    int nuova_quantita_int;
+    char quantita_rimossa[10];
+    int quantita_rimossa_int;
 
-    int vecchia_quantita;
+    int quantita_totale_int;
+    int quantita_singolo_int;
+    int quantita_rimuovere;
+
+    int numero_conf_int;
+
 
     int i;
 
-    printf("Di quale alimento si intende modificare i numeri di confezioni o le quantita'presenti?\n\nDigitane il numero ad esso associato:");
+    printf("Quale elemento vuoi prelevare dal frigo?\n\nDigitane il numero ad esso associato:");
 
     fflush(stdin);
 
-    gets(selezione);
+    gets(selezione);  //GOTO implementa limite
 
     if(isOnlyNumbers(selezione)==true) {
 
@@ -502,41 +509,134 @@ void modifica_alimenti(int num_linee){
 
     	case 1:
 
-    	break;
-
-    	case 2:
-
-    	    vecchia_quantita=atoi(archivio_alimenti[selezione_int].quantita_tot); //copio la vecciha quantità presente in frigo per usarla nel confronto,in quanto è possibile solo diminuire le quantità,non aumentarle
+    	    numero_conf_int=atoi(archivio_alimenti[selezione_int].numero); //copio la vecciha quantità presente in frigo per usarla nel confronto,in quanto è possibile solo diminuire le quantità,non aumentarle
 
     	    do{
 
-    			printf("\nInserire la nuova quantita',se vuoi rimuovere un elemento dal frigo,digita 0");
+    			printf("\nQuante confezioni hai preso dal frigo?");
 
-    			gets(nuova_quantita);
+    			fflush(stdin);
 
-    			if(isOnlyNumbers(nuova_quantita)==true) {
+    			gets(quantita_rimossa);
+
+    			if(isOnlyNumbers(quantita_rimossa)==true) {
 
     				messaggio_errore();
     				alimenti();
 
     			}
 
-    			else if (isOnlyNumbers(nuova_quantita)==false){
+    			else if (isOnlyNumbers(quantita_rimossa)==false){
 
-    				nuova_quantita_int=atoi(nuova_quantita);
+    				quantita_rimossa_int=atoi(quantita_rimossa);
     			}
 
-    			if(nuova_quantita_int>vecchia_quantita){
+    			if(quantita_rimossa_int>numero_conf_int){
 
-    				printf("\n\nNon puoi aggiungere cibo!\nPuoi solo rimuoverlo,se vuoi aggiungere cibo al frigo\nusare la funzione 'Aggiungi Alimenti'\n");
+    				printf("\nNon puoi togliere piu' cibo di quanto ne sia presente!\n");
     				system("pause");
     			}
 
-    		}while(nuova_quantita_int>vecchia_quantita);
+    		}while(quantita_rimossa_int>numero_conf_int);
 
-    	    strcpy(archivio_alimenti[selezione_int].quantita,nuova_quantita);
+    	    //calcolo il nuovo numero di alimenti e la copio nella struttura
 
-    	    if(nuova_quantita_int==0){    //nel caso venga inserito un valore pari a 0 nel campo quantità,l'alimento verrà automaticamente rimosso
+    	    numero_conf_int=numero_conf_int-quantita_rimossa_int;
+
+    	    sprintf(archivio_alimenti[selezione_int].numero, "%d" , numero_conf_int);
+
+    	    if(numero_conf_int==0){    //nel caso venga inserito un valore pari a 0 nel campo quantità,l'alimento verrà automaticamente rimosso
+
+    	       	        for (i=selezione_int;i<num_linee;i++){ 		//ciclo per copiare i valori nella posizione precedente,in modo da rimuovere l'alimento e non lasciare spazi vuoti nell'elenco
+
+    	       	            strcpy(archivio_alimenti[i].nome,archivio_alimenti[i+1].nome);
+    	       	            strcpy(archivio_alimenti[i].giorno,archivio_alimenti[i+1].giorno);
+    	       	            strcpy(archivio_alimenti[i].mese,archivio_alimenti[i+1].mese);
+    	       	            strcpy(archivio_alimenti[i].anno,archivio_alimenti[i+1].anno);
+    	       	            strcpy(archivio_alimenti[i].numero,archivio_alimenti[i+1].numero);
+    	       	            strcpy(archivio_alimenti[i].tipo,archivio_alimenti[i+1].tipo);
+    	       	            strcpy(archivio_alimenti[i].quantita,archivio_alimenti[i+1].quantita);
+    	       	            strcpy(archivio_alimenti[i].quantita_tot,archivio_alimenti[i+1].quantita_tot);
+    	       	            strcpy(archivio_alimenti[i].kcal,archivio_alimenti[i+1].kcal);
+
+    	       	            //copia del nome nella lista della spesaa
+
+    	       	            file_append_lista(archivio_alimenti[i].nome);
+
+    	       	        }
+
+    	       	        num_linee--;	//decremento del numero di linee del file, dopo l'eliminazione di un alimento
+
+    	       	    }
+
+    	    else{
+
+    	       	    //TODO RIvedi commenti (quantita e numero)
+
+					//calcola le nuove quantita
+
+					quantita_singolo_int=atoi(archivio_alimenti[selezione_int].quantita);
+					quantita_totale_int=atoi(archivio_alimenti[selezione_int].quantita_tot);
+
+					quantita_rimuovere=quantita_singolo_int*quantita_rimossa_int; //calcolo la quantita rimossa
+
+					quantita_totale_int=quantita_totale_int-quantita_rimuovere; //rimuovo la quantita calcolata prima
+
+					//salvo la nuova quantita nella struttura
+					sprintf(archivio_alimenti[selezione_int].quantita_tot, "%d" ,quantita_totale_int);
+
+    	    }
+
+			if(numero_conf_int<=SOGLIA_LISTA){
+
+				//copia del nome nella lista della spesaa
+
+				file_append_lista(archivio_alimenti[selezione_int].nome);
+
+			}
+
+
+    	break;
+
+    	case 2:
+
+    	    quantita_totale_int=atoi(archivio_alimenti[selezione_int].quantita_tot); //copio la vecciha quantità presente in frigo per usarla nel confronto,in quanto è possibile solo diminuire le quantità,non aumentarle
+
+    	    do{
+
+    			printf("\nQuanto alimento hai prelevato dal frigo?");
+
+    			fflush(stdin);
+
+    			gets(quantita_rimossa);
+
+    			if(isOnlyNumbers(quantita_rimossa)==true) {
+
+    				messaggio_errore();
+    				alimenti();
+
+    			}
+
+    			else if (isOnlyNumbers(quantita_rimossa)==false){
+
+    				quantita_rimossa_int=atoi(quantita_rimossa);
+    			}
+
+    			if(quantita_rimossa_int>quantita_totale_int){
+
+    				printf("\nNon puoi togliere piu' cibo di quanto ne sia presente!\n");
+    				system("pause");
+    			}
+
+    		}while(quantita_rimossa_int>quantita_totale_int);
+
+    	    //calcolo la nuova quantita totale e la copio nella struttura
+
+    	    quantita_totale_int=quantita_totale_int-quantita_rimossa_int;
+
+    	    sprintf(archivio_alimenti[selezione_int].quantita_tot, "%d" , quantita_totale_int);
+
+    	    if(quantita_totale_int==0){    //nel caso venga inserito un valore pari a 0 nel campo quantità,l'alimento verrà automaticamente rimosso
 
     	        for (i=selezione_int;i<num_linee;i++){ 		//ciclo per copiare i valori nella posizione precedente,in modo da rimuovere l'alimento e non lasciare spazi vuoti nell'elenco
 
@@ -544,7 +644,10 @@ void modifica_alimenti(int num_linee){
     	            strcpy(archivio_alimenti[i].giorno,archivio_alimenti[i+1].giorno);
     	            strcpy(archivio_alimenti[i].mese,archivio_alimenti[i+1].mese);
     	            strcpy(archivio_alimenti[i].anno,archivio_alimenti[i+1].anno);
+    	            strcpy(archivio_alimenti[i].numero,archivio_alimenti[i+1].numero);
+    	            strcpy(archivio_alimenti[i].tipo,archivio_alimenti[i+1].tipo);
     	            strcpy(archivio_alimenti[i].quantita,archivio_alimenti[i+1].quantita);
+    	            strcpy(archivio_alimenti[i].quantita_tot,archivio_alimenti[i+1].quantita_tot);
     	            strcpy(archivio_alimenti[i].kcal,archivio_alimenti[i+1].kcal);
 
     	            //copia del nome nella lista della spesaa
@@ -557,23 +660,44 @@ void modifica_alimenti(int num_linee){
 
     	    }
 
-    	    if(nuova_quantita_int<=SOGLIA_LISTA){
+    	    else{
 
-    	        //copia del nome nella lista della spesaa
+				//in base a quanto ho rimosso dal frigo,decremento il numero di confezioni presenti in frigo,basandomi sulla quantità unitaria dell'alimento
 
-    	    	file_append_lista(archivio_alimenti[selezione_int].nome);
+				quantita_singolo_int=atoi(archivio_alimenti[selezione_int].quantita);
+				numero_conf_int=atoi(archivio_alimenti[selezione_int].numero);
+
+				numero_conf_int=numero_conf_int-(quantita_rimossa_int/quantita_singolo_int);  //calcolo il nuovo numero di confezioni
+
+				if(quantita_totale_int<(numero_conf_int-1)*quantita_singolo_int){ //controllo,se la quantità totale degli alimenti è minore della moltiplicazione,singifica che ho meno elementi di quanti salvati,quindi decremento
+
+					numero_conf_int--;
+
+				}
+
+				//salvo il numero di confezioni nella struttura
+				sprintf(archivio_alimenti[selezione_int].numero, "%d" ,numero_conf_int);
+
+				if(quantita_totale_int<=SOGLIA_LISTA_Q){
+
+					//copia del nome nella lista della spesaa
+
+					file_append_lista(archivio_alimenti[selezione_int].nome);
+
+				}
 
     	    }
 
     	break;
+
+    	default:
+    	//TODO Aggiungi default
+    	break;
     }
-
-
-
 
         file_save_alimenti(num_linee);	//aggiornamento del contenuto del file dopo le modifiche
 
-        printf("\n\n");
+        printf("\nModifiche effettutate!Tornerai ora al menu'\n");
         system("pause");
 
 }

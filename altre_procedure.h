@@ -61,4 +61,3 @@ void memos();
 
 const char* low_conversion(char* stringa[]); //converte la stringa di ingresso in caratteri minuscoli
 
-
