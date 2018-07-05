@@ -46,7 +46,7 @@ void alimenti(){
     fflush(stdin);
     system("cls");
 
-    printf("Menu' Alimenti\nSeleziona un opzione\n\n1)Visualizza alimenti presenti in frigo\n2)Aggiungi un alimento\n3)Modifica le quantita' presenti\n4)Torna al menu'\n\n");
+    printf("Menu' Alimenti\nSeleziona un opzione\n\n1)Visualizza alimenti presenti in frigo\n2)Prendi un alimento dal frigo\n3)Aggiungi un alimento\n4)Torna al menu'\n\n");
 
     scadenze(num_linee);
 
@@ -65,15 +65,15 @@ void alimenti(){
 
         case 2:
 
-        	aggiunta_alimenti(num_linee);
+            stampa_alimenti(num_linee);
+            modifica_alimenti(num_linee);
             alimenti();
 
         break;
 
         case 3:
 
-            stampa_alimenti(num_linee);
-            modifica_alimenti(num_linee);
+        	aggiunta_alimenti(num_linee);
             alimenti();
 
         break;
@@ -1052,6 +1052,8 @@ void scadenze(int num_linee){
 
     	}
     }
+
+    printf("\n\n");
 
     //salvo il file alimenti per aggiornare lo status degli alimenti scaduti
     file_save_alimenti(num_linee);

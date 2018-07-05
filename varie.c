@@ -31,7 +31,7 @@ void varie(){
     fflush(stdin);
     system("cls");
 
-    printf("Menu' Varie\nSeleziona un opzione\n\n1)Imposta il menu' della settimana\n2)Genera Lista della spesa\n3)Torna al menu'\n\n");
+    printf("Menu' Varie\nSeleziona un opzione\n\n1)Menu' della settimana\n2)Lista della spesa\n3)Statistiche\n4)Torna al menu'\n\n");
 
     scanf("%d",&menu_select);
 
@@ -46,8 +46,12 @@ void varie(){
             break;
 
         case 3:
-            stampa_menu();
+            statistiche();
             break;
+
+        case 4:
+        	stampa_menu();
+        	break;
 
         default:
             messaggio_errore();
@@ -229,5 +233,89 @@ void lista(){
             lista();
             break;
     }
+
+}
+
+void statistiche(){
+
+	int selezione;
+
+	system("cls");
+	printf("Qui puoi visualizzare gli alimenti più consumati e le ricette più preparate\nCosa vuoi visualizzare?\n\n1)Alimenti piu' consumati\n2)Ricette piu' preparate\n\n");
+
+	scanf("%d",&selezione);
+
+	switch(selezione){
+
+		case 1:
+
+			int num_linee;
+			num_linee=file_load_consumazioni();
+
+			system("cls");
+			printf("Ecco un elenco dei 5 alimenti più consumati");
+
+			ordinamento(num_linee,archivio_consumazioni.consumazioni,archivio_cons_ordinato.consumazioni);
+
+	        printf("Elenco degli alimenti presenti in frigo\n\n|%-50s|%-12s|%-10s|%-10s|%-7s|","Alimento","Scadenza","Numero","Quantita'","KCAL");  //il valore negativo serve per l'allineamento a sinistra
+	        printf("\n----------------------------------------------------------------------------------------------");
+
+	        for(i=0;i<5;i++){
+
+	                printf("\n|%-50s|%s|%d)",archivio_alimenti[i].nome,archivio_alimenti[i].giorno,archivio_alimenti[i].mese,archivio_alimenti[i].anno,archivio_alimenti[i].numero,temp_quantita,archivio_alimenti[i].kcal,i+1);
+
+	            }
+
+			break;
+
+		case 2:
+
+			break;
+
+		default:
+            messaggio_errore();
+            statistiche();
+			break;
+	}
+
+}
+
+void ordinamento(int num_linee,char array_num[],char array_dest_num[],char array_nomi[],char array_dest_nomi[]){
+
+	int i;
+
+	for(i=0;i<num_linee;i++){
+
+		array_dest[i]=atoi(array_char[i]);
+
+	}
+
+	selection_sort(array_dest,num_linee);
+
+}
+
+void selection_sort(int array_int[], int num_linee) {
+
+	int i;
+	int j;
+	int p;
+	int min;
+
+	for (i=0; i < num_linee-1; i++){
+
+		min = array_int[i]; p = i; // p = posizione del minimo
+		for (j = i+1; j < num_linee; j++) { // ricerca del minimo
+
+				if (array_int[j] < min) {
+
+					min = array_int[j]; // salva il minimo
+					p = j; // aggiorna posizione del minimo
+
+				}
+
+				array_int[p] = array_int[i]; // scambio
+				array_int[i] = min;
+			}
+	}
 
 }

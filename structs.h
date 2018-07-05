@@ -54,7 +54,7 @@ struct alimento{
 
     char quantita_tot[10];
 
-    char scaduto[10];
+    char scaduto[10];   //TODO Prova a convertire in int
 
 }archivio_alimenti[ALIM_MAX];
 
@@ -66,6 +66,8 @@ struct consumazioni{
     char consumazioni[10];
 
 }archivio_consumazioni[CONSUM_MAX];
+
+struct consumazioni archivio_cons_ordinato[CONSUM_MAX];
 
 
 /**
