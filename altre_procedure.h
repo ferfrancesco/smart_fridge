@@ -61,3 +61,5 @@ void memos();
 
 const char* low_conversion(char* stringa[]); //converte la stringa di ingresso in caratteri minuscoli
 
+void consumazioni(int num_consumazioni,int num_linee,char *stringa[]);
+

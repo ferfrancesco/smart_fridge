@@ -18,12 +18,9 @@
 
 int main(int argc, char *argv[]) {
 
-	//int num_linee;
+	int num_linee_consumazioni;
 
-	//num_linee=file_load_alimenti();
-	//scadenze(num_linee);
-
-	//ricerca_ricette();
+	//num_linee_consumazioni=file_load_consumazioni();
 
     dayname_fill(); 								//inizializzazione giorni della settimana per il menù settimanale
     stampa_menu();									//stampa del menù di scelta principale del programma

@@ -62,7 +62,7 @@ int file_load_alimenti(){
 
     while(!feof(fp)){								//TODO nella funzione stampa, se il num linee ==1, visualizza : 'il frigo è vuoto'
 
-    	fscanf(fp,"%50[^,],%4[^,],%4[^,],%6[^,],%15[^,],%5[^,],%10[^,],%10[^,],%15[^,],\n",archivio_alimenti[i].nome,archivio_alimenti[i].giorno,archivio_alimenti[i].mese,archivio_alimenti[i].anno,archivio_alimenti[i].numero,archivio_alimenti[i].tipo,archivio_alimenti[i].quantita,archivio_alimenti[i].quantita_tot,archivio_alimenti[i].kcal);	//utilizzo [^,] in quanto utilizzare %s leggeva l'intera stringa,virgole incluse,
+    	fscanf(fp,"%50[^,],%4[^,],%4[^,],%6[^,],%15[^,],%5[^,],%10[^,],%10[^,],%15[^,],%10[^,],\n",archivio_alimenti[i].nome,archivio_alimenti[i].giorno,archivio_alimenti[i].mese,archivio_alimenti[i].anno,archivio_alimenti[i].numero,archivio_alimenti[i].tipo,archivio_alimenti[i].quantita,archivio_alimenti[i].quantita_tot,archivio_alimenti[i].kcal,archivio_alimenti[i].scaduto);	//utilizzo [^,] in quanto utilizzare %s leggeva l'intera stringa,virgole incluse,
 
         i++;
         num_linee++;
@@ -223,6 +223,41 @@ int file_load_lista(int num_linee){ //TODO CONTROLLA
 
 }
 
+int file_load_consumazioni(){
+
+	int i=0;
+	int num_linee=0;
+
+    FILE *fp;
+    fp = fopen ("consumazioni.txt","r");
+
+    if (fp==NULL){								//controllo presenza file
+        printf("\n Errore nel caricamento del file");
+        exit(1);
+    }
+
+    while(!feof(fp)){
+
+        fscanf(fp,"%50[^,],%10[^,],\n",archivio_consumazioni[i].nome,archivio_consumazioni[i].consumazioni);	//utilizzo [^,] in quanto utilizzare %s leggeva l'intera stringa,virgole incluse
+        i++;
+        num_linee++;
+
+        if(archivio_consumazioni[i-1].nome[0] == '\0'){   /*controllo se la prima posizione di un array di caratteri (stringa[0]) qualsiasi della struct contiene il carattere speciale \0. Se il carattere è trovato,significa che in realtà
+        												 *non è stato caricato nulla,quindi decremento il numero di linee,e quindi di alimenti caricati. Funzione necessaria per il fix di un bug*/
+        	i--;
+        	num_linee--;
+
+        }
+
+    }
+
+    fclose(fp);
+
+    return num_linee;
+
+
+}
+
 
 //OPERAZIONI DI SALVATAGGIO DEI FILE
 
@@ -242,7 +277,7 @@ void file_save_alimenti(int num_linee){
 
     for(i=0;i<num_linee;i++){
 
-    	fprintf(fp,"%s,%s,%s,%s,%s,%s,%s,%s,%s,\n",archivio_alimenti[i].nome,archivio_alimenti[i].giorno,archivio_alimenti[i].mese,archivio_alimenti[i].anno,archivio_alimenti[i].numero,archivio_alimenti[i].tipo,archivio_alimenti[i].quantita,archivio_alimenti[i].quantita_tot,archivio_alimenti[i].kcal);
+    	fprintf(fp,"%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,\n",archivio_alimenti[i].nome,archivio_alimenti[i].giorno,archivio_alimenti[i].mese,archivio_alimenti[i].anno,archivio_alimenti[i].numero,archivio_alimenti[i].tipo,archivio_alimenti[i].quantita,archivio_alimenti[i].quantita_tot,archivio_alimenti[i].kcal,archivio_alimenti[i].scaduto);
 
     }
 
@@ -327,6 +362,28 @@ void file_append_lista(char stringa[]){
     fprintf(fp,"%s,\n",stringa);
 
     fclose(fp);
+}
+
+void file_save_consumazioni(int num_linee){
+
+	int i;
+
+    FILE *fp;
+    fp = fopen ("consumazioni.txt","w");
+
+    if (fp==NULL){								//controllo presenza file
+        printf("\n Errore nel caricamento del file");
+        exit(1);
+    }
+
+    for(i=0;i<num_linee;i++){
+
+        fprintf(fp,"%s,%s,\n",archivio_consumazioni[i].nome,archivio_consumazioni[i].consumazioni);
+
+    }
+
+    fclose(fp);
+
 }
 
 

@@ -42,6 +42,8 @@ int file_load_menu_sett();
 
 int file_load_lista(int num_linee); //TODO commenta dopo che la funzione viene controllata
 
+int file_load_consumazioni();
+
 //PROCEDURE DI SALVATAGGIO SU FILE
 
 /**
@@ -65,3 +67,5 @@ void file_save_ricette (int num_linee);
 
 //provaa
 void file_append_lista(char stringa[]);
+
+void file_save_consumazioni(int num_linee);

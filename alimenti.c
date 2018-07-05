@@ -20,6 +20,7 @@ typedef int bool;
 #define INGR_MAX 50  //quantità max di ingredienti in una ricetta
 
 int num_linee;
+int num_linee_consumazioni;
 
 /**
 La procedura rappresenta il menu degli alimenti. In base alla scelta che viene inserita, si hanno possibilità diverse:
@@ -40,6 +41,7 @@ void alimenti(){
     int menu_select=0;
 
     num_linee=file_load_alimenti();
+  //  num_linee_consumazioni=file_load_consumazioni();
 
     fflush(stdin);
     system("cls");
@@ -260,6 +262,14 @@ void aggiunta_alimenti(int num_linee){
 			alimenti();
 		}
 
+		//inizializzo a zero il flag che indica se l'alimento è scaduto o meno
+
+		sprintf(archivio_alimenti[num_linee].scaduto, "%d" , 0);
+
+		//aggiungo l'alimento alla struct consumazioni per tenere conto delle consumazioni totali
+
+	//	consumazioni(0,num_linee_consumazioni,archivio_alimenti[num_linee].nome);
+
 		system("cls");
 
     	//--------------------------------------------------------------------------
@@ -476,6 +486,8 @@ void modifica_alimenti(int num_linee){
     int quantita_singolo_int;
     int quantita_rimuovere;
 
+    int num_consumazioni_int;
+
     int numero_conf_int;
 
 
@@ -538,6 +550,23 @@ void modifica_alimenti(int num_linee){
     			}
 
     		}while(quantita_rimossa_int>numero_conf_int);
+
+    	    //incremento il contatore di consumazioni per tener conto degli alimenti più consumati
+
+    	    //num_consumazioni_int=atoi(archivio_alimenti[selezione_int].num_consumazioni);
+
+    	//    if(strcmp(archivio_alimenti[selezione_int].scaduto,"0")){
+
+    	    	//num_consumazioni_int=num_consumazioni_int+quantita_rimossa_int;
+
+    	 //   char array_temp[50];
+
+    	 //   strcpy(array_temp,archivio_alimenti[selezione_int].nome);
+
+    	    //	consumazioni(quantita_rimossa_int,num_linee_consumazioni,archivio_alimenti[selezione_int].nome);
+
+    	  //  }
+
 
     	    //calcolo il nuovo numero di alimenti e la copio nella struttura
 
@@ -841,12 +870,20 @@ void scadenze(int num_linee){
     		flag_scadenza=0; //indica che c'è effettivamente cibo in scadenza
     		flag_scaduto=1;  //L'alimento è scaduto
 
+    		//salvo il risultato nel file,per tener conto degli alimenti scaduti
+
+    		sprintf(archivio_alimenti[i].scaduto, "%d" , flag_scaduto);
+
     	}
 
     	if ((anno_attuale>anno_int)){
 
         		flag_scadenza=0; //indica che c'è effettivamente cibo in scadenza
         		flag_scaduto=1;  //L'alimento è scaduto
+
+        		//salvo il risultato nel file,per tener conto degli alimenti scaduti
+
+        		sprintf(archivio_alimenti[i].scaduto, "%d" , flag_scaduto);
 
     	}
 
@@ -900,7 +937,7 @@ void scadenze(int num_linee){
 
     }
 
-    if(flag_scadenza==0){
+    if(flag_scadenza==0){  //TODO Controlla perchè non stampa sta roba
 
     	printf("\nNessun alimento in scadenza\n\n");
     }
@@ -1017,6 +1054,9 @@ void scadenze(int num_linee){
 
     	}
     }
+
+    //salvo il file alimenti per aggiornare lo status degli alimenti scaduti
+    file_save_alimenti(num_linee);
 
 }
 

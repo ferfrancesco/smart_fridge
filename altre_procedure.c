@@ -100,7 +100,6 @@ void stampa_menu(){
 
     printf("\n\nSeleziona una categoria\n\n1)Alimenti\n2)Ricette\n3)Varie\n4)Spegni il sistema\n\n");
 
-    //fflush(stdout);
     //memos();
 
     scanf("%d",&menu_select);
@@ -140,8 +139,6 @@ void memos(){
     printf("\n\n---------------------------------------------\n\nSEZIONE MEMOS");
 }
 
-//converte una stringa in caratteri minuscoli,utile per le funzioni di ricerca
-
 /**
  * Questa funzione trasforma una stringa ,eventualmente scritta anche in lettere maiuscole,
  * in lettere minuscole.
@@ -161,5 +158,55 @@ char* low_conversion(char stringa[]){
 	}
 
 	return stringa;
+}
+
+void consumazioni(int num_consumazioni,int num_linee,char stringa[]){
+
+	int i;
+	int consumazioni_tot_int;
+
+	if (num_linee==0){
+
+		strcpy(archivio_consumazioni[num_linee].nome,stringa);
+
+		consumazioni_tot_int=0;
+
+		consumazioni_tot_int=consumazioni_tot_int+num_consumazioni;
+
+		sprintf(archivio_consumazioni[num_linee].consumazioni ,"%d",consumazioni_tot_int);
+
+		num_linee++;
+	}
+
+	else{
+
+		for(i=0;i<num_linee;i++){
+
+			if(strcmp(archivio_consumazioni[i].nome,stringa)){
+
+				consumazioni_tot_int=atoi(archivio_consumazioni[i].consumazioni);
+
+				consumazioni_tot_int=consumazioni_tot_int+num_consumazioni;
+
+				sprintf(archivio_consumazioni[i].consumazioni ,"%d",consumazioni_tot_int);
+
+			}
+
+			else {
+
+				strcpy(archivio_consumazioni[num_linee].nome,stringa);
+
+				consumazioni_tot_int=atoi(archivio_consumazioni[i].consumazioni);
+
+				consumazioni_tot_int=consumazioni_tot_int+num_consumazioni;
+
+				sprintf(archivio_consumazioni[num_linee].consumazioni ,"%d",consumazioni_tot_int);
+
+				num_linee++;
+			}
+		}
+	}
+
+	file_save_consumazioni(num_linee);
 }
 

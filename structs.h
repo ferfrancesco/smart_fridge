@@ -5,6 +5,7 @@
 // Libreria contentente le strutture del programma
 
 #define ALIM_MAX 50  //quantità alimenti massimi inseribile in frigo
+#define CONSUM_MAX 100
 #define STEP_MAX 50  //quantità massima di step per ricetta
 #define INGR_MAX 50  //quantità max di ingredienti in una ricetta
 #define LUNGH_MAX_NOME 50 //Luneghezza massima per il nome di un alimento
@@ -53,7 +54,19 @@ struct alimento{
 
     char quantita_tot[10];
 
+    char scaduto[10];
+
 }archivio_alimenti[ALIM_MAX];
+
+struct consumazioni{
+
+	///nome dell'alimento
+    char nome[LUNGH_MAX_NOME];
+
+    char consumazioni[10];
+
+}archivio_consumazioni[CONSUM_MAX];
+
 
 /**
  * Struct che definisce ogni singola ricetta presente nella lista inserita nello Smart Fridge
