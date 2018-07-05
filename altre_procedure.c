@@ -164,6 +164,7 @@ void consumazioni(int num_consumazioni,int num_linee,char stringa[]){
 
 	int i;
 	int consumazioni_tot_int;
+	int trovato=0;  //flag che indica che l'alimento è già in lista o se è da aggiungere
 
 	if (num_linee==0){
 
@@ -178,33 +179,34 @@ void consumazioni(int num_consumazioni,int num_linee,char stringa[]){
 		num_linee++;
 	}
 
-	else{
+	for(i=0;i<num_linee;i++){
 
-		for(i=0;i<num_linee;i++){
+		if(strcmp(archivio_consumazioni[i].nome,stringa)==0){
 
-			if(strcmp(archivio_consumazioni[i].nome,stringa)){
+			consumazioni_tot_int=atoi(archivio_consumazioni[i].consumazioni);
 
-				consumazioni_tot_int=atoi(archivio_consumazioni[i].consumazioni);
+			consumazioni_tot_int=consumazioni_tot_int+num_consumazioni;
 
-				consumazioni_tot_int=consumazioni_tot_int+num_consumazioni;
+			sprintf(archivio_consumazioni[i].consumazioni ,"%d",consumazioni_tot_int);
 
-				sprintf(archivio_consumazioni[i].consumazioni ,"%d",consumazioni_tot_int);
+			trovato=1;
 
-			}
-
-			else {
-
-				strcpy(archivio_consumazioni[num_linee].nome,stringa);
-
-				consumazioni_tot_int=atoi(archivio_consumazioni[i].consumazioni);
-
-				consumazioni_tot_int=consumazioni_tot_int+num_consumazioni;
-
-				sprintf(archivio_consumazioni[num_linee].consumazioni ,"%d",consumazioni_tot_int);
-
-				num_linee++;
-			}
 		}
+
+	}
+
+	if (trovato==0) {
+
+		strcpy(archivio_consumazioni[num_linee].nome,stringa);
+
+		consumazioni_tot_int=0;
+
+		consumazioni_tot_int=consumazioni_tot_int+num_consumazioni;
+
+		sprintf(archivio_consumazioni[num_linee].consumazioni ,"%d",consumazioni_tot_int);
+
+		num_linee++;
+
 	}
 
 	file_save_consumazioni(num_linee);
