@@ -41,6 +41,7 @@ struct alimento{
     ///anno di scadenza dell'alimento
     char anno[6];
 
+    /// numero di pacchi (o vasetti) di ciascun alimento
     char numero[10];
 
     ///calorie di un dato alimento
@@ -49,19 +50,29 @@ struct alimento{
     ///tipo di un alimento (ovvero liquido o solido)
     char tipo [5];
 
-    ///quantita' di un dato alimento
+    ///quantità di una singola unità di un alimento
     char quantita[10];
 
+    ///indica la quantità totale presente di un alimento
     char quantita_tot[10];
+
 
     char scaduto[10];
 
 }archivio_alimenti[ALIM_MAX];
 
+/**
+ * Struct che contiene informazioni sulla consumazione di un dato alimento,
+ * le cui informazioni verranno memorizzate nel file "consumazioni.txt"
+ *
+ */
+
 struct consumazioni{
 
 	///nome dell'alimento
+
     char nome[LUNGH_MAX_NOME];
+    ///numero di consumazioni di un dato alimento
 
     char consumazioni[10];
 

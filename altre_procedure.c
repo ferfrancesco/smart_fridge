@@ -160,6 +160,9 @@ char* low_conversion(char stringa[]){
 	return stringa;
 }
 
+
+ //TODO commenta
+
 void consumazioni(int num_consumazioni,int num_linee,char stringa[]){
 
 	int i;
