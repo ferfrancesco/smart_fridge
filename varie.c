@@ -244,6 +244,7 @@ void statistiche(){
 	int selezione;
 	int num_linee;
 	int i;
+	int j;
 
 	char nomi_temp[CONSUM_MAX][LUNGH_MAX_NOME];
 	int valori_ordinare[CONSUM_MAX];
@@ -262,9 +263,11 @@ void statistiche(){
 			for(i=0;i<num_linee;i++){
 
 				valori_ordinare[i]=atoi(archivio_consumazioni[i].consumazioni);  //converto i valori da ordinare da char a int
-				strcpy(nomi_temp[i],archivio_consumazioni[i].nome);
+				//for(j=0;j<50;j++){
 
-			}
+				strcpy(nomi_temp[i],archivio_consumazioni[i].nome);}
+
+			//}
 
 			selection_sort(valori_ordinare,nomi_temp,num_linee);
 
@@ -297,7 +300,7 @@ void statistiche(){
 
 }
 
-void selection_sort(int array_int[],char *array_nomi[], int num_linee) {
+void selection_sort(int array_int[],char array_nomi[CONSUM_MAX][LUNGH_MAX_NOME], int num_linee) {
 
 	int i;
 	int j;
@@ -318,7 +321,7 @@ void selection_sort(int array_int[],char *array_nomi[], int num_linee) {
 
 				}
 
-				//scambio il valore numerico
+				//scambio il valore numericoo
 				temp=array_int[max];
 				array_int[max]=array_int[i];
 				array_int[i]=temp;
