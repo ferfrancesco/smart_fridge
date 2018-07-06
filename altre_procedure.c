@@ -161,15 +161,25 @@ char* low_conversion(char stringa[]){
 }
 
 
- //TODO commenta
+ /**
+  * Questa procedura non fa altro che effettuare controlli sul calcolo delle consumazioni di ciascun alimento e sulla trascrizione dell'aggiornamento sul file "consumazioni.txt"
+  * Vengono distinti diversi casi a seconda se l'alimento è già in lista consumazioni, se il file è vuoto, oppure se è già presente nel file.
+  * Se il file è vuoto, si scrive l'alimento e le relative consumazioni
+  * Se il file non è vuoto ma non esistono corrispondenze, si aggiunge il nome dell'alimento e le relative consumazioni
+  * Se il file non è vuoto e viene trovata una corrispondenza, si aggiorna solo il dato relativo alle consumazioni.
+  *
+  * @param num_consumazioni, ovvero il numero di confezioni che si stanno eliminando di un dato alimento.
+  * @param num_linee,ovvero di quante linee e' composto il file "consumazioni.txt".
+  * @param stringa, ovvero il nome dell'alimento di cui si intende cercare la corrispondenza nel file "consumazioni.txt"
+  */
 
 void consumazioni(int num_consumazioni,int num_linee,char stringa[]){
 
 	int i;
-	int consumazioni_tot_int;
-	int trovato=0;  //flag che indica che l'alimento è già in lista o se è da aggiungere
+	int consumazioni_tot_int;//indica il numero totale di consumazioni di un dato alimento nella lista "consumazioni.txt"
+	int trovato=0;  		 //flag che indica che l'alimento è già in lista o se è da aggiungere
 
-	if (num_linee==0){
+	if (num_linee==0){		//se il file non esiste
 
 		strcpy(archivio_consumazioni[num_linee].nome,stringa);
 
@@ -182,9 +192,9 @@ void consumazioni(int num_consumazioni,int num_linee,char stringa[]){
 		num_linee++;
 	}
 
-	for(i=0;i<num_linee;i++){
+	for(i=0;i<num_linee;i++){ // se il file esiste e ...
 
-		if(strcmp(archivio_consumazioni[i].nome,stringa)==0){
+		if(strcmp(archivio_consumazioni[i].nome,stringa)==0){ //...viene trovata una corrispondenza tra nomi
 
 			consumazioni_tot_int=atoi(archivio_consumazioni[i].consumazioni);
 
@@ -198,7 +208,7 @@ void consumazioni(int num_consumazioni,int num_linee,char stringa[]){
 
 	}
 
-	if (trovato==0) {
+	if (trovato==0) {			// se non viene trovata nessuna corrispondenza tra nomi
 
 		strcpy(archivio_consumazioni[num_linee].nome,stringa);
 

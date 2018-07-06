@@ -47,7 +47,11 @@ void stampa_alimenti(int num_linee);
 void aggiunta_alimenti(int num_linee);
 
 /**
- * La procedura permette di modificare alimenti gia' presenti nello Smart Fridge.
+ * Questa procedura permette di modificare alimenti gia' presenti nello Smart Fridge. Funziona tramite lo stabilimento di una correlazione
+ * di tre campi della struct "alimento", ovvero archivio_alimenti.quantita, archivio_alimenti.quantita_tot, archivio_alimenti.numero.
+ * Infatti, se si modifica il numero di confezioni di alimento presenti in frigo (archivio_alimenti.numero), verrà conseguentemente modificata anche la quantità totale di un alimento(archivio_alimenti.quantita_tot),
+ * poichè il sistema rimuoverà da essa il quantitativo (in ml o g ) corrispondente ad una confezione di quell'alimento (archivio_alimenti. quantita).
+ *
  *
  * @param num_linee,ovvero di quante linee e' composto il file "alimenti.txt"
  *
@@ -65,6 +69,8 @@ void modifica_alimenti(int num_linee);
  * Se invece è maggiore di piu' di SOGLIA_SCADENZA, l'alimento non e' ne' in scadenza, ne' scaduto.
  * (SOGLIA_SCADENZA è una costante che vale 3).
  *
+ * @pre viene attivata in automatico quando si seleziona il sottomenù "alimenti"
+ * @pre devono esserci alimenti presenti all'interno dello Smart Fridge
  * @param num_linee, ovvero il numero di linee di cui si compone il file "alimenti.txt"
  */
 

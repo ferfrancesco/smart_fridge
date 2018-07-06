@@ -222,7 +222,10 @@ int file_load_lista(int num_linee){ //TODO CONTROLLA
     return num_linee;
 
 }
-
+/**
+ * Questa funzione permette di caricare nel programma il file "consumazioni.txt", all'attivarsi del sottomenù della categoria "alimenti"
+ * @return num_linee, ovvero il numero di linee di cui il file "consumazioni.txt" è composto
+ */
 int file_load_consumazioni(){
 
 	int i=0;
@@ -353,7 +356,7 @@ void file_save_menu_sett(){
     fclose(fp);
 
 }
-
+//todo aspetta
 void file_append_lista(char stringa[]){
 
     FILE *fp;
@@ -364,6 +367,11 @@ void file_append_lista(char stringa[]){
     fclose(fp);
 }
 
+/**
+ * Questa procedura permette di salvare le modifiche apportate al file "consumazioni.txt".
+ *
+ * @param num_linee,ovvero il numero di linee di cui è composto il file "consumazioni.txt"
+ */
 void file_save_consumazioni(int num_linee){
 
 	int i;

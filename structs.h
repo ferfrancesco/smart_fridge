@@ -18,9 +18,10 @@
  */
 
 struct menu_settimana{
-
-    char dayname[12];  /// nome del giorno della settimana
-    char pietanza[50]; /// nome del piatto
+	/// nome del giorno della settimana
+    char dayname[12];
+    /// nome del piatto
+    char pietanza[50];
 
 }giorno[6];
 
@@ -41,6 +42,7 @@ struct alimento{
     ///anno di scadenza dell'alimento
     char anno[6];
 
+    ///numero di confezioni di un alimento presente nello Smart Fridge
     char numero[10];
 
     ///calorie di un dato alimento
@@ -52,9 +54,11 @@ struct alimento{
     ///quantita' di un dato alimento
     char quantita[10];
 
+    ///quantità totale di un alimento presente nello Smart Fridge
     char quantita_tot[10];
 
-    char scaduto[10];   //TODO Prova a convertire in int
+    ///flag che indica se un alimento presente nello Smart Fridge è scaduto oppure no
+    char scaduto[10];
 
 }archivio_alimenti[ALIM_MAX];
 
@@ -63,6 +67,7 @@ struct consumazioni{
 	///nome dell'alimento
     char nome[LUNGH_MAX_NOME];
 
+    ///numero di volte in cui un certo alimento è stato consumato
     char consumazioni[10];
 
 }archivio_consumazioni[CONSUM_MAX];
@@ -93,6 +98,7 @@ struct ricetta{
     ///[numero step] [descrizione ciascuno step]
     char procedura[STEP_MAX][4000];
 
+    ///numero di volte in cui una ricetta è stata preparata
     char num_preparazioni[5];
 
 

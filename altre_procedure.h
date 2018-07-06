@@ -61,5 +61,17 @@ void memos();
 
 const char* low_conversion(char* stringa[]); //converte la stringa di ingresso in caratteri minuscoli
 
+
+/**
+  * Questa procedura non fa altro che effettuare controlli sul calcolo delle consumazioni di ciascun alimento e sulla trascrizione dell'aggiornamento sul file "consumazioni.txt"
+  * Vengono distinti diversi casi a seconda se l'alimento è già in lista consumazioni, se il file è vuoto, oppure se è già presente nel file.
+  * Se il file è vuoto, si scrive l'alimento e le relative consumazioni
+  * Se il file non è vuoto ma non esistono corrispondenze, si aggiunge il nome dell'alimento e le relative consumazioni
+  * Se il file non è vuoto e viene trovata una corrispondenza, si aggiorna solo il dato relativo alle consumazioni.
+  *
+  * @param num_consumazioni, ovvero il numero di confezioni che si stanno eliminando di un dato alimento.
+  * @param num_linee,ovvero di quante linee e' composto il file "consumazioni.txt".
+  * @param stringa, ovvero il nome dell'alimento di cui si intende cercare la corrispondenza nel file "consumazioni.txt"
+  */
 void consumazioni(int num_consumazioni,int num_linee,char *stringa[]);
 

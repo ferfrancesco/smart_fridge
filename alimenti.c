@@ -15,12 +15,12 @@ typedef int bool;
 #define false 0
 
 #define SOGLIA_SCADENZA 3  //Un alimento risultera' in scadenza quando il suo giorno di scadenza di stanzierà di SOGLIA_SCADENZA dal giorno attuale
-#define SOGLIA_LISTA_Q 50  //todo cos'è?//Soglia sotto al quale un alimento verrà inserito nella lista della spesa
-#define SOGLIA_LISTA 2	   //Soglia sotto al quale un alimento verrà inserito nella lista della spesa
-#define INGR_MAX 50  //quantità max di ingredienti in una ricetta
+#define SOGLIA_LISTA_Q 50  //Soglia (in g o ml) sotto la quale un alimento verrà considerato in esaurimento e inserito nella lista della spesa
+#define SOGLIA_LISTA 2	   //Soglia (in confezioni)sotto la quale un alimento verrà inserito nella lista della spesa
+#define INGR_MAX 50  	   //quantità max di ingredienti in una ricetta
 
-int num_linee;
-int num_linee_consumazioni;
+int num_linee;			   //indica il numero di linee di cui è composto un file testuale
+int num_linee_consumazioni;//indica il numero di linee di cui è composto il file "consumazioni.txt"
 
 /**
 La procedura rappresenta il menu degli alimenti. In base alla scelta che viene inserita, si hanno possibilità diverse:
@@ -468,27 +468,29 @@ void aggiunta_alimenti(int num_linee){
 
 /**
  * La procedura permette di modificare le quantita degli alimenti presenti nel frigo.
+ * E' presente una correlazione tra i campi "quantità", "numero" e "quantita_tot" della struct "alimento".
+ * Infatti, se si apportano delle modifiche ad uno dei tre campi, gli altri due ne saranno coinvolti.
  *
+ * @pre bisogna selezionare la seconda voce del sottomenù "alimenti", ovvero "Prendi un alimento dal frigo".
+ * @pre è necessario che ci siano alimenti già inseriti all'interno dello Smart Fridge.
+ * @post si ha la modifica delle quantità di un alimento all'interno dello Smart Fridge, con coinvolgimento di tutti i campi sopra citati.
  * @param num_linee riceve in input il numero di linee del file "alimenti.txt"
  */
 
 void modifica_alimenti(int num_linee){
 
-    char selezione[10]; //stringa per memorizzare il numero di alimenti che si vogliono inserire
-    int selezione_int; 	//variabile in cui è memorizzato il numero di alimenti che si vogliono inserire (case1), il numero dell'alimento che si vuole modificare( case3)
+    char selezione[10]; // stringa che memorizza la scelta dell'utente su quale alimento modificare all'interno dello Smart Fridge
+    int selezione_int; 	// trasformazione della stringa "selezione" in intero
+    int selezione_tipo;	//indica la scelta dell'utente riguardo il tipo della modifica che si intende effettuare
 
-    int selezione_tipo;
+    char quantita_rimossa[10]; //stringa che memorizza la quantità di alimento che si vuole modificare
+    int quantita_rimossa_int;  // conversione di quantita_rimossa[10] in intero
 
-    char quantita_rimossa[10];
-    int quantita_rimossa_int;
+    int quantita_totale_int;   //trasformazione in intero del campo "archivio_alimenti.quantita_tot"
+    int quantita_singolo_int;  //trasformazione in intero del campo "archivio_alimenti.quantita"
+    int quantita_rimuovere;	   //memorizza la quantità totale di alimento (in g o ml) rimossa dallo Smart fridge
 
-    int quantita_totale_int;
-    int quantita_singolo_int;
-    int quantita_rimuovere;
-
-    int num_consumazioni_int;
-
-    int numero_conf_int;
+    int numero_conf_int;	   // trasformazione in intero del numero di confezioni di un alimento presenti nello Smart fridge
 
 
     int i;
@@ -497,7 +499,7 @@ void modifica_alimenti(int num_linee){
 
     fflush(stdin);
 
-    gets(selezione);  //GOTO implementa limite
+    gets(selezione);  //todo implementa limite
 
     if(isOnlyNumbers(selezione)==true) {
 
@@ -599,9 +601,9 @@ void modifica_alimenti(int num_linee){
 					quantita_singolo_int=atoi(archivio_alimenti[selezione_int].quantita);
 					quantita_totale_int=atoi(archivio_alimenti[selezione_int].quantita_tot);
 
-					quantita_rimuovere=quantita_singolo_int*quantita_rimossa_int; //calcolo la quantita rimossa
+					quantita_rimuovere=quantita_singolo_int*quantita_rimossa_int; //calcolo la quantita totale di alimento rimossa (in g o ml)
 
-					quantita_totale_int=quantita_totale_int-quantita_rimuovere; //rimuovo la quantita calcolata prima
+					quantita_totale_int=quantita_totale_int-quantita_rimuovere;  //rimuovo la quantita calcolata prima
 
 					//salvo la nuova quantita nella struttura
 					sprintf(archivio_alimenti[selezione_int].quantita_tot, "%d" ,quantita_totale_int);
@@ -677,7 +679,7 @@ void modifica_alimenti(int num_linee){
 
     	        }
 
-    	        num_linee--;	//decremento del numero di linee del file, dopo l'eliminazione di un alimento
+    	        num_linee--;	//deecremento del numero di linee del file, dopo l'eliminazione di un alimento
 
     	    }
 
@@ -733,9 +735,11 @@ void modifica_alimenti(int num_linee){
  * Questa procedura permette di capire quali sono gli alimenti, presenti nello Smart Fridge, che sono scaduti o sono in scadenza.
  * Viene utilizzata all'interno del sottomenù "alimenti".
  *
+ * @pre Viene attivata in automatico quando viene aperto il sottomenù "alimenti"
  * @pre devono esserci alimenti presenti nello Smart Fridge.
  *
  * @param num_linee, ovvero il numero di linee del file "alimenti.txt"
+ *
  */
 
 void scadenze(int num_linee){
