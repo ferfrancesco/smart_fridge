@@ -15,6 +15,8 @@ typedef int bool;
 #define true 1
 #define false 0
 
+#define LUNGH_MAX_NOME 50
+
 int menu_inserito=false; //flag controllo inserimento menù della settimana
 
 /**
@@ -46,7 +48,7 @@ void varie(){
             break;
 
         case 3:
-            statistiche();
+        //    statistiche();
             break;
 
         case 4:
@@ -235,7 +237,7 @@ void lista(){
     }
 
 }
-
+/*
 void statistiche(){
 
 	int selezione;
@@ -279,18 +281,18 @@ void statistiche(){
 	}
 
 }
-
+/*
 void ordinamento(int num_linee,char array_num[],char array_dest_num[],char array_nomi[],char array_dest_nomi[]){
 
 	int i;
 
 	for(i=0;i<num_linee;i++){
 
-		array_dest[i]=atoi(array_char[i]);
+		array_dest[i]=atoi(array_char[i]);  //converto i valori da ordinare da char a int
 
 	}
 
-	selection_sort(array_dest,num_linee);
+	selection_sort(array_dest,num_linee);  //ordino i valori int
 
 }
 
@@ -300,6 +302,8 @@ void selection_sort(int array_int[], int num_linee) {
 	int j;
 	int p;
 	int min;
+
+	char nome_temp[LUNGH_MAX_NOME];
 
 	for (i=0; i < num_linee-1; i++){
 
@@ -315,7 +319,9 @@ void selection_sort(int array_int[], int num_linee) {
 
 				array_int[p] = array_int[i]; // scambio
 				array_int[i] = min;
+
+
 			}
 	}
 
-}
+}*/
