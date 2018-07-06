@@ -62,6 +62,13 @@ void messaggio_errore(){
  * Questa procedura copia i nomi dei giorni della settimana nella struct "giorno"
  */
 
+//TODO Controlla sta roba
+//--------------------------------------------------------
+/*È anche possibile inizializzare i valori alla dichiarazione, mettendo i valori (giusti nel tipo) compresi tra parentesi graffe:
+
+struct libro biblio = {"Guida al C", "Fabrizio Ciacchi", 2003, 45.2};*/
+//-----------------------------------------------------------------------
+
 void dayname_fill(){
 
     strcpy(giorno[0].dayname,"Lunedi'");

@@ -15,6 +15,7 @@ typedef int bool;
 #define true 1
 #define false 0
 
+#define CONSUM_MAX 100
 #define LUNGH_MAX_NOME 50
 
 int menu_inserito=false; //flag controllo inserimento menù della settimana
@@ -48,7 +49,7 @@ void varie(){
             break;
 
         case 3:
-        //    statistiche();
+            statistiche();
             break;
 
         case 4:
@@ -237,10 +238,15 @@ void lista(){
     }
 
 }
-/*
+
 void statistiche(){
 
 	int selezione;
+	int num_linee;
+	int i;
+
+	char nomi_temp[CONSUM_MAX][LUNGH_MAX_NOME];
+	int valori_ordinare[CONSUM_MAX];
 
 	system("cls");
 	printf("Qui puoi visualizzare gli alimenti più consumati e le ricette più preparate\nCosa vuoi visualizzare?\n\n1)Alimenti piu' consumati\n2)Ricette piu' preparate\n\n");
@@ -251,22 +257,31 @@ void statistiche(){
 
 		case 1:
 
-			int num_linee;
 			num_linee=file_load_consumazioni();
 
+			for(i=0;i<num_linee;i++){
+
+				valori_ordinare[i]=atoi(archivio_consumazioni[i].consumazioni);  //converto i valori da ordinare da char a int
+				strcpy(nomi_temp[i],archivio_consumazioni[i].nome);
+
+			}
+
+			selection_sort(valori_ordinare,nomi_temp,num_linee);
+
 			system("cls");
-			printf("Ecco un elenco dei 5 alimenti più consumati");
+			printf("Ecco un elenco dei 5 alimenti piu' consumati");
 
-			ordinamento(num_linee,archivio_consumazioni.consumazioni,archivio_cons_ordinato.consumazioni);
-
-	        printf("Elenco degli alimenti presenti in frigo\n\n|%-50s|%-12s|%-10s|%-10s|%-7s|","Alimento","Scadenza","Numero","Quantita'","KCAL");  //il valore negativo serve per l'allineamento a sinistra
+			printf("\n\n|%-50s|%-12s|%-10s|%-10s|%-7s|","Alimento","Scadenza","Numero","Quantita'","KCAL");  //il valore negativo serve per l'allineamento a sinistra
 	        printf("\n----------------------------------------------------------------------------------------------");
 
-	        for(i=0;i<5;i++){
+	        for(i=0;i<3;i++){
 
-	                printf("\n|%-50s|%s|%d)",archivio_alimenti[i].nome,archivio_alimenti[i].giorno,archivio_alimenti[i].mese,archivio_alimenti[i].anno,archivio_alimenti[i].numero,temp_quantita,archivio_alimenti[i].kcal,i+1);
+	                printf("\n|%-50s|%10d|%d)",nomi_temp[i],valori_ordinare[i],i+1);
 
 	            }
+
+	        printf("\n");
+	        system("pause");
 
 			break;
 
@@ -281,47 +296,39 @@ void statistiche(){
 	}
 
 }
-/*
-void ordinamento(int num_linee,char array_num[],char array_dest_num[],char array_nomi[],char array_dest_nomi[]){
 
-	int i;
-
-	for(i=0;i<num_linee;i++){
-
-		array_dest[i]=atoi(array_char[i]);  //converto i valori da ordinare da char a int
-
-	}
-
-	selection_sort(array_dest,num_linee);  //ordino i valori int
-
-}
-
-void selection_sort(int array_int[], int num_linee) {
+void selection_sort(int array_int[],char *array_nomi[], int num_linee) {
 
 	int i;
 	int j;
-	int p;
-	int min;
+	int max;
 
-	char nome_temp[LUNGH_MAX_NOME];
+	int temp;
+	char nome_temp[50];
 
-	for (i=0; i < num_linee-1; i++){
+	for (i=num_linee-1;i>0;i--){
 
-		min = array_int[i]; p = i; // p = posizione del minimo
-		for (j = i+1; j < num_linee; j++) { // ricerca del minimo
+		max=0;
 
-				if (array_int[j] < min) {
+		for (j=1;j<=i;j++) { // ricerca del max
 
-					min = array_int[j]; // salva il minimo
-					p = j; // aggiorna posizione del minimo
+				if (array_int[j] < max) {
+
+					max=j;
 
 				}
 
-				array_int[p] = array_int[i]; // scambio
-				array_int[i] = min;
+				//scambio il valore numerico
+				temp=array_int[max];
+				array_int[max]=array_int[i];
+				array_int[i]=temp;
 
 
+				//scambio i nomi
+				strcpy(nome_temp,array_nomi[max]);
+				strcpy(array_nomi[max],array_nomi[i]);
+				strcpy(array_nomi[i],nome_temp);
 			}
 	}
 
-}*/
+}
