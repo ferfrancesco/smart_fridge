@@ -15,7 +15,7 @@ typedef int bool;
 #define false 0
 
 #define SOGLIA_SCADENZA 3  //Un alimento risultera' in scadenza quando il suo giorno di scadenza di stanzierà di SOGLIA_SCADENZA dal giorno attuale
-#define SOGLIA_LISTA_Q 50  //Soglia sotto al quale un alimento verrà inserito nella lista della spesa
+#define SOGLIA_LISTA_Q 50  //todo cos'è?//Soglia sotto al quale un alimento verrà inserito nella lista della spesa
 #define SOGLIA_LISTA 2	   //Soglia sotto al quale un alimento verrà inserito nella lista della spesa
 #define INGR_MAX 50  //quantità max di ingredienti in una ricetta
 
