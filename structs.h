@@ -65,9 +65,11 @@ struct consumazioni{
 
     char consumazioni[10];
 
-}archivio_consumazioni[CONSUM_MAX];
+    int consumazioni_int;
 
-struct consumazioni archivio_cons_ordinato[CONSUM_MAX];
+}archivio_consumazioni[CONSUM_MAX],archivio_cons_ordinato[CONSUM_MAX];
+
+//struct consumazioni archivio_cons_ordinato[CONSUM_MAX];
 
 
 /**

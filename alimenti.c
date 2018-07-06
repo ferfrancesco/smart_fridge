@@ -717,9 +717,12 @@ void modifica_alimenti(int num_linee){
 
     	break;
 
-    	default:
-    	//TODO Aggiungi default
-    	break;
+        default:
+
+        	messaggio_errore();  //TODO Controlla perchè non entra in errore
+            alimenti();
+
+        break;
     }
 
         file_save_alimenti(num_linee);	//aggiornamento del contenuto del file dopo le modifiche
