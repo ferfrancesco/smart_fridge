@@ -41,12 +41,12 @@ void alimenti(){
     int menu_select=0;
 
     num_linee=file_load_alimenti();
-  //  num_linee_consumazioni=file_load_consumazioni();
+    num_linee_consumazioni=file_load_consumazioni();
 
     fflush(stdin);
     system("cls");
 
-    printf("Menu' Alimenti\nSeleziona un opzione\n\n1)Visualizza alimenti presenti in frigo\n2)Aggiungi un alimento\n3)Modifica le quantita' presenti\n4)Torna al menu'\n\n");
+    printf("Menu' Alimenti\nSeleziona un opzione\n\n1)Visualizza alimenti presenti in frigo\n2)Prendi un alimento dal frigo\n3)Aggiungi un alimento\n4)Torna al menu'\n\n");
 
     scadenze(num_linee);
 
@@ -65,15 +65,15 @@ void alimenti(){
 
         case 2:
 
-        	aggiunta_alimenti(num_linee);
+            stampa_alimenti(num_linee);
+            modifica_alimenti(num_linee);
             alimenti();
 
         break;
 
         case 3:
 
-            stampa_alimenti(num_linee);
-            modifica_alimenti(num_linee);
+        	aggiunta_alimenti(num_linee);
             alimenti();
 
         break;
@@ -268,7 +268,7 @@ void aggiunta_alimenti(int num_linee){
 
 		//aggiungo l'alimento alla struct consumazioni per tenere conto delle consumazioni totali
 
-	//	consumazioni(0,num_linee_consumazioni,archivio_alimenti[num_linee].nome);
+		consumazioni(0,num_linee_consumazioni,archivio_alimenti[num_linee].nome);
 
 		system("cls");
 
@@ -553,19 +553,11 @@ void modifica_alimenti(int num_linee){
 
     	    //incremento il contatore di consumazioni per tener conto degli alimenti più consumati
 
-    	    //num_consumazioni_int=atoi(archivio_alimenti[selezione_int].num_consumazioni);
+    	    if(strcmp(archivio_alimenti[selezione_int].scaduto,"0")==0){
 
-    	//    if(strcmp(archivio_alimenti[selezione_int].scaduto,"0")){
+    	    	consumazioni(quantita_rimossa_int,num_linee_consumazioni,archivio_alimenti[selezione_int].nome);
 
-    	    	//num_consumazioni_int=num_consumazioni_int+quantita_rimossa_int;
-
-    	 //   char array_temp[50];
-
-    	 //   strcpy(array_temp,archivio_alimenti[selezione_int].nome);
-
-    	    //	consumazioni(quantita_rimossa_int,num_linee_consumazioni,archivio_alimenti[selezione_int].nome);
-
-    	  //  }
+    	    }
 
 
     	    //calcolo il nuovo numero di alimenti e la copio nella struttura
@@ -701,6 +693,12 @@ void modifica_alimenti(int num_linee){
 				if(quantita_totale_int<(numero_conf_int-1)*quantita_singolo_int){ //controllo,se la quantità totale degli alimenti è minore della moltiplicazione,singifica che ho meno elementi di quanti salvati,quindi decremento
 
 					numero_conf_int--;
+
+		    	    if(strcmp(archivio_alimenti[selezione_int].scaduto,"0")==0){
+
+		    	    	consumazioni(1,num_linee_consumazioni,archivio_alimenti[selezione_int].nome);  //aumento di 1 il numero totale delle volte in cui è stato consumato quell'elemento
+
+		    	    }
 
 				}
 
@@ -1054,6 +1052,8 @@ void scadenze(int num_linee){
 
     	}
     }
+
+    printf("\n\n");
 
     //salvo il file alimenti per aggiornare lo status degli alimenti scaduti
     file_save_alimenti(num_linee);

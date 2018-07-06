@@ -7,3 +7,4 @@
 void varie();
 void menu_sett();
 void lista();
+void statistiche();
