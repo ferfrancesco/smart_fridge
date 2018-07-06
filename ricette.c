@@ -305,11 +305,11 @@ int* ricerca(char alimento[]){
  */
 void ricerca_ricette(){
 
-	char nome_alimento[LUNGH_MAX_NOME];
+	char nome_alimento[LUNGH_MAX_NOME];//memorizza il nome dell'alimento di cui cercare un'eventuale corrispondenza di ricetta
 
-	char* nome_alimento_low;
+	char* nome_alimento_low;		   //conversione in minuscolo della stringa "nome_alimento"
 
-	int *ricette_trovate;
+	int *ricette_trovate;			   //variabile locale che indica il numero di corrispondenze tra alimento e ricette trovate, da mettere nella prima posizione dell'array
 	int i;
 	int j;
 
