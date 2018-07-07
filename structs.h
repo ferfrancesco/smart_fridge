@@ -103,6 +103,8 @@ struct ricetta{
     ///numero di volte in cui una ricetta è stata preparata
     char num_preparazioni[5];
 
+    char kcal[10];
+
 
 }archivio_ricette[MAX_RICETTE];
 

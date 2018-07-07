@@ -74,3 +74,5 @@ void visualizza_ricette();
  */
 
 void aggiungi_ricette();
+
+void modifica_ricette();

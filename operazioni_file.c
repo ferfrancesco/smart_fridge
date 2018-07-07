@@ -110,7 +110,7 @@ int file_load_ricette(){
 
     while(!feof(fp)){
 
-        fscanf(fp,"%50[^,],%5[^,],%5[^,],%5[^,],",archivio_ricette[i].nome,archivio_ricette[i].difficolta,archivio_ricette[i].num_ingredienti,archivio_ricette[i].num_preparazioni); //utilizzo [^,] in quanto utilizzare %s leggeva l'intera stringa,virgole incluse
+        fscanf(fp,"%50[^,],%5[^,],%5[^,],%5[^,],%10[^,],",archivio_ricette[i].nome,archivio_ricette[i].difficolta,archivio_ricette[i].num_ingredienti,archivio_ricette[i].num_preparazioni,archivio_ricette[i].kcal); //utilizzo [^,] in quanto utilizzare %s leggeva l'intera stringa,virgole incluse
 
         temp_int = atoi(archivio_ricette[i].num_ingredienti);
 
@@ -305,7 +305,7 @@ void file_save_ricette (int num_linee){
 
     for(i=0;i<num_linee;i++){
 
-        fprintf(fp,"%s,%s,%s,%s,",archivio_ricette[i].nome,archivio_ricette[i].difficolta,archivio_ricette[i].num_ingredienti,archivio_ricette[i].num_preparazioni);
+        fprintf(fp,"%s,%s,%s,%s,%s,",archivio_ricette[i].nome,archivio_ricette[i].difficolta,archivio_ricette[i].num_ingredienti,archivio_ricette[i].num_preparazioni,archivio_ricette[i].kcal);
 
         temp_int = atoi(archivio_ricette[i].num_ingredienti);  //converto il numero di step in intero per l'uso nel ciclo
 

@@ -263,32 +263,84 @@ void statistiche(){
 			for(i=0;i<num_linee;i++){
 
 				valori_ordinare[i]=atoi(archivio_consumazioni[i].consumazioni);  //converto i valori da ordinare da char a int
-				//for(j=0;j<50;j++){
+				strcpy(nomi_temp[i],archivio_consumazioni[i].nome);
 
-				strcpy(nomi_temp[i],archivio_consumazioni[i].nome);}
-
-			//}
+			}
 
 			selection_sort(valori_ordinare,nomi_temp,num_linee);
 
 			system("cls");
 			printf("Ecco un elenco dei 5 alimenti piu' consumati");
 
-			printf("\n\n|%-50s|%-12s|%-10s|%-10s|%-7s|","Alimento","Scadenza","Numero","Quantita'","KCAL");  //il valore negativo serve per l'allineamento a sinistra
-	        printf("\n----------------------------------------------------------------------------------------------");
+			printf("\n\n|%-50s|%-12s|","Alimento","Consumazioni");  //il valore negativo serve per l'allineamento a sinistra
+	        printf("\n-----------------------------------------------------------------");
 
-	        for(i=0;i<3;i++){
+	        if(num_linee<5){
 
-	                printf("\n|%-50s|%10d|%d)",nomi_temp[i],valori_ordinare[i],i+1);
+				for(i=0;i<num_linee;i++){
 
-	            }
+					printf("\n|%-50s|%12d|%d)",nomi_temp[i],valori_ordinare[i],i+1);
 
-	        printf("\n");
+				}
+	        }
+
+	        else{
+
+		        for(i=0;i<5;i++){
+
+		           printf("\n|%-50s|%12d|%d)",nomi_temp[i],valori_ordinare[i],i+1);
+
+		        }
+
+	        }
+
+	        printf("\n\n");
 	        system("pause");
+	        varie();
 
 			break;
 
 		case 2:
+
+			num_linee=file_load_ricette();
+
+			for(i=0;i<num_linee;i++){
+
+				valori_ordinare[i]=atoi(archivio_ricette[i].num_preparazioni);  //converto i valori da ordinare da char a int
+				strcpy(nomi_temp[i],archivio_ricette[i].nome);
+
+			}
+
+			selection_sort(valori_ordinare,nomi_temp,num_linee);
+
+			system("cls");
+			printf("Ecco un elenco delle 5 ricette piu' preparate");
+
+			printf("\n\n|%-50s|%-12s|","Ricetta","Preparazioni");  //il valore negativo serve per l'allineamento a sinistra
+	        printf("\n-----------------------------------------------------------------");
+
+	        if(num_linee<5){
+
+				for(i=0;i<num_linee;i++){
+
+					printf("\n|%-50s|%12d|%d)",nomi_temp[i],valori_ordinare[i],i+1);
+
+				}
+	        }
+
+	        else{
+
+		        for(i=0;i<5;i++){
+
+		           printf("\n|%-50s|%12d|%d)",nomi_temp[i],valori_ordinare[i],i+1);
+
+		        }
+
+	        }
+
+	        printf("\n\n");
+	        system("pause");
+	        varie();
 
 			break;
 
@@ -296,42 +348,6 @@ void statistiche(){
             messaggio_errore();
             statistiche();
 			break;
-	}
-
-}
-
-void selection_sort(int array_int[],char array_nomi[CONSUM_MAX][LUNGH_MAX_NOME], int num_linee) {
-
-	int i;
-	int j;
-	int max;
-
-	int temp;
-	char nome_temp[50];
-
-	for (i=num_linee-1;i>0;i--){
-
-		max=0;
-
-		for (j=1;j<=i;j++) { // ricerca del max
-
-				if (array_int[j] < max) {
-
-					max=j;
-
-				}
-
-				//scambio il valore numericoo
-				temp=array_int[max];
-				array_int[max]=array_int[i];
-				array_int[i]=temp;
-
-
-				//scambio i nomi
-				strcpy(nome_temp,array_nomi[max]);
-				strcpy(array_nomi[max],array_nomi[i]);
-				strcpy(array_nomi[i],nome_temp);
-			}
 	}
 
 }

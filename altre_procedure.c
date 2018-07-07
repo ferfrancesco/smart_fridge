@@ -232,3 +232,38 @@ void consumazioni(int num_consumazioni,int num_linee,char stringa[]){
 	file_save_consumazioni(num_linee);
 }
 
+void selection_sort(int array_int[],char array_nomi[CONSUM_MAX][LUNGH_MAX_NOME], int num_linee) {
+//TODO L'ordinamento è sminchiato,controlla e fixa
+
+	int i;
+	int j;
+	int max;
+
+	int temp;
+	char nome_temp[50];
+
+	for (i=num_linee-1;i>0;i--){
+
+		max=0;
+
+		for (j=1;j<=i;j++) { // ricerca del max
+
+				if (array_int[j] < max) {
+
+					max=j;
+
+				}
+
+				//scambio il valore numericoo
+				temp=array_int[max];
+				array_int[max]=array_int[i];
+				array_int[i]=temp;
+
+				//scambio i nomi
+				strcpy(nome_temp,array_nomi[max]);
+				strcpy(array_nomi[max],array_nomi[i]);
+				strcpy(array_nomi[i],nome_temp);
+			}
+	}
+
+}

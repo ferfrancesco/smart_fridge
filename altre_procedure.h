@@ -75,3 +75,5 @@ const char* low_conversion(char* stringa[]); //converte la stringa di ingresso i
   */
 void consumazioni(int num_consumazioni,int num_linee,char *stringa[]);
 
+void selection_sort(int array_int[],char array_nomi[CONSUM_MAX][LUNGH_MAX_NOME], int num_linee);
+
