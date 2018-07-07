@@ -60,12 +60,16 @@ void file_save_alimenti(int num_linee);
 
 /**
  * Procedura che salva il file ricette, dopo eventuali modifiche apportate.
- * @param num_linee,ovvero il numero di linee di cui il file e' composto
+ * @param num_linee,ovvero il numero di linee di cui il file "ricette.txt" e' composto
  */
 void file_save_ricette (int num_linee);
 
 
-//provaa
+//todo commenta
 void file_append_lista(char stringa[]);
 
+/**
+ * Procedura che salva il file "consumazioni.txt", dopo eventuali modifiche apportate.
+ * @param num_linee,ovvero il numero di linee di cui il file "consumazioni.txt" e' composto
+ */
 void file_save_consumazioni(int num_linee);

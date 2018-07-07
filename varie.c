@@ -183,11 +183,16 @@ void menu_sett(){
     }
 
 }
+// todo commenta e finisci procedura
+/**
+ * Questa procedura permette di accedere al sottomenu' riguardante la lista della spesa nella categoria "varie"
+ *
+ */
 
 void lista(){
 
-    int menu_selez;
-    int num_linee_lista;
+    int menu_selez;		 //variabile che memorizza la scelta nel menu' da parte dell'utente
+    int num_linee_lista; //numero di linee di cui e' composto il file "lista_spesa.txt"
     int i;
 
     system("cls");
@@ -238,16 +243,26 @@ void lista(){
     }
 
 }
-
+/**
+ *Questa procedura permette di accedere ad un sottomenu', interno alla categoria "varie", che permette di visualizzare le statistiche relative ai cibi più consumati e alle ricette più preparate.
+ *
+ *@pre bisogna accedere prima al sottomenu' della categoria "varie" per visualizzare le statistiche.
+ *@post verranno visualizzare le statistiche relative a:
+ *		1) Alimenti piu' consumati;
+ *		2) Ricette piu' preparate;
+ *In entrambe le opzioni, gli array che devono essere ordinati ( che sono campi di struct) ,vengono copiati
+ * in array locali e poi ordinati
+ *
+ */
 void statistiche(){
 
-	int selezione;
-	int num_linee;
+	int selezione;	//variabile che memorizza la selezione dell'utente nel sottomenu'
+	int num_linee;	//numero di linee di cui e' composto il file "consumazioni.txt"
 	int i;
 	int j;
 
-	char nomi_temp[CONSUM_MAX][LUNGH_MAX_NOME];
-	int valori_ordinare[CONSUM_MAX];
+	char nomi_temp[CONSUM_MAX][LUNGH_MAX_NOME]; //array locale in cui copiare il campo dei nomi di una delle struct di cui si devono ordinare i numeri
+	int valori_ordinare[CONSUM_MAX]; 			//array locale in cui copiare il campo della struct da ordinare (composto da interi)
 
 	system("cls");
 	printf("Qui puoi visualizzare gli alimenti più consumati e le ricette più preparate\nCosa vuoi visualizzare?\n\n1)Alimenti piu' consumati\n2)Ricette piu' preparate\n\n");
@@ -300,14 +315,26 @@ void statistiche(){
 
 }
 
+/**
+ * Questa procedura permette di ordinare, tramite un algoritmo "selection sort", l'array passato alla procedura,
+ * in maniera decrescente.
+ *
+ * @pre dev'essere selezionata un'opzione che includa l'ordinamento di qualcosa
+ * @post Si ha l'ordinamento di un vettore di interi, insieme ai nomi ad essi eventualmente associati
+ *
+ * @param array_int, ovvero l'array di interi del quale si deve effettuare l'ordinamento principale
+ * @param array_nomi,ovvero l'array dei nomi corrispondenti ai numeri che devono essere ordinati
+ * @param num_linee, ovvero il numero di linee di lui e' composto il file che deve essere ordinato
+ */
+
 void selection_sort(int array_int[],char array_nomi[CONSUM_MAX][LUNGH_MAX_NOME], int num_linee) {
 
 	int i;
 	int j;
-	int max;
+	int max;			// variabile che memorizza il valore massimo numerico dell'array da ordinare
 
-	int temp;
-	char nome_temp[50];
+	int temp;			// variabile temporanea per effettuare gli scambi
+	char nome_temp[50];	// stringa temporanea per effettuare lo scambio dei nomi
 
 	for (i=num_linee-1;i>0;i--){
 
@@ -321,7 +348,7 @@ void selection_sort(int array_int[],char array_nomi[CONSUM_MAX][LUNGH_MAX_NOME],
 
 				}
 
-				//scambio il valore numericoo
+				//scambio il valore numerico
 				temp=array_int[max];
 				array_int[max]=array_int[i];
 				array_int[i]=temp;
