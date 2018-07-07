@@ -169,9 +169,9 @@ void aggiunta_alimenti(int num_linee){
 	int i;
 
     int numero_int;
-	int tipo_int; 		//variabile di appoggio per la scelta dell'unità di misura dell'alimento
-	int quantita_int;
-	int quantita_tot_int;
+	int tipo_int; 		 //variabile di appoggio per la scelta dell'unità di misura dell'alimento
+	int quantita_int;	 //variabile che memorizza la conversione della quantita di una singola confezione di un alimento da stringa ad intero
+	int quantita_tot_int;//variabile che memorizza la conversione della quantita totale di un alimento in intero
 
 	int anno_int;		//variabile temporanea per la conversione in int della stringa anno
 	int mese_int;		//variabile temporanea per la conversione in int della stringa mese

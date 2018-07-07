@@ -173,7 +173,7 @@ char* stampa_stelle(int num){
 void stampa_ricetta(int num){
 
     int i;
-    int temp_int; //variabile intera temporanea per i cicli di stampa di ingredienti e procedure
+    int temp_int; 			   //variabile intera temporanea per i cicli di stampa di ingredienti e procedure
     int num_preparazioni_int;  //variabile intera temporanea per l'incremento di num_preparazioni
 
     int menu_select=0;
@@ -266,10 +266,10 @@ int* ricerca(char alimento[]){
 	static int ricette_con_alimento[MAX_RICETTE];  //static necessario per il return dell'array
 	int i;
 	int j;
-	int k=1;
-	int num_ingredienti_int;
+	int k=1;									  //contatore che parte da 1, poiche in posizione 0 verra' memorizzato il numero di corrispondenze trovate
+	int num_ingredienti_int;					  // memorizza la conversione del numero di ingredienti di una ricetta da stringa ad intero
 
-	char *risultato;
+	char *risultato;							  //memorizza la stringa trovata facendo la corrispondenza tra l'alimento inserito in input e ogni ingrediente di ogni ricetta
 
 	num_linee=file_load_ricette();
 
@@ -281,8 +281,8 @@ int* ricerca(char alimento[]){
 
 			risultato=strstr(archivio_ricette[i].ingredienti[j],alimento); //scansiono,cercando anche in sottostringhe,l'elenco degli ingredienti di ogni ricetta.
 
-			if(risultato != NULL){								//se viene trovata una corrispondenza,trascrivo il valore dell'indice i in un array,salvando quindi effettivamente,
-																//la posizione nell'array di struct della ricetta contenente l'ingrediente
+			if(risultato != NULL){										   //se viene trovata una corrispondenza,trascrivo il valore dell'indice i in un array,salvando quindi effettivamente,
+																           //la posizione nell'array di struct della ricetta contenente l'ingrediente
 				ricette_con_alimento[k]=i;
 
 				k++;
@@ -424,8 +424,11 @@ void visualizza_ricette(){
     system("pause");
 
 }
-/**Questa procedura permette di aggiungere ricette alla lista di ricette presenti all'interno del sistema.
+/**
+ * Questa procedura permette di aggiungere ricette alla lista di ricette presenti all'interno del sistema.
 *
+* @pre E' necessario accedere al sottomenu' della categoria "ricette" e selezionare la voce "aggiungi ricetta"
+* @post il sistema aggiungera' una ricettaal file "ricette.txt"
 * E' possibile immettere il nome della ricetta, gli ingredienti, la difficolta' e gli steps.
 * **/
 void aggiungi_ricette(){
