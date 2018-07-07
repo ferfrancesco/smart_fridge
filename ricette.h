@@ -55,7 +55,7 @@ void stampa_ricetta(int num);
  * @return ricette_con_alimento,ovvero un array di indici interi che indicano le posizioni delle corrispondenze
  */
 
-int* ricerca(char alimento[]);  //int* perchè ha come ritorno un array di int
+int* ricerca(char alimento[]);  //int* perchè ha come ritorno un array di intt
 
 /**
  * E' la procedura che ci permette di accedere alla funzione "ricerca", per trovare le
@@ -76,3 +76,7 @@ void visualizza_ricette();
 void aggiungi_ricette();
 
 void modifica_ricette();
+
+void modifica_ingredienti(int ingrediente);
+
+void modifica_procedura(int ingrediente);

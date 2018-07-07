@@ -604,6 +604,8 @@ void modifica_ricette(){
 
     		strcpy(archivio_ricette[selezione_int].nome,nuovo_dato);
 
+    		file_save_ricette(num_linee);
+
     	break;
 
     	case 2:
@@ -634,6 +636,8 @@ void modifica_ricette(){
 
     		} while((nuovo_dato_int<0) && (nuovo_dato_int>6));
 
+    		file_save_ricette(num_linee);
+
     	break;
 
     	case 3:
@@ -651,6 +655,8 @@ void modifica_ricette(){
 
 			strcpy(archivio_ricette[selezione_int].kcal,nuovo_dato);
 
+			file_save_ricette(num_linee);
+
     	break;
 
     	case 4:
@@ -660,7 +666,11 @@ void modifica_ricette(){
 
     	break;
 
+
     	case 5:
+
+    		modifica_procedura(selezione_int);
+			ricette();
 
     	break;
 
@@ -672,8 +682,6 @@ void modifica_ricette(){
         break;
     }
 
-
-    file_save_ricette(num_linee);
     printf("\n\n");
     system("pause");
     ricette();
@@ -720,6 +728,8 @@ void modifica_ingredienti(int ingrediente){
 
         strcpy(archivio_ricette[ingrediente].ingredienti[num_ingredienti],nuovo_dato_low);
 
+        file_save_ricette(num_linee);
+
 	break;
 
 	case 2:
@@ -741,6 +751,13 @@ void modifica_ingredienti(int ingrediente){
 		fflush(stdin);
 		gets(selezione);
 
+		if(isOnlyNumbers(selezione)==true) {
+
+			messaggio_errore();
+			modifica_ingredienti(ingrediente);
+
+		}
+
 		selezione_int=atoi(selezione);
 
 		if(selezione_int>num_ingredienti){
@@ -750,6 +767,8 @@ void modifica_ingredienti(int ingrediente){
 
 		}while(selezione_int>num_ingredienti);
 
+		selezione_int--; //decremento di uno per allinearmi con l'array
+
 		printf("\nInserire il nuovo nome dell' ingrediente\n\n");
 		fflush(stdin);
 		gets(nuovo_dato);
@@ -757,6 +776,8 @@ void modifica_ingredienti(int ingrediente){
         nuovo_dato_low=low_conversion(nuovo_dato);
 
         strcpy(archivio_ricette[ingrediente].ingredienti[selezione_int],nuovo_dato_low);
+
+        file_save_ricette(num_linee);
 
 	break;
 
@@ -788,18 +809,207 @@ void modifica_ingredienti(int ingrediente){
 
 		}while(selezione_int>num_ingredienti);
 
+		selezione_int--; //decremento di uno per allinearmi con l'array
+
 	    for (i=selezione_int;i<num_ingredienti;i++){ 		//ciclo per copiare i valori nella posizione precedente,in modo da rimuovere l'alimento e non lasciare spazi vuoti nell'elenco
 
-	       strcpy(archivio_ricette[i].nome,archivio_ricette[i+1].nome);
-	       strcpy(archivio_ricette[i].difficolta,archivio_ricette[i+1].difficolta);
-	       strcpy(archivio_ricette[i].ingredienti,archivio_ricette[i+1].ingredienti);
-	       strcpy(archivio_ricette[i].kcal,archivio_ricette[i+1].kcal);
-	       strcpy(archivio_ricette[i].num_ingredienti,archivio_ricette[i+1].num_ingredienti);
-	       strcpy(archivio_ricette[i].num_preparazioni,archivio_ricette[i+1].num_preparazioni);
-	       strcpy(archivio_ricette[i].num_step,archivio_ricette[i+1].num_step);
-	       strcpy(archivio_ricette[i].procedura,archivio_ricette[i+1].procedura);
+	       strcpy(archivio_ricette[ingrediente].ingredienti[i],archivio_ricette[ingrediente].ingredienti[i+1]);
 
 	    }
+
+	    num_ingredienti--;
+
+	    sprintf(archivio_ricette[ingrediente].num_ingredienti, "%d", num_ingredienti);
+
+	    file_save_ricette(num_linee);
+
+	break;
+
+	case 4:
+
+		ricette();
+
+	break;
+
+	default:
+
+    	messaggio_errore();
+    	ricette();
+
+    break;
+
+	}
+
+	printf("\n\n");
+	system("pause");
+
+}
+
+void modifica_procedura(int ingrediente){
+
+	num_linee=file_load_ricette();
+
+	char selezione[10];
+	int selezione_int;
+
+	int selezione_menu;
+	int i;
+
+	char nuova_posizione[10];
+	int nuova_posizione_int;
+
+	char nuovo_dato[50];
+	char* nuovo_dato_low;
+	int nuovo_dato_int;
+
+	int num_ingredienti;
+
+	system("cls");
+	printf("Che operazione vuoi eseguire?\n\n1)Aggiungi uno step\n2)Modifica uno step\n3)Rimuovi uno step\n4)Torna al menu'\n\n");
+
+	fflush(stdin);
+
+	scanf("%d",&selezione_menu);
+
+	switch(selezione_menu){
+
+	case 1:
+
+		system("cls");
+		printf("Elenco degli step\n\n");
+
+		num_ingredienti=atoi(archivio_ricette[ingrediente].num_step);
+
+		for(i=0;i<num_ingredienti;i++){
+
+			printf("%d)%s\n",i+1,archivio_ricette[ingrediente].procedura[i]);
+
+		}
+
+		printf("\nInserire il nuovo step\n\n");
+		fflush(stdin);
+		gets(nuovo_dato);
+
+		printf("\nInserire la posizione dello step\n\n");
+		fflush(stdin);
+		gets(nuova_posizione);
+
+		if(isOnlyNumbers(nuova_posizione)==true) {
+
+			messaggio_errore();
+			modifica_procedura(ingrediente);
+
+		}
+
+        num_ingredienti=atoi(archivio_ricette[ingrediente].num_step);
+        nuova_posizione_int=atoi(nuova_posizione);
+
+        num_ingredienti++;
+
+        nuova_posizione_int--;
+
+        sprintf(archivio_ricette[ingrediente].num_step, "%d", num_ingredienti);
+
+        for(i=nuova_posizione_int;i<num_ingredienti;i++){
+
+        	strcpy(archivio_ricette[ingrediente].procedura[nuova_posizione_int+i],archivio_ricette[ingrediente].procedura[nuova_posizione_int+i-1]);
+
+        }
+
+        //strcpy(archivio_ricette[ingrediente].procedura[nuova_posizione_int],nuovo_dato);
+
+        file_save_ricette(num_linee);
+
+	break;
+
+	case 2:
+
+		system("cls");
+		printf("Elenco degli step\n\n");
+
+		num_ingredienti=atoi(archivio_ricette[ingrediente].num_step);
+
+		for(i=0;i<num_ingredienti;i++){
+
+			printf("%d)%s\n",i+1,archivio_ricette[ingrediente].procedura[i]);
+
+		}
+
+		do{
+
+		printf("\n\nChe step si intende modificare?\n\n");
+		fflush(stdin);
+		gets(selezione);
+
+		if(isOnlyNumbers(selezione)==true) {
+
+			messaggio_errore();
+			modifica_procedura(ingrediente);
+
+		}
+
+		selezione_int=atoi(selezione);
+
+		if(selezione_int>num_ingredienti){
+
+			printf("\nHai selezionato uno step non esistente,riprova");
+		}
+
+		}while(selezione_int>num_ingredienti);
+
+		printf("\nInserire lo step modificato\n\n");
+		fflush(stdin);
+		gets(nuovo_dato);
+
+		selezione_int--; //decremento di uno per allinearmi con l'array
+
+        strcpy(archivio_ricette[ingrediente].procedura[selezione_int],nuovo_dato);
+
+        file_save_ricette(num_linee);
+
+	break;
+
+	case 3:
+
+		system("cls");
+		printf("Elenco degli step\n\n");
+
+		num_ingredienti=atoi(archivio_ricette[ingrediente].num_step);
+
+		for(i=0;i<num_ingredienti;i++){
+
+			printf("%d)%s\n",i+1,archivio_ricette[ingrediente].procedura[i]);
+
+		}
+
+		do{
+
+		printf("\n\nChe step si intende rimuovere?\n\n");
+		fflush(stdin);
+		gets(selezione);
+
+		selezione_int=atoi(selezione);
+
+		if(selezione_int>num_ingredienti){
+
+			printf("\nHai selezionato uno step non esistente,riprova");
+		}
+
+		}while(selezione_int>num_ingredienti);
+
+		selezione_int--; //decremento di uno per allinearmi con l'array
+
+	    for (i=selezione_int;i<num_ingredienti;i++){ 		//ciclo per copiare i valori nella posizione precedente,in modo da rimuovere l'alimento e non lasciare spazi vuoti nell'elenco
+
+	       strcpy(archivio_ricette[ingrediente].procedura[i],archivio_ricette[ingrediente].procedura[i+1]);
+
+	    }
+
+	    num_ingredienti--;
+
+	    sprintf(archivio_ricette[ingrediente].num_step, "%d", num_ingredienti);
+
+	    file_save_ricette(num_linee);
 
 
 	break;
@@ -823,3 +1033,4 @@ void modifica_ingredienti(int ingrediente){
 	system("pause");
 
 }
+
