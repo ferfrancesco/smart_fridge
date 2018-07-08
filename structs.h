@@ -103,6 +103,7 @@ struct ricetta{
     ///numero di volte in cui una ricetta è stata preparata
     char num_preparazioni[5];
 
+    ///kcal di una ricetta
     char kcal[10];
 
 
