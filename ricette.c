@@ -434,6 +434,7 @@ void visualizza_ricette(){
 * @post il sistema aggiungera' una ricettaal file "ricette.txt"
 * E' possibile immettere il nome della ricetta, gli ingredienti, la difficolta' e gli steps.
 * **/
+//todo aggiungere kcal per 100g di ogni ricetta
 void aggiungi_ricette(){
 
     char selezione[10];
@@ -560,6 +561,7 @@ void aggiungi_ricette(){
 
 }
 
+//todo commenta
 void modifica_ricette(){
 
 	char selezione[10];
@@ -690,6 +692,8 @@ void modifica_ricette(){
     ricette();
 
 }
+
+//todo commenta
 
 void modifica_ingredienti(int ingrediente){
 
@@ -847,6 +851,8 @@ void modifica_ingredienti(int ingrediente){
 	system("pause");
 
 }
+
+//todo commenta
 
 void modifica_procedura(int ingrediente){
 
@@ -1036,6 +1042,8 @@ void modifica_procedura(int ingrediente){
 	system("pause");
 
 }
+
+//todo commenta
 
 void rimuovi_ricette(){
 
