@@ -80,3 +80,5 @@ void modifica_ricette();
 void modifica_ingredienti(int ingrediente);
 
 void modifica_procedura(int ingrediente);
+
+void rimuovi_ricette();
