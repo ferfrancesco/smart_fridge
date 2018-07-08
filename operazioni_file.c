@@ -8,6 +8,13 @@ typedef int bool;
 #define true 1
 #define false 0
 
+/**
+ * Questa funzione permette di contare le linee di cui un file e' composto.
+ *
+ * @param nome_file, ovvero il nome del file di cui bisogna contare il numero di linee.
+ * @return num_linee, il numero di linee di cui il file e' composto
+ */
+
 int conta_linee(char nome_file[40]){ //TODO togli funzione perchè inutileee
 
     int num_linee=0;
@@ -356,7 +363,11 @@ void file_save_menu_sett(){
     fclose(fp);
 
 }
-//todo aspetta
+/**
+ * Questa procedura permette di aggiungere stringhe in append ad un file, in questo caso "lista_spesa.txt"
+ *
+ * @param stringa,ovvero la stringa da aggiungere in append al file "lista_spesa.txt"
+ */
 void file_append_lista(char stringa[]){
 
     FILE *fp;
