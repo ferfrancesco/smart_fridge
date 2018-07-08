@@ -232,6 +232,18 @@ void consumazioni(int num_consumazioni,int num_linee,char stringa[]){
 	file_save_consumazioni(num_linee);
 }
 
+/**
+ * Questa procedura permette di ordinare, tramite un algoritmo "selection sort", l'array passato alla procedura,
+ * in maniera decrescente.
+ *
+ * @pre dev'essere selezionata un'opzione che includa l'ordinamento di qualcosa
+ * @post Si ha l'ordinamento di un vettore di interi, insieme ai nomi ad essi eventualmente associati
+ *
+ * @param array_int, ovvero l'array di interi del quale si deve effettuare l'ordinamento principale
+ * @param array_nomi,ovvero l'array dei nomi corrispondenti ai numeri che devono essere ordinati
+ * @param num_linee, ovvero il numero di linee di lui e' composto il file che deve essere ordinato
+ */
+
 void selection_sort(int array_int[],char array_nomi[CONSUM_MAX][LUNGH_MAX_NOME], int num_linee) {
 //TODO L'ordinamento è sminchiato,controlla e fixa
 

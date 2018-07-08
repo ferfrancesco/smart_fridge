@@ -75,5 +75,15 @@ const char* low_conversion(char* stringa[]); //converte la stringa di ingresso i
   */
 void consumazioni(int num_consumazioni,int num_linee,char *stringa[]);
 
+/**
+ * Questa procedura permette di ordinare, tramite un algoritmo "selection sort", l'array passato alla procedura,
+ * in maniera decrescente.E' una procedura generica e riusabile in quanto, a seconda dei parametri attuali che le vengono forniti, ordina
+ * oggetti diversi. Se gli oggetti appartengono ad una struct, vengono copiati i campi della struct in array locali ed avviene l'ordinamento di questi array locali.
+ *
+ * @param array_int, ovvero l'array di interi del quale si deve effettuare l'ordinamento principale
+ * @param array_nomi,ovvero l'array dei nomi corrispondenti ai numeri che devono essere ordinati
+ * @param num_linee, ovvero il numero di linee di lui e' composto il file che deve essere ordinato
+ */
+
 void selection_sort(int array_int[],char array_nomi[CONSUM_MAX][LUNGH_MAX_NOME], int num_linee);
 
