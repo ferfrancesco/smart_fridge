@@ -23,7 +23,7 @@ int num_linee;
  * Questo array serve a conservare il numero di stelle indicanti la difficoltà di una ricetta.
  */
 
-char stelle[5]={0};
+char stelle[5]={0};  //inizialiazzo l'array della stampa delle stelle
 
 /**
  * 		Questa procedura permette di stampare il sottomenu per la categoria "ricette".
@@ -383,6 +383,8 @@ void ricerca_ricette(){
 	        system("pause");
 
 		break;
+
+		//TODO aggiungi Default
 	}
 
 }
