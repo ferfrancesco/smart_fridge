@@ -133,7 +133,7 @@ int file_load_ricette(){
 
         for(j=0;j<temp_int;j++){
 
-            fscanf(fp,"%4000[^,],\n",archivio_ricette[i].procedura[j]);
+            fscanf(fp,"%4000[^-]-\n",archivio_ricette[i].procedura[j]);
 
         }
 
@@ -328,7 +328,7 @@ void file_save_ricette (int num_linee){
 
         for(j=0;j<temp_int;j++){
 
-            fprintf(fp,"%s,",archivio_ricette[i].procedura[j]);
+            fprintf(fp,"%s-",archivio_ricette[i].procedura[j]);
 
         }
 

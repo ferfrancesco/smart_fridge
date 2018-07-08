@@ -78,6 +78,9 @@ void ricette(){
 
         case 5:
 
+        	rimuovi_ricette();
+			ricette();
+
         	break;
 
         case 6:
@@ -1034,3 +1037,70 @@ void modifica_procedura(int ingrediente){
 
 }
 
+void rimuovi_ricette(){
+
+    char selezione[10];
+    int selezione_int;
+
+    int valore_temp; //valore temporaneo per ciclare la copia di ingredienti e procedura
+
+    int i;
+    int j;
+
+    system("cls");
+    stampa_elenco_ricette(num_linee);
+
+    printf("\n\nChe ricetta si desidera eliminare?Inserire un valore numerico:");
+
+    fflush(stdin);
+    gets(selezione);
+
+    if(isOnlyNumbers(selezione)==true) {
+
+    	messaggio_errore();
+        ricette();
+
+    }
+
+    else if (isOnlyNumbers(selezione)==false){
+
+        selezione_int=atoi(selezione);
+    }
+
+    selezione_int--; //decremento di 1 per allinearmi con l'array
+
+    for(i=selezione_int;i<num_linee;i++){
+
+    	strcpy(archivio_ricette[i].nome,archivio_ricette[i+1].nome);
+    	strcpy(archivio_ricette[i].difficolta,archivio_ricette[i+1].difficolta);
+    	strcpy(archivio_ricette[i].num_preparazioni,archivio_ricette[i+1].num_preparazioni);
+    	strcpy(archivio_ricette[i].kcal,archivio_ricette[i+1].kcal);
+
+    	strcpy(archivio_ricette[i].num_ingredienti,archivio_ricette[i+1].num_ingredienti);
+
+    	valore_temp=atoi(archivio_ricette[i].num_ingredienti);
+
+    	for(j=0;j<valore_temp;j++){
+
+    		strcpy(archivio_ricette[i].ingredienti[j],archivio_ricette[i+1].ingredienti[j]);
+    	}
+
+    	strcpy(archivio_ricette[i].num_step,archivio_ricette[i+1].num_step);
+
+    	valore_temp=atoi(archivio_ricette[i].num_step);
+
+    	for(j=0;j<valore_temp;j++){
+
+    		strcpy(archivio_ricette[i].procedura[j],archivio_ricette[i+1].procedura[j]);
+    	}
+
+
+    }
+
+    num_linee--;
+
+    file_save_ricette(num_linee);
+    printf("\n\n");
+    system("pause");
+
+}
