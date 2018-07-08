@@ -479,7 +479,7 @@ void aggiungi_ricette(){
 				ricette();
 		}
 
-    printf("\nQuante KCAL ha approssimativamente questa ricetta?(Inserire valori numerici):");
+    printf("\nQuante KCAL ha approssimativamente questa ricetta?(Inserire valori numerici, kcal su 100g di pietanza):");
     gets(selezione);
 
     if(isOnlyNumbers(selezione)==true) {
@@ -563,16 +563,30 @@ void aggiungi_ricette(){
 
 }
 
-//todo commenta
+/**
+ * Questa procedura permette di modificare le caratteristiche di una ricetta, ovvero nome, difficolta', kcal, ingredienti o procedura.
+ * Si accede ad un sottomenu' di modifica, dal quale si immette la scelta relativa al dato da modificare.
+ * 1)nome
+ * 2)difficolta'
+ * 3)kcal
+ * 4)ingredienti
+ * 5)procedura
+ *
+ * @pre Per accedere al sottomenu' di modifica e' necessario accedere alla categoria "ricette" del programma
+ * @pre E' necessario che ci siano ricette all'interno del programma
+ *
+ * @post si ha l'effettiva modifica dei dati di una ricetta
+ *
+ */
 void modifica_ricette(){
 
-	char selezione[10];
-	int selezione_int;
+	char selezione[10]; // stringa che memorizza la scelta dell'utente su che ricetta modificare
+	int selezione_int;	//conversione di "selezione" in intero
 
-	int selezione_menu;
+	int selezione_menu;	//scelta dell'utente su qualce parametro di una ricetta modificare
 
-	char nuovo_dato[50];
-	int nuovo_dato_int;
+	char nuovo_dato[200];// stringa che memorizza il nuovo dato da sostituire al precedente
+	int nuovo_dato_int;	// conversione di "nuovo_dato" in intero, se questo e' un dato numerico
 
 	system("cls");
 	stampa_elenco_ricette(num_linee);
@@ -695,21 +709,27 @@ void modifica_ricette(){
 
 }
 
-//todo commenta
+/**
+ * Questa procedura permette di aggiungere, modificare o rimuovere un ingrediente da una ricetta gia' esistente all'interno del sistema Smart Fridge.
+ * @pre e' necessario prima accedere alla categoria "ricette", poi al sottomenu' di modifica di una ricetta.
+ * @pre e' necessario che ci siano ricette all'interno dello Smart Fridge
+ *
+ * @param ingrediente, ovvero il numero dell'ingrediente che, eventualmente, si vuole modificare
+ */
 
 void modifica_ingredienti(int ingrediente){
 
-	char selezione[10];
-	int selezione_int;
+	char selezione[10];	//stringa che memorizza la selezione dell'utente sull'ingrediente da modificare
+	int selezione_int;	//conversione ddi "selezione"
 
-	int selezione_menu;
+	int selezione_menu;	//memorizza la scelta dell'utente su cosa fare (aggiungere, modificare o rimuovere un ingrediente da una ricetta)
 	int i;
 
-	char nuovo_dato[50];
-	char* nuovo_dato_low;
-	int nuovo_dato_int;
+	char nuovo_dato[200]; //stringa che memorizza il nuovo ingrediente (o la modifica di un ingrediente gia' esistente)
+	char* nuovo_dato_low; //conversione di "nuovo_dato" in minuscolo
+	int nuovo_dato_int;	  // conversione di "nuovo_dato" in intero, se dovesse essere un dato di tipo numerico
 
-	int num_ingredienti;
+	int num_ingredienti;  //contatore che viene incrementato, qualora venissero aggiunti ingredienti
 
 	system("cls");
 	printf("Che operazione vuoi eseguire?\n\n1)Aggiungi un ingrediente\n2)Modifica un ingrediente\n3)Rimuovi un ingrediente\n4)Torna al menu'\n\n");
@@ -854,9 +874,14 @@ void modifica_ingredienti(int ingrediente){
 
 }
 
-//todo commenta
+/**
+ * Questa procedura permette di modificare i passi di una ricetta.
+ * @pre e' necessario accedere al sottomenu' di modifica di una ricetta e poi selezionare la modifica della procedura della ricetta
+ * @pre devono esserci ricette all'interno dello Smart Fridge
+ * @param step,ovvero il numero dello step che si intende modificare o eliminare
+ */
 
-void modifica_procedura(int ingrediente){
+void modifica_procedura(int step){
 
 	num_linee=file_load_ricette();
 
@@ -866,14 +891,14 @@ void modifica_procedura(int ingrediente){
 	int selezione_menu;
 	int i;
 
-	char nuova_posizione[10];
-	int nuova_posizione_int;
+	char nuova_posizione[10]; //stringa che memorizza la posizione del nuovo step, qualora se ne dovesse aggiungere uno
+	int nuova_posizione_int;  //conversione di "nuova_posizione" in intero
 
-	char nuovo_dato[50];
-	char* nuovo_dato_low;
-	int nuovo_dato_int;
+	char nuovo_dato[200];	  //stringa che memorizza temporaneamente il nuovo step che si andra' ad aggiungere o a sostituire al precedente
+	char* nuovo_dato_low;	  //conversione in minuscolo di "nuovo_dato"
+	int nuovo_dato_int;		  //conversione di "nuovo_dato" in intero se si tratta di un dato numerico
 
-	int num_ingredienti;
+	int num_step;	 		  //contatore che viene incrementato, qualora venissero aggiunti steps alla ricetta
 
 	system("cls");
 	printf("Che operazione vuoi eseguire?\n\n1)Aggiungi uno step\n2)Modifica uno step\n3)Rimuovi uno step\n4)Torna al menu'\n\n");
@@ -889,11 +914,11 @@ void modifica_procedura(int ingrediente){
 		system("cls");
 		printf("Elenco degli step\n\n");
 
-		num_ingredienti=atoi(archivio_ricette[ingrediente].num_step);
+		num_step=atoi(archivio_ricette[step].num_step);
 
-		for(i=0;i<num_ingredienti;i++){
+		for(i=0;i<num_step;i++){
 
-			printf("%d)%s\n",i+1,archivio_ricette[ingrediente].procedura[i]);
+			printf("%d)%s\n",i+1,archivio_ricette[step].procedura[i]);
 
 		}
 
@@ -908,26 +933,26 @@ void modifica_procedura(int ingrediente){
 		if(isOnlyNumbers(nuova_posizione)==true) {
 
 			messaggio_errore();
-			modifica_procedura(ingrediente);
+			modifica_procedura(step);
 
 		}
 
-        num_ingredienti=atoi(archivio_ricette[ingrediente].num_step);
+        num_step=atoi(archivio_ricette[step].num_step);
         nuova_posizione_int=atoi(nuova_posizione);
 
-        num_ingredienti++;
+        num_step++;
 
         nuova_posizione_int--;
 
-        sprintf(archivio_ricette[ingrediente].num_step, "%d", num_ingredienti);
+        sprintf(archivio_ricette[step].num_step, "%d", num_step);
 
-        for(i=nuova_posizione_int;i<num_ingredienti;i++){
+        for(i=nuova_posizione_int;i<num_step;i++){
 
-        	strcpy(archivio_ricette[ingrediente].procedura[nuova_posizione_int+i],archivio_ricette[ingrediente].procedura[nuova_posizione_int+i-1]);
+        	strcpy(archivio_ricette[step].procedura[nuova_posizione_int+i],archivio_ricette[step].procedura[nuova_posizione_int+i-1]);
 
         }
 
-        //strcpy(archivio_ricette[ingrediente].procedura[nuova_posizione_int],nuovo_dato);
+        //strcpy(archivio_ricette[step].procedura[nuova_posizione_int],nuovo_dato);
 
         file_save_ricette(num_linee);
 
@@ -938,11 +963,11 @@ void modifica_procedura(int ingrediente){
 		system("cls");
 		printf("Elenco degli step\n\n");
 
-		num_ingredienti=atoi(archivio_ricette[ingrediente].num_step);
+		num_step=atoi(archivio_ricette[step].num_step);
 
-		for(i=0;i<num_ingredienti;i++){
+		for(i=0;i<num_step;i++){
 
-			printf("%d)%s\n",i+1,archivio_ricette[ingrediente].procedura[i]);
+			printf("%d)%s\n",i+1,archivio_ricette[step].procedura[i]);
 
 		}
 
@@ -955,18 +980,18 @@ void modifica_procedura(int ingrediente){
 		if(isOnlyNumbers(selezione)==true) {
 
 			messaggio_errore();
-			modifica_procedura(ingrediente);
+			modifica_procedura(step);
 
 		}
 
 		selezione_int=atoi(selezione);
 
-		if(selezione_int>num_ingredienti){
+		if(selezione_int>num_step){
 
 			printf("\nHai selezionato uno step non esistente,riprova");
 		}
 
-		}while(selezione_int>num_ingredienti);
+		}while(selezione_int>num_step);
 
 		printf("\nInserire lo step modificato\n\n");
 		fflush(stdin);
@@ -974,7 +999,7 @@ void modifica_procedura(int ingrediente){
 
 		selezione_int--; //decremento di uno per allinearmi con l'array
 
-        strcpy(archivio_ricette[ingrediente].procedura[selezione_int],nuovo_dato);
+        strcpy(archivio_ricette[step].procedura[selezione_int],nuovo_dato);
 
         file_save_ricette(num_linee);
 
@@ -985,11 +1010,11 @@ void modifica_procedura(int ingrediente){
 		system("cls");
 		printf("Elenco degli step\n\n");
 
-		num_ingredienti=atoi(archivio_ricette[ingrediente].num_step);
+		num_step=atoi(archivio_ricette[step].num_step);
 
-		for(i=0;i<num_ingredienti;i++){
+		for(i=0;i<num_step;i++){
 
-			printf("%d)%s\n",i+1,archivio_ricette[ingrediente].procedura[i]);
+			printf("%d)%s\n",i+1,archivio_ricette[step].procedura[i]);
 
 		}
 
@@ -1001,24 +1026,24 @@ void modifica_procedura(int ingrediente){
 
 		selezione_int=atoi(selezione);
 
-		if(selezione_int>num_ingredienti){
+		if(selezione_int>num_step){
 
 			printf("\nHai selezionato uno step non esistente,riprova");
 		}
 
-		}while(selezione_int>num_ingredienti);
+		}while(selezione_int>num_step);
 
 		selezione_int--; //decremento di uno per allinearmi con l'array
 
-	    for (i=selezione_int;i<num_ingredienti;i++){ 		//ciclo per copiare i valori nella posizione precedente,in modo da rimuovere l'alimento e non lasciare spazi vuoti nell'elenco
+	    for (i=selezione_int;i<num_step;i++){ 		//ciclo per copiare i valori nella posizione precedente,in modo da rimuovere l'alimento e non lasciare spazi vuoti nell'elenco
 
-	       strcpy(archivio_ricette[ingrediente].procedura[i],archivio_ricette[ingrediente].procedura[i+1]);
+	       strcpy(archivio_ricette[step].procedura[i],archivio_ricette[step].procedura[i+1]);
 
 	    }
 
-	    num_ingredienti--;
+	    num_step--;
 
-	    sprintf(archivio_ricette[ingrediente].num_step, "%d", num_ingredienti);
+	    sprintf(archivio_ricette[step].num_step, "%d", num_step);
 
 	    file_save_ricette(num_linee);
 
@@ -1045,7 +1070,12 @@ void modifica_procedura(int ingrediente){
 
 }
 
-//todo commenta
+/**
+ * Questa procedura permette di rimuovere una ricetta dal sistema Smart Fridge.
+ * @pre e' necessario accedere al sottomenu' della categoria "ricette" e selezionare "rimuovi una ricetta"
+ * @post rimuove una ricetta
+ *
+ */
 
 void rimuovi_ricette(){
 

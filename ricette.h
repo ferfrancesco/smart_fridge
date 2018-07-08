@@ -74,11 +74,43 @@ void visualizza_ricette();
  */
 
 void aggiungi_ricette();
+/**
+ * Questa procedura permette di modificare le caratteristiche di una ricetta, ovvero nome, difficolta', kcal, ingredienti o procedura.
+ * Si accede ad un sottomenu' di modifica, dal quale si immette la scelta relativa al dato da modificare.
+ * 1)nome
+ * 2)difficolta'
+ * 3)kcal
+ * 4)ingredienti
+ * 5)procedura
+ *
+ * @pre Per accedere al sottomenu' di modifica e' necessario accedere alla categoria "ricette" del programma
+ * @pre E' necessario che ci siano ricette all'interno del programma
+ *
+ * @post si ha l'effettiva modifica dei dati di una ricetta
+ *
+ */
 
 void modifica_ricette();
-
+/**
+ * Questa procedura permette di aggiungere, modificare o rimuovere un ingrediente da una ricetta gia' esistente all'interno del sistema Smart Fridge.
+ * @pre e' necessario prima accedere alla categoria "ricette", poi al sottomenu' di modifica di una ricetta.
+ * @pre e' necessario che ci siano ricette all'interno dello Smart Fridge
+ *
+ * @param ingrediente, ovvero il numero dell'ingrediente che, eventualmente, si vuole modificare
+ */
 void modifica_ingredienti(int ingrediente);
-
+/**
+ * Questa procedura permette di modificare i passi di una ricetta.
+ * @pre e' necessario accedere al sottomenu' di modifica di una ricetta e poi selezionare la modifica della procedura della ricetta
+ * @pre devono esserci ricette all'interno dello Smart Fridge
+ * @param step,ovvero il numero dello step che si intende modificare o eliminare
+ */
 void modifica_procedura(int ingrediente);
+/**
+ * Questa procedura permette di rimuovere una ricetta dal sistema Smart Fridge.
+ * @pre e' necessario accedere al sottomenu' della categoria "ricette" e selezionare "rimuovi una ricetta"
+ * @post rimuove una ricetta
+ *
+ */
 
 void rimuovi_ricette();
