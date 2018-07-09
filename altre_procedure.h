@@ -87,4 +87,15 @@ void consumazioni(int num_consumazioni,int num_linee,char *stringa[]);
 
 void selection_sort(int array_int[],char array_nomi[CONSUM_MAX][LUNGH_MAX_NOME], int num_linee);
 
+/**
+ * Funzione che introduce il testing con CUnit.
+ * E' possibile accedervi selezionando la scelta 5 nel menu' principale.
+ * Testa le asserzioni (Test Method) inserite in una o piu' "Test Suite" e ne valuta la verita' o la falsita'.
+ * Vi sono diversi tipi di asserzione, a seconda di quale funzione si vuole testare.
+ * Le funzioni testate sono "low_conversion", "stampa_stelle" e "isOnlyNumbers".
+ * Le asserzioni sono raggruppate in un'unica Test Suite, la quale a sua volta si trova nel Test Registry allocato e deallocato all'inizio del programma.
+ *
+ *
+ * @return CU_get_error();
+ */
 int testing();
