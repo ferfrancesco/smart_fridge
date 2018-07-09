@@ -70,7 +70,7 @@ void varie(){
  * @pre per selezionare la prima scelta del menu, c'e' bisogno che il menu sia gia' stato inserito in precedenza
  */
 
-void menu_sett(){
+void menu_sett(){ //TODO IMPORTANTE: SEPARARE LA VISUALIZZAZIONE DALL'INSERIMENTO, COSì COME SCRITTO NELL'ANALISI
 
   //  char temp_nome_file[40];
     int menu_select=0;
@@ -197,7 +197,7 @@ void lista(){
     int i;
 
     system("cls");
-    printf("Scegli un opzione\n\n1)Visualiza lista della spesa\n2)Aggiungi elemento alla lista\n3)Rimuovi elemento dalla lista\n4)Torna al menu' precedente\n\n");
+    printf("Scegli un opzione\n\n1)Visualizza lista della spesa\n2)Aggiungi elemento alla lista\n3)Rimuovi elemento dalla lista\n4)Torna al menu' precedente\n\n");
 
     fflush(stdin);
 
@@ -262,7 +262,7 @@ void statistiche(){
 	int selezione;	//variabile che memorizza la selezione dell'utente nel sottomenu'
 	int num_linee;	//numero di linee di cui e' composto il file "consumazioni.txt"
 	int i;
-	int j;
+	//int j;
 
 	char nomi_temp[CONSUM_MAX][LUNGH_MAX_NOME]; //array locale in cui copiare il campo dei nomi di una delle struct di cui si devono ordinare i numeri
 	int valori_ordinare[CONSUM_MAX]; 			//array locale in cui copiare il campo della struct da ordinare (composto da interi)
