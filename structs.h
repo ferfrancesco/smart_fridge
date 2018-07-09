@@ -21,7 +21,7 @@ struct menu_settimana{
 	/// nome del giorno della settimana
     char dayname[12];
     /// nome del piatto
-    char pietanza[50];
+    char pietanza[2][LUNGH_MAX_NOME];
 
 }giorno[6];
 
@@ -73,9 +73,6 @@ struct consumazioni{
     int consumazioni_int;
 
 }archivio_consumazioni[CONSUM_MAX],archivio_cons_ordinato[CONSUM_MAX];
-
-//struct consumazioni archivio_cons_ordinato[CONSUM_MAX];
-
 
 /**
  * Struct che definisce ogni singola ricetta presente nella lista inserita nello Smart Fridge

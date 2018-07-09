@@ -72,103 +72,110 @@ void varie(){
 
 void menu_sett(){ //TODO IMPORTANTE: SEPARARE LA VISUALIZZAZIONE DALL'INSERIMENTO, COSì COME SCRITTO NELL'ANALISI
 
-  //  char temp_nome_file[40];
     int menu_select=0;
     int i;
-    FILE *fp;
+
+    char selezione[10];
+    int selezione_int;
+
+    char pasto[LUNGH_MAX_NOME];
+
+
+    file_load_menu_sett();
+
+    system("cls");
+    printf("Menu' settimanale:\n\n1)Visualizza menu'\n2)Inserisci pasto\n3)Cancella menu'\n4)Torna al menu' precedente\n\n");
 
     fflush(stdin);
-    system("cls");
-
-    printf("Menu' settimanale:\n\n1)Visualizza o Inserisci\n2)Modifica\n3)Torna al menu' precedente\n\n");
-
     scanf("%d",&menu_select);
 
     switch(menu_select){
 
         case 1:
 
-            if(menu_inserito==false){    //controllo se il menu' settimanale è stato già inserito.in caso contrario,do messaggio di errore
+            system("cls");
 
-                /*	strcpy(temp_nome_file,"menu_sett.txt");	//caricamento del file menu
+            for(i=0;i<7;i++){
 
-                    fp = fopen (temp_nome_file,"r");
-
-                    if ((fp!=NULL) && (conta_linee(temp_nome_file)==7)){   //controllo la presenza del file. se il file è presente e vi sono 7 righe,il menu' è stato già inserito
-
-                        menu_inserito=true;
-
-                    }
-
-                    fclose(fp);*/
-
-                fflush(stdin);
-                system("cls");
-                printf("Il menu' della settimana non e' stato ancora definito.Vuoi definirlo ora?\n\n1)Si\n2)No\n\n");   //propongo l'inserimento del menu della settimana
-
-                scanf("%d",&menu_select);
-
-                switch(menu_select){
-
-                    case 1:
-
-                        fflush(stdin);
-                        system("cls");
-
-                        printf("Inserire il piatto del %s:",giorno[0].dayname);			//popolo il primo giorno della settimana
-                        gets(giorno[0].pietanza);
-
-                        for(i=1;i<7;i++){
-
-                            fflush(stdin);
-                            printf("\nInserire il piatto del %s:",giorno[i].dayname);		//popolo il resto della settimana
-                            gets(giorno[i].pietanza);
-
-                        }
-
-                        menu_inserito=true;
-
-                        file_save_menu_sett();
-
-                        printf("\n---------------------------------\nTornerai ora al menu' precedente\n");
-                        system("pause");
-                        menu_sett();
-
-                        break;
-
-                    case 2:
-                        menu_sett();
-                        break;
-
-                    default:
-                        messaggio_errore();
-                        menu_sett();
-                        break;
-                }
-            }
-
-            else if (menu_inserito==true){
-
-                system("cls");
-
-                file_load_menu_sett();
-
-                for(i=0;i<7;i++){
-
-                    printf("%-10s:%s\n\n",giorno[i].dayname,giorno[i].pietanza);
-
-                }
-
-                printf("\n---------------------------------\nTornerai ora al menu' precedente\n");
-                system("pause");
-                menu_sett();
+            	  printf("***************%-10s***************",giorno[i].dayname);
+            	  printf("\nPranzo:%-15sCena:%-15s",giorno[i].pietanza[0],giorno[i].pietanza[1]);
+            	  printf("\n\n----------------------------------------\n");
 
             }
+
+            printf("Tornerai ora al menu' precedente\n");
+            system("pause");
+            menu_sett();
 
             break;
 
         case 2:
-            //	ricette();
+
+        	system("cls");
+        	printf("In che giorno vuoi inserire il pasto?\n\n1)Lunedi'\n2)Martedi'\n3)Mercoledi'\n4)Giovedi'\n5)Venerdi'\n6)Sabato\n7)Domenica\n");
+        	fflush(stdin);
+        	gets(selezione);
+
+        	if(isOnlyNumbers(selezione)==true) {
+
+        	    	messaggio_errore();
+        	        menu_sett();
+
+        	}
+
+        	selezione_int=atoi(selezione);
+
+        	if((selezione_int<=0) || (selezione_int>7)){
+
+        		printf("\nDevi inserire un valore da 1 a 7\n");
+        		system("pause");
+        		menu_sett();
+
+        	}
+
+        	selezione_int--; //mi allineo all'array
+
+        	printf("Vuoi inserire il pranzo o la cena?\n\n1)Pranzo\n2)Cena\n");
+
+        	fflush(stdin);
+        	scanf("%d",&menu_select);
+
+        	switch(menu_select){
+
+        	case 1:
+
+        		printf("\nInserisci il pasto:");
+        		fflush(stdin);
+        		gets(giorno[selezione_int].pietanza[0]);
+
+        		//strcpy(giorno[selezione_int].pietanza[0],pasto);
+
+        		break;
+
+        	case 2:
+
+        		printf("\nInserisci il pasto:");
+        		fflush(stdin);
+        		gets(giorno[selezione_int].pietanza[1]);
+
+        		//strcpy(giorno[selezione_int].pietanza[1],pasto);
+
+        		break;
+
+        	default:
+
+                messaggio_errore();
+                menu_sett();
+                break;
+
+        	}
+
+            file_save_menu_sett();
+
+            printf("\nInserimento completato,tornerai ora al menu' precedente\n");
+            system("pause");
+            menu_sett();
+
             break;
 
         case 3:
@@ -210,7 +217,7 @@ void lista(){
             system("cls");
             printf("Questa e' la lista della spesa generata automaticamente\n\n");
 
-            num_linee_lista=conta_linee("lista_spesa.txt");
+            //num_linee_lista=conta_linee("lista_spesa.txt");
 
             file_load_lista(num_linee_lista);
 

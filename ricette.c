@@ -17,16 +17,20 @@ typedef int bool;
 #define MAX_RICETTE 50  //quantità max di ricette
 #define LUNGH_MAX_NOME 50 //Luneghezza massima per il nome di un alimento
 
-int num_linee;
-
 /**
  * Questo array serve a conservare il numero di stelle indicanti la difficoltà di una ricetta.
  */
 
 char stelle[5]={0};  //inizialiazzo l'array della stampa delle stelle
+int num_linee;
+
+
+//----------------------------------------------------------------------------
+//PROCEDURE RICETTE VARIE
+
 
 /**
- * 		Questa procedura permette di stampare il sottomenu per la categoria "ricette".
+ * 	Questa procedura permette di stampare il sottomenu per la categoria "ricette".
  * 		E' possibile :
  * 	1) 	Visualizzare le ricette salvate nel sistema
  * 	2)	Ricercare corrispondenza ricette per ingrediente o per numero di Kcal
@@ -96,43 +100,6 @@ void ricette(){
 
 }
 
-
-/**
- * Questa procedura permette di visualizzare l'elenco delle ricette inserite nel sistema.
- *
- * @pre E' necessario che il file delle ricette sia gia' esistente nel sistema
- *
- * @param num_linee, ovvero il numero di linee di cui il file "ricette.txt" e' costituito
- */
-void stampa_elenco_ricette(int num_linee){
-
-	//todo inserire messaggio d'errore quando nel sistema non sono presenti ricette "Non ci sono ricette!"
-    int i;
-
-    if(num_linee==0){
-
-    	printf("Nessuna ricetta salvata!\n\n");
-    	system("pause");
-    	ricette();
-    }
-
-    else{
-
-        printf("Elenco delle ricette\n\n");
-        printf("|%-50s|%-12s|","Nome Ricetta","Difficolta'");
-        printf("\n-----------------------------------------------------------------\n");
-
-        for(i=0;i<num_linee;i++){
-
-            printf("|%-50s|",archivio_ricette[i].nome);
-
-            printf("%-12s|%d)\n",stampa_stelle(i),i+1);
-        }
-
-    }
-
-}
-
 /**
  * Questa funzione permette di calcolare il numero di stelline da visualizzare relativamente alla difficolta di una ricetta
  *
@@ -162,6 +129,93 @@ char* stampa_stelle(int num){
     strcpy(stelle,stars); //copio l'array locale nell'array globale
 
     return stelle;
+}
+
+
+//----------------------------------------------------------------------------
+
+
+
+//----------------------------------------------------------------------------
+//VISUALIZZAZIONE RICETTE
+
+
+/**
+ * Questa procedura richiama le sottoprocedure "stampa_elenco_ricette" e, a sua volta, stampa_ricette
+ */
+
+void visualizza_ricette(){
+
+    char selezione[10];
+    int selezione_int;
+
+    system("cls");
+    stampa_elenco_ricette(num_linee);
+
+    printf("\n\nChe ricetta si desidera visualizzare?Inserire un valore numerico:");
+
+    fflush(stdin);
+    gets(selezione);
+
+    if(isOnlyNumbers(selezione)==true) {
+
+    	messaggio_errore();
+        ricette();
+
+    }
+
+    else if (isOnlyNumbers(selezione)==false){
+
+        selezione_int=atoi(selezione);
+    }
+
+    selezione_int--; //decremento di 1 per allinearmi con l'array
+
+    system("cls");
+
+    stampa_ricetta(selezione_int);
+
+    printf("\n------------------------------------------------------------------");
+    printf("\nFinito!Tornerai ora al menu' delle ricette\n\n");
+    system("pause");
+
+}
+
+/**
+ * Questa procedura permette di visualizzare l'elenco delle ricette inserite nel sistema.
+ *
+ * @pre E' necessario che il file delle ricette sia gia' esistente nel sistema
+ *
+ * @param num_linee, ovvero il numero di linee di cui il file "ricette.txt" e' costituito
+ */
+
+void stampa_elenco_ricette(int num_linee){
+
+	//todo inserire messaggio d'errore quando nel sistema non sono presenti ricette "Non ci sono ricette!"
+    int i;
+
+    if(num_linee==0){
+
+    	printf("Nessuna ricetta salvata!\n\n");
+    	system("pause");
+    	ricette();
+    }
+
+    else{
+
+        printf("Elenco delle ricette\n\n");
+        printf("|%-50s|%-12s|","Nome Ricetta","Difficolta'");
+        printf("\n-----------------------------------------------------------------\n");
+
+        for(i=0;i<num_linee;i++){
+
+            printf("|%-50s|",archivio_ricette[i].nome);
+
+            printf("%-12s|%d)\n",stampa_stelle(i),i+1);
+        }
+
+    }
+
 }
 
 /**
@@ -250,6 +304,15 @@ void stampa_ricetta(int num){
 
 }
 
+
+//----------------------------------------------------------------------------
+
+
+
+//----------------------------------------------------------------------------
+//RICERCA RICETTE
+
+
 //todo commenta (ricordati di usare l'algoritmo di scrematura--->
 //fedelucio vuole un ingrediente o un gruppo di ingredienti.
 
@@ -305,6 +368,7 @@ int* ricerca(char alimento[]){
  * E' la procedura che ci permette di accedere alla funzione "ricerca", per trovare le
  * corrispondenze tra un alimento e le ricette disponibili all'interno del sistema.
  */
+
 void ricerca_ricette(){
 
 	char nome_alimento[LUNGH_MAX_NOME];//memorizza il nome dell'alimento di cui cercare un'eventuale corrispondenza di ricetta
@@ -389,46 +453,14 @@ void ricerca_ricette(){
 
 }
 
-/**
- * Questa procedura richiama le sottoprocedure "stampa_elenco_ricette" e, a sua volta, stampa_ricette
- */
 
-void visualizza_ricette(){
+//----------------------------------------------------------------------------
 
-    char selezione[10];
-    int selezione_int;
 
-    system("cls");
-    stampa_elenco_ricette(num_linee);
 
-    printf("\n\nChe ricetta si desidera visualizzare?Inserire un valore numerico:");
+//----------------------------------------------------------------------------
+//GESTIONE RICETTE
 
-    fflush(stdin);
-    gets(selezione);
-
-    if(isOnlyNumbers(selezione)==true) {
-
-    	messaggio_errore();
-        ricette();
-
-    }
-
-    else if (isOnlyNumbers(selezione)==false){
-
-        selezione_int=atoi(selezione);
-    }
-
-    selezione_int--; //decremento di 1 per allinearmi con l'array
-
-    system("cls");
-
-    stampa_ricetta(selezione_int);
-
-    printf("\n------------------------------------------------------------------");
-    printf("\nFinito!Tornerai ora al menu' delle ricette\n\n");
-    system("pause");
-
-}
 /**
  * Questa procedura permette di aggiungere ricette alla lista di ricette presenti all'interno del sistema.
 *
@@ -437,6 +469,7 @@ void visualizza_ricette(){
 * E' possibile immettere il nome della ricetta, gli ingredienti, la difficolta' e gli steps.
 * **/
 //todo aggiungere kcal per 100g di ogni ricetta
+
 void aggiungi_ricette(){
 
     char selezione[10];
@@ -578,6 +611,7 @@ void aggiungi_ricette(){
  * @post si ha l'effettiva modifica dei dati di una ricetta
  *
  */
+
 void modifica_ricette(){
 
 	char selezione[10]; // stringa che memorizza la scelta dell'utente su che ricetta modificare
@@ -1144,3 +1178,6 @@ void rimuovi_ricette(){
     system("pause");
 
 }
+
+
+//----------------------------------------------------------------------------

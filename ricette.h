@@ -8,9 +8,6 @@
  *
  */
 
-
-
-
 #ifndef RICETTE_H_
 #define RICETTE_H_
 #endif /* RICETTE_H_ */
@@ -21,8 +18,10 @@
 #include <string.h>
 #include <time.h>
 
+//----------------------------------------------------------------------------
+//PROCEDURE RICETTE VARIE
+
 void ricette();
-void stampa_elenco_ricette(int num_linee);
 
 /**
  * Questa funzione, dato in input un numero intero, calcola il numero di stelle che verranno visualizzate
@@ -35,7 +34,26 @@ void stampa_elenco_ricette(int num_linee);
  *
  * @return il vettore caricato di stelle in base all'input inserito
  */
+
 char* stampa_stelle(int num); //stampa le stellette di difficolta',int num indica il numero della ricetta
+
+
+//----------------------------------------------------------------------------
+
+
+
+//----------------------------------------------------------------------------
+//VISUALIZZAZIONE RICETTE
+
+/**
+ * Questa procedura richiama a sua volta le sottoprocedure "stampa_elenco_ricette" e "stampa_ricetta"
+ */
+
+void visualizza_ricette();
+
+//TODO COMMENTA
+
+void stampa_elenco_ricette(int num_linee);
 
 /**
  * Questa procedura permette di stampare le caratteristiche relative ad una ricetta, prendendo in input il
@@ -44,7 +62,16 @@ char* stampa_stelle(int num); //stampa le stellette di difficolta',int num indic
  *
  * @param num, ovvero il numero della ricetta di cui visionare le caratteristiche.
  */
+
 void stampa_ricetta(int num);
+
+
+//----------------------------------------------------------------------------
+
+
+
+//----------------------------------------------------------------------------
+//RICERCA RICETTE
 
 /**
  * La funzione "ricerca" prende in input una stringa (che rappresenta un alimento) e restituisce
@@ -61,11 +88,17 @@ int* ricerca(char alimento[]);  //int* perchè ha come ritorno un array di intt
  * E' la procedura che ci permette di accedere alla funzione "ricerca", per trovare le
  * corrispondenze tra un alimento e le ricette disponibili all'interno del sistema.
  */
+
 void ricerca_ricette();
-/**
- * Questa procedura richiama a sua volta le sottoprocedure "stampa_elenco_ricette" e "stampa_ricetta"
- */
-void visualizza_ricette();
+
+
+//----------------------------------------------------------------------------
+
+
+
+
+//----------------------------------------------------------------------------
+//GESTIONE RICETTE
 
 /**
  * Questa procedura permette di aggiungere ricette alla lista di ricette presenti all'interno del sistema.
@@ -91,6 +124,7 @@ void aggiungi_ricette();
  */
 
 void modifica_ricette();
+
 /**
  * Questa procedura permette di aggiungere, modificare o rimuovere un ingrediente da una ricetta gia' esistente all'interno del sistema Smart Fridge.
  * @pre e' necessario prima accedere alla categoria "ricette", poi al sottomenu' di modifica di una ricetta.
@@ -98,14 +132,18 @@ void modifica_ricette();
  *
  * @param ingrediente, ovvero il numero dell'ingrediente che, eventualmente, si vuole modificare
  */
+
 void modifica_ingredienti(int ingrediente);
+
 /**
  * Questa procedura permette di modificare i passi di una ricetta.
  * @pre e' necessario accedere al sottomenu' di modifica di una ricetta e poi selezionare la modifica della procedura della ricetta
  * @pre devono esserci ricette all'interno dello Smart Fridge
  * @param step,ovvero il numero dello step che si intende modificare o eliminare
  */
+
 void modifica_procedura(int ingrediente);
+
 /**
  * Questa procedura permette di rimuovere una ricetta dal sistema Smart Fridge.
  * @pre e' necessario accedere al sottomenu' della categoria "ricette" e selezionare "rimuovi una ricetta"
@@ -114,3 +152,7 @@ void modifica_procedura(int ingrediente);
  */
 
 void rimuovi_ricette();
+
+
+//----------------------------------------------------------------------------
+

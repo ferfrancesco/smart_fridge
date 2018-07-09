@@ -8,36 +8,6 @@ typedef int bool;
 #define true 1
 #define false 0
 
-/**
- * Questa funzione permette di contare le linee di cui un file e' composto.
- *
- * @param nome_file, ovvero il nome del file di cui bisogna contare il numero di linee.
- * @return num_linee, il numero di linee di cui il file e' composto
- */
-
-int conta_linee(char nome_file[40]){ //TODO togli funzione perchè inutileee
-
-    int num_linee=0;
-
-    FILE *fp;
-    fp = fopen (nome_file,"r");
-
-    if (fp==NULL){													//controllo presenza file
-        printf("\n Errore nel caricamento del file");
-        exit(1);
-    }
-
-    while(!feof(fp)){
-
-        if(fgetc(fp) == '\n')
-            num_linee++;  											 //TODO NON ELIMINARE
-
-    }
-
-    fclose(fp);
-
-    return num_linee;
-}
 
 //---------------------------------------------------------------------------------------
 //OPERAZIONI DI CARICAMENTO DEI FILE
@@ -165,10 +135,9 @@ int file_load_ricette(){
  * @return num_linee Se il controllo va a buon fine, la funzione restituirà il numero di linee del file analizzato
  */
 
-int file_load_menu_sett(){
+void file_load_menu_sett(){
 
-    int i;
-    int num_linee=conta_linee("menu_sett.txt");
+    int i=0;
 
     FILE *fp;
     fp = fopen ("menu_sett.txt","r");
@@ -180,17 +149,14 @@ int file_load_menu_sett(){
 
     while(!feof(fp)){
 
-        for	(i=0;i<GIORNI_SETTIMANA;i++){
+       //fscanf(fp,"%50[^,],%50[^,],\n",giorno[i].pietanza[0],giorno[i].pietanza[1]);
+       fscanf(fp,"%s\n",giorno[i].pietanza[0]);
+       fscanf(fp,"%s\n",giorno[i].pietanza[1]);
 
-            fscanf(fp,"%s\n",giorno[i].pietanza);
-
-        }
-
+       i++;
     }
 
     fclose(fp);
-
-    return num_linee;
 
 }
 
@@ -356,7 +322,7 @@ void file_save_menu_sett(){
 
     for(i=0;i<GIORNI_SETTIMANA;i++){
 
-        fprintf(fp,"%s\n",giorno[i].pietanza);
+        fprintf(fp,"%s\n%s\n",giorno[i].pietanza[0],giorno[i].pietanza[1]);
 
     }
 
