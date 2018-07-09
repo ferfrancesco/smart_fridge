@@ -341,6 +341,11 @@ int testing(){
 		CU_ASSERT_STRING_EQUAL(low_conversion(strcpy(test1,"CIAO")),"ciao");
 		CU_ASSERT_STRING_EQUAL(low_conversion(strcpy(test1,"CIAO")),"cia");
 		CU_ASSERT_STRING_EQUAL(low_conversion(strcpy(test1,"CIao")),"ciao");
+		CU_ASSERT_STRING_EQUAL(low_conversion(strcpy(test1,"ciao")),"ciao");
+		CU_ASSERT_STRING_EQUAL(low_conversion(strcpy(test1,"1234")),"1234");
+		CU_ASSERT_STRING_EQUAL(low_conversion(strcpy(test1,"12AB")),"12AB");
+		CU_ASSERT_STRING_EQUAL(low_conversion(strcpy(test1,"12AB")),"12ab");
+		CU_ASSERT_STRING_EQUAL(low_conversion(strcpy(test1,"&*.,")),"&*.,");
 	}
 
 
