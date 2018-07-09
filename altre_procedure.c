@@ -106,7 +106,9 @@ void stampa_menu(){
 
     printf("%s",stringa_ora);
 
-    printf("\n\nSeleziona una categoria\n\n1)Alimenti\n2)Ricette\n3)Varie\n4)Spegni il sistema\n\n\n*************************\n5)TESTING CUnit\n*************************\n\n");
+    printf("\n\nSeleziona una categoria\n\n1)Alimenti\n2)Ricette\n3)Varie\n4)Spegni il sistema\n\n");
+
+    printf("\n*************************\n5)TESTING CUnit\n*************************\n\n");
 
     //memos();
 
@@ -309,18 +311,22 @@ int testing(){
 	//PROCEDURE TEST
 	void test_IsOnlyNumbers(void){
 
+		CU_ASSERT_EQUAL(isOnlyNumbers("12"),false);
 		CU_ASSERT_EQUAL(isOnlyNumbers("ciao"),true);
-
+		CU_ASSERT_EQUAL(isOnlyNumbers("-1"),true);
+		CU_ASSERT_EQUAL(isOnlyNumbers("a1"),true);
 
 	}
 
 	void test_low_conversion(void){
 
+		CU_ASSERT_STRING_EQUAL(low_conversion('CIAO'),"ciao");
 
 	}
 
 	void test_stampa_stelle(void){
 
+	//	CU_ASSERT_STRING_EQUAL(stampa_stelle(5),"*****");
 
 	}
 	//--------------------------------------------------
@@ -330,9 +336,9 @@ int testing(){
 
 	CU_pSuite pSuite_A = CU_add_suite("Test_A",init_testA, clean_testA);
 
-	CU_add_test(pSuite_A, "test di is only numbers",test_IsOnlyNumbers);
-
-	//system("cls");
+	CU_add_test(pSuite_A, "test IsOnlyNumbers",test_IsOnlyNumbers);
+	CU_add_test(pSuite_A, "test low_conversion",test_low_conversion);
+	//CU_add_test(pSuite_A, "test stampa_stelle",test_stampa_stelle);
 
 	CU_basic_set_mode(CU_BRM_VERBOSE);
 
