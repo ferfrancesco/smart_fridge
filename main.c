@@ -9,6 +9,7 @@
 #include "altre_procedure.h"
 #include "ricette.h"
 #include "varie.h"
+#include "CUnit/Basic.h"
 
 
 #define ALIM_MAX 50  								//quantità massima alimenti presenti in frigo

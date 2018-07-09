@@ -7,6 +7,7 @@
 #include "alimenti.h"
 #include "ricette.h"
 #include "varie.h"
+#include "CUnit/Basic.h"
 
 //inclusione valori bool
 typedef int bool;
@@ -105,7 +106,7 @@ void stampa_menu(){
 
     printf("%s",stringa_ora);
 
-    printf("\n\nSeleziona una categoria\n\n1)Alimenti\n2)Ricette\n3)Varie\n4)Spegni il sistema\n\n");
+    printf("\n\nSeleziona una categoria\n\n1)Alimenti\n2)Ricette\n3)Varie\n4)Spegni il sistema\n\n\n*************************\n5)TESTING CUnit\n*************************\n\n");
 
     //memos();
 
@@ -128,6 +129,13 @@ void stampa_menu(){
         case 4:
             exit(1);
             break;
+
+        case 5:
+        	system("cls");
+        	testing();
+        	system("pause");
+        	stampa_menu();
+        	break;
 
         default:
             messaggio_errore();
@@ -277,5 +285,61 @@ void selection_sort(int array_int[],char array_nomi[CONSUM_MAX][LUNGH_MAX_NOME],
 				strcpy(array_nomi[i],nome_temp);
 			}
 	}
+
+}
+
+//------------------------------------------------------------------------------------------------------
+//PROCEDURE TESTING CUNIT
+
+int testing(){
+
+	//allocazione risorse
+	int init_testA(void){
+
+		return 0;
+	}
+
+	//deallocazione risorse
+	int clean_testA(void){
+
+		return 0;
+	}
+
+	//---------------------------------------------------------
+	//PROCEDURE TEST
+	void test_IsOnlyNumbers(void){
+
+		CU_ASSERT_EQUAL(isOnlyNumbers("ciao"),true);
+
+
+	}
+
+	void test_low_conversion(void){
+
+
+	}
+
+	void test_stampa_stelle(void){
+
+
+	}
+	//--------------------------------------------------
+
+	//inizializzazione registro cunit
+	CU_initialize_registry();
+
+	CU_pSuite pSuite_A = CU_add_suite("Test_A",init_testA, clean_testA);
+
+	CU_add_test(pSuite_A, "test di is only numbers",test_IsOnlyNumbers);
+
+	//system("cls");
+
+	CU_basic_set_mode(CU_BRM_VERBOSE);
+
+	CU_basic_run_tests();
+
+	CU_cleanup_registry();
+
+	return CU_get_error();
 
 }

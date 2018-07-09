@@ -946,7 +946,7 @@ void modifica_procedura(int step){
 
         sprintf(archivio_ricette[step].num_step, "%d", num_step);
 
-        for(i=nuova_posizione_int;i<num_step;i++){
+        for(i=num_step;i>nuova_posizione_int;i--){
 
         	strcpy(archivio_ricette[step].procedura[nuova_posizione_int+i],archivio_ricette[step].procedura[nuova_posizione_int+i-1]);
 
