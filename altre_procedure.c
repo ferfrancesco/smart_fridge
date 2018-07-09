@@ -317,22 +317,23 @@ int testing(){
 		CU_ASSERT_EQUAL(isOnlyNumbers("ciao"),true);
 		CU_ASSERT_EQUAL(isOnlyNumbers("-1"),true);
 		CU_ASSERT_EQUAL(isOnlyNumbers("a1"),true);
+		CU_ASSERT_EQUAL(isOnlyNumbers("1a"),true);
 
 	}
 
-	strcpy(test1,"CIAO");
+
 
 	void test_low_conversion(void){
 
-
-
-		CU_ASSERT_STRING_EQUAL(low_conversion(test1),"ciao");
-		CU_ASSERT_STRING_EQUAL(low_conversion(test1),"cia");
+		CU_ASSERT_STRING_EQUAL(low_conversion(strcpy(test1,"CIAO")),"ciao");
+		CU_ASSERT_STRING_EQUAL(low_conversion(strcpy(test1,"CIAO")),"cia");
+		CU_ASSERT_STRING_EQUAL(low_conversion(strcpy(test1,"CIao")),"ciao");
 	}
+
 
 	void test_stampa_stelle(void){
 
-	//	CU_ASSERT_STRING_EQUAL(stampa_stelle(5),"*****");
+		CU_ASSERT_PTR_EQUAL(stampa_stelle(4),"****");
 
 	}
 	//--------------------------------------------------
@@ -344,7 +345,7 @@ int testing(){
 
 	CU_add_test(pSuite_A, "test IsOnlyNumbers",test_IsOnlyNumbers);
 	CU_add_test(pSuite_A, "test low_conversion",test_low_conversion);
-	//CU_add_test(pSuite_A, "test stampa_stelle",test_stampa_stelle);
+	CU_add_test(pSuite_A, "test stampa_stelle",test_stampa_stelle);
 
 	CU_basic_set_mode(CU_BRM_VERBOSE);
 
