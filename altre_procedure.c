@@ -295,6 +295,8 @@ void selection_sort(int array_int[],char array_nomi[CONSUM_MAX][LUNGH_MAX_NOME],
 
 int testing(){
 
+	char test1[50];
+
 	//allocazione risorse
 	int init_testA(void){
 
@@ -318,10 +320,14 @@ int testing(){
 
 	}
 
+	strcpy(test1,"CIAO");
+
 	void test_low_conversion(void){
 
-		CU_ASSERT_STRING_EQUAL(low_conversion('CIAO'),"ciao");
 
+
+		CU_ASSERT_STRING_EQUAL(low_conversion(test1),"ciao");
+		CU_ASSERT_STRING_EQUAL(low_conversion(test1),"cia");
 	}
 
 	void test_stampa_stelle(void){
