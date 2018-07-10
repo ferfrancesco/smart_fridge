@@ -114,7 +114,7 @@ char* stampa_stelle(int difficolta){
 
     int i;
 
-    char stars[5]={0}; //definisco un array locale
+    char stars[6]={0}; //definisco un array locale
 
     for(i=0;i<difficolta;i++){
 

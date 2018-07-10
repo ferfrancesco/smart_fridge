@@ -149,9 +149,7 @@ void file_load_menu_sett(){
 
     while(!feof(fp)){
 
-       //fscanf(fp,"%50[^,],%50[^,],\n",giorno[i].pietanza[0],giorno[i].pietanza[1]);
-       fscanf(fp,"%s\n",giorno[i].pietanza[0]);
-       fscanf(fp,"%s\n",giorno[i].pietanza[1]);
+       fscanf(fp,"%50[^-]-%50[^-]-\n",giorno[i].pietanza[0],giorno[i].pietanza[1]);
 
        i++;
     }
@@ -170,9 +168,10 @@ void file_load_menu_sett(){
  * @return num_linee Se il controllo va a buon fine, la funzione restituirà il numero di linee del file analizzato
  */
 
-int file_load_lista(int num_linee){ //TODO CONTROLLA
+int file_load_lista(){ //TODO CONTROLLA
 
-    int i;
+    int i=0;
+    int num_linee=0;
 
     FILE *fp;
     fp = fopen ("lista_spesa.txt","r");
@@ -182,11 +181,19 @@ int file_load_lista(int num_linee){ //TODO CONTROLLA
         exit(1);
     }
 
-    //while(!feof(fp)){							//TODO controlla
+    while(!feof(fp)){							//TODO controlla
 
-    for	(i=0;i<num_linee;i++){
+        fscanf(fp,"%50[^-]-\n",lista_spesa[i]);
 
-        fscanf(fp,"%[^,]\n",lista_spesa[i]);	//utilizzo [^,] in quanto utilizzare %s leggeva l'intera stringa,virgole incluse
+        i++;
+        num_linee++;
+
+        if(lista_spesa[i-1][0] == '\0'){   /*controllo se la prima posizione di un array di caratteri (stringa[0]) qualsiasi della struct contiene il carattere speciale \0. Se il carattere è trovato,significa che in realtà
+        									*non è stato caricato nulla,quindi decremento il numero di linee,e quindi di alimenti caricati. Funzione necessaria per il fix di un bug*/
+        	i--;
+        	num_linee--;
+
+        }
 
     }
 
@@ -322,24 +329,42 @@ void file_save_menu_sett(){
 
     for(i=0;i<GIORNI_SETTIMANA;i++){
 
-        fprintf(fp,"%s\n%s\n",giorno[i].pietanza[0],giorno[i].pietanza[1]);
+        fprintf(fp,"%s-%s-\n",giorno[i].pietanza[0],giorno[i].pietanza[1]);
 
     }
 
     fclose(fp);
 
 }
+
+void file_save_lista(int num_linee){
+
+	int i;
+
+    FILE *fp;
+    fp = fopen ("lista_spesa.txt","w");
+
+    for(i=0;i<num_linee;i++){
+
+    	fprintf(fp,"%s-\n",lista_spesa[i]);
+
+    }
+
+    fclose(fp);
+}
+
 /**
  * Questa procedura permette di aggiungere stringhe in append ad un file, in questo caso "lista_spesa.txt"
  *
  * @param stringa,ovvero la stringa da aggiungere in append al file "lista_spesa.txt"
  */
+
 void file_append_lista(char stringa[]){
 
     FILE *fp;
     fp = fopen ("lista_spesa.txt","a");
 
-    fprintf(fp,"%s,\n",stringa);
+    fprintf(fp,"%s-\n",stringa);
 
     fclose(fp);
 }

@@ -10,6 +10,7 @@
 #define INGR_MAX 50  //quantità max di ingredienti in una ricetta
 #define LUNGH_MAX_NOME 50 //Luneghezza massima per il nome di un alimento
 #define MAX_RICETTE 50 //Num massimo di ricette salvabili
+#define MAX_LISTA 50
 
 /**
  * Struct che definisce ogni singola pietanza del menu settimanale,
@@ -112,5 +113,5 @@ struct ricetta{
  *
  */
 
-char lista_spesa[50][LUNGH_MAX_NOME];
+char lista_spesa[MAX_LISTA][LUNGH_MAX_NOME];
 

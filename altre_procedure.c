@@ -25,7 +25,6 @@ typedef int bool;
 int isOnlyNumbers(char* stringa){ // todo c'è un warning legato alla correttezza dei tipi
 
     int i;
-    //int numero;
 
     for(i=0;i<strlen(stringa);i++){
 
@@ -63,14 +62,9 @@ void messaggio_errore(){
  * Questa procedura copia i nomi dei giorni della settimana nella struct "giorno"
  */
 
-//TODO Controlla sta roba
-//--------------------------------------------------------
-/*È anche possibile inizializzare i valori alla dichiarazione, mettendo i valori (giusti nel tipo) compresi tra parentesi graffe:
-
-struct libro biblio = {"Guida al C", "Fabrizio Ciacchi", 2003, 45.2};*/
-//-----------------------------------------------------------------------
-
 void dayname_fill(){
+
+	int i;
 
     strcpy(giorno[0].dayname,"Lunedi'");
     strcpy(giorno[1].dayname,"Martedi'");
@@ -79,6 +73,12 @@ void dayname_fill(){
     strcpy(giorno[4].dayname,"Venerdi'");
     strcpy(giorno[5].dayname,"Sabato");
     strcpy(giorno[6].dayname,"Domenica");
+
+    for(i=0;i<7;i++){
+
+    	strcpy(giorno[i].pietanza[0],"Vuoto");
+    	strcpy(giorno[i].pietanza[1],"Vuoto");
+    }
 
 }
 
@@ -364,12 +364,12 @@ int testing(){
 		CU_ASSERT_STRING_EQUAL(stampa_stelle('3a'),"***");
 		CU_ASSERT_STRING_EQUAL(stampa_stelle('a3'),"***");
 		CU_ASSERT_STRING_EQUAL(stampa_stelle('&.,*'),"*");
-		CU_ASSERT_STRING_NOT_EQUAL(stampa_stelle(0)," ");
 		CU_ASSERT_STRING_EQUAL(stampa_stelle(-1),"*");
 		CU_ASSERT_STRING_EQUAL(stampa_stelle(-2),"**");
 		CU_ASSERT_STRING_EQUAL(stampa_stelle(-3),"***");
 		CU_ASSERT_STRING_EQUAL(stampa_stelle(-4),"****");
 		CU_ASSERT_STRING_EQUAL(stampa_stelle(-5),"*****");
+		CU_ASSERT_STRING_NOT_EQUAL(stampa_stelle(0)," ");
 	}
 	//--------------------------------------------------
 

@@ -52,7 +52,7 @@ int file_load_menu_sett();
  *
  * @return num_linee, ovvero il numero di linee del file "lista_spesa.txt" aggiornato
  */
-int file_load_lista(int num_linee); //TODO commenta dopo che la funzione viene controllata
+int file_load_lista(); //TODO commenta dopo che la funzione viene controllata
 
 /**
  * Questa procedura permette di caricare il file "consumazioni.txt" all'interno dello Smart Fridge.
@@ -89,6 +89,8 @@ void file_save_ricette (int num_linee);
  * @param stringa, ovvero la stringa da aggiungere in coda al file
  */
 void file_append_lista(char stringa[]);
+
+void file_save_lista(int num_linee);
 
 /**
  * Procedura che salva il file "consumazioni.txt", dopo eventuali modifiche apportate.
