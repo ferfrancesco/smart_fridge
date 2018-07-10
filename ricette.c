@@ -430,14 +430,14 @@ void ricerca_ricette(){
 			selection_sort(valori_ordinare,nomi_temp,num_linee);
 
 			system("cls");
-			printf("Ecco un elenco dei 5 alimenti piu' consumati");
+			printf("Elenco delle ricette ordinate in modo decrescente in base alle KCAL");
 
 			printf("\n\n|%-50s|%-12s|","Ricetta","KCAL");  //il valore negativo serve per l'allineamento a sinistra
-	        printf("\n-----------------------------------------------------------------");
+	        printf("\n-----------------------------------------------------------------\n");
 
-			for(i=0;i<num_linee;i++){
+			for(i=num_linee-1;i>=0;i--){
 
-				printf("\n|%-50s|%12d|%d)",nomi_temp[i],valori_ordinare[i],i+1);
+				printf("|%-50s|%12d|%d)\n",nomi_temp[i],valori_ordinare[i],num_linee-i);
 
 			}
 

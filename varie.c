@@ -380,18 +380,18 @@ void statistiche(){
 
 	        if(num_linee<5){
 
-				for(i=0;i<num_linee;i++){
+				for(i=num_linee-1;i>=0;i--){
 
-					printf("\n|%-50s|%12d|%d)",nomi_temp[i],valori_ordinare[i],i+1);
+					printf("\n|%-50s|%12d|%d)",nomi_temp[i],valori_ordinare[i],num_linee-i);
 
 				}
 	        }
 
 	        else{
 
-		        for(i=0;i<5;i++){
+		        for(i=5;i>0;i--){
 
-		           printf("\n|%-50s|%12d|%d)",nomi_temp[i],valori_ordinare[i],i+1);
+		           printf("\n|%-50s|%12d|%d)",nomi_temp[i],valori_ordinare[i],num_linee-i);
 
 		        }
 
@@ -424,18 +424,18 @@ void statistiche(){
 
 	        if(num_linee<5){
 
-				for(i=0;i<num_linee;i++){
+				for(i=num_linee-1;i>=0;i--){
 
-					printf("\n|%-50s|%12d|%d)",nomi_temp[i],valori_ordinare[i],i+1);
+					printf("\n|%-50s|%12d|%d)",nomi_temp[i],valori_ordinare[i],num_linee-i);
 
 				}
 	        }
 
 	        else{
 
-		        for(i=0;i<5;i++){
+		        for(i=5;i>0;i--){
 
-		           printf("\n|%-50s|%12d|%d)",nomi_temp[i],valori_ordinare[i],i+1);
+		           printf("\n|%-50s|%12d|%d)",nomi_temp[i],valori_ordinare[i],num_linee-i);
 
 		        }
 

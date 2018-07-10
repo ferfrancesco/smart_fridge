@@ -264,29 +264,31 @@ void selection_sort(int array_int[],char array_nomi[CONSUM_MAX][LUNGH_MAX_NOME],
 	int temp;
 	char nome_temp[50];
 
-	for (i=num_linee-1;i>0;i--){
+	int p;
 
-		max=0;
+	for (i=0;i<num_linee;i++){
 
-		for (j=1;j<=i;j++) { // ricerca del max
+		max=array_int[i];
+		p=i;
+
+		for (j=i+1;j<num_linee;j++) { // ricerca del max
 
 				if (array_int[j] < max) {
 
-					max=j;
+					max=array_int[j];
+					p=j;
+
 
 				}
+		}
+				array_int[p]=array_int[i];
+				array_int[i]=max;
 
-				//scambio il valore numericoo
-				temp=array_int[max];
-				array_int[max]=array_int[i];
-				array_int[i]=temp;
-
-				//scambio i nomi
-				strcpy(nome_temp,array_nomi[max]);
-				strcpy(array_nomi[max],array_nomi[i]);
+				strcpy(nome_temp,array_nomi[p]);
+				strcpy(array_nomi[p],array_nomi[i]);
 				strcpy(array_nomi[i],nome_temp);
-			}
 	}
+
 
 }
 
