@@ -149,9 +149,7 @@ void file_load_menu_sett(){
 
     while(!feof(fp)){
 
-       //fscanf(fp,"%50[^,],%50[^,],\n",giorno[i].pietanza[0],giorno[i].pietanza[1]);
-       fscanf(fp,"%s\n",giorno[i].pietanza[0]);
-       fscanf(fp,"%s\n",giorno[i].pietanza[1]);
+       fscanf(fp,"%50[^-]-%50[^-]-\n",giorno[i].pietanza[0],giorno[i].pietanza[1]);
 
        i++;
     }
@@ -322,7 +320,7 @@ void file_save_menu_sett(){
 
     for(i=0;i<GIORNI_SETTIMANA;i++){
 
-        fprintf(fp,"%s\n%s\n",giorno[i].pietanza[0],giorno[i].pietanza[1]);
+        fprintf(fp,"%s-%s-\n",giorno[i].pietanza[0],giorno[i].pietanza[1]);
 
     }
 

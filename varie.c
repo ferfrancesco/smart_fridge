@@ -70,7 +70,7 @@ void varie(){
  * @pre per selezionare la prima scelta del menu, c'e' bisogno che il menu sia gia' stato inserito in precedenza
  */
 
-void menu_sett(){ //TODO IMPORTANTE: SEPARARE LA VISUALIZZAZIONE DALL'INSERIMENTO, COSì COME SCRITTO NELL'ANALISI
+void menu_sett(){
 
     int menu_select=0;
     int i;
@@ -80,6 +80,7 @@ void menu_sett(){ //TODO IMPORTANTE: SEPARARE LA VISUALIZZAZIONE DALL'INSERIMENT
 
     char pasto[LUNGH_MAX_NOME];
 
+    dayname_fill(); 								//inizializzazione giorni della settimana per il menù settimanale
 
     file_load_menu_sett();
 
@@ -98,8 +99,8 @@ void menu_sett(){ //TODO IMPORTANTE: SEPARARE LA VISUALIZZAZIONE DALL'INSERIMENT
             for(i=0;i<7;i++){
 
             	  printf("***************%-10s***************",giorno[i].dayname);
-            	  printf("\nPranzo:%-15sCena:%-15s",giorno[i].pietanza[0],giorno[i].pietanza[1]);
-            	  printf("\n\n----------------------------------------\n");
+            	  printf("\nPranzo:%s\nCena:%s",giorno[i].pietanza[0],giorno[i].pietanza[1]);
+            	  printf("\n\n");
 
             }
 
@@ -148,8 +149,6 @@ void menu_sett(){ //TODO IMPORTANTE: SEPARARE LA VISUALIZZAZIONE DALL'INSERIMENT
         		fflush(stdin);
         		gets(giorno[selezione_int].pietanza[0]);
 
-        		//strcpy(giorno[selezione_int].pietanza[0],pasto);
-
         		break;
 
         	case 2:
@@ -157,8 +156,6 @@ void menu_sett(){ //TODO IMPORTANTE: SEPARARE LA VISUALIZZAZIONE DALL'INSERIMENT
         		printf("\nInserisci il pasto:");
         		fflush(stdin);
         		gets(giorno[selezione_int].pietanza[1]);
-
-        		//strcpy(giorno[selezione_int].pietanza[1],pasto);
 
         		break;
 
@@ -179,6 +176,15 @@ void menu_sett(){ //TODO IMPORTANTE: SEPARARE LA VISUALIZZAZIONE DALL'INSERIMENT
             break;
 
         case 3:
+
+        	dayname_fill();
+        	file_save_menu_sett();
+        	printf("\n\nCancellazione eseguita\n\n");
+        	system("pause");
+        	menu_sett();
+        	break;
+
+        case 4:
             varie();
             break;
 
@@ -191,7 +197,6 @@ void menu_sett(){ //TODO IMPORTANTE: SEPARARE LA VISUALIZZAZIONE DALL'INSERIMENT
 
 }
 
-// todo commenta e finisci procedura
 /**
  * Questa procedura permette di accedere al sottomenu' riguardante la lista della spesa nella categoria "varie"
  *

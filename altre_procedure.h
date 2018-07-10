@@ -59,7 +59,7 @@ void memos();
  * @return stringa, ovvero la stringa convertita
  */
 
-const char* low_conversion(char* stringa[]); //converte la stringa di ingresso in caratteri minuscoli
+char* low_conversion(char stringa[]); //converte la stringa di ingresso in caratteri minuscoli
 
 
 /**

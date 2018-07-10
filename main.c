@@ -11,15 +11,8 @@
 #include "varie.h"
 #include "CUnit/Basic.h"
 
+int main() {
 
-#define ALIM_MAX 50  								//quantità massima alimenti presenti in frigo
-#define STEP_MAX 50  								//numero massimo di step per ricetta
-#define INGR_MAX 50  								//numero massimo di ingredienti per ricetta
-#define LUNGH_MAX_NOME 50 							//lunghezza massima stringa per il nome di un alimento
-
-int main(int argc, char *argv[]) {
-
-    dayname_fill(); 								//inizializzazione giorni della settimana per il menù settimanale
     stampa_menu();									//stampa del menù di scelta principale del programma
 
     return 0;
