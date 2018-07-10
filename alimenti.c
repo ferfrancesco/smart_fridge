@@ -570,6 +570,10 @@ void modifica_alimenti(int num_linee){
 
     	    if(numero_conf_int==0){    //nel caso venga inserito un valore pari a 0 nel campo quantità,l'alimento verrà automaticamente rimosso
 
+    	    			//copia del nome nella lista della spesa
+
+       	        		file_append_lista(archivio_alimenti[selezione_int].nome);
+
     	       	        for (i=selezione_int;i<num_linee;i++){ 		//ciclo per copiare i valori nella posizione precedente,in modo da rimuovere l'alimento e non lasciare spazi vuoti nell'elenco
 
     	       	            strcpy(archivio_alimenti[i].nome,archivio_alimenti[i+1].nome);
@@ -581,10 +585,6 @@ void modifica_alimenti(int num_linee){
     	       	            strcpy(archivio_alimenti[i].quantita,archivio_alimenti[i+1].quantita);
     	       	            strcpy(archivio_alimenti[i].quantita_tot,archivio_alimenti[i+1].quantita_tot);
     	       	            strcpy(archivio_alimenti[i].kcal,archivio_alimenti[i+1].kcal);
-
-    	       	            //copia del nome nella lista della spesaa
-
-    	       	            file_append_lista(archivio_alimenti[i].nome);
 
     	       	        }
 
@@ -608,16 +608,16 @@ void modifica_alimenti(int num_linee){
 					//salvo la nuova quantita nella struttura
 					sprintf(archivio_alimenti[selezione_int].quantita_tot, "%d" ,quantita_totale_int);
 
+					if(numero_conf_int<=SOGLIA_LISTA){
+
+						//copia del nome nella lista della spesaa
+
+						file_append_lista(archivio_alimenti[selezione_int].nome);
+
+					}
+
+
     	    }
-
-			if(numero_conf_int<=SOGLIA_LISTA){
-
-				//copia del nome nella lista della spesaa
-
-				file_append_lista(archivio_alimenti[selezione_int].nome);
-
-			}
-
 
     	break;
 
@@ -661,6 +661,10 @@ void modifica_alimenti(int num_linee){
 
     	    if(quantita_totale_int==0){    //nel caso venga inserito un valore pari a 0 nel campo quantità,l'alimento verrà automaticamente rimosso
 
+	            //copia del nome nella lista della spesaa
+
+	            file_append_lista(archivio_alimenti[selezione_int].nome);
+
     	        for (i=selezione_int;i<num_linee;i++){ 		//ciclo per copiare i valori nella posizione precedente,in modo da rimuovere l'alimento e non lasciare spazi vuoti nell'elenco
 
     	            strcpy(archivio_alimenti[i].nome,archivio_alimenti[i+1].nome);
@@ -672,10 +676,6 @@ void modifica_alimenti(int num_linee){
     	            strcpy(archivio_alimenti[i].quantita,archivio_alimenti[i+1].quantita);
     	            strcpy(archivio_alimenti[i].quantita_tot,archivio_alimenti[i+1].quantita_tot);
     	            strcpy(archivio_alimenti[i].kcal,archivio_alimenti[i+1].kcal);
-
-    	            //copia del nome nella lista della spesaa
-
-    	            file_append_lista(archivio_alimenti[i].nome);
 
     	        }
 

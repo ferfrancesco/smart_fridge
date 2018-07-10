@@ -17,8 +17,7 @@ typedef int bool;
 
 #define CONSUM_MAX 100
 #define LUNGH_MAX_NOME 50
-
-int menu_inserito=false; //flag controllo inserimento menù della settimana
+#define MAX_LISTA 50
 
 /**
  * Questa procedura stampa il menu per la categoria "varie".
@@ -205,11 +204,18 @@ void menu_sett(){
 void lista(){
 
     int menu_selez;		 //variabile che memorizza la scelta nel menu' da parte dell'utente
-    int num_linee_lista; //numero di linee di cui e' composto il file "lista_spesa.txt"
+    int num_linee;
     int i;
 
+    char selezione[10];
+    int selezione_int;
+
+    char nuovo_elemento[LUNGH_MAX_NOME];
+
+    num_linee=file_load_lista();
+
     system("cls");
-    printf("Scegli un opzione\n\n1)Visualizza lista della spesa\n2)Aggiungi elemento alla lista\n3)Rimuovi elemento dalla lista\n4)Torna al menu' precedente\n\n");
+    printf("Scegli un opzione\n\n1)Visualizza lista\n2)Aggiungi elemento\n3)Rimuovi elemento\n4)Cancella lista\n5)Torna al menu' precedente\n\n");
 
     fflush(stdin);
 
@@ -220,13 +226,16 @@ void lista(){
         case 1:
 
             system("cls");
-            printf("Questa e' la lista della spesa generata automaticamente\n\n");
+            printf("Questa e' la lista della spesa\n\n");
 
-            //num_linee_lista=conta_linee("lista_spesa.txt");
+            if(num_linee==0){
 
-            file_load_lista(num_linee_lista);
+            	printf("\nLa lista e' vuota\n");
+            	system("pause");
+            	lista();
+            }
 
-            for(i=0;i<num_linee_lista;i++){
+            for(i=0;i<num_linee;i++){
 
                 printf("%d)%s\n",i+1,lista_spesa[i]);
             }
@@ -239,14 +248,78 @@ void lista(){
 
         case 2:
 
+        	printf("\n\nCosa vuoi aggiungere alla lista?\n");
+
+        	fflush(stdin);
+        	gets(lista_spesa[num_linee]);
+
+        	num_linee++;
+        	file_save_lista(num_linee);
+
+        	printf("\nElemento aggiunto!\n");
+        	system("pause");
+        	lista();
+
             break;
 
         case 3:
 
+            system("cls");
+            printf("Questa e' la lista della spesa\n\n");
+
+            for(i=0;i<num_linee;i++){
+
+                printf("%d)%s\n",i+1,lista_spesa[i]);
+            }
+
+            printf("\n\nChe elemento vuoi rimuovere?Inserire un valore numerico");
+
+            fflush(stdin);
+
+            gets(selezione);
+
+			if(isOnlyNumbers(selezione)==true) {
+
+				messaggio_errore();
+				alimenti();
+
+			}
+
+			selezione_int=atoi(selezione);
+
+			selezione_int--; //mi allineo all'array
+
+			for(i=selezione_int;i<num_linee;i++){
+
+				strcpy(lista_spesa[i],lista_spesa[i+1]);
+
+			}
+
+			num_linee--;
+			file_save_lista(num_linee);
+
+			printf("\nElemento Rimosso!\n");
+			system("pause");
+			lista();
+
             break;
 
         case 4:
-            varie();
+
+        	memset(&lista_spesa[0], 0, MAX_LISTA);  //Cancello ogni elemento all'intero della matrice lista_spesa
+
+			num_linee=0;
+
+			file_save_lista(num_linee);
+
+			printf("\n\nLista cancellata!\n");
+			system("pause");
+			lista();
+
+        	break;
+
+        case 5:
+            lista();
             break;
 
         default:
