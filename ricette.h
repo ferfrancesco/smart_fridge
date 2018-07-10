@@ -61,7 +61,13 @@ char* stampa_stelle(int num); //stampa le stellette di difficolta',int num indic
 
 void visualizza_ricette();
 
-//TODO COMMENTA
+/**
+ * Questa procedura permette di visualizzare l'elenco delle ricette inserite nel sistema.
+ *
+ * @pre E' necessario che il file delle ricette sia gia' esistente nel sistema
+ *
+ * @param num_linee, ovvero il numero di linee di cui il file "ricette.txt" e' costituito
+ */
 
 void stampa_elenco_ricette(int num_linee);
 
