@@ -332,6 +332,7 @@ int testing(){
 		CU_ASSERT_EQUAL(isOnlyNumbers("-1"),true);
 		CU_ASSERT_EQUAL(isOnlyNumbers("a1"),true);
 		CU_ASSERT_EQUAL(isOnlyNumbers("1a"),true);
+		CU_ASSERT_EQUAL(isOnlyNumbers("&2"),true);
 
 	}
 
