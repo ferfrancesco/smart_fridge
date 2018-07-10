@@ -187,7 +187,6 @@ void visualizza_ricette(){
 
 void stampa_elenco_ricette(int num_linee){
 
-	//todo inserire messaggio d'errore quando nel sistema non sono presenti ricette "Non ci sono ricette!"
     int i;
     int int_difficolta;
 
@@ -201,8 +200,8 @@ void stampa_elenco_ricette(int num_linee){
     else{
 
         printf("Elenco delle ricette\n\n");
-        printf("|%-50s|%-12s|","Nome Ricetta","Difficolta'");
-        printf("\n-----------------------------------------------------------------\n");
+        printf("|%-50s|%-12s|%-9s|","Nome Ricetta","Difficolta'","KCAL 100g");
+        printf("\n---------------------------------------------------------------------------\n");
 
         for(i=0;i<num_linee;i++){
 
@@ -210,7 +209,7 @@ void stampa_elenco_ricette(int num_linee){
 
             int_difficolta = atoi(archivio_ricette[i].difficolta);
 
-            printf("%-12s|%d)\n",stampa_stelle(int_difficolta),i+1);
+            printf("%-12s|%-9s|%d)\n",stampa_stelle(int_difficolta),archivio_ricette[i].kcal,i+1);
         }
 
     }
@@ -314,9 +313,6 @@ void stampa_ricetta(int num){
 //----------------------------------------------------------------------------
 //RICERCA RICETTE
 
-
-//todo commenta (ricordati di usare l'algoritmo di scrematura--->
-//fedelucio vuole un ingrediente o un gruppo di ingredienti.
 
 /**
  * La funzione "ricerca" prende in input una stringa (che rappresenta un alimento) e restituisce
@@ -450,7 +446,13 @@ void ricerca_ricette(){
 
 		break;
 
-		//TODO aggiungi Default
+		default:
+
+			messaggio_errore();
+			ricerca_ricette();
+
+			break;
+
 	}
 
 }
@@ -470,7 +472,6 @@ void ricerca_ricette(){
 * @post il sistema aggiungera' una ricettaal file "ricette.txt"
 * E' possibile immettere il nome della ricetta, gli ingredienti, la difficolta' e gli steps.
 * **/
-//todo aggiungere kcal per 100g di ogni ricetta
 
 void aggiungi_ricette(){
 
@@ -514,7 +515,7 @@ void aggiungi_ricette(){
 				ricette();
 		}
 
-    printf("\nQuante KCAL ha approssimativamente questa ricetta?(Inserire valori numerici, kcal su 100g di pietanza):");
+    printf("\nQuante KCAL ha approssimativamente questa ricetta per 100g?(Inserire valori numerici):");
     gets(selezione);
 
     if(isOnlyNumbers(selezione)==true) {

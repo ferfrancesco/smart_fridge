@@ -594,8 +594,6 @@ void modifica_alimenti(int num_linee){
 
     	    else{
 
-    	       	    //TODO RIvedi commenti (quantita e numero)
-
 					//calcola le nuove quantita
 
 					quantita_singolo_int=atoi(archivio_alimenti[selezione_int].quantita);
@@ -615,7 +613,6 @@ void modifica_alimenti(int num_linee){
 						file_append_lista(archivio_alimenti[selezione_int].nome);
 
 					}
-
 
     	    }
 

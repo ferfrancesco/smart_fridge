@@ -37,7 +37,7 @@ int file_load_alimenti(){
         exit(1);
     }
 
-    while(!feof(fp)){								//TODO nella funzione stampa, se il num linee ==1, visualizza : 'il frigo è vuoto'
+    while(!feof(fp)){
 
     	fscanf(fp,"%50[^,],%4[^,],%4[^,],%6[^,],%15[^,],%5[^,],%10[^,],%10[^,],%15[^,],%10[^,],\n",archivio_alimenti[i].nome,archivio_alimenti[i].giorno,archivio_alimenti[i].mese,archivio_alimenti[i].anno,archivio_alimenti[i].numero,archivio_alimenti[i].tipo,archivio_alimenti[i].quantita,archivio_alimenti[i].quantita_tot,archivio_alimenti[i].kcal,archivio_alimenti[i].scaduto);	//utilizzo [^,] in quanto utilizzare %s leggeva l'intera stringa,virgole incluse,
 
@@ -168,7 +168,7 @@ void file_load_menu_sett(){
  * @return num_linee Se il controllo va a buon fine, la funzione restituirà il numero di linee del file analizzato
  */
 
-int file_load_lista(){ //TODO CONTROLLA
+int file_load_lista(){
 
     int i=0;
     int num_linee=0;
@@ -181,7 +181,7 @@ int file_load_lista(){ //TODO CONTROLLA
         exit(1);
     }
 
-    while(!feof(fp)){							//TODO controlla
+    while(!feof(fp)){
 
         fscanf(fp,"%50[^-]-\n",lista_spesa[i]);
 
