@@ -359,7 +359,16 @@ int testing(){
 		CU_ASSERT_STRING_EQUAL(stampa_stelle(4),"****");
 		CU_ASSERT_STRING_EQUAL(stampa_stelle(5),"*****");
 		CU_ASSERT_STRING_EQUAL(stampa_stelle(6),"******");
-
+		CU_ASSERT_STRING_EQUAL(stampa_stelle('a'),"a");
+		CU_ASSERT_STRING_EQUAL(stampa_stelle('3a'),"***");
+		CU_ASSERT_STRING_EQUAL(stampa_stelle('a3'),"***");
+		CU_ASSERT_STRING_EQUAL(stampa_stelle('&.,*'),"*");
+		CU_ASSERT_STRING_NOT_EQUAL(stampa_stelle(0)," ");
+		CU_ASSERT_STRING_EQUAL(stampa_stelle(-1),"*");
+		CU_ASSERT_STRING_EQUAL(stampa_stelle(-2),"**");
+		CU_ASSERT_STRING_EQUAL(stampa_stelle(-3),"***");
+		CU_ASSERT_STRING_EQUAL(stampa_stelle(-4),"****");
+		CU_ASSERT_STRING_EQUAL(stampa_stelle(-5),"*****");
 	}
 	//--------------------------------------------------
 
