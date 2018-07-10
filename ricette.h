@@ -20,6 +20,16 @@
 
 //----------------------------------------------------------------------------
 //PROCEDURE RICETTE VARIE
+/**
+ * 	Questa procedura permette di stampare il sottomenu per la categoria "ricette".
+ * 		E' possibile :
+ * 	1) 	Visualizzare le ricette salvate nel sistema
+ * 	2)	Ricercare corrispondenza ricette per ingrediente o per numero di Kcal
+ * 	3)	Aggiungere una ricetta
+ * 	4)  Modificare una ricetta
+ * 	5)	Rimuovere una ricetta
+ * 	6)	Tornare al menu
+ */
 
 void ricette();
 
