@@ -352,7 +352,9 @@ int testing(){
 
 	void test_stampa_stelle(void){
 
-		CU_ASSERT_PTR_EQUAL(stampa_stelle(4),"****");
+
+		CU_ASSERT_STRING_EQUAL(stampa_stelle(3),"***");
+		CU_ASSERT_STRING_EQUAL(stampa_stelle(4),"****");
 
 	}
 	//--------------------------------------------------

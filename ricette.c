@@ -110,17 +110,13 @@ void ricette(){
  * @return il numero di stelle che saranno visualizzate in output, in base al numero intero inserito
  */
 
-char* stampa_stelle(int num){
+char* stampa_stelle(int difficolta){
 
     int i;
-    int int_difficolta;
 
     char stars[5]={0}; //definisco un array locale
 
-    int_difficolta = atoi(archivio_ricette[num].difficolta);
-
-
-    	for(i=0;i<int_difficolta;i++){
+    for(i=0;i<difficolta;i++){
 
         strcat(stars,"*");  //accodo una stella fino a raggiungere il valore di difficoltà
 
@@ -193,6 +189,7 @@ void stampa_elenco_ricette(int num_linee){
 
 	//todo inserire messaggio d'errore quando nel sistema non sono presenti ricette "Non ci sono ricette!"
     int i;
+    int int_difficolta;
 
     if(num_linee==0){
 
@@ -211,7 +208,9 @@ void stampa_elenco_ricette(int num_linee){
 
             printf("|%-50s|",archivio_ricette[i].nome);
 
-            printf("%-12s|%d)\n",stampa_stelle(i),i+1);
+            int_difficolta = atoi(archivio_ricette[i].difficolta);
+
+            printf("%-12s|%d)\n",stampa_stelle(int_difficolta),i+1);
         }
 
     }
@@ -232,10 +231,13 @@ void stampa_ricetta(int num){
     int i;
     int temp_int; 			   //variabile intera temporanea per i cicli di stampa di ingredienti e procedure
     int num_preparazioni_int;  //variabile intera temporanea per l'incremento di num_preparazioni
+    int int_difficolta;
 
     int menu_select=0;
 
-    printf("%s\nDifficolta':%s\n",archivio_ricette[num].nome,stampa_stelle(num));
+    int_difficolta = atoi(archivio_ricette[num].difficolta);
+
+    printf("%s\nDifficolta':%s\n",archivio_ricette[num].nome,stampa_stelle(int_difficolta));
     printf("------------------------------------------------------------------\n");
     printf("Ingredienti:\n\n");
 
