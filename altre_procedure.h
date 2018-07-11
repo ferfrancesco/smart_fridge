@@ -12,11 +12,13 @@
 #define OPERAZIONI_VARIE_H_
 #endif /* OPERAZIONI_VARIE_H_ */
 
-/*Libreria contenente operazioni varie quali controlli di input,atti al corretto funzionamento del programma*/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+
+//--------------------------------------------------------------------------------
+
 
 /**
  * Questa funzione verifica che la stringa data in input sia composta da soli numeri.
@@ -32,26 +34,31 @@
 
 int isOnlyNumbers(char* stringa);
 
+
+
 /**
  * Procedura che stampa un messaggio d'errore
  */
+
 void messaggio_errore();
+
+
 
 /**
  * Questa procedura copia i nomi dei giorni della settimana nella struct "giorno"
  */
+
 void dayname_fill();
+
+
 
 /**
  * Questa procedura stampa il menu principale dello Smart Fridge.
  */
+
 void stampa_menu();
 
-/**
- * Procedura che permette di visualizzare sull'interfaccia del programma eventuali
- * note e promemoria.
- */
-void memos();
+
 
 /**
  * Questa funzione trasforma una stringa composta di lettere (anche maiuscole) in lettere tutte minuscole
@@ -60,6 +67,7 @@ void memos();
  */
 
 char* low_conversion(char stringa[]); //converte la stringa di ingresso in caratteri minuscoli
+
 
 
 /**
@@ -73,7 +81,10 @@ char* low_conversion(char stringa[]); //converte la stringa di ingresso in carat
   * @param num_linee,ovvero di quante linee e' composto il file "consumazioni.txt".
   * @param stringa, ovvero il nome dell'alimento di cui si intende cercare la corrispondenza nel file "consumazioni.txt"
   */
-void consumazioni(int num_consumazioni,int num_linee,char *stringa[]);
+
+void consumazioni(int num_consumazioni,int num_linee,char stringa[]);
+
+
 
 /**
  * Questa procedura permette di ordinare, tramite un algoritmo "selection sort", l'array passato alla procedura,
@@ -85,7 +96,12 @@ void consumazioni(int num_consumazioni,int num_linee,char *stringa[]);
  * @param num_linee, ovvero il numero di linee di lui e' composto il file che deve essere ordinato
  */
 
-void* selection_sort(int array_int[],char array_nomi[CONSUM_MAX][LUNGH_MAX_NOME], int num_linee);
+void selection_sort(int array_int[],char array_nomi[CONSUM_MAX][LUNGH_MAX_NOME], int num_linee);
+
+
+
+//------------------------------------------------------------------------------------------------------
+//PROCEDURE TESTING CUNIT
 
 /**
  * Funzione che introduce il testing con CUnit.
@@ -98,4 +114,8 @@ void* selection_sort(int array_int[],char array_nomi[CONSUM_MAX][LUNGH_MAX_NOME]
  *
  * @return CU_get_error();
  */
+
 int testing();
+
+//------------------------------------------------------------------------------------------------------
+

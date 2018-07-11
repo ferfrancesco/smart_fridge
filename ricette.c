@@ -56,7 +56,7 @@ void ricette(){
 
         case 1:
 
-        	visualizza_ricette();  //TODO Fixa crash quando l'input è nullo
+        	visualizza_ricette();
             ricette();
 
         break;
@@ -99,6 +99,7 @@ void ricette(){
     }
 
 }
+
 
 /**
  * Questa funzione permette di calcolare il numero di stelline da visualizzare relativamente alla difficolta di una ricetta
@@ -177,6 +178,7 @@ void visualizza_ricette(){
 
 }
 
+
 /**
  * Questa procedura permette di visualizzare l'elenco delle ricette inserite nel sistema.
  *
@@ -215,6 +217,7 @@ void stampa_elenco_ricette(int num_linee){
     }
 
 }
+
 
 /**
  * Questa procedura permette di stampare le informazioni e le caratteristiche relative ad una
@@ -364,6 +367,7 @@ int* ricerca(char alimento[]){
 	return ricette_con_alimento;
 
 }
+
 
 /**
  * E' la procedura che ci permette di accedere alla funzione "ricerca", per trovare le
@@ -602,6 +606,7 @@ void aggiungi_ricette(){
 
 }
 
+
 /**
  * Questa procedura permette di modificare le caratteristiche di una ricetta, ovvero nome, difficolta', kcal, ingredienti o procedura.
  * Si accede ad un sottomenu' di modifica, dal quale si immette la scelta relativa al dato da modificare.
@@ -749,6 +754,7 @@ void modifica_ricette(){
 
 }
 
+
 /**
  * Questa procedura permette di aggiungere, modificare o rimuovere un ingrediente da una ricetta gia' esistente all'interno del sistema Smart Fridge.
  * @pre e' necessario prima accedere alla categoria "ricette", poi al sottomenu' di modifica di una ricetta.
@@ -767,7 +773,7 @@ void modifica_ingredienti(int ingrediente){
 
 	char nuovo_dato[200]; //stringa che memorizza il nuovo ingrediente (o la modifica di un ingrediente gia' esistente)
 	char* nuovo_dato_low; //conversione di "nuovo_dato" in minuscolo
-	int nuovo_dato_int;	  // conversione di "nuovo_dato" in intero, se dovesse essere un dato di tipo numerico
+
 
 	int num_ingredienti;  //contatore che viene incrementato, qualora venissero aggiunti ingredienti
 
@@ -914,6 +920,7 @@ void modifica_ingredienti(int ingrediente){
 
 }
 
+
 /**
  * Questa procedura permette di modificare i passi di una ricetta.
  * @pre e' necessario accedere al sottomenu' di modifica di una ricetta e poi selezionare la modifica della procedura della ricetta
@@ -935,13 +942,9 @@ void modifica_procedura(int step){
 	int nuova_posizione_int;  //conversione di "nuova_posizione" in intero
 
 	char nuovo_dato[200];	  //stringa che memorizza temporaneamente il nuovo step che si andra' ad aggiungere o a sostituire al precedente
-	char* nuovo_dato_low;	  //conversione in minuscolo di "nuovo_dato"
-	int nuovo_dato_int;		  //conversione di "nuovo_dato" in intero se si tratta di un dato numerico
+
 
 	int num_step;	 		  //contatore che viene incrementato, qualora venissero aggiunti steps alla ricetta
-
-	char step_temp[4000];  //variabile temporanea in cui copiare uno step prima della copia
-	char step_temp1[4000];  //variabile temporanea in cui copiare uno step prima della copia
 
 	system("cls");
 	printf("Che operazione vuoi eseguire?\n\n1)Aggiungi uno step\n2)Modifica uno step\n3)Rimuovi uno step\n4)Torna al menu'\n\n");
@@ -1112,6 +1115,7 @@ void modifica_procedura(int step){
 	system("pause");
 
 }
+
 
 /**
  * Questa procedura permette di rimuovere una ricetta dal sistema Smart Fridge.

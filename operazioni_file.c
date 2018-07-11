@@ -8,8 +8,7 @@ typedef int bool;
 #define true 1
 #define false 0
 
-
-//---------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
 //OPERAZIONI DI CARICAMENTO DEI FILE
 
 /**
@@ -58,6 +57,7 @@ int file_load_alimenti(){
     return num_linee;
 
 }
+
 
 /**
  *Questa funzione conta le linee del file ricette, se il file esiste,
@@ -125,6 +125,7 @@ int file_load_ricette(){
 
 }
 
+
 /**
  *Questa funzione conta le linee del file menu settimanale, se il file esiste,
  *altrimenti riporta un messaggio d'errore nell'apertura del file.
@@ -157,6 +158,7 @@ void file_load_menu_sett(){
     fclose(fp);
 
 }
+
 
 /**
  *Questa funzione conta le linee del file lista della spesa, se il file esiste,
@@ -202,10 +204,13 @@ int file_load_lista(){
     return num_linee;
 
 }
+
+
 /**
  * Questa funzione permette di caricare nel programma il file "consumazioni.txt", all'attivarsi del sottomenù della categoria "alimenti"
  * @return num_linee, ovvero il numero di linee di cui il file "consumazioni.txt" è composto
  */
+
 int file_load_consumazioni(){
 
 	int i=0;
@@ -242,7 +247,14 @@ int file_load_consumazioni(){
 }
 
 
+//-----------------------------------------------------------------------------------
+
+
+
+
+//-----------------------------------------------------------------------------------
 //OPERAZIONI DI SALVATAGGIO DEI FILE
+
 
 /**
  * Questa procedura riceve in input il numero di linee del file "alimenti.txt" e lo stesso viene aperto in scrittura.
@@ -266,6 +278,7 @@ void file_save_alimenti(int num_linee){
 
     fclose(fp);
 }
+
 
 /**
  * Questa procedura riceve in input il numero di linee del file "ricette.txt" e lo stesso viene aperto in scrittura.
@@ -312,6 +325,7 @@ void file_save_ricette (int num_linee){
 
 }
 
+
 /**
  * Questa procedura salva il menu settimanale.
  *
@@ -337,6 +351,7 @@ void file_save_menu_sett(){
 
 }
 
+
 /**
  * Questa procedura salva il file "lista_spesa.txt" dopo eventuali modifiche apportate.
  *
@@ -359,6 +374,7 @@ void file_save_lista(int num_linee){
     fclose(fp);
 }
 
+
 /**
  * Questa procedura permette di aggiungere stringhe in append ad un file, in questo caso "lista_spesa.txt"
  *
@@ -375,11 +391,13 @@ void file_append_lista(char stringa[]){
     fclose(fp);
 }
 
+
 /**
  * Questa procedura permette di salvare le modifiche apportate al file "consumazioni.txt".
  *
  * @param num_linee,ovvero il numero di linee di cui è composto il file "consumazioni.txt"
  */
+
 void file_save_consumazioni(int num_linee){
 
 	int i;
@@ -403,3 +421,4 @@ void file_save_consumazioni(int num_linee){
 }
 
 
+//-----------------------------------------------------------------------------------

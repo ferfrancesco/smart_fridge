@@ -26,6 +26,7 @@ typedef int bool;
  * @pre E' necessario che nel menu principale dello Smart Fridge sia selezionata la categoria "varie"
  *
  */
+
 void varie(){
 
     int menu_select=0;
@@ -64,6 +65,7 @@ void varie(){
 
 }
 
+
 /**
  * Procedura che stampa le diverse opzioni disponibili riguardo il menu settimanale
  * @pre per selezionare la prima scelta del menu, c'e' bisogno che il menu sia gia' stato inserito in precedenza
@@ -76,8 +78,6 @@ void menu_sett(){
 
     char selezione[10];
     int selezione_int;
-
-    char pasto[LUNGH_MAX_NOME];
 
     dayname_fill(); 								//inizializzazione giorni della settimana per il menù settimanale
 
@@ -196,6 +196,7 @@ void menu_sett(){
 
 }
 
+
 /**
  * Questa procedura permette di accedere al sottomenu' riguardante la lista della spesa nella categoria "varie"
  *
@@ -209,8 +210,6 @@ void lista(){
 
     char selezione[10];
     int selezione_int;
-
-    char nuovo_elemento[LUNGH_MAX_NOME];
 
     num_linee=file_load_lista();
 
@@ -329,6 +328,7 @@ void lista(){
     }
 
 }
+
 
 /**
  *Questa procedura permette di accedere ad un sottomenu', interno alla categoria "varie", che permette di visualizzare le statistiche relative ai cibi più consumati e alle ricette più preparate.

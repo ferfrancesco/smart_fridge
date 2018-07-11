@@ -12,6 +12,8 @@
 #define MAX_RICETTE 50 //Num massimo di ricette salvabili
 #define MAX_LISTA 50
 
+//---------------------------------------------------------------------------
+
 /**
  * Struct che definisce ogni singola pietanza del menu settimanale,
  * contrassegnata da nome del piatto stesso e dal giorno della settimana in cui
@@ -25,6 +27,9 @@ struct menu_settimana{
     char pietanza[2][LUNGH_MAX_NOME];
 
 }giorno[6];
+
+
+//---------------------------------------------------------------------------
 
 /**
  * Struct che definisce ogni singolo alimento presente nello Smart Fridge
@@ -75,6 +80,9 @@ struct consumazioni{
 
 }archivio_consumazioni[CONSUM_MAX],archivio_cons_ordinato[CONSUM_MAX];
 
+//---------------------------------------------------------------------------
+
+
 /**
  * Struct che definisce ogni singola ricetta presente nella lista inserita nello Smart Fridge
  */
@@ -106,6 +114,8 @@ struct ricetta{
 
 
 }archivio_ricette[MAX_RICETTE];
+
+//---------------------------------------------------------------------------
 
 /**
  * Rappresenta la lista della spesa, con [ numero di ingrediente ]

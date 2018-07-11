@@ -7,6 +7,8 @@
 #include "alimenti.h"
 #include "ricette.h"
 #include "varie.h"
+#include "operazioni_file.h"
+#include "altre_procedure.h"
 #include "CUnit/Basic.h"
 
 //inclusione valori bool
@@ -16,33 +18,55 @@ typedef int bool;
 
 #define LUNGH_MAX_NOME 50 //Lunghezza massima per il nome di un alimento
 
+//--------------------------------------------------------------------------------
+
+
 /**
  * Questa funzione verifica che una data stringa contenga solo numeri.
  *
  * @pre deve essere inserita una stringa che indica la stringa la cui composizione deve essere verificata
  * @post viene restituito un valore booleano, o vero o falso (che corrispondono rispettivamente ad un 1 o ad uno 0)
  */
-int isOnlyNumbers(char* stringa){ // todo c'è un warning legato alla correttezza dei tipi
+
+int isOnlyNumbers(char* stringa){
 
     int i;
+    int stringa_errata=0;
+
+    int ritorno;
+
+    if(stringa[0]=='\0'){
+
+    	stringa_errata=1;
+
+    }
 
     for(i=0;i<strlen(stringa);i++){
 
         if(isdigit(stringa[i])==false){
 
-            return true;
-
-        }
-
-        else if(isdigit(stringa[i])==true){
-
-            return false;
+            stringa_errata=1;
 
         }
 
     }
 
+    if(stringa_errata==1){
+
+    	ritorno=true;
+
+    }
+
+    else{
+
+    	ritorno=false;
+
+    }
+
+    return ritorno;
 }
+
+
 
 /**
  * Questa procedura stampa un messaggio di errore, utile in diverse funzioni
@@ -57,6 +81,8 @@ void messaggio_errore(){
     fflush(stdin);
 
 }
+
+
 
 /**
  * Questa procedura copia i nomi dei giorni della settimana nella struct "giorno"
@@ -81,6 +107,8 @@ void dayname_fill(){
     }
 
 }
+
+
 
 /**
  * Questa procedura stampa il menu principale dello Smart Fridge.
@@ -109,8 +137,6 @@ void stampa_menu(){
     printf("\n\nSeleziona una categoria\n\n1)Alimenti\n2)Ricette\n3)Varie\n4)Spegni il sistema\n\n");
 
     printf("\n*************************\n5)TESTING CUnit\n*************************\n\n");
-
-    //memos();
 
     scanf("%d",&menu_select);
 
@@ -147,14 +173,7 @@ void stampa_menu(){
 
 }
 
-/**
- * Procedura che stampa eventuali promemoria inseriti nello Smart Fridge
- *
- */
-void memos(){
 
-    printf("\n\n---------------------------------------------\n\nSEZIONE MEMOS");
-}
 
 /**
  * Questa funzione trasforma una stringa ,eventualmente scritta anche in lettere maiuscole,
@@ -164,6 +183,7 @@ void memos(){
  * @param stringa, ovvero la stringa da convertire
  * @return stringa, la stringa convertita
  */
+
 char* low_conversion(char stringa[]){
 
 	int i;
@@ -176,6 +196,7 @@ char* low_conversion(char stringa[]){
 
 	return stringa;
 }
+
 
 
  /**
@@ -242,6 +263,8 @@ void consumazioni(int num_consumazioni,int num_linee,char stringa[]){
 	file_save_consumazioni(num_linee);
 }
 
+
+
 /**
  * Questa procedura permette di ordinare, tramite un algoritmo "selection sort", l'array passato alla procedura,
  * in maniera decrescente.
@@ -260,7 +283,6 @@ void selection_sort(int array_int[],char array_nomi[CONSUM_MAX][LUNGH_MAX_NOME],
 	int j;
 	int max;
 
-	int temp;
 	char nome_temp[50];
 
 	int p;
@@ -292,6 +314,7 @@ void selection_sort(int array_int[],char array_nomi[CONSUM_MAX][LUNGH_MAX_NOME],
 }
 
 
+
 //------------------------------------------------------------------------------------------------------
 //PROCEDURE TESTING CUNIT
 
@@ -306,7 +329,6 @@ void selection_sort(int array_int[],char array_nomi[CONSUM_MAX][LUNGH_MAX_NOME],
  *
  * @return CU_get_error();
  */
-
 
 int testing(){
 
@@ -330,11 +352,13 @@ int testing(){
 
 		CU_ASSERT_EQUAL(isOnlyNumbers("12"),false);
 		CU_ASSERT_EQUAL(isOnlyNumbers("ciao"),true);
-		CU_ASSERT_EQUAL(isOnlyNumbers("-1"),true);
-		CU_ASSERT_EQUAL(isOnlyNumbers("a1"),true);
 		CU_ASSERT_EQUAL(isOnlyNumbers("1a"),true);
 		CU_ASSERT_EQUAL(isOnlyNumbers("&2"),true);
-
+		CU_ASSERT_EQUAL(isOnlyNumbers("-1"),true);
+		CU_ASSERT_EQUAL(isOnlyNumbers("a1"),true);
+		CU_ASSERT_EQUAL(isOnlyNumbers(" "),true);
+		CU_ASSERT_EQUAL(isOnlyNumbers("1a1"),true);
+		CU_ASSERT_EQUAL(isOnlyNumbers(""),true);
 	}
 
 
@@ -342,35 +366,31 @@ int testing(){
 	void test_low_conversion(void){
 
 		CU_ASSERT_STRING_EQUAL(low_conversion(strcpy(test1,"CIAO")),"ciao");
-		CU_ASSERT_STRING_EQUAL(low_conversion(strcpy(test1,"CIAO")),"cia");
 		CU_ASSERT_STRING_EQUAL(low_conversion(strcpy(test1,"CIao")),"ciao");
 		CU_ASSERT_STRING_EQUAL(low_conversion(strcpy(test1,"ciao")),"ciao");
 		CU_ASSERT_STRING_EQUAL(low_conversion(strcpy(test1,"1234")),"1234");
-		CU_ASSERT_STRING_EQUAL(low_conversion(strcpy(test1,"12AB")),"12AB");
 		CU_ASSERT_STRING_EQUAL(low_conversion(strcpy(test1,"12AB")),"12ab");
 		CU_ASSERT_STRING_EQUAL(low_conversion(strcpy(test1,"&*.,")),"&*.,");
+		CU_ASSERT_STRING_NOT_EQUAL(low_conversion(strcpy(test1,"12AB")),"12AB");
+		CU_ASSERT_STRING_NOT_EQUAL(low_conversion(strcpy(test1,"CIAO")),"cia");
 	}
 
 
 	void test_stampa_stelle(void){
 
-		CU_ASSERT_STRING_EQUAL(stampa_stelle(0)," ");
+		CU_ASSERT_STRING_EQUAL(stampa_stelle(0),"");
 		CU_ASSERT_STRING_EQUAL(stampa_stelle(1),"*");
 		CU_ASSERT_STRING_EQUAL(stampa_stelle(2),"**");
 		CU_ASSERT_STRING_EQUAL(stampa_stelle(3),"***");
 		CU_ASSERT_STRING_EQUAL(stampa_stelle(4),"****");
 		CU_ASSERT_STRING_EQUAL(stampa_stelle(5),"*****");
-		CU_ASSERT_STRING_EQUAL(stampa_stelle(6),"******");
-		CU_ASSERT_STRING_EQUAL(stampa_stelle('a'),"a");
-		CU_ASSERT_STRING_EQUAL(stampa_stelle('3a'),"***");
-		CU_ASSERT_STRING_EQUAL(stampa_stelle('a3'),"***");
-		CU_ASSERT_STRING_EQUAL(stampa_stelle('&.,*'),"*");
-		CU_ASSERT_STRING_EQUAL(stampa_stelle(-1),"*");
-		CU_ASSERT_STRING_EQUAL(stampa_stelle(-2),"**");
-		CU_ASSERT_STRING_EQUAL(stampa_stelle(-3),"***");
-		CU_ASSERT_STRING_EQUAL(stampa_stelle(-4),"****");
-		CU_ASSERT_STRING_EQUAL(stampa_stelle(-5),"*****");
+		CU_ASSERT_STRING_NOT_EQUAL(stampa_stelle(-1),"*");
+		CU_ASSERT_STRING_NOT_EQUAL(stampa_stelle(-2),"**");
+		CU_ASSERT_STRING_NOT_EQUAL(stampa_stelle(-3),"***");
+		CU_ASSERT_STRING_NOT_EQUAL(stampa_stelle(-4),"****");
+		CU_ASSERT_STRING_NOT_EQUAL(stampa_stelle(-5),"*****");
 		CU_ASSERT_STRING_NOT_EQUAL(stampa_stelle(0)," ");
+		CU_ASSERT_STRING_NOT_EQUAL(stampa_stelle(6),"******");
 	}
 	//--------------------------------------------------
 

@@ -45,7 +45,7 @@ void ricette();
  * @return il vettore caricato di stelle in base all'input inserito
  */
 
-char* stampa_stelle(int num); //stampa le stellette di difficolta',int num indica il numero della ricetta
+char* stampa_stelle(int difficolta); //stampa le stellette di difficolta',int num indica il numero della ricetta
 
 
 //----------------------------------------------------------------------------
@@ -61,6 +61,7 @@ char* stampa_stelle(int num); //stampa le stellette di difficolta',int num indic
 
 void visualizza_ricette();
 
+
 /**
  * Questa procedura permette di visualizzare l'elenco delle ricette inserite nel sistema.
  *
@@ -71,6 +72,7 @@ void visualizza_ricette();
 
 void stampa_elenco_ricette(int num_linee);
 
+
 /**
  * Questa procedura permette di stampare le caratteristiche relative ad una ricetta, prendendo in input il
  * numero corrispondente alla ricetta di cui si vogliono visualizzare le caratteristiche.
@@ -80,6 +82,7 @@ void stampa_elenco_ricette(int num_linee);
  */
 
 void stampa_ricetta(int num);
+
 
 
 //----------------------------------------------------------------------------
@@ -100,12 +103,14 @@ void stampa_ricetta(int num);
 
 int* ricerca(char alimento[]);  //int* perchè ha come ritorno un array di intt
 
+
 /**
  * E' la procedura che ci permette di accedere alla funzione "ricerca", per trovare le
  * corrispondenze tra un alimento e le ricette disponibili all'interno del sistema.
  */
 
 void ricerca_ricette();
+
 
 
 //----------------------------------------------------------------------------
@@ -123,6 +128,8 @@ void ricerca_ricette();
  */
 
 void aggiungi_ricette();
+
+
 /**
  * Questa procedura permette di modificare le caratteristiche di una ricetta, ovvero nome, difficolta', kcal, ingredienti o procedura.
  * Si accede ad un sottomenu' di modifica, dal quale si immette la scelta relativa al dato da modificare.
@@ -141,6 +148,7 @@ void aggiungi_ricette();
 
 void modifica_ricette();
 
+
 /**
  * Questa procedura permette di aggiungere, modificare o rimuovere un ingrediente da una ricetta gia' esistente all'interno del sistema Smart Fridge.
  * @pre e' necessario prima accedere alla categoria "ricette", poi al sottomenu' di modifica di una ricetta.
@@ -151,6 +159,7 @@ void modifica_ricette();
 
 void modifica_ingredienti(int ingrediente);
 
+
 /**
  * Questa procedura permette di modificare i passi di una ricetta.
  * @pre e' necessario accedere al sottomenu' di modifica di una ricetta e poi selezionare la modifica della procedura della ricetta
@@ -158,7 +167,8 @@ void modifica_ingredienti(int ingrediente);
  * @param step,ovvero il numero dello step che si intende modificare o eliminare
  */
 
-void modifica_procedura(int ingrediente);
+void modifica_procedura(int step);
+
 
 /**
  * Questa procedura permette di rimuovere una ricetta dal sistema Smart Fridge.
@@ -168,6 +178,7 @@ void modifica_procedura(int ingrediente);
  */
 
 void rimuovi_ricette();
+
 
 
 //----------------------------------------------------------------------------

@@ -14,6 +14,7 @@
 
 void varie();
 
+
 /**
  * Procedura che stampa le diverse opzioni disponibili riguardo il menu settimanale
  * @pre per selezionare la prima scelta del menu, c'e' bisogno che il menu sia gia' stato inserito in precedenza
@@ -21,12 +22,14 @@ void varie();
 
 void menu_sett();
 
+
 /**
  * Questa procedura permette di accedere al sottomenu' riguardante la lista della spesa nella categoria "varie"
  *
  */
 
 void lista();
+
 
 /**Questa procedura permette di accedere ad un sottomenu', interno alla categoria "varie", che permette di visualizzare le statistiche relative ai cibi più consumati e alle ricette più preparate.
  *
