@@ -417,29 +417,16 @@ void statistiche(){
 			selection_sort(valori_ordinare,nomi_temp,num_linee);
 
 			system("cls");
-			printf("Ecco un elenco delle 5 ricette piu' preparate");
+			printf("Ecco un elenco delle ricette piu' preparate");
 
 			printf("\n\n|%-50s|%-12s|","Ricetta","Preparazioni");  //il valore negativo serve per l'allineamento a sinistra
 	        printf("\n-----------------------------------------------------------------");
 
-	        if(num_linee<5){
+		    for(i=num_linee-1;i>=0;i--){
 
-				for(i=num_linee-1;i>=0;i--){
+		        printf("\n|%-50s|%12d|%d)",nomi_temp[i],valori_ordinare[i],num_linee-i);
 
-					printf("\n|%-50s|%12d|%d)",nomi_temp[i],valori_ordinare[i],num_linee-i);
-
-				}
-	        }
-
-	        else{
-
-		        for(i=5;i>0;i--){
-
-		           printf("\n|%-50s|%12d|%d)",nomi_temp[i],valori_ordinare[i],num_linee-i);
-
-		        }
-
-	        }
+		    }
 
 	        printf("\n\n");
 	        system("pause");

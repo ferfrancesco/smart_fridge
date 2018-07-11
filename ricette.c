@@ -244,8 +244,11 @@ void stampa_ricetta(int num){
 
     for(i=0;i<temp_int;i++){
 
-        printf("%s\n",archivio_ricette[num].ingredienti[i]);
+    	archivio_ricette[num].ingredienti[i][0]=toupper(archivio_ricette[num].ingredienti[i][0]); 	//converto il primo carattere per una questione estetica durante la stampa degli ingredienti
 
+    	printf("%s\n",archivio_ricette[num].ingredienti[i]);
+
+        archivio_ricette[num].ingredienti[i][0]=tolower(archivio_ricette[num].ingredienti[i][0]);   //riporto a minuscolo,serve che l'ingrediente sia salvato in minuscolo per la ricerca
     }
 
     printf("\n------------------------------------------------------------------");
@@ -937,6 +940,9 @@ void modifica_procedura(int step){
 
 	int num_step;	 		  //contatore che viene incrementato, qualora venissero aggiunti steps alla ricetta
 
+	char step_temp[4000];  //variabile temporanea in cui copiare uno step prima della copia
+	char step_temp1[4000];  //variabile temporanea in cui copiare uno step prima della copia
+
 	system("cls");
 	printf("Che operazione vuoi eseguire?\n\n1)Aggiungi uno step\n2)Modifica uno step\n3)Rimuovi uno step\n4)Torna al menu'\n\n");
 
@@ -979,17 +985,17 @@ void modifica_procedura(int step){
 
         num_step++;
 
-        nuova_posizione_int--;
-
         sprintf(archivio_ricette[step].num_step, "%d", num_step);
 
-        for(i=num_step;i>nuova_posizione_int;i--){
+        for(i=num_step;i>=nuova_posizione_int;i--){
 
-        	strcpy(archivio_ricette[step].procedura[nuova_posizione_int+i],archivio_ricette[step].procedura[nuova_posizione_int+i-1]);
+        	strcpy(archivio_ricette[step].procedura[i],archivio_ricette[step].procedura[i-1]);
 
         }
 
-        //strcpy(archivio_ricette[step].procedura[nuova_posizione_int],nuovo_dato);
+        nuova_posizione_int--;
+
+        strcpy(archivio_ricette[step].procedura[nuova_posizione_int],nuovo_dato);
 
         file_save_ricette(num_linee);
 
