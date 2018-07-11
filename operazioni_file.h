@@ -90,6 +90,12 @@ void file_save_ricette (int num_linee);
  */
 void file_append_lista(char stringa[]);
 
+/**
+ * Questa procedura salva il file "lista_spesa.txt" dopo eventuali modifiche apportate.
+ *
+ * @param num_linee,ovvero il numero di linee di cui e' composto il file "lista_spesa.txt"
+ */
+
 void file_save_lista(int num_linee);
 
 /**

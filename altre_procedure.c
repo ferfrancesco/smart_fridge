@@ -196,7 +196,7 @@ void consumazioni(int num_consumazioni,int num_linee,char stringa[]){
 	int consumazioni_tot_int;//indica il numero totale di consumazioni di un dato alimento nella lista "consumazioni.txt"
 	int trovato=0;  		 //flag che indica che l'alimento è già in lista o se è da aggiungere
 
-	if (num_linee==0){		//se il file non esiste
+	if (num_linee==0){		 //se il file non esiste
 
 		strcpy(archivio_consumazioni[num_linee].nome,stringa);
 
