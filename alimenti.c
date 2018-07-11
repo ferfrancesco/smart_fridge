@@ -751,6 +751,7 @@ void scadenze(int num_linee){
 	int anno_attuale;   	//variabile in cui salvare l'anno attuale (a cui poi dover aggiungere 1900)
 	int flag_scadenza=0;	//valore flag per indicare se ci sono alimenti in scadenza
 	int flag_scaduto=0;		//valore flag per indicare se un alimento è scaduto,serve per non ripetere la stampa degli alimenti ANCORA IN SCADENZA
+	int presenza_scaduti=0;
 	int i;
 	int j;
 	int k;
@@ -873,6 +874,7 @@ void scadenze(int num_linee){
 
     		flag_scadenza=0; //indica che c'è effettivamente cibo in scadenza
     		flag_scaduto=1;  //L'alimento è scaduto
+    		presenza_scaduti=1;	//segnalo che c'è almeno un alimento scaduto in frigo
 
     		//salvo il risultato nel file,per tener conto degli alimenti scaduti
 
@@ -884,6 +886,7 @@ void scadenze(int num_linee){
 
         		flag_scadenza=0; //indica che c'è effettivamente cibo in scadenza
         		flag_scaduto=1;  //L'alimento è scaduto
+        		presenza_scaduti=1;  //segnalo che c'è almeno un alimento scaduto in frigo
 
         		//salvo il risultato nel file,per tener conto degli alimenti scaduti
 
@@ -900,7 +903,7 @@ void scadenze(int num_linee){
 
     		if(flag_scaduto==0){
 
-    			printf("\n%s",archivio_alimenti[i].nome);  //TODO Inserire consiglio ricette anche nelle altre condizioni if
+    			printf("\n\n%s",archivio_alimenti[i].nome);
 
     			strcpy(low_ricerca,low_conversion(archivio_alimenti[i].nome));
 
@@ -910,15 +913,31 @@ void scadenze(int num_linee){
 
     			k=ricette_trovate[0];   //la prima posizione dell'array ricette_trovate contiene il numero di ricette trovate,utile quindi al corretto numero di stampe
 
-    			for(j=0;j<k;j++){
+    			printf("\nPotresti cucinare:");
 
-        			printf("\nPotresti cucinare:");
+    			if(k!=0){
 
-        			printf("%s",archivio_ricette[ricette_trovate[j+1]].nome);  //il resto delle posizioni dell'array,quindi da ricette_trovate[1] in poi,contiene
-        																	   //la posizione nell'array di struct della ricetta contenente l'alimento in scadenza
+					for(j=0;j<k;j++){
+
+						if((j+1)==k){
+
+							printf("%s",archivio_ricette[ricette_trovate[j+1]].nome); //all'ultimo ciclo faccio stampare una stringa senza virgola,per questioni estetiche
+						}
+
+						else{
+
+							printf("%s,",archivio_ricette[ricette_trovate[j+1]].nome);					//il resto delle posizioni dell'array,quindi da ricette_trovate[1] in poi,contiene
+																										//la posizione nell'array di struct della ricetta contenente l'alimento in scadenza
+						}
+					}
 
     			}
 
+    			else{
+
+    				printf("Nessuna ricetta trovata");
+
+    			}
     		}
     	}
 
@@ -935,7 +954,41 @@ void scadenze(int num_linee){
 
         		if(flag_scaduto==0){
 
-        			printf("\n%s",archivio_alimenti[i].nome);
+        			printf("\n\n%s",archivio_alimenti[i].nome);
+
+        			strcpy(low_ricerca,low_conversion(archivio_alimenti[i].nome));
+
+        			ricette_trovate=ricerca(low_ricerca);  //converto tutto in minuscolo per la ricerca
+
+        			archivio_alimenti[i].nome[0]=toupper(archivio_alimenti[i].nome[0]);  //riporto il primo carattere in maiuscolo per questioni grafiche
+
+        			k=ricette_trovate[0];   //la prima posizione dell'array ricette_trovate contiene il numero di ricette trovate,utile quindi al corretto numero di stampe
+
+        			printf("\nPotresti cucinare:");
+
+        			if(k!=0){
+
+    					for(j=0;j<k;j++){
+
+    						if((j+1)==k){
+
+    							printf("%s",archivio_ricette[ricette_trovate[j+1]].nome); //all'ultimo ciclo faccio stampare una stringa senza virgola,per questioni estetiche
+    						}
+
+    						else{
+
+    							printf("%s,",archivio_ricette[ricette_trovate[j+1]].nome);					//il resto delle posizioni dell'array,quindi da ricette_trovate[1] in poi,contiene
+    																										//la posizione nell'array di struct della ricetta contenente l'alimento in scadenza
+    						}
+    					}
+
+        			}
+
+        			else{
+
+        				printf("Nessuna ricetta trovata");
+
+        			}
 
         		}
 
@@ -1061,7 +1114,10 @@ void scadenze(int num_linee){
     	}
     }
 
-    printf("\n\n");
+    if(presenza_scaduti==0){
+
+    	printf("\nNessun alimento scaduto in frigo\n\n");
+    }
 
     //salvo il file alimenti per aggiornare lo status degli alimenti scaduti
     file_save_alimenti(num_linee);
