@@ -756,6 +756,8 @@ void scadenze(int num_linee){
 	int k;
 	int *ricette_trovate;
 
+	char low_ricerca[50];
+
 	int tot_giorni_anno=0; //variabile per salvare il numero del giorno in cui scade l'alimento,da 0 a 365
 
 	//Acquisisco l'orario e lo memorizzo nella struct tm
@@ -900,7 +902,11 @@ void scadenze(int num_linee){
 
     			printf("\n%s",archivio_alimenti[i].nome);  //TODO Inserire consiglio ricette anche nelle altre condizioni if
 
-    			ricette_trovate=ricerca(archivio_alimenti[i].nome);
+    			strcpy(low_ricerca,low_conversion(archivio_alimenti[i].nome));
+
+    			ricette_trovate=ricerca(low_ricerca);  //converto tutto in minuscolo per la ricerca
+
+    			archivio_alimenti[i].nome[0]=toupper(archivio_alimenti[i].nome[0]);  //riporto il primo carattere in maiuscolo per questioni grafiche
 
     			k=ricette_trovate[0];   //la prima posizione dell'array ricette_trovate contiene il numero di ricette trovate,utile quindi al corretto numero di stampe
 
@@ -931,15 +937,13 @@ void scadenze(int num_linee){
 
         			printf("\n%s",archivio_alimenti[i].nome);
 
-                	//printf("Potresti cucinare:%s",);
-
         		}
 
     	}
 
     }
 
-    if(flag_scadenza==0){  //TODO Controlla perchè non stampa sta roba
+    if(flag_scadenza==0){
 
     	printf("\nNessun alimento in scadenza\n\n");
     }
@@ -947,7 +951,7 @@ void scadenze(int num_linee){
     printf("\n\n\n");
 
     printf("\n***********************************************************");
-    printf("\nALIMENTI SCADUTI\nE' consigliato rimuovere questi alimenti dal frigo)");
+    printf("\nALIMENTI SCADUTI\n(E' consigliato rimuovere questi alimenti dal frigo)");
     printf("\n***********************************************************");
 
     for(i=0;i<num_linee;i++){
