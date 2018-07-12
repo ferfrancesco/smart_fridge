@@ -162,7 +162,7 @@ void stampa_alimenti(int num_linee){
  * Questa procedura permette di capire quali sono gli alimenti, presenti nello Smart Fridge, che sono scaduti o sono in scadenza.
  * Viene utilizzata all'interno del sottomenù "alimenti".
  *
- * @pre Viene attivata in automatico quando viene aperto il sottomenù "alimenti"
+ * @pre Viene attivata in automatico quando viene aperto il sottomenu' "alimenti"
  * @pre devono esserci alimenti presenti nello Smart Fridge.
  *
  * @param num_linee, ovvero il numero di linee del file "alimenti.txt"
@@ -566,8 +566,8 @@ void scadenze(int num_linee){
  * La procedura permette di inserire nuovi alimenti.
    E' possibile effettuare una scelta interna:
 
-		1- Se l'alimento è solido, e le sue quantità si misurano in grammi.
-		2- Se l'alimento è liquido e si misura in millilitri.
+		1- Se l'alimento e' solido, e le sue quantità si misurano in grammi.
+		2- Se l'alimento e' liquido e si misura in millilitri.
 
  * @param num_linee riceve in input il numero di linee di cui e' composto il file
  */
@@ -888,12 +888,12 @@ void aggiunta_alimenti(int num_linee){
 
 /**
  * La procedura permette di modificare le quantita degli alimenti presenti nel frigo.
- * E' presente una correlazione tra i campi "quantità", "numero" e "quantita_tot" della struct "alimento".
+ * E' presente una correlazione tra i campi "quantita'", "numero" e "quantita_tot" della struct "alimento".
  * Infatti, se si apportano delle modifiche ad uno dei tre campi, gli altri due ne saranno coinvolti.
  *
- * @pre bisogna selezionare la seconda voce del sottomenù "alimenti", ovvero "Prendi un alimento dal frigo".
- * @pre è necessario che ci siano alimenti già inseriti all'interno dello Smart Fridge.
- * @post si ha la modifica delle quantità di un alimento all'interno dello Smart Fridge, con coinvolgimento di tutti i campi sopra citati.
+ * @pre bisogna selezionare la seconda voce del sottomenu' "alimenti", ovvero "Prendi un alimento dal frigo".
+ * @pre e' necessario che ci siano alimenti gia' inseriti all'interno dello Smart Fridge.
+ * @post si ha la modifica delle quantita' di un alimento all'interno dello Smart Fridge, con coinvolgimento di tutti i campi sopra citati.
  * @param num_linee riceve in input il numero di linee del file "alimenti.txt"
  */
 

@@ -94,7 +94,7 @@ void stampa_ricetta(int num);
 
 /**
  * La funzione "ricerca" prende in input una stringa (che rappresenta un alimento) e restituisce
- * la ricetta (o le ricette) che contengono quell'ingrediente.Dà come valore di ritorno un array
+ * la ricetta (o le ricette) che contengono quell'ingrediente.Da' come valore di ritorno un array
  * di interi, ovvero "ricette_con_alimento"
  *
  * @param alimento,ovvero l'ingrediente con il quale ricercare le corrispondenze

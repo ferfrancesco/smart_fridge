@@ -201,10 +201,10 @@ char* low_conversion(char stringa[]){
 
  /**
   * Questa procedura non fa altro che effettuare controlli sul calcolo delle consumazioni di ciascun alimento e sulla trascrizione dell'aggiornamento sul file "consumazioni.txt"
-  * Vengono distinti diversi casi a seconda se l'alimento è già in lista consumazioni, se il file è vuoto, oppure se è già presente nel file.
-  * Se il file è vuoto, si scrive l'alimento e le relative consumazioni
-  * Se il file non è vuoto ma non esistono corrispondenze, si aggiunge il nome dell'alimento e le relative consumazioni
-  * Se il file non è vuoto e viene trovata una corrispondenza, si aggiorna solo il dato relativo alle consumazioni.
+  * Vengono distinti diversi casi a seconda se l'alimento e' gia' in lista consumazioni, se il file e' vuoto, oppure se e' gia' presente nel file.
+  * Se il file e' vuoto, si scrive l'alimento e le relative consumazioni
+  * Se il file non e' vuoto ma non esistono corrispondenze, si aggiunge il nome dell'alimento e le relative consumazioni
+  * Se il file non e' vuoto e viene trovata una corrispondenza, si aggiorna solo il dato relativo alle consumazioni.
   *
   * @param num_consumazioni, ovvero il numero di confezioni che si stanno eliminando di un dato alimento.
   * @param num_linee,ovvero di quante linee e' composto il file "consumazioni.txt".

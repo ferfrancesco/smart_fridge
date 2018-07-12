@@ -60,7 +60,7 @@ struct alimento{
     ///quantita' di un dato alimento
     char quantita[10];
 
-    ///quantità totale di un alimento presente nello Smart Fridge
+    ///quantita' totale di un alimento presente nello Smart Fridge
     char quantita_tot[10];
 
     ///flag che indica se un alimento presente nello Smart Fridge è scaduto oppure no
@@ -76,6 +76,7 @@ struct consumazioni{
     ///numero di volte in cui un certo alimento è stato consumato
     char consumazioni[10];
 
+    ///conversione di "consumazioni" in intero
     int consumazioni_int;
 
 }archivio_consumazioni[CONSUM_MAX],archivio_cons_ordinato[CONSUM_MAX];
