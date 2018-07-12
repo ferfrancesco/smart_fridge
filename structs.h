@@ -4,13 +4,13 @@
 
 // Libreria contentente le strutture del programma
 
-#define ALIM_MAX 50  //quantità alimenti massimi inseribile in frigo
-#define CONSUM_MAX 100
-#define STEP_MAX 50  //quantità massima di step per ricetta
-#define INGR_MAX 50  //quantità max di ingredienti in una ricetta
-#define LUNGH_MAX_NOME 50 //Luneghezza massima per il nome di un alimento
-#define MAX_RICETTE 50 //Num massimo di ricette salvabili
-#define MAX_LISTA 50
+#define ALIM_MAX 50  		//quantità alimenti massimi inseribile in frigo
+#define CONSUM_MAX 100		//Massimo numero di linee per il file "consumazioni.txt"
+#define STEP_MAX 50  		//quantità massima di step per ricetta
+#define INGR_MAX 50  		//quantità max di ingredienti in una ricetta
+#define LUNGH_MAX_NOME 50 	//Lunghezza massima per il nome di un alimento
+#define MAX_RICETTE 50 		//Num massimo di ricette salvabili
+#define MAX_LISTA 50		//Massimo numero di linee per il file "lista_spesa.txt"
 
 //---------------------------------------------------------------------------
 

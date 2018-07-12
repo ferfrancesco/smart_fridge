@@ -366,13 +366,14 @@ int testing(){
 	void test_low_conversion(void){
 
 		CU_ASSERT_STRING_EQUAL(low_conversion(strcpy(test1,"CIAO")),"ciao");
+		CU_ASSERT_STRING_NOT_EQUAL(low_conversion(strcpy(test1,"CIAO")),"cia");
 		CU_ASSERT_STRING_EQUAL(low_conversion(strcpy(test1,"CIao")),"ciao");
 		CU_ASSERT_STRING_EQUAL(low_conversion(strcpy(test1,"ciao")),"ciao");
 		CU_ASSERT_STRING_EQUAL(low_conversion(strcpy(test1,"1234")),"1234");
 		CU_ASSERT_STRING_EQUAL(low_conversion(strcpy(test1,"12AB")),"12ab");
 		CU_ASSERT_STRING_EQUAL(low_conversion(strcpy(test1,"&*.,")),"&*.,");
 		CU_ASSERT_STRING_NOT_EQUAL(low_conversion(strcpy(test1,"12AB")),"12AB");
-		CU_ASSERT_STRING_NOT_EQUAL(low_conversion(strcpy(test1,"CIAO")),"cia");
+
 	}
 
 
@@ -384,13 +385,14 @@ int testing(){
 		CU_ASSERT_STRING_EQUAL(stampa_stelle(3),"***");
 		CU_ASSERT_STRING_EQUAL(stampa_stelle(4),"****");
 		CU_ASSERT_STRING_EQUAL(stampa_stelle(5),"*****");
+		CU_ASSERT_STRING_NOT_EQUAL(stampa_stelle(6),"******");
 		CU_ASSERT_STRING_NOT_EQUAL(stampa_stelle(-1),"*");
 		CU_ASSERT_STRING_NOT_EQUAL(stampa_stelle(-2),"**");
 		CU_ASSERT_STRING_NOT_EQUAL(stampa_stelle(-3),"***");
 		CU_ASSERT_STRING_NOT_EQUAL(stampa_stelle(-4),"****");
 		CU_ASSERT_STRING_NOT_EQUAL(stampa_stelle(-5),"*****");
 		CU_ASSERT_STRING_NOT_EQUAL(stampa_stelle(0)," ");
-		CU_ASSERT_STRING_NOT_EQUAL(stampa_stelle(6),"******");
+
 	}
 	//--------------------------------------------------
 
