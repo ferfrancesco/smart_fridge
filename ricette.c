@@ -400,7 +400,7 @@ void ricerca_ricette(){
 	int valori_ordinare[CONSUM_MAX];
 
 	system("cls");
-	printf("Con quale parametro vuoi cercare le ricette?\n\n1)Ricerca per ingrediente\n2)Visualizza per ordine di KCAL\n\n");
+	printf("Con quale parametro vuoi cercare le ricette?\n\n1)Ricerca per ingrediente\n2)Visualizza per ordine di KCAL\n3)Ritorna al menu' precedente\n\n");
 	scanf("%d",&selezione);
 
 	switch(selezione){
@@ -415,11 +415,29 @@ void ricerca_ricette(){
 
 			gets(nome_alimento);
 
+			printf("\n");
+
+			if(nome_alimento[0]=='\0'){
+
+				printf("Inserire un nome,una stringa vuota non e' accettata\n\n");
+				system("pause");
+				ricerca_ricette();
+			}
+
 			nome_alimento_low=low_conversion(nome_alimento);
 
 			ricette_trovate=ricerca(nome_alimento_low);
 
 			j=ricette_trovate[0];   //la prima posizione dell'array ricette_trovate contiene il numero di ricette trovate,utile quindi al corretto numero di stampe
+
+			if(j==0){
+
+				printf("Nessuna ricetta trovata\n\n");
+				fflush(stdin);
+				system("pause");
+				ricerca_ricette();
+
+			}
 
 			for(i=0;i<j;i++){
 
@@ -428,8 +446,10 @@ void ricerca_ricette(){
 
 			}
 
-			printf("\n\n");
+			printf("\n");
+			fflush(stdin);
 			system("pause");
+			ricerca_ricette();
 
 		break;
 
@@ -460,8 +480,14 @@ void ricerca_ricette(){
 
 	        printf("\n\n");
 	        system("pause");
+	        ricerca_ricette();
 
 		break;
+
+		case 3:
+
+			ricette();
+			break;
 
 		default:
 
@@ -879,6 +905,11 @@ void modifica_ingredienti(int ingrediente){
 
         file_save_ricette(num_linee);
 
+    	printf("\n\n");
+    	system("pause");
+
+    	modifica_ingredienti(ingrediente);
+
 	break;
 
 	case 3:
@@ -899,6 +930,13 @@ void modifica_ingredienti(int ingrediente){
 		printf("\n\nChe ingrediente si intende rimuovere?\n\n");
 		fflush(stdin);
 		gets(selezione);
+
+		if(isOnlyNumbers(selezione)==true) {
+
+			messaggio_errore();
+			modifica_ingredienti(ingrediente);
+
+		}
 
 		selezione_int=atoi(selezione);
 
@@ -922,6 +960,12 @@ void modifica_ingredienti(int ingrediente){
 	    sprintf(archivio_ricette[ingrediente].num_ingredienti, "%d", num_ingredienti);
 
 	    file_save_ricette(num_linee);
+
+    	printf("\n\n");
+    	system("pause");
+
+    	modifica_ingredienti(ingrediente);
+
 
 	break;
 
@@ -1039,6 +1083,10 @@ void modifica_procedura(int step){
 
         file_save_ricette(num_linee);
 
+    	printf("\n\n");
+    	system("pause");
+    	modifica_procedura(step);
+
 	break;
 
 	case 2:
@@ -1086,6 +1134,10 @@ void modifica_procedura(int step){
 
         file_save_ricette(num_linee);
 
+        printf("\n\n");
+    	system("pause");
+    	modifica_procedura(step);
+
 	break;
 
 	case 3:
@@ -1106,6 +1158,13 @@ void modifica_procedura(int step){
 		printf("\n\nChe step si intende rimuovere?\n\n");
 		fflush(stdin);
 		gets(selezione);
+
+		if(isOnlyNumbers(selezione)==true) {
+
+			messaggio_errore();
+			modifica_procedura(step);
+
+		}
 
 		selezione_int=atoi(selezione);
 
@@ -1130,6 +1189,9 @@ void modifica_procedura(int step){
 
 	    file_save_ricette(num_linee);
 
+    	printf("\n\n");
+    	system("pause");
+    	modifica_procedura(step);
 
 	break;
 
@@ -1147,9 +1209,6 @@ void modifica_procedura(int step){
     break;
 
 	}
-
-	printf("\n\n");
-	system("pause");
 
 }
 

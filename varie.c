@@ -74,10 +74,13 @@ void varie(){
 void menu_sett(){
 
     int menu_select=0;
+    int menu_select1=0;
     int i;
 
     char selezione[10];
     int selezione_int;
+
+    char pietanza[LUNGH_MAX_NOME];
 
     dayname_fill(); 								//inizializzazione giorni della settimana per il menù settimanale
 
@@ -138,24 +141,45 @@ void menu_sett(){
         	printf("Vuoi inserire il pranzo o la cena?\n\n1)Pranzo\n2)Cena\n");
 
         	fflush(stdin);
-        	scanf("%d",&menu_select);
+        	scanf("%d",&menu_select1);
 
-        	switch(menu_select){
+        	switch(menu_select1){
 
         	case 1:
 
-        		printf("\nInserisci il pasto:");
-        		fflush(stdin);
-        		gets(giorno[selezione_int].pietanza[0]);
+        		do{
+
+					printf("\nInserisci il pasto:");
+					fflush(stdin);
+					gets(pietanza);
+
+					if(pietanza[0]=='\0'){
+
+						printf("\nIl campo non puo' essere vuoto");
+					}
+
+        		}while(pietanza[0]=='\0');
+
+        		strcpy(giorno[selezione_int].pietanza[0],pietanza);
 
         		break;
 
         	case 2:
 
-        		printf("\nInserisci il pasto:");
-        		fflush(stdin);
-        		gets(giorno[selezione_int].pietanza[1]);
+        		do{
 
+					printf("\nInserisci il pasto:");
+					fflush(stdin);
+					gets(pietanza);
+
+					if(pietanza[0]=='\0'){
+
+						printf("\nIl campo non puo' essere vuoto");
+					}
+
+        		}while(pietanza[0]=='\0');
+
+        		strcpy(giorno[selezione_int].pietanza[1],pietanza);
         		break;
 
         	default:
@@ -229,7 +253,7 @@ void lista(){
 
             if(num_linee==0){
 
-            	printf("\nLa lista e' vuota\n");
+            	printf("La lista e' vuota\n\n");
             	system("pause");
             	lista();
             }
@@ -266,25 +290,42 @@ void lista(){
             system("cls");
             printf("Questa e' la lista della spesa\n\n");
 
+            if(num_linee==0){
+
+            	printf("La lista e' vuota\n\n");
+            	system("pause");
+            	lista();
+            }
+
             for(i=0;i<num_linee;i++){
 
                 printf("%d)%s\n",i+1,lista_spesa[i]);
             }
 
-            printf("\n\nChe elemento vuoi rimuovere?Inserire un valore numerico");
+            do{
 
-            fflush(stdin);
+				printf("\n\nChe elemento vuoi rimuovere?Inserire un valore numerico\n\n");
 
-            gets(selezione);
+				fflush(stdin);
 
-			if(isOnlyNumbers(selezione)==true) {
+				gets(selezione);
 
-				messaggio_errore();
-				alimenti();
+				if(isOnlyNumbers(selezione)==true) {
 
-			}
+					messaggio_errore();
+					lista();
 
-			selezione_int=atoi(selezione);
+				}
+
+				selezione_int=atoi(selezione);
+
+				if((selezione_int>num_linee) || (selezione_int<1)){
+
+					printf("\nSeleziona un elemento corretto");
+
+				}
+
+            }while((selezione_int>num_linee) || (selezione_int<1));
 
 			selezione_int--; //mi allineo all'array
 
@@ -318,7 +359,7 @@ void lista(){
         	break;
 
         case 5:
-            lista();
+            varie();
             break;
 
         default:
@@ -353,7 +394,7 @@ void statistiche(){
 	int valori_ordinare[CONSUM_MAX]; 			//array locale in cui copiare il campo della struct da ordinare (composto da interi)
 
 	system("cls");
-	printf("Qui puoi visualizzare gli alimenti più consumati e le ricette più preparate\nCosa vuoi visualizzare?\n\n1)Alimenti piu' consumati\n2)Ricette piu' preparate\n\n");
+	printf("Qui puoi visualizzare gli alimenti più consumati e le ricette più preparate\nCosa vuoi visualizzare?\n\n1)Alimenti piu' consumati\n2)Ricette piu' preparate\n3)Ritorna al menu' precedente\n\n");
 
 	scanf("%d",&selezione);
 
@@ -389,7 +430,7 @@ void statistiche(){
 
 	        else{
 
-		        for(i=5;i>0;i--){
+		        for(i=num_linee-1;i>num_linee-6;i--){
 
 		           printf("\n|%-50s|%12d|%d)",nomi_temp[i],valori_ordinare[i],num_linee-i);
 
@@ -432,6 +473,11 @@ void statistiche(){
 	        system("pause");
 	        varie();
 
+			break;
+
+		case 3:
+
+			varie();
 			break;
 
 		default:

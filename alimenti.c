@@ -54,6 +54,8 @@ void alimenti(){
 
     scadenze(num_linee);
 
+    fflush(stdin);
+
     scanf("%d",&menu_select);
 
     switch(menu_select){
@@ -137,7 +139,7 @@ void stampa_alimenti(int num_linee){
                 strcpy(temp_quantita,archivio_alimenti[i].quantita_tot);
                 strcat(temp_quantita," ml");
 
-                printf("\n|%-50s|%-s/%-s/%-6s|%-10s|%-10s|%-7s|%d)",archivio_alimenti[i].nome,archivio_alimenti[i].giorno,archivio_alimenti[i].mese,archivio_alimenti[i].anno,archivio_alimenti[i].numero,temp_quantita,archivio_alimenti[i].kcal,i+1);
+                printf("\n|%-50s|%-2s/%-2s/%-6s|%-10s|%-10s|%-7s|%d)",archivio_alimenti[i].nome,archivio_alimenti[i].giorno,archivio_alimenti[i].mese,archivio_alimenti[i].anno,archivio_alimenti[i].numero,temp_quantita,archivio_alimenti[i].kcal,i+1);
 
             }
 
@@ -664,6 +666,10 @@ void aggiunta_alimenti(int num_linee){
 
                 break;
 
+            default:
+    			messaggio_errore();
+    			alimenti();
+            	break;
         }
 
         numero_int=atoi(archivio_alimenti[num_linee].numero);
