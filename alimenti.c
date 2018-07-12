@@ -640,15 +640,27 @@ void aggiunta_alimenti(int num_linee){
 
             case 1:
 
-                printf("\nQual e' la quantita' in g del singolo elemento?[GRAMMI]:"); //TODO inserire controllo su input numerico
+                printf("\nQual e' la quantita' in g del singolo elemento?[GRAMMI]:");
                 gets(archivio_alimenti[num_linee].quantita);
+
+        		if(isOnlyNumbers(archivio_alimenti[num_linee].quantita)==true){
+
+        			messaggio_errore();
+        			alimenti();
+        		}
 
                 break;
 
             case 2:
 
-                printf("\nQual e' la quantita' in ml del singolo elemento?[MILLILITRI]:"); //TODO inserire controllo su input numerico
+                printf("\nQual e' la quantita' in ml del singolo elemento?[MILLILITRI]:");
                 gets(archivio_alimenti[num_linee].quantita);
+
+        		if(isOnlyNumbers(archivio_alimenti[num_linee].quantita)==true){
+
+        			messaggio_errore();
+        			alimenti();
+        		}
 
                 break;
 
@@ -903,25 +915,35 @@ void modifica_alimenti(int num_linee){
 
     int i;
 
-    printf("Quale elemento vuoi prelevare dal frigo?\n\nDigitane il numero ad esso associato:");
+    do{
 
-    fflush(stdin);
+		printf("Quale elemento vuoi prelevare dal frigo?\n\nDigitane il numero ad esso associato:");
 
-    gets(selezione);  //todo implementa limite
+		fflush(stdin);
 
-    if(isOnlyNumbers(selezione)==true) {
+		gets(selezione);
 
-    	messaggio_errore();
-        alimenti();
+		if(isOnlyNumbers(selezione)==true) {
 
-    }
+			messaggio_errore();
+			alimenti();
 
-    else if (isOnlyNumbers(selezione)==false){
+		}
 
-        selezione_int=atoi(selezione);
-    }
+		else if (isOnlyNumbers(selezione)==false){
 
-    selezione_int=selezione_int-1; 	//diminuzione del valore della variabile di 1 per allinearsi con l'array,in quanto l'utente vede e seleziona valori shiftati di 1,per evitare che vi sia un alimento indicato col valore 0
+			selezione_int=atoi(selezione);
+
+			selezione_int=selezione_int-1; 	//diminuzione del valore della variabile di 1 per allinearsi con l'array,in quanto l'utente vede e seleziona valori shiftati di 1,per evitare che vi sia un alimento indicato col valore 0
+
+			if((selezione_int>=num_linee) || (selezione_int<0)){
+
+				printf("\nInserisci un numero di alimento valido\n\n\n");
+
+			}
+		}
+
+	}while((selezione_int>=num_linee) || (selezione_int<0));
 
     printf("\n\nVuoi modificare il numero di elementi in frigo o le quantita'?\n\n1)Numero Elementi\n2)Quantita'\n\n");
 

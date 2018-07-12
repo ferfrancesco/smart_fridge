@@ -149,24 +149,34 @@ void visualizza_ricette(){
     system("cls");
     stampa_elenco_ricette(num_linee);
 
-    printf("\n\nChe ricetta si desidera visualizzare?Inserire un valore numerico:");
+    do{
 
-    fflush(stdin);
-    gets(selezione);
+    	printf("\n\nChe ricetta si desidera visualizzare?Inserire un valore numerico:");
 
-    if(isOnlyNumbers(selezione)==true) {
+		fflush(stdin);
+		gets(selezione);
 
-    	messaggio_errore();
-        ricette();
+		if(isOnlyNumbers(selezione)==true) {
 
-    }
+			messaggio_errore();
+			ricette();
 
-    else if (isOnlyNumbers(selezione)==false){
+		}
 
-        selezione_int=atoi(selezione);
-    }
+		else if (isOnlyNumbers(selezione)==false){
 
-    selezione_int--; //decremento di 1 per allinearmi con l'array
+			selezione_int=atoi(selezione);
+
+			selezione_int=selezione_int-1; 	//diminuzione del valore della variabile di 1 per allinearsi con l'array,in quanto l'utente vede e seleziona valori shiftati di 1,per evitare che vi sia un alimento indicato col valore 0
+
+			if((selezione_int>=num_linee) || (selezione_int<0)){
+
+				printf("Inserisci un numero di ricetta valido");
+
+			}
+		}
+
+	}while((selezione_int>=num_linee) || (selezione_int<0));
 
     system("cls");
 
@@ -636,24 +646,34 @@ void modifica_ricette(){
 	system("cls");
 	stampa_elenco_ricette(num_linee);
 
+	do{
+
     printf("\n\nChe ricetta si desidera modificare?Inserire un valore numerico:");
 
-    fflush(stdin);
-    gets(selezione);
+		fflush(stdin);
+		gets(selezione);
 
-    if(isOnlyNumbers(selezione)==true) {
+		if(isOnlyNumbers(selezione)==true) {
 
-    	messaggio_errore();
-        ricette();
+			messaggio_errore();
+			ricette();
 
-    }
+		}
 
-    else if (isOnlyNumbers(selezione)==false){
+		else if (isOnlyNumbers(selezione)==false){
 
-        selezione_int=atoi(selezione);
-    }
+			selezione_int=atoi(selezione);
 
-    selezione_int--; //decremento di 1 per allinearmi con l'array
+			selezione_int=selezione_int-1; 	//diminuzione del valore della variabile di 1 per allinearsi con l'array,in quanto l'utente vede e seleziona valori shiftati di 1,per evitare che vi sia un alimento indicato col valore 0
+
+			if((selezione_int>=num_linee) || (selezione_int<0)){
+
+				printf("Inserisci un numero di ricetta valido");
+
+			}
+		}
+
+	}while((selezione_int>=num_linee) || (selezione_int<0));
 
     system("cls");
 
@@ -700,7 +720,7 @@ void modifica_ricette(){
 						printf("Scelta inserita non valida!\n");
 				}
 
-    		} while((nuovo_dato_int<0) && (nuovo_dato_int>6));
+    		} while((nuovo_dato_int<=0) || (nuovo_dato_int>5));
 
     		file_save_ricette(num_linee);
 
@@ -739,6 +759,11 @@ void modifica_ricette(){
 			ricette();
 
     	break;
+
+    	case 6:
+
+    		ricette();
+    		break;
 
     	default:
 
@@ -835,12 +860,12 @@ void modifica_ingredienti(int ingrediente){
 
 		selezione_int=atoi(selezione);
 
-		if(selezione_int>num_ingredienti){
+		if((selezione_int>num_ingredienti) || (selezione_int<=0)){
 
 			printf("\nHai selezionato un ingrediente non esistente,riprova");
 		}
 
-		}while(selezione_int>num_ingredienti);
+		}while((selezione_int>num_ingredienti) || (selezione_int<=0));
 
 		selezione_int--; //decremento di uno per allinearmi con l'array
 
@@ -877,12 +902,12 @@ void modifica_ingredienti(int ingrediente){
 
 		selezione_int=atoi(selezione);
 
-		if(selezione_int>num_ingredienti){
+		if((selezione_int>num_ingredienti) || (selezione_int<=0)){
 
 			printf("\nHai selezionato un ingrediente non esistente,riprova");
 		}
 
-		}while(selezione_int>num_ingredienti);
+		}while((selezione_int>num_ingredienti) || (selezione_int<=0));
 
 		selezione_int--; //decremento di uno per allinearmi con l'array
 
@@ -972,19 +997,31 @@ void modifica_procedura(int step){
 		fflush(stdin);
 		gets(nuovo_dato);
 
-		printf("\nInserire la posizione dello step\n\n");
-		fflush(stdin);
-		gets(nuova_posizione);
+		do{
+			printf("\nInserire la posizione dello step\n\n");
+			fflush(stdin);
+			gets(nuova_posizione);
 
-		if(isOnlyNumbers(nuova_posizione)==true) {
+			if(isOnlyNumbers(nuova_posizione)==true) {
 
-			messaggio_errore();
-			modifica_procedura(step);
+				messaggio_errore();
+				modifica_procedura(step);
 
-		}
+			}
+
+			else if (isOnlyNumbers(nuova_posizione)==false){
+
+				nuova_posizione_int=atoi(nuova_posizione);
+
+				if((nuova_posizione_int>num_step+1) || (nuova_posizione_int<1)){
+
+					printf("\nHai inserito un numero di step che va oltre gli step gia' presenti,riprova");
+				}
+			}
+
+		}while((nuova_posizione_int>num_step+1) || (nuova_posizione_int<1));
 
         num_step=atoi(archivio_ricette[step].num_step);
-        nuova_posizione_int=atoi(nuova_posizione);
 
         num_step++;
 
@@ -1032,12 +1069,12 @@ void modifica_procedura(int step){
 
 		selezione_int=atoi(selezione);
 
-		if(selezione_int>num_step){
+		if((selezione_int>num_step) || (selezione_int<1)){
 
 			printf("\nHai selezionato uno step non esistente,riprova");
 		}
 
-		}while(selezione_int>num_step);
+		}while((selezione_int>num_step) || (selezione_int<1));
 
 		printf("\nInserire lo step modificato\n\n");
 		fflush(stdin);
@@ -1072,12 +1109,12 @@ void modifica_procedura(int step){
 
 		selezione_int=atoi(selezione);
 
-		if(selezione_int>num_step){
+		if((selezione_int>num_step) || (selezione_int<1)){
 
 			printf("\nHai selezionato uno step non esistente,riprova");
 		}
 
-		}while(selezione_int>num_step);
+		}while((selezione_int>num_step) || (selezione_int<1));
 
 		selezione_int--; //decremento di uno per allinearmi con l'array
 
@@ -1137,24 +1174,34 @@ void rimuovi_ricette(){
     system("cls");
     stampa_elenco_ricette(num_linee);
 
-    printf("\n\nChe ricetta si desidera eliminare?Inserire un valore numerico:");
+    do{
 
-    fflush(stdin);
-    gets(selezione);
+		printf("\n\nChe ricetta si desidera eliminare?Inserire un valore numerico:");
 
-    if(isOnlyNumbers(selezione)==true) {
+		fflush(stdin);
+		gets(selezione);
 
-    	messaggio_errore();
-        ricette();
+		if(isOnlyNumbers(selezione)==true) {
 
-    }
+			messaggio_errore();
+			ricette();
 
-    else if (isOnlyNumbers(selezione)==false){
+		}
 
-        selezione_int=atoi(selezione);
-    }
+		else if (isOnlyNumbers(selezione)==false){
 
-    selezione_int--; //decremento di 1 per allinearmi con l'array
+			selezione_int=atoi(selezione);
+
+			selezione_int=selezione_int-1; 	//diminuzione del valore della variabile di 1 per allinearsi con l'array,in quanto l'utente vede e seleziona valori shiftati di 1,per evitare che vi sia un alimento indicato col valore 0
+
+			if((selezione_int>=num_linee) || (selezione_int<0)){
+
+				printf("Inserisci un numero di ricetta valido");
+
+			}
+		}
+
+    }while((selezione_int>=num_linee) || (selezione_int<0));
 
     for(i=selezione_int;i<num_linee;i++){
 

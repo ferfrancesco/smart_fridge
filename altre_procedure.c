@@ -76,7 +76,7 @@ int isOnlyNumbers(char* stringa){
 void messaggio_errore(){
 
     system("cls");
-    printf("Selezione Errata.Inserire una cifra numerica (1,2,3,4,...)\n");
+    printf("Selezione Errata.Inserire una cifra numerica (1,2,3,4,...) e che rientri nel giusto range\n");
     system("pause");
     fflush(stdin);
 
