@@ -144,7 +144,9 @@ void file_load_menu_sett(){
     fp = fopen ("menu_sett.txt","r");
 
     if (fp==NULL){									//controllo presenza file
-        printf("\n Errore nel caricamento del file");
+        system("cls");
+    	printf("Errore nel caricamento del file\n");
+        system("pause");
         exit(1);
     }
 
@@ -179,7 +181,9 @@ int file_load_lista(){
     fp = fopen ("lista_spesa.txt","r");
 
     if (fp==NULL){								//controllo presenza file
-        printf("\n Errore nel caricamento del file");
+        system("cls");
+    	printf("Errore nel caricamento del file\n");
+        system("pause");
         exit(1);
     }
 
@@ -220,7 +224,9 @@ int file_load_consumazioni(){
     fp = fopen ("consumazioni.txt","r");
 
     if (fp==NULL){								//controllo presenza file
-        printf("\n Errore nel caricamento del file");
+        system("cls");
+    	printf("Errore nel caricamento del file\n");
+        system("pause");
         exit(1);
     }
 

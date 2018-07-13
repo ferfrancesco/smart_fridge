@@ -17,6 +17,7 @@ typedef int bool;
 #define false 0
 
 #define LUNGH_MAX_NOME 50 //Lunghezza massima per il nome di un alimento
+#define FUSO_ORARIO 2
 
 //--------------------------------------------------------------------------------
 
@@ -119,22 +120,26 @@ void stampa_menu(){
 
     int menu_select=0;
 
-    time_t orario;
-    char* stringa_ora;
+    //inserisco libreria per acquisizione ora
 
-    orario = time(NULL);
+    time_t rawtime;
+    struct tm *info;
 
-    /* Convert to local time format. */
-    stringa_ora = ctime(&orario);
+    time(&rawtime);
+    info = gmtime(&rawtime);
 
     fflush(stdin);		//termina lo stream di scanf
     system("cls");
 
     printf("Benvenuto nel tuo Smart Fridge\n");
 
-    printf("%s",stringa_ora);
+    //stampa orario
 
-    printf("\n\nSeleziona una categoria\n\n1)Alimenti\n2)Ricette\n3)Varie\n4)Spegni il sistema\n\n");
+    printf("%d:%d                 %d/%d/%d",info->tm_hour+FUSO_ORARIO,info->tm_min,info->tm_mday,info->tm_mon+1,info->tm_year+1900);
+
+    printf("\n-------------------------------");
+
+    printf("\nSeleziona una categoria\n\n1)Alimenti\n2)Ricette\n3)Varie\n4)Spegni il sistema\n\n");
 
     printf("\n*************************\n5)TESTING CUnit\n*************************\n\n");
 

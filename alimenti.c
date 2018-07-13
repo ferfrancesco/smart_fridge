@@ -56,6 +56,8 @@ void alimenti(){
 
     fflush(stdin);
 
+    printf("\n\n");
+
     scanf("%d",&menu_select);
 
     switch(menu_select){
@@ -679,7 +681,7 @@ void aggiunta_alimenti(int num_linee){
 
         sprintf(archivio_alimenti[num_linee].quantita_tot, "%d" ,quantita_tot_int);
 
-        printf("\nInserire le KCAL dell'alimento:");
+        printf("\nInserire le KCAL per 100g dell'alimento:");
         gets(archivio_alimenti[num_linee].kcal);
 
 		if(isOnlyNumbers(archivio_alimenti[num_linee].kcal)==true){
@@ -965,7 +967,7 @@ void modifica_alimenti(int num_linee){
 
     	    do{
 
-    			printf("\nQuante confezioni hai preso dal frigo?");
+    			printf("\nQuante confezioni hai preso dal frigo?\n");
 
     			fflush(stdin);
 
