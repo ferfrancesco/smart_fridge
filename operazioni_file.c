@@ -18,7 +18,7 @@ typedef int bool;
  *
  *@pre Il file "alimenti.txt" deve gia' esistere
  *
- * @return num_linee Se il controllo va a buon fine, la funzione restituirà il numero di linee del file analizzato
+ * @return num_linee .Se il controllo va a buon fine, la funzione restituira' il numero di linee del file analizzato
  */
 
 int file_load_alimenti(){
@@ -65,7 +65,7 @@ int file_load_alimenti(){
  *Apre automaticamente il file "ricette.txt" senza aver bisogno di un nome in input
  *@pre Il file "ricette.txt" deve gia' esistere
  *
- * @return num_linee Se il controllo va a buon fine, la funzione restituirà il numero di linee del file analizzato
+ * @return num_linee .Se il controllo va a buon fine, la funzione restituira' il numero di linee del file analizzato
  */
 
 int file_load_ricette(){
@@ -133,7 +133,7 @@ int file_load_ricette(){
  *
  *@pre Il file "menu_sett.txt" deve gia' esistere
  *
- * @return num_linee Se il controllo va a buon fine, la funzione restituirà il numero di linee del file analizzato
+ * @return num_linee .Se il controllo va a buon fine, la funzione restituira' il numero di linee del file analizzato
  */
 
 void file_load_menu_sett(){
@@ -169,7 +169,7 @@ void file_load_menu_sett(){
  *
  *@pre Il file "lista_spesa.txt" deve gia' esistere
  *
- * @return num_linee Se il controllo va a buon fine, la funzione restituirà il numero di linee del file analizzato
+ * @return num_linee Se il controllo va a buon fine, la funzione restituira' il numero di linee del file analizzato
  */
 
 int file_load_lista(){
@@ -211,8 +211,8 @@ int file_load_lista(){
 
 
 /**
- * Questa funzione permette di caricare nel programma il file "consumazioni.txt", all'attivarsi del sottomenù della categoria "alimenti"
- * @return num_linee, ovvero il numero di linee di cui il file "consumazioni.txt" è composto
+ * Questa funzione permette di caricare nel programma il file "consumazioni.txt", all'attivarsi del sottomenu' della categoria "alimenti"
+ * @return num_linee, ovvero il numero di linee di cui il file "consumazioni.txt" e' composto
  */
 
 int file_load_consumazioni(){
@@ -361,7 +361,7 @@ void file_save_menu_sett(){
 /**
  * Questa procedura salva il file "lista_spesa.txt" dopo eventuali modifiche apportate.
  *
- * @param num_linee,ovvero il numero di linee di cui e' composto il file "lista_spesa.txt"
+ * @param num_linee, ovvero il numero di linee di cui e' composto il file "lista_spesa.txt"
  */
 
 void file_save_lista(int num_linee){
@@ -401,7 +401,7 @@ void file_append_lista(char stringa[]){
 /**
  * Questa procedura permette di salvare le modifiche apportate al file "consumazioni.txt".
  *
- * @param num_linee,ovvero il numero di linee di cui è composto il file "consumazioni.txt"
+ * @param num_linee, ovvero il numero di linee di cui e' composto il file "consumazioni.txt"
  */
 
 void file_save_consumazioni(int num_linee){

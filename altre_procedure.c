@@ -212,7 +212,7 @@ char* low_conversion(char stringa[]){
   * Se il file non e' vuoto e viene trovata una corrispondenza, si aggiorna solo il dato relativo alle consumazioni.
   *
   * @param num_consumazioni, ovvero il numero di confezioni che si stanno eliminando di un dato alimento.
-  * @param num_linee,ovvero di quante linee e' composto il file "consumazioni.txt".
+  * @param num_linee, ovvero di quante linee e' composto il file "consumazioni.txt".
   * @param stringa, ovvero il nome dell'alimento di cui si intende cercare la corrispondenza nel file "consumazioni.txt"
   */
 
@@ -272,13 +272,13 @@ void consumazioni(int num_consumazioni,int num_linee,char stringa[]){
 
 /**
  * Questa procedura permette di ordinare, tramite un algoritmo "selection sort", l'array passato alla procedura,
- * in maniera decrescente.
+ *
  *
  * @pre dev'essere selezionata un'opzione che includa l'ordinamento di qualcosa
  * @post Si ha l'ordinamento di un vettore di interi, insieme ai nomi ad essi eventualmente associati
  *
  * @param array_int, ovvero l'array di interi del quale si deve effettuare l'ordinamento principale
- * @param array_nomi,ovvero l'array dei nomi corrispondenti ai numeri che devono essere ordinati
+ * @param array_nomi, ovvero l'array dei nomi corrispondenti ai numeri che devono essere ordinati
  * @param num_linee, ovvero il numero di linee di lui e' composto il file che deve essere ordinato
  */
 

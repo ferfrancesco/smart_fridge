@@ -31,7 +31,7 @@ void menu_sett();
 void lista();
 
 
-/**Questa procedura permette di accedere ad un sottomenu', interno alla categoria "varie", che permette di visualizzare le statistiche relative ai cibi più consumati e alle ricette più preparate.
+/**Questa procedura permette di accedere ad un sottomenu', interno alla categoria "varie", che permette di visualizzare le statistiche relative ai cibi piu' consumati e alle ricette piu' preparate.
  *
  *@pre bisogna accedere prima al sottomenu' della categoria "varie" per visualizzare le statistiche.
  *@post verranno visualizzare le statistiche relative a:

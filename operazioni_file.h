@@ -49,7 +49,7 @@ void file_load_menu_sett();
 /**
  * Questa procedura carica nello Smart Fridge il file "lista_spesa.txt"
  *
- * @param num_linee,ovvero il numero di linee di cui e' composto il file "lista_spesa.txt" al momento del caricamento
+ * @param num_linee, ovvero il numero di linee di cui e' composto il file "lista_spesa.txt" al momento del caricamento
  *
  * @return num_linee, ovvero il numero di linee del file "lista_spesa.txt" aggiornato
  */
@@ -82,7 +82,7 @@ void file_save_menu_sett();
 /**
  * Procedura che salva il file alimenti, dopo eventuali modifiche apportate.
  *
- * @param num_linee,ovvero il numero di linee di cui il file e' composto
+ * @param num_linee,  il numero di linee di cui il file e' composto
  */
 
 void file_save_alimenti(int num_linee);
@@ -91,7 +91,7 @@ void file_save_alimenti(int num_linee);
 /**
  * Procedura che salva il file ricette, dopo eventuali modifiche apportate.
  *
- * @param num_linee,ovvero il numero di linee di cui il file "ricette.txt" e' composto
+ * @param num_linee, ovvero il numero di linee di cui il file "ricette.txt" e' composto
  */
 
 void file_save_ricette (int num_linee);
@@ -109,7 +109,7 @@ void file_append_lista(char stringa[]);
 /**
  * Questa procedura salva il file "lista_spesa.txt" dopo eventuali modifiche apportate.
  *
- * @param num_linee,ovvero il numero di linee di cui e' composto il file "lista_spesa.txt"
+ * @param num_linee, ovvero il numero di linee di cui e' composto il file "lista_spesa.txt"
  */
 
 void file_save_lista(int num_linee);
@@ -117,7 +117,7 @@ void file_save_lista(int num_linee);
 /**
  * Procedura che salva il file "consumazioni.txt", dopo eventuali modifiche apportate.
  *
- * @param num_linee,ovvero il numero di linee di cui il file "consumazioni.txt" e' composto
+ * @param num_linee, ovvero il numero di linee di cui il file "consumazioni.txt" e' composto
  */
 
 void file_save_consumazioni(int num_linee);
