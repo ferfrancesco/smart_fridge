@@ -13,7 +13,7 @@
 
 int main() {
 
-    stampa_menu();									//stampa del menù di scelta principale del programma
+    stampa_menu();									//stampa del menu' di scelta principale del programma
 
     return 0;
 }

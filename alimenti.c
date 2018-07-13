@@ -27,7 +27,7 @@ int num_linee_consumazioni;//indica il numero di linee di cui è composto il file
 
 
 /**
-La procedura rappresenta il menu degli alimenti. In base alla scelta che viene inserita, si hanno possibilità diverse:
+La procedura rappresenta il menu degli alimenti. In base alla scelta che viene inserita, si hanno possibilita' diverse:
 
 1) Attiva la procedura stampa_alimenti;
 
@@ -162,12 +162,12 @@ void stampa_alimenti(int num_linee){
 
 /**
  * Questa procedura permette di capire quali sono gli alimenti, presenti nello Smart Fridge, che sono scaduti o sono in scadenza.
- * Viene utilizzata all'interno del sottomenù "alimenti".
+ * Viene utilizzata all'interno del sottomenu' "alimenti".
  *
  * @pre Viene attivata in automatico quando viene aperto il sottomenu' "alimenti"
  * @pre devono esserci alimenti presenti nello Smart Fridge.
  *
- * @param num_linee, ovvero il numero di linee del file "alimenti.txt"
+ * @param num_linee , ovvero il numero di linee del file "alimenti.txt"
  *
  */
 
@@ -179,16 +179,16 @@ void scadenze(int num_linee){
 
 	int anno_attuale;   	//variabile in cui salvare l'anno attuale (a cui poi dover aggiungere 1900)
 	int flag_scadenza=0;	//valore flag per indicare se ci sono alimenti in scadenza
-	int flag_scaduto=0;		//valore flag per indicare se un alimento è scaduto,serve per non ripetere la stampa degli alimenti ANCORA IN SCADENZA
+	int flag_scaduto=0;		//valore flag per indicare se un alimento e' scaduto,serve per non ripetere la stampa degli alimenti ANCORA IN SCADENZA
 	int presenza_scaduti=0;
 	int i;
 	int j;
 	int k;
-	int *ricette_trovate;
+	int *ricette_trovate;	//array che memorizza nella posizione 0 il numero di ricette trovate e da 1 in poi le posizioni delle ricette nell'array delle ricette
 
-	char low_ricerca[50];
+	char low_ricerca[50];	//memorizza in minuscolo la stringa che si inserisce in input per la ricerca
 
-	int tot_giorni_anno=0; //variabile per salvare il numero del giorno in cui scade l'alimento,da 0 a 365
+	int tot_giorni_anno=0;  //variabile per salvare il numero del giorno in cui scade l'alimento,da 0 a 365
 
 	//Acquisisco l'orario e lo memorizzo nella struct tm
     time_t rawtime;
@@ -568,7 +568,7 @@ void scadenze(int num_linee){
  * La procedura permette di inserire nuovi alimenti.
    E' possibile effettuare una scelta interna:
 
-		1- Se l'alimento e' solido, e le sue quantità si misurano in grammi.
+		1- Se l'alimento e' solido, e le sue quantita' si misurano in grammi.
 		2- Se l'alimento e' liquido e si misura in millilitri.
 
  * @param num_linee riceve in input il numero di linee di cui e' composto il file

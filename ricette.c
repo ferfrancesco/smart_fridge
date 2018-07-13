@@ -18,7 +18,7 @@ typedef int bool;
 #define LUNGH_MAX_NOME 50 //Luneghezza massima per il nome di un alimento
 
 /**
- * Questo array serve a conservare il numero di stelle indicanti la difficoltà di una ricetta.
+ * Questo array serve a conservare il numero di stelle indicanti la difficolta' di una ricetta.
  */
 
 char stelle[5]={0};  //inizialiazzo l'array della stampa delle stelle
@@ -336,8 +336,8 @@ void stampa_ricetta(int num){
  *
  * @pre Si deve accedere prima alla procedura "ricerca_ricette"
  *
- * @param alimento,ovvero l'ingrediente con il quale ricercare le corrispondenze
- * @return ricette_con_alimento,ovvero un array di indici interi che indicano le posizioni delle corrispondenze
+ * @param alimento, ovvero l'ingrediente con il quale ricercare le corrispondenze
+ * @return ricette_con_alimento, ovvero un array di indici interi che indicano le posizioni delle corrispondenze
  */
 
 int* ricerca(char alimento[]){
@@ -512,7 +512,7 @@ void ricerca_ricette(){
  * Questa procedura permette di aggiungere ricette alla lista di ricette presenti all'interno del sistema.
 *
 * @pre E' necessario accedere al sottomenu' della categoria "ricette" e selezionare la voce "aggiungi ricetta"
-* @post il sistema aggiungera' una ricettaal file "ricette.txt"
+* @post il sistema aggiungera' una ricetta al file "ricette.txt"
 * E' possibile immettere il nome della ricetta, gli ingredienti, la difficolta' e gli steps.
 * **/
 
@@ -994,7 +994,7 @@ void modifica_ingredienti(int ingrediente){
  * Questa procedura permette di modificare i passi di una ricetta.
  * @pre e' necessario accedere al sottomenu' di modifica di una ricetta e poi selezionare la modifica della procedura della ricetta
  * @pre devono esserci ricette all'interno dello Smart Fridge
- * @param step,ovvero il numero dello step che si intende modificare o eliminare
+ * @param step, ovvero il numero dello step che si intende modificare o eliminare
  */
 
 void modifica_procedura(int step){

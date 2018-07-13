@@ -40,7 +40,7 @@ void ricette();
  * Ricevendo il numero intero che indica la difficolta', compreso tra 1 e 5, la funzione carica l'array di 5 posizioni max
  * con un numero di stelle corrispondenti all'intero inserito
  *
- * @param num,ovvero l'intero che indica il grado di difficolta'
+ * @param num, ovvero l'intero che indica il grado di difficolta'
  *
  * @return il vettore caricato di stelle in base all'input inserito
  */
@@ -94,11 +94,11 @@ void stampa_ricetta(int num);
 
 /**
  * La funzione "ricerca" prende in input una stringa (che rappresenta un alimento) e restituisce
- * la ricetta (o le ricette) che contengono quell'ingrediente.Da' come valore di ritorno un array
+ * la ricetta (o le ricette) che contengono quell'ingrediente. Da' come valore di ritorno un array
  * di interi, ovvero "ricette_con_alimento"
  *
- * @param alimento,ovvero l'ingrediente con il quale ricercare le corrispondenze
- * @return ricette_con_alimento,ovvero un array di indici interi che indicano le posizioni delle corrispondenze
+ * @param alimento, ovvero l'ingrediente con il quale ricercare le corrispondenze
+ * @return ricette_con_alimento, ovvero un array di indici interi che indicano le posizioni delle corrispondenze
  */
 
 int* ricerca(char alimento[]);  //int* perchè ha come ritorno un array di intt
@@ -164,7 +164,7 @@ void modifica_ingredienti(int ingrediente);
  * Questa procedura permette di modificare i passi di una ricetta.
  * @pre e' necessario accedere al sottomenu' di modifica di una ricetta e poi selezionare la modifica della procedura della ricetta
  * @pre devono esserci ricette all'interno dello Smart Fridge
- * @param step,ovvero il numero dello step che si intende modificare o eliminare
+ * @param step, ovvero il numero dello step che si intende modificare o eliminare
  */
 
 void modifica_procedura(int step);
