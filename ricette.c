@@ -48,7 +48,15 @@ void ricette(){
     fflush(stdin);
     system("cls");
 
-    printf("Menu' Ricette\nSeleziona un opzione\n\n1)Visualizza ricette salvate\n2)Ricerca ricette\n3)Aggiungi una ricetta\n4)Modifica una ricetta\n5)Rimuovi una ricetta\n6)Torna al menu'\n\n");
+    printf("Menu' Ricette\nSeleziona un opzione\n\n1)Visualizza ricette salvate\n2)Ricerca ricette");
+
+    printf("\n----------------------------\n");
+
+    printf("3)Aggiungi una ricetta\n4)Modifica una ricetta\n5)Rimuovi una ricetta");
+
+    printf("\n----------------------------\n");
+
+    printf("6)Torna al menu'\n\n");
 
     scanf("%d",&menu_select);
 

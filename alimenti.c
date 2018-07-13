@@ -56,6 +56,8 @@ void alimenti(){
 
     fflush(stdin);
 
+    printf("\n\n");
+
     scanf("%d",&menu_select);
 
     switch(menu_select){
@@ -965,7 +967,7 @@ void modifica_alimenti(int num_linee){
 
     	    do{
 
-    			printf("\nQuante confezioni hai preso dal frigo?");
+    			printf("\nQuante confezioni hai preso dal frigo?\n");
 
     			fflush(stdin);
 
