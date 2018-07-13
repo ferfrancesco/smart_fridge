@@ -425,7 +425,7 @@ void ricerca_ricette(){
 
 			printf("\n");
 
-			if(nome_alimento[0]=='\0'){
+			if((nome_alimento[0]=='\0') || (nome_alimento[0]==' ')){
 
 				printf("Inserire un nome,una stringa vuota non e' accettata\n\n");
 				system("pause");
@@ -1301,7 +1301,7 @@ void rimuovi_ricette(){
     num_linee--;
 
     file_save_ricette(num_linee);
-    printf("\n\n");
+    printf("\nRicetta eliminata\n\n");
     system("pause");
 
 }

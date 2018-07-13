@@ -610,6 +610,13 @@ void aggiunta_alimenti(int num_linee){
     else if (isOnlyNumbers(selezione)==false){
 
         selezione_int=atoi(selezione);
+
+        if(selezione_int>10){
+
+        	printf("\nNon puoi inserire piu' di 10 alimenti per volta\n\n");
+        	system("pause");
+        	alimenti();
+        }
     }
 
     for(i=0;i<selezione_int;i++){
@@ -987,7 +994,7 @@ void modifica_alimenti(int num_linee){
 
     			if(quantita_rimossa_int>numero_conf_int){
 
-    				printf("\nNon puoi togliere piu' cibo di quanto ne sia presente!\n");
+    				printf("\nNon puoi togliere piu' cibo di quanto ne sia presente!\n\n");
     				system("pause");
     			}
 
@@ -1064,7 +1071,7 @@ void modifica_alimenti(int num_linee){
 
     	    do{
 
-    			printf("\nQuanto alimento hai prelevato dal frigo?");
+    			printf("\nQuanto alimento hai prelevato dal frigo?\n\n");
 
     			fflush(stdin);
 
@@ -1084,7 +1091,7 @@ void modifica_alimenti(int num_linee){
 
     			if(quantita_rimossa_int>quantita_totale_int){
 
-    				printf("\nNon puoi togliere piu' cibo di quanto ne sia presente!\n");
+    				printf("\nNon puoi togliere piu' cibo di quanto ne sia presente!\n\n");
     				system("pause");
     			}
 
@@ -1166,7 +1173,7 @@ void modifica_alimenti(int num_linee){
 
         file_save_alimenti(num_linee);	//aggiornamento del contenuto del file dopo le modifiche
 
-        printf("\nModifiche effettutate!Tornerai ora al menu'\n");
+        printf("\nModifiche effettutate!Tornerai ora al menu'\n\n");
         system("pause");
 
 }

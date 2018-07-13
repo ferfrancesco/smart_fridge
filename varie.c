@@ -153,12 +153,12 @@ void menu_sett(){
 					fflush(stdin);
 					gets(pietanza);
 
-					if(pietanza[0]=='\0'){
+					if((pietanza[0]=='\0') || (pietanza[0]==' ')){
 
-						printf("\nIl campo non puo' essere vuoto");
+						printf("\nIl campo non puo' essere vuoto\n");
 					}
 
-        		}while(pietanza[0]=='\0');
+        		}while((pietanza[0]=='\0') || (pietanza[0]==' '));
 
         		strcpy(giorno[selezione_int].pietanza[0],pietanza);
 
@@ -172,12 +172,12 @@ void menu_sett(){
 					fflush(stdin);
 					gets(pietanza);
 
-					if(pietanza[0]=='\0'){
+					if((pietanza[0]=='\0') || (pietanza[0]==' ')){
 
 						printf("\nIl campo non puo' essere vuoto");
 					}
 
-        		}while(pietanza[0]=='\0');
+        		}while((pietanza[0]=='\0') || (pietanza[0]==' '));
 
         		strcpy(giorno[selezione_int].pietanza[1],pietanza);
         		break;
@@ -235,6 +235,8 @@ void lista(){
     char selezione[10];
     int selezione_int;
 
+    char elemento_lista[LUNGH_MAX_NOME];
+
     num_linee=file_load_lista();
 
     system("cls");
@@ -271,15 +273,26 @@ void lista(){
 
         case 2:
 
-        	printf("\n\nCosa vuoi aggiungere alla lista?\n");
+    		do{
 
-        	fflush(stdin);
-        	gets(lista_spesa[num_linee]);
+				printf("\nCosa vuoi aggiungere alla lista?\n");
+				fflush(stdin);
+				gets(elemento_lista);
+
+				if((elemento_lista[0]=='\0') || (elemento_lista[0]==' ')){
+
+					printf("\nIl campo non puo' essere vuoto");
+				}
+
+    		}while((elemento_lista[0]=='\0') || (elemento_lista[0]==' '));
+
+
+        	strcpy(lista_spesa[num_linee],elemento_lista);
 
         	num_linee++;
         	file_save_lista(num_linee);
 
-        	printf("\nElemento aggiunto!\n");
+        	printf("\n\nElemento aggiunto!\n\n");
         	system("pause");
         	lista();
 
