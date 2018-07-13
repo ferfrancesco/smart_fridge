@@ -679,7 +679,7 @@ void aggiunta_alimenti(int num_linee){
 
         sprintf(archivio_alimenti[num_linee].quantita_tot, "%d" ,quantita_tot_int);
 
-        printf("\nInserire le KCAL dell'alimento:");
+        printf("\nInserire le KCAL per 100g dell'alimento:");
         gets(archivio_alimenti[num_linee].kcal);
 
 		if(isOnlyNumbers(archivio_alimenti[num_linee].kcal)==true){
