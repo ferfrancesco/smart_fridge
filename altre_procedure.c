@@ -147,9 +147,13 @@ void scadenze(int num_linee){
 	int giorno_int;		   //conversione in int del giorno di scadenza dell'alimento
 
 	int anno_attuale;   //variabile in cui salvare l'anno attuale (a cui poi dover aggiungere 1900)
+	int flag_scadenza=0;	//valore flag per indicare se ci sono alimenti in scadenza
 	int i;
 
 	int tot_giorni_anno=0; //variabile per salvare il numero del giorno in cui scade l'alimento,da 0 a 365
+	int giorni1;		   //variabile di appoggio per il controllo della scadenza nel caso di alimenti che scadono l'anno dopo (solo nel caso di (Dicembre 20XX) -> (Gennaio 20XX+1)
+	int giorni2;		   //variabile di appoggio per il controllo della scadenza nel caso di alimenti che scadono l'anno dopo (solo nel caso di (Dicembre 20XX) -> (Gennaio 20XX+1)
+
 
 	//Acquisisco l'orario e lo memorizzo nella struct tm
     time_t rawtime;
@@ -161,6 +165,10 @@ void scadenze(int num_linee){
     anno_attuale=info->tm_year;
 
     anno_attuale=anno_attuale + 1900; //aggiungo 1900 perchè la libreria esterna inizia a contare da 0,ignorando ben 1900 anni.Senza l'addizione,risulterebbe come anno attuale il 118,e non 2018 (2018=1900+118)
+
+    printf("\n-----------------------------------------------------------");
+    printf("\nALIMENTI IN SCADENZA");
+    printf("\n-----------------------------------------------------------");
 
     for(i=0;i<num_linee;i++){
 
@@ -254,14 +262,44 @@ void scadenze(int num_linee){
 
     	if(tot_giorni_anno-SOGLIA_SCADENZA<=info->tm_yday){
 
-            printf("\n----------------------------------------------------");
-            printf("\nALIMENTI IN SCADENZA");
-            printf("\n----------------------------------------------------");
+    		flag_scadenza=1; //indica che c'è effettivamente cibo in scadenza
 
             printf("\n%s",archivio_alimenti[i].nome);
 
+            //printf("Potresti cucinare:%s",);
+
     	}
 
+    	//controllo della scadenza nel caso di alimenti che scadono l'anno dopo (solo nel caso di (Dicembre 20XX) -> (Gennaio 20XX+1)
+
+    	//ALGORITMO
+    	//{[(N.Giorni Dicembre+N.Giorni Gennaio) - Giorno attuale] - (N.Giorni Gennaio - Giorno di Scadenza)} < Soglia di scadenza
+
+    	//Se il risultato dell'operazione fra le parentesi è minore della soglia di scadenza,l'alimento è in scadenza
+
+    	else if (anno_attuale<anno_int  &&  mese_int<info->tm_mon){
+
+    		giorni1=info->tm_mday;
+
+    		giorni2=(62-giorni1)-(31-giorno_int);
+
+    		if(giorni2<SOGLIA_SCADENZA){
+
+        		flag_scadenza=1; //indica che c'è effettivamente cibo in scadenza
+
+                printf("\n%s",archivio_alimenti[i].nome);
+
+                //printf("Potresti cucinare:%s",);
+
+    		}
+
+    	}
+
+    }
+
+    if(flag_scadenza==0){
+
+    	printf("\nNessun alimento in scadenza\n\n");
     }
 
 }
